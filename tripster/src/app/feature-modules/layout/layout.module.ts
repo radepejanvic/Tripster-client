@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
   declarations: [
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
