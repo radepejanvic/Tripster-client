@@ -1,0 +1,33 @@
+#rating {
+    display: flex;
+    justify-content: space-between;
+}
+
+.rate {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    border-style: solid;
+    width: 65px;
+    height: 40px;
+    margin: 5px 0px 5px 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+p {
+    text-align: center;
+    margin: 0;
+}
+
+h3 {
+    margin: 0;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+h4 {
+    margin: 0;
+    font-weight: 400;
+    font-size: 12px;
+}
