@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { ReviewComponent } from './review/review.component';
 import { RatingStatsComponent } from './rating-stats/rating-stats.component';
 import { ReviewsComponent } from './reviews/reviews.component';
+import { RentComponent } from './rent/rent.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ReviewsComponent } from './reviews/reviews.component';
     AmenityComponent,
     ReviewComponent,
     RatingStatsComponent,
-    ReviewsComponent
+    ReviewsComponent,
+    RentComponent
   ],
   imports: [
     CommonModule,

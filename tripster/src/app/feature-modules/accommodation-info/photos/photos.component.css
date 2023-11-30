@@ -3,6 +3,10 @@
     margin: 0 auto;
 } */
 
+* {
+    font-family: 'Poppins';
+}
+
 #photos {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
