@@ -1,17 +1,5 @@
 #review-stat {
-    width: 25%;
-}
-
-h1 {
-    margin: 0;
-    font-weight: 500;
-    font-size: 24px;
-}
-
-p {
-    font-size: 14px;
-    font-weight: 400;
-    margin: 20px 0px 10px 0px;
+    width: 300px;
 }
 
 .header {
@@ -29,6 +17,18 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+h1 {
+    margin: 0;
+    font-weight: 500;
+    font-size: 24px;
+}
+
+p {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 20px 0px 10px 0px;
 }
 
 h3 {
