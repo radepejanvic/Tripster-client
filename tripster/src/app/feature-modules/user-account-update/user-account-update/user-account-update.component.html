@@ -1,0 +1,40 @@
+<div class="container"> 
+    <form class="registration-form" id="registration-form" layout="grid">
+        <div class="basic-info-div">
+            <div class="pop-up-text-div">
+                    <img class="dummy-profile-input "
+                        src="https://media-s3-us-east-1.ceros.com/centaur-financial-platforms/images/2020/12/14/964e7b7d25cf55f625013e4382cd0986/shutterstock-485490535-customer-icon-blue.png" />
+                    <!-- <input type="file" id="myfile" style="display:none" /> -->
+            </div>
+            <div class="pop-up-text-div">
+                <p class="text">Personal info :</p>
+                <input type="text" class="form-control" id="name" [value] = "name">
+                <input type="text" class="form-control" id="surname" [value] = "surname">
+                <input type="email" class="form-control" id="email" [value] = "email">
+                <input type="tel" class="form-control" id="phone" [value] = "phone"><br />
+                <input type="password" class="form-control" id="password1" placeholder="********">
+                <input type="password" class="form-control" id="password2" placeholder="********">
+                <p class="text">Adress:</p>
+                
+                <input type="text" class="form-control" id="country" [value] = "country">
+                <input type="text" class="form-control" id="city" [value] = "city">
+                <input type="text" class="form-control" id="postal-code" [value] = "zipCode">
+                <input type="text" class="form-control" id="street" [value] = "street">
+                <input type="text" class="form-control" id="number" [value] = "number">
+                
+                
+
+                <button type="button" class="btn btn-outline-dark">
+                    Update profile
+                </button>
+                <button type="button" class="btn btn-outline-dark" id="delete-btn">
+                    Delete profile
+                </button>
+                
+            </div>
+        </div>
+
+
+        
+    </form>
+</div>

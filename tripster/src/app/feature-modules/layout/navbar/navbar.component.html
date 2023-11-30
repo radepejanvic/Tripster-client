@@ -14,12 +14,14 @@
         <div class="col-1"></div>
 
         <div class="container row col-3" >
-            <div class="col-6 d-flex justify-content-end" >
+            <div class="d-flex justify-content-end" >
                 <app-registration-form></app-registration-form>
+                <app-login style="margin-left: 20px;"></app-login>
+                <i class="bi bi-person-circle user-circle" [routerLink] = "['/updateAccount']"></i>
+                
             </div>
-            <div class="col-6 d-flex justify-content-start" >
-                <app-login></app-login>
-            </div>
+            
+            
         </div>
 
     </div>
