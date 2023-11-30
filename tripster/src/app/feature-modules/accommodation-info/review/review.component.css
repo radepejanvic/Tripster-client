@@ -1,0 +1,20 @@
+#review {
+    text-align: justify;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+p {
+    font-size: 14px;
+    font-weight: 400;
+}

@@ -4,6 +4,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
 import { FooterComponent } from './footer/footer.component';
+import { AccommodationInfoModule } from '../accommodation-info/accommodation-info.module';
 import { AuthorizationModule } from '../authorization/authorization.module';
 
 
@@ -16,9 +17,10 @@ import { AuthorizationModule } from '../authorization/authorization.module';
   imports: [
     CommonModule,
     RouterModule,
+    AccommodationInfoModule,
     AuthorizationModule
   ],
-  exports:[
+  exports: [
     NavbarComponent,
     HomeComponent,
     FooterComponent
