@@ -1,0 +1,87 @@
+.basic-info-div {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+}
+
+.pop-up-image-div {
+    display: flex;
+    justify-content: center;
+}
+
+.pop-up-text-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* margin-bottom: 20px; */
+}
+
+.registration-form {
+    margin: 30px;
+}
+
+.form-control {
+    margin-bottom: 15px;
+    border-radius: 10px;
+    width: 50%;
+
+}
+
+.profile-photo {
+    /*display: non;*/
+    border-radius: 100%;
+}
+
+.medium-input {
+    width: 35%;
+}
+
+.input-row input {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.small-input {
+    width: 30%;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.mybtn {
+    margin: 10px;
+    border-radius: 10px;
+    background-color: #FFF;
+    color: #000
+}
+
+.text {
+    /*font-family: "Poppins", 'Times New Roman', Times, serif, "sans-serif";*/
+}
+
+.dummy-profile-input {
+    border-radius: 50%;
+    width: 170px;
+    height: 170px;
+    margin-bottom: 50px;
+    
+}
+
+
+.adress-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button {
+    margin-top: 20px;
+    width: 160px;
+}
+
+#delete-btn {
+    color: red;
+    border-color: red;
+}

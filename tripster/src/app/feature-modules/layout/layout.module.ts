@@ -7,6 +7,7 @@ import { FooterComponent } from './footer/footer.component';
 import { AccommodationInfoModule } from '../accommodation-info/accommodation-info.module';
 import { AuthorizationModule } from '../authorization/authorization.module';
 import { UserRegistrationModule } from '../user-registration/user-registration.module';
+import { UserAccountUpdateModule } from '../user-account-update/user-account-update';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { UserRegistrationModule } from '../user-registration/user-registration.m
     RouterModule,
     AccommodationInfoModule,
     AuthorizationModule,
-    UserRegistrationModule
+    UserRegistrationModule,
+    UserAccountUpdateModule
   ],
   exports: [
     NavbarComponent,
