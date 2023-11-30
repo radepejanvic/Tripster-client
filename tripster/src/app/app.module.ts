@@ -7,10 +7,13 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './infrastructure/material/material.module';
 import { UserRegistrationModule } from './feature-modules/user-registration/user-registration.module';
+import { AccommodationInfoModule } from './feature-modules/accommodation-info/accommodation-info.module';
+import { LayoutModule } from './feature-modules/layout/layout.module';
+import { AuthorizationModule } from './feature-modules/authorization/authorization.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -18,7 +21,11 @@ import { UserRegistrationModule } from './feature-modules/user-registration/user
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    UserRegistrationModule
+    UserRegistrationModule,
+    AccommodationInfoModule,
+    LayoutModule,
+    AuthorizationModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

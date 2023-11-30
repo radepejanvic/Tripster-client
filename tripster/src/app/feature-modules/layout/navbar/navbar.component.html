@@ -1,0 +1,26 @@
+<nav class="navbar">
+    <div class="container-fluid">
+        
+        <a class="navbar-brand col-2"  [routerLink]="['home']" href="#">
+            <img src="./assets/images/logo.svg" alt="Tripster"  width="102" height="80">
+        </a>
+
+        <div class="d-flex col-2"></div>
+
+        <form class="d-flex col-4" role="search">
+            <input class="form-control me-2 text-center" type="search" placeholder="Search" aria-label="Search">
+        </form>
+
+        <div class="col-1"></div>
+
+        <div class="container row col-3" >
+            <div class="col-6 d-flex justify-content-end" >
+                <button type="button "  class="btn btn-outline-dark">Sing up</button>
+            </div>
+            <div class="col-6 d-flex justify-content-start" >
+                <app-login></app-login>
+            </div>
+        </div>
+
+    </div>
+</nav>
