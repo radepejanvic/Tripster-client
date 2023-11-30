@@ -1,0 +1,14 @@
+*{
+    font-family: 'Poppins',sans-serif;
+}
+
+.font{
+    font-weight: 600;
+}
+
+.font-text{
+    font-size: 40px;
+    padding: 0;
+    margin: 0;
+    text-align: right;
+}
