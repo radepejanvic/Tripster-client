@@ -7,6 +7,8 @@ import { OverviewComponent } from './overview/overview.component';
 import { AmenityComponent } from './amenity/amenity.component';
 import { RouterModule } from '@angular/router';
 import { ReviewComponent } from './review/review.component';
+import { RatingStatsComponent } from './rating-stats/rating-stats.component';
+import { ReviewsComponent } from './reviews/reviews.component';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { ReviewComponent } from './review/review.component';
     RatingComponent,
     OverviewComponent,
     AmenityComponent,
-    ReviewComponent
+    ReviewComponent,
+    RatingStatsComponent,
+    ReviewsComponent
   ],
   imports: [
     CommonModule,

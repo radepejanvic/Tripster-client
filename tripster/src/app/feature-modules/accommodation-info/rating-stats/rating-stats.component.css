@@ -1,0 +1,44 @@
+#review-stat {
+    width: 25%;
+}
+
+h1 {
+    margin: 0;
+    font-weight: 500;
+    font-size: 24px;
+}
+
+p {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 20px 0px 10px 0px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+#rating {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#stat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h3 {
+    margin: 0;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+h4 {
+    margin: 0;
+    font-weight: 400;
+    font-size: 12px;
+}
