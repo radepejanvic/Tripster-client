@@ -1,72 +1,61 @@
 
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Hello, world!</title>
-</head>
 
-<body>
-    <div class="container">
-        <h2>Basic Modal Example</h2>
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Launch demo modal
-        </button>
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog pop-up">
-                <div class="modal-content pop-up-background">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Register now</h5>
-                        
-                    </div>
-                    <div class="modal-body">
-                        <form class="registration-form" id="registration-form" layout="grid">
-                            <div class="basic-info-div">
-                                <div class="pop-up-text-div">
-                                    <input type="text" class="form-control" id="userNameInput" placeholder="user name">
-                                    <input type="password" class="form-control" id="password1" placeholder="password">
-                                    <input type="password" class="form-control" id="password2" placeholder="password again">
-                                    <input type="email" class="form-control" id="email" placeholder="email@gmail.com">
-                                    <input type="text" class="form-control" id="first-name" placeholder="first name">
-                                    <input type="text" class="form-control" id="last-name" placeholder="last name">
-                                    <input type="tel" class="form-control" id="phone-number" placeholder="phone number"><br/>
-                                </div>
-                                <div class="pop-up-image-div">
-                                    <div >
-                                        <img class="dummy-profile-input"
-                                        src="https://media-s3-us-east-1.ceros.com/centaur-financial-platforms/images/2020/12/14/964e7b7d25cf55f625013e4382cd0986/shutterstock-485490535-customer-icon-blue.png"  />
-                                        <input type="file" id="myfile" style="display:none" />
-                                    </div>
-                                </div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Register now
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog pop-up">
+        <div class="modal-content pop-up-background">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Register now</h5>
+                
+            </div>
+            <div class="modal-body">
+                <form class="registration-form" id="registration-form" layout="grid">
+                    <div class="basic-info-div">
+                        <div class="pop-up-text-div">
+                            <input type="text" class="form-control" id="userNameInput" placeholder="user name">
+                            <input type="password" class="form-control" id="password1" placeholder="password">
+                            <input type="password" class="form-control" id="password2" placeholder="password again">
+                            <input type="email" class="form-control" id="email" placeholder="email@gmail.com">
+                            <input type="text" class="form-control" id="first-name" placeholder="first name">
+                            <input type="text" class="form-control" id="last-name" placeholder="last name">
+                            <input type="tel" class="form-control" id="phone-number" placeholder="phone number"><br/>
+                        </div>
+                        <div class="pop-up-image-div">
+                            <div >
+                                <img class="dummy-profile-input"
+                                src="https://media-s3-us-east-1.ceros.com/centaur-financial-platforms/images/2020/12/14/964e7b7d25cf55f625013e4382cd0986/shutterstock-485490535-customer-icon-blue.png"  />
+                                <input type="file" id="myfile" style="display:none" />
                             </div>
-                            
+                        </div>
+                    </div>
+                    
 
-                            <p class="text">Adress:</p> 
-                            <div class="input-row">
-                                <input type="text" class="form-control medium-input" id="street" placeholder="street">
-                                <input type="text" class="form-control small-input" id="number" placeholder="number">
-                            </div>
-                            <div class="input-row">
-                                <input type="text" class="form-control medium-input" id="city" placeholder="city">
-                                <input type="text" class="form-control small-input" id="postal-code" placeholder="postal code">
-                            </div>
-                            <input type="text" class="form-control medium-input" id="country" placeholder="country">
-                            
-                        </form>
+                    <p class="text">Adress:</p> 
+                    <div class="input-row">
+                        <input type="text" class="form-control medium-input" id="street" placeholder="street">
+                        <input type="text" class="form-control small-input" id="number" placeholder="number">
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn cancel-btn mybtn" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn register-btn mybtn">Register</button>
+                    <div class="input-row">
+                        <input type="text" class="form-control medium-input" id="city" placeholder="city">
+                        <input type="text" class="form-control small-input" id="postal-code" placeholder="postal code">
                     </div>
-                </div>
+                    <input type="text" class="form-control medium-input" id="country" placeholder="country">
+                    
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn cancel-btn mybtn" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn register-btn mybtn">Register</button>
             </div>
         </div>
     </div>
-</body>
+</div>
 
-</html>
