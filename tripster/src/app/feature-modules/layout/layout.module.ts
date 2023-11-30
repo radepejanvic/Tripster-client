@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { FooterComponent } from './footer/footer.component';
 import { AccommodationInfoModule } from '../accommodation-info/accommodation-info.module';
 import { AuthorizationModule } from '../authorization/authorization.module';
-
+import { UserRegistrationModule } from '../user-registration/user-registration.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,8 @@ import { AuthorizationModule } from '../authorization/authorization.module';
     CommonModule,
     RouterModule,
     AccommodationInfoModule,
-    AuthorizationModule
+    AuthorizationModule,
+    UserRegistrationModule
   ],
   exports: [
     NavbarComponent,
