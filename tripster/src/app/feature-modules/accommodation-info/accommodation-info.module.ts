@@ -5,6 +5,8 @@ import { MaterialModule } from '../../infrastructure/material/material.module';
 import { RatingComponent } from './rating/rating.component';
 import { OverviewComponent } from './overview/overview.component';
 import { AmenityComponent } from './amenity/amenity.component';
+import { RouterModule } from '@angular/router';
+import { ReviewComponent } from './review/review.component';
 
 
 @NgModule({
@@ -12,11 +14,13 @@ import { AmenityComponent } from './amenity/amenity.component';
     PhotosComponent,
     RatingComponent,
     OverviewComponent,
-    AmenityComponent
+    AmenityComponent,
+    ReviewComponent
   ],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    RouterModule
   ],
   exports: [
     PhotosComponent
