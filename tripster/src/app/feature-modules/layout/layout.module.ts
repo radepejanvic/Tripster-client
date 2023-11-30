@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { RouterModule } from '@angular/router';
 import { FooterComponent } from './footer/footer.component';
 import { AccommodationInfoModule } from '../accommodation-info/accommodation-info.module';
+import { AuthorizationModule } from '../authorization/authorization.module';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { AccommodationInfoModule } from '../accommodation-info/accommodation-inf
   imports: [
     CommonModule,
     RouterModule,
-    AccommodationInfoModule
+    AccommodationInfoModule,
+    AuthorizationModule
   ],
   exports: [
     NavbarComponent,
