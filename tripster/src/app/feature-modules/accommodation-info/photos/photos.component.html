@@ -1,10 +1,6 @@
 <div class="container">
     <div id="photos">
-        <img class="item-1" src="./assets/images/accommodation.jpg"/> 
-        <img class="item-2" src="./assets/images/accommodation.jpg"/>
-        <img class="item-3" src="./assets/images/accommodation.jpg"/>
-        <img class="item-4" src="./assets/images/accommodation.jpg"/>
-        <img class="item5" src="./assets/images/accommodation.jpg"/>
+        <img *ngFor="let url of photos; let i = index" [src]="url" [class]="'item-' + (i + 1)" alt="Photo" />
     </div>
 
     <div id="title">

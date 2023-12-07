@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AccommodationInfoService } from '../accommodation-info.service';
 import { Accommodation } from '../model/accommodation.model';
 
@@ -9,7 +9,10 @@ import { Accommodation } from '../model/accommodation.model';
 })
 export class PhotosComponent implements OnInit {
 
+  @Input() id: number | undefined;
+
   accommodation!: Accommodation;
+  photos!: string[];
 
   constructor(private service: AccommodationInfoService) { }
 
@@ -20,9 +23,20 @@ export class PhotosComponent implements OnInit {
         console.log(result);
       },
       error: (err: any) => {
-        console.log(err);
+        console.error('Error fetching accommodation info', err);
       }
     });
+
+    this.service.getPhotos(12).subscribe({
+      next: (result: string[]) => {
+        this.photos = result;
+        console.log(result);
+      },
+      error: (err: any) => {
+        console.error('Error fetching photos', err);
+      }
+    })
+
   }
 
 }
