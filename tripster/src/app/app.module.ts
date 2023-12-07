@@ -11,6 +11,7 @@ import { UserRegistrationModule } from './feature-modules/user-registration/user
 import { AccommodationInfoModule } from './feature-modules/accommodation-info/accommodation-info.module';
 import { LayoutModule } from './feature-modules/layout/layout.module';
 import { AuthorizationModule } from './feature-modules/authorization/authorization.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { AuthorizationModule } from './feature-modules/authorization/authorizati
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
     UserRegistrationModule,
