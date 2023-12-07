@@ -11,7 +11,6 @@ import { RatingStatsComponent } from './rating-stats/rating-stats.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { RentComponent } from './rent/rent.component';
 
-
 @NgModule({
   declarations: [
     PhotosComponent,
