@@ -9,8 +9,8 @@
 
     <div id="title">
         <div>
-            <h1>Hotel Norrebro</h1>
-            <h4>3-star hotel located in center of Copenhagen</h4>
+            <h1>{{accommodation.name}}</h1>
+            <h4>{{accommodation.shortDescription}}</h4>
         </div>
         
         <app-rating></app-rating>
@@ -23,7 +23,7 @@
             <button>Rent</button>
     </div>
     <hr/>
-    <app-overview></app-overview>
+    <app-overview [accommodation]="accommodation"></app-overview>
     <hr/>
     <app-rent></app-rent>
     <hr/>
