@@ -12,6 +12,8 @@ import { AccommodationInfoModule } from './feature-modules/accommodation-info/ac
 import { LayoutModule } from './feature-modules/layout/layout.module';
 import { AuthorizationModule } from './feature-modules/authorization/authorization.module';
 import { HttpClientModule } from '@angular/common/http';
+import { Interceptor } from './feature-modules/authorization/interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 
@@ -32,7 +34,9 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     FormsModule
   ],
-  providers: [     ],
+  providers: [{      provide: HTTP_INTERCEPTORS,
+    useClass: Interceptor,
+    multi: true,}     ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
