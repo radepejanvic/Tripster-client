@@ -1,6 +1,6 @@
 
 
-    <button type="button " class="btn btn-outline-dark"  data-bs-toggle="modal" data-bs-target="#myModal">Log in</button>
+    <button type="button " class="btn btn-outline-dark"  id="login" data-bs-toggle="modal" data-bs-target="#myModal">Log in</button>
 
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
@@ -12,34 +12,34 @@
             </div>
             
             <div class="modal-body">
-            <form>
+            <form [formGroup]='loginForm' (submit)="login()">
     
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label font">Email address</label>
                 
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" aria-describedby="basic-addon2">
+                        <input type="text" class="form-control" formControlName="username" aria-describedby="basic-addon2">
                         <span class="input-group-text" id="basic-addon2">&#64;example.com</span>
                     </div>
         
-                    <!-- <div id="emailHelp" class="form-text" style="color: red;">E-mail does not exist</div> -->
                 </div>
                 
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label font">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <input type="password" class="form-control" formControlName="password" id="exampleInputPassword1">
                 </div>
                 <div class="mb-3 form-check">
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                     <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                    </div>
+                </div>
                 
+                <div id="error" class="form-text" style="color: red;" >{{errorText}}</div>
             </form>            
-            </div>
-
+        </div>
+        
             <div class="modal-footer">
-            <button type="button" class="btn  btn-outline-dark" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn  btn-secondary">Save changes</button>
+            <button type="button" class="btn  btn-outline-dark"  id="close" data-bs-dismiss="modal" >Close</button>
+            <button type="submit" class="btn  btn-secondary" (click)="login()">Log in</button>
 
             </div>
 
