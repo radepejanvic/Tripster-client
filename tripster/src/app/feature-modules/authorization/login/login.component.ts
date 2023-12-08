@@ -35,15 +35,19 @@ export class LoginComponent implements OnInit{
 				password: this.loginForm.value.password || ""
 			}
 
-			this.authService.login(login).subscribe({
+			this.authService.login(login).subscribe(
 
-				next: (response: AuthResponse) => {
+				(response: AuthResponse) => {
 					localStorage.setItem('user',response.token);
 					this.authService.setRole();
 					this.router.navigate(['home']);
 					document.getElementById("close")?.click()
 				}
-			})
+			,(error:string) =>{
+				let text:string = error.toString()
+				this.errorText = text.replace("Error: ","")
+				}
+			)
 		}else{
 			this.errorText = "Bad data."
 		}
