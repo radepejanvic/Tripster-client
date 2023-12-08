@@ -21,7 +21,6 @@ export class NavbarComponent implements OnInit{
       next:(_) => {
         localStorage.removeItem('user');
         this.authService.setRole();
-        this.router.navigate(['login']);
       }
     })
   }

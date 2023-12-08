@@ -39,18 +39,13 @@ export class LoginComponent implements OnInit{
 
 				next: (response: AuthResponse) => {
 					localStorage.setItem('user',response.token);
-					this.authService.setRole()
-					this.router.navigate(['home'])
-					this.claerForm()
+					this.authService.setRole();
+					this.router.navigate(['home']);
 					document.getElementById("close")?.click()
 				}
 			})
 		}else{
 			this.errorText = "Bad data."
 		}
-	}
-
-	claerForm():void{
-		this.loginForm.reset();
 	}
 } 
