@@ -21,7 +21,6 @@ export class PhotosComponent implements OnInit {
     this.service.getAccommodation(12).subscribe({
       next: (result: Accommodation) => {
         this.accommodation = result;
-        console.log(result);
       },
       error: (err: any) => {
         console.error('Error fetching accommodation info', err);
@@ -31,7 +30,6 @@ export class PhotosComponent implements OnInit {
     this.service.getPhotos(12).subscribe({
       next: (result: string[]) => {
         this.photos = result;
-        console.log(result);
       },
       error: (err: any) => {
         console.error('Error fetching photos', err);

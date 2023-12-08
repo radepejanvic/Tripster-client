@@ -12,6 +12,10 @@
     border-radius: 10px;
 }
 
+.calendar {
+    width: 300px;
+}
+
 input {
     border-radius: 10px;
     border: 1px solid;

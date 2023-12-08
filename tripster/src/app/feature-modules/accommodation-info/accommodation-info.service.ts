@@ -18,7 +18,6 @@ export class AccommodationInfoService {
     return this.http.get<string[]>(`http://localhost:8080/api/photos/${id}`).pipe(
       map((base64Strings: string[]) => {
         const dataUrls = base64Strings.map(base64 => this.getDataUrl(base64));
-        console.log('Data URLs:', dataUrls);
         return dataUrls;
       })
     );

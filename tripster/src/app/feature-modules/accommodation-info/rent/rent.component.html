@@ -1,9 +1,8 @@
 <h1> Make a reservation for Hotel Norrebro </h1>
 <div id="form">
-    <mat-form-field class="datePicker">
+    <!-- <mat-form-field class="datePicker">
         <mat-label>Start date</mat-label>
         <input matInput [matDatepicker]="picker1">
-        <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
         <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
         <mat-datepicker #picker1></mat-datepicker>
     </mat-form-field>
@@ -11,10 +10,23 @@
     <mat-form-field class="datePicker">
         <mat-label>End date</mat-label>
         <input matInput [matDatepicker]="picker2">
-        <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
         <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
         <mat-datepicker #picker2></mat-datepicker>
-    </mat-form-field>
+    </mat-form-field> -->
+
+    <mat-card class="calendar">
+    <mat-calendar [(selected)]="from"
+        (change)="goToNextMonth()"></mat-calendar>
+    </mat-card>
+    <!-- <p>Selected date: {{from}}</p> -->
+
+    <mat-card class="calendar">
+    <mat-calendar #calendar 
+        [(selected)]="to"
+        [startAt]="startAt"></mat-calendar>
+    </mat-card>
+    <!-- <p>Selected date: {{to}}</p> -->
+
 
     <input type="text" placeholder="Number of guests">
 
