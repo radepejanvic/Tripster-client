@@ -11,6 +11,7 @@ export class PhotosComponent implements OnInit {
 
   @Input() id: number | undefined;
 
+  choice: string = "overview";
   accommodation!: Accommodation;
   photos!: string[];
 
@@ -37,6 +38,10 @@ export class PhotosComponent implements OnInit {
       }
     })
 
+  }
+
+  onClick(choice: string): void {
+    this.choice = choice;
   }
 
 }

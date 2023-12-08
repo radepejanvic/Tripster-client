@@ -3,14 +3,14 @@
     margin: 0 auto;
 } */
 
-* {
+/* * {
     font-family: 'Poppins';
-}
+} */
 
 #photos {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 200px);
     grid-column-gap: 10px;
     grid-row-gap: 10px;
 }
@@ -74,4 +74,29 @@ button {
 
 hr {
     margin: 0px 0px 20px 0px;
+}
+
+#canvas {
+    /* padding-top: 20px; */
+    min-height: 400px;
+}
+
+button:hover {
+    transform: scale(1.1);
+    font-weight: bolder;
+    border-top: 1px solid gray;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+button:focus {
+    /* transform: scale(1.02); */
+    font-weight: bolder;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }

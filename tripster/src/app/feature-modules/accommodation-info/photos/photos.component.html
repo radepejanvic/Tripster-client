@@ -1,6 +1,6 @@
 <div class="container">
     <div id="photos">
-        <img *ngFor="let url of photos; let i = index" [src]="url" [class]="'item-' + (i + 1)" alt="Photo" />
+        <img *ngFor="let url of photos.slice(0,5); let i = index" [src]="url" [class]="'item-' + (i + 1)" alt="Photo" />
     </div>
 
     <div id="title">
@@ -13,15 +13,18 @@
     </div>
 
     <div id="menu">
-            <button>Overview</button>
-            <button>Amenities</button>
-            <button>Reviews</button>
-            <button>Rent</button>
+            <button type="button" (click)="onClick('overview')">Overview</button>
+            <button type="button" (click)="onClick('amenities')">Amenities</button>
+            <button type="button" (click)="onClick('reviews')">Reviews</button>
+            <button type="button" (click)="onClick('rent')">Rent</button>
     </div>
-    <hr/>
-    <app-overview [accommodation]="accommodation"></app-overview>
-    <hr/>
-    <app-rent></app-rent>
-    <hr/>
-    <app-reviews></app-reviews>
+
+    <hr>
+    <div id="canvas">
+        <app-overview [hidden]="!(choice == 'overview')" [accommodation]="accommodation"></app-overview>
+    
+        <app-rent [hidden]="!(choice == 'rent')"></app-rent>
+        
+        <app-reviews [hidden]="!(choice == 'reviews')"></app-reviews>
+    </div>
 </div>

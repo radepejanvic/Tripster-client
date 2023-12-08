@@ -29,6 +29,4 @@ export class AccommodationInfoService {
     return `data:${contentType};base64,${base64String}`;
   }
 
-
-
 }
