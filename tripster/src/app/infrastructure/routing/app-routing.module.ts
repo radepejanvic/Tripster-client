@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'accommodationInfo', component: PhotosComponent },
   {path:'login',component:LoginComponent},
-  { path: 'updateAccount', component:UserAccountUpdateComponent}
+  { path: 'updateAccount', component:UserAccountUpdateComponent,canActivate:[AuthGuard], data: {role: ['ROLE_HOST','ROLE_GUEST']}}
 ];
 
 @NgModule({
