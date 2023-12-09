@@ -1,0 +1,33 @@
+<div>
+    
+    <div class="row mb-3">
+        <div class="col">
+            <label for="minPrice" class="form-label">Min price</label>
+            <input type="number" class="form-control" id="minPrice" min="0">
+
+        </div>
+        <div class="col">
+            <label for="maxPrice" class="form-label">Max price</label>
+            <input type="number" class="form-control" id="maxPrice" min="0">
+        </div>
+    </div>
+
+    <label class="mb-3 title">Amenities</label>
+    <div class="mb-3">
+        <div *ngFor="let amenity of amenities" class="mb-1 amenities" >
+                <label class="check-label">
+                    <input type="checkbox" [value]="amenity" class="check-box">{{ amenity }}
+                </label>
+        </div>
+    </div>
+    
+    <label class="mb-3 title">Accommodation type</label>
+    <div class="mb-3">
+        <div *ngFor="let accommodationType of accommodationTypes" class="mb-1 amenities" >
+                <label class="check-label">
+                    <input type="checkbox" [value]="accommodationType" class="check-box" >{{ accommodationType }}
+                </label>
+        </div>
+    </div>
+
+</div>

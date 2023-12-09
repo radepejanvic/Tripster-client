@@ -11,6 +11,7 @@ import { UserAccountUpdateModule } from '../user-account-update/user-account-upd
 import { UserNavbarComponent } from './navbar/user-navbar/user-navbar.component';
 import { AdminNavbarComponent } from './navbar/admin-navbar/admin-navbar.component';
 import { FilterPageComponent } from './filter-page/filter-page.component';
+import { FilterModule } from '../filter/filter.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { FilterPageComponent } from './filter-page/filter-page.component';
     FooterComponent,
     UserNavbarComponent,
     AdminNavbarComponent,
-    FilterPageComponent
+    FilterPageComponent,
   ],
   imports: [
     CommonModule,
@@ -27,7 +28,8 @@ import { FilterPageComponent } from './filter-page/filter-page.component';
     AccommodationInfoModule,
     AuthorizationModule,
     UserRegistrationModule,
-    UserAccountUpdateModule
+    UserAccountUpdateModule,
+    FilterModule
   ],
   exports: [
     NavbarComponent,
