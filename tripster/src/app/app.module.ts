@@ -24,6 +24,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
     UserRegistrationModule,
@@ -34,9 +35,11 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     HttpClientModule,
     FormsModule
   ],
-  providers: [{      provide: HTTP_INTERCEPTORS,
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
     useClass: Interceptor,
-    multi: true,}     ],
+    multi: true,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-amenity',
@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './amenity.component.css'
 })
 export class AmenityComponent {
-
+  @Input() amenity: string | undefined;
 }
