@@ -10,6 +10,7 @@ import { UserRegistrationModule } from '../user-registration/user-registration.m
 import { UserAccountUpdateModule } from '../user-account-update/user-account-update';
 import { UserNavbarComponent } from './navbar/user-navbar/user-navbar.component';
 import { AdminNavbarComponent } from './navbar/admin-navbar/admin-navbar.component';
+import { FilterPageComponent } from './filter-page/filter-page.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { AdminNavbarComponent } from './navbar/admin-navbar/admin-navbar.compone
     HomeComponent,
     FooterComponent,
     UserNavbarComponent,
-    AdminNavbarComponent
+    AdminNavbarComponent,
+    FilterPageComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +32,8 @@ import { AdminNavbarComponent } from './navbar/admin-navbar/admin-navbar.compone
   exports: [
     NavbarComponent,
     HomeComponent,
-    FooterComponent
+    FooterComponent,
+    FilterPageComponent
   ]
 })
 export class LayoutModule { }
