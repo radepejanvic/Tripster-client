@@ -8,12 +8,16 @@ import { AccommodationInfoModule } from '../accommodation-info/accommodation-inf
 import { AuthorizationModule } from '../authorization/authorization.module';
 import { UserRegistrationModule } from '../user-registration/user-registration.module';
 import { UserAccountUpdateModule } from '../user-account-update/user-account-update';
+import { UserNavbarComponent } from './navbar/user-navbar/user-navbar.component';
+import { AdminNavbarComponent } from './navbar/admin-navbar/admin-navbar.component';
 
 @NgModule({
   declarations: [
     NavbarComponent,
     HomeComponent,
-    FooterComponent
+    FooterComponent,
+    UserNavbarComponent,
+    AdminNavbarComponent
   ],
   imports: [
     CommonModule,

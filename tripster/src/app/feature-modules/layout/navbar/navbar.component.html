@@ -15,10 +15,11 @@
 
         <div class="container row col-3" >
             <div class="d-flex justify-content-end" >
-                <app-registration-form></app-registration-form>
-                <app-login style="margin-left: 20px;"></app-login>
-                <i class="bi bi-person-circle user-circle" [routerLink] = "['/updateAccount']"></i>
-                
+                <app-registration-form *ngIf="role == null"></app-registration-form>
+                <app-login *ngIf="role == null" style="margin-left: 20px;"></app-login>
+                <button type="button" *ngIf="role != null"  class="btn btn-outline-dark" (click)="logOut()"   >Log out</button>
+                <app-admin-navbar *ngIf="role == 'ROLE_ADMIN'" ></app-admin-navbar>
+                <app-user-navbar *ngIf="role == 'ROLE_GUEST' "></app-user-navbar>
             </div>
             
             
