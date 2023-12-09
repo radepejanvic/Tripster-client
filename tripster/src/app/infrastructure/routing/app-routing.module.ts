@@ -3,12 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from '../../feature-modules/layout/home/home.component';
 import { PhotosComponent } from '../../feature-modules/accommodation-info/photos/photos.component';
 import { UserAccountUpdateComponent } from 'src/app/feature-modules/user-account-update/user-account-update/user-account-update.component';
+import { AuthGuard } from 'src/app/feature-modules/authorization/guard/auth.guard';
+import { LoginComponent } from 'src/app/feature-modules/authorization/login/login.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },//default route
   { path: 'home', component: HomeComponent },
   { path: 'accommodationInfo', component: PhotosComponent },
-  { path: 'updateAccount', component:UserAccountUpdateComponent}
+  {path:'login',component:LoginComponent},
+  { path: 'updateAccount', component:UserAccountUpdateComponent,canActivate:[AuthGuard], data: {role: ['ROLE_HOST','ROLE_GUEST']}}
 ];
 
 @NgModule({

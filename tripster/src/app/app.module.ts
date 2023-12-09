@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { UserAccountUpdateModule } from './feature-modules/user-account-update/user-account-update';
 import { AppRoutingModule } from './infrastructure/routing/app-routing.module';
@@ -12,6 +12,10 @@ import { AccommodationInfoModule } from './feature-modules/accommodation-info/ac
 import { LayoutModule } from './feature-modules/layout/layout.module';
 import { AuthorizationModule } from './feature-modules/authorization/authorization.module';
 import { HttpClientModule } from '@angular/common/http';
+import { Interceptor } from './feature-modules/authorization/interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
+
 
 @NgModule({
   declarations: [
@@ -19,7 +23,6 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -28,10 +31,15 @@ import { HttpClientModule } from '@angular/common/http';
     AccommodationInfoModule,
     LayoutModule,
     AuthorizationModule,
-    ReactiveFormsModule,
-    UserAccountUpdateModule
+    UserAccountUpdateModule,
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: Interceptor,
+    multi: true,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
