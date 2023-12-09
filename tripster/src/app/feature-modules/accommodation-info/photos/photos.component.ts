@@ -42,4 +42,8 @@ export class PhotosComponent implements OnInit {
     this.choice = choice;
   }
 
+  justClick() {
+    console.log('Neki tekst');
+  }
+
 }
