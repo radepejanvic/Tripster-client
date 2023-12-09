@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { MatCalendar } from '@angular/material/datepicker';
+import { Component, Input } from '@angular/core';
+import { DateRange, MatCalendar } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-rent',
@@ -7,18 +7,24 @@ import { MatCalendar } from '@angular/material/datepicker';
   styleUrl: './rent.component.css'
 })
 export class RentComponent {
-  from?: Date;
-  to?: Date;
 
-  startAt: Date = this.goToNextMonth();
+  @Input() name?: string;
+  selectedDateRange?: DateRange<Date>;
 
-  @ViewChild('calendar', { static: false }) calendar!: MatCalendar<Date>;
-
-  goToNextMonth(): Date {
-    const now: Date = new Date();
-    now.setMonth(now.getMonth() + 1);
-    return now;
+  _onSelectedChange(date: Date): void {
+    if (
+      this.selectedDateRange &&
+      this.selectedDateRange.start &&
+      date > this.selectedDateRange.start &&
+      !this.selectedDateRange.end
+    ) {
+      this.selectedDateRange = new DateRange(
+        this.selectedDateRange.start,
+        date
+      );
+    } else {
+      this.selectedDateRange = new DateRange(date, null);
+    }
   }
-
 
 }
