@@ -12,6 +12,7 @@ import { ReviewsComponent } from './reviews/reviews.component';
 import { RentComponent } from './rent/rent.component';
 import { AccommodationCrudComponent } from './accommodation-crud/accommodation-crud.component';
 import { PhotoUploadComponent } from './photo-upload/photo-upload.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { PhotoUploadComponent } from './photo-upload/photo-upload.component';
   imports: [
     CommonModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    NgxDropzoneModule
   ],
   exports: [
     PhotosComponent,

@@ -92,15 +92,7 @@
         <input type="number" id="custom" min="0" max="60" placeholder="Custom free cancellation period policy">
     </div>
 
-    <div id="photos">
-        <!-- <img *ngFor="let url of photos.slice(0,5); let i = index" [src]="url" [class]="'item-' + (i + 1)" alt="Photo" /> -->
+    <h1> Show us the photos of your unit. </h1>
 
-        <div class="item-1 temp"></div>
-        <div class="item-2 temp"></div>
-        <div class="item-3 temp"></div>
-        <div class="item-4 temp"></div>
-        <div class="item-5 temp"></div>
-
-        <!-- <button type="button" class="item-5 shader"> View gallery </button> -->
-    </div>
+    <app-photo-upload></app-photo-upload>
 </div>
