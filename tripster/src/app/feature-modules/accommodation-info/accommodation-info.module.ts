@@ -11,6 +11,7 @@ import { RatingStatsComponent } from './rating-stats/rating-stats.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { RentComponent } from './rent/rent.component';
 import { AccommodationCrudComponent } from './accommodation-crud/accommodation-crud.component';
+import { PhotoUploadComponent } from './photo-upload/photo-upload.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AccommodationCrudComponent } from './accommodation-crud/accommodation-c
     RatingStatsComponent,
     ReviewsComponent,
     RentComponent,
-    AccommodationCrudComponent
+    AccommodationCrudComponent,
+    PhotoUploadComponent
   ],
   imports: [
     CommonModule,

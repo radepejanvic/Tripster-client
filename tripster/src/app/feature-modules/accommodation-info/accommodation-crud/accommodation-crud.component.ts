@@ -10,7 +10,7 @@ export class AccommodationCrudComponent implements OnInit {
   checkedAmenities: boolean[] = [];
 
   ngOnInit(): void {
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 30; i++) {
       this.amenities.push("Some amenity");
     }
     this.checkedAmenities = new Array(this.amenities.length).fill(false);
