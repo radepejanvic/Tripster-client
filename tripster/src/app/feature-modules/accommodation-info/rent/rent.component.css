@@ -4,12 +4,8 @@
     align-items: center;
 }
 
-
-.datePicker {
-    height: 100px;
-    padding: 10px;
-    margin: 0px;
-    border-radius: 10px;
+.calendar {
+    width: 300px;
 }
 
 input {
@@ -17,9 +13,28 @@ input {
     border: 1px solid;
     height: 37px;
     padding: 10px;
+    width: 300px;
 }
 
 h1 {
     font-weight: 500;
     font-size: 24px;
+}
+
+span {
+    display: flex;
+    width: 500px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#rent {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+p {
+    margin-bottom: 20px;
 }

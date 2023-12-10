@@ -1,22 +1,35 @@
-<h1> Make a reservation for Hotel Norrebro </h1>
-<div id="form">
-    <mat-form-field class="datePicker">
-        <mat-label>Start date</mat-label>
-        <input matInput [matDatepicker]="picker1">
-        <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
-        <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
-        <mat-datepicker #picker1></mat-datepicker>
-    </mat-form-field>
+<div id="rent">
+    <div>
+        <h1> Make a reservation for {{name}} </h1>
+        <p> Pick the time frame that best suits you. </p>
+        
+        <mat-card class="calendar">
+        <mat-calendar (selectedChange)="_onSelectedChange($event)"
+                    [selected]="selectedDateRange"></mat-calendar>
+        </mat-card>
+    </div>
 
-    <mat-form-field class="datePicker">
-        <mat-label>End date</mat-label>
-        <input matInput [matDatepicker]="picker2">
-        <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
-        <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
-        <mat-datepicker #picker2></mat-datepicker>
-    </mat-form-field>
-
-    <input type="text" placeholder="Number of guests">
-
-    <button type="button " class="btn btn-outline-dark"> Make a reservation </button>
+    <div id="preview">
+        <h1> Reservation preview </h1>
+        <p> Review reservation details before finalizing your decision. </p>
+        <span>
+            <label> Start date: </label>
+            <input type="text" disabled="true" placeholder="Pick from calendar">
+        </span>
+        <span>
+            <label> End date: </label>
+            <input type="text" disabled="true" placeholder="Pick from calendar">
+        </span>
+        <span>
+            <label> Number of guests: </label>
+            <input type="number" placeholder="Number of guests">
+        </span>
+        <span>
+            <label> Total price: </label>
+            <input type="text" disabled="true" placeholder="Total price">
+        </span>
+        <button type="button " class="btn btn-outline-dark"> Make a reservation </button>
+    </div>
 </div>
+
+

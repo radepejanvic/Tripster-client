@@ -10,7 +10,7 @@ import { ReviewComponent } from './review/review.component';
 import { RatingStatsComponent } from './rating-stats/rating-stats.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { RentComponent } from './rent/rent.component';
-
+import { AccommodationCrudComponent } from './accommodation-crud/accommodation-crud.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,8 @@ import { RentComponent } from './rent/rent.component';
     ReviewComponent,
     RatingStatsComponent,
     ReviewsComponent,
-    RentComponent
+    RentComponent,
+    AccommodationCrudComponent
   ],
   imports: [
     CommonModule,
