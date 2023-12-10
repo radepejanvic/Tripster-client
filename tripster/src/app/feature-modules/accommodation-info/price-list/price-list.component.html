@@ -1,1 +1,38 @@
-<p>price-list works!</p>
+<div id="#price-list">
+
+    <div id="add-price-list"> 
+        <div class="wrapper">
+            <mat-card class="calendar">
+                <mat-calendar [(selected)]="start"></mat-calendar>
+            </mat-card>
+            <mat-card class="calendar">
+                <mat-calendar [(selected)]="end"></mat-calendar>
+            </mat-card>
+        </div>
+        <label>
+            Selected date range: {{formatDate(start)}} - {{formatDate(end)}}
+        </label>
+        <div class="wrapper">
+            <input class="error" type="number" placeholder="Standard">
+            <input class="error" type="number" placeholder="Weekend">
+            <input type="number" placeholder="Holiday">
+        </div>
+        <!-- <input type="range" min="10" max="300"> -->
+        <button class="btn btn-outline-dark"> Create new pricelist</button>
+    </div>
+
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Start date</th>
+            <th>End date</th>
+            <th>Standard price</th>
+        </tr>
+        <tr *ngFor="let price of priceLists; index as i">
+            <td class="id">{{i + 1}}</td>
+            <td>Some random info</td>
+            <td>Some random info</td>
+            <td>Some random info</td>
+        </tr>
+    </table>
+</div>
