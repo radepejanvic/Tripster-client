@@ -2,7 +2,13 @@
     background-color: #F0F0F0;
     width: 100%;
     aspect-ratio: 4/1;
+    
 }
+.card:hover{
+    scale: 1.005;
+    box-shadow: 5px 5px 10px 2px rgba(33,33,33,.2) ; 
+}
+
 .card-title{
     margin-bottom: 0px;
     font-size: 24px;
