@@ -23,8 +23,9 @@
         <div class="container col-8 ">
             <p class="searchResults">{{numberOfResults}} Search Results For </p>
             <p class="title">{{title}}</p>
-            <div>
-                <app-accommodation-info-card></app-accommodation-info-card>
+            <div *ngFor="let accommodation of accommodations">
+                
+                <app-accommodation-info-card [accommodation]="accommodation"></app-accommodation-info-card>
                   
             </div>
             
