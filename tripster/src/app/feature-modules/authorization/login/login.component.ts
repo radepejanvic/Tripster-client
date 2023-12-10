@@ -16,8 +16,8 @@ export class LoginComponent implements OnInit{
 	constructor(private authService: AuthorizationService,
 		private router:Router){}
 	ngOnInit(): void {
-		this.router.navigate(['home'])
-		document.getElementById("login")?.click()
+		// this.router.navigate(['home'])
+		// document.getElementById("login")?.click()
 	}
 
 	loginForm = new FormGroup({
