@@ -1,0 +1,8 @@
+<label class="mb-2 title">Filter accomodation requests</label>
+<div class="mb-3">
+    <div *ngFor="let request of accomodationRequests" class="mb-1 amenities" >
+            <label class="check-label">
+                <input type="checkbox" [value]="request" class="check-box" >{{ request }}
+            </label>
+    </div>
+</div>
