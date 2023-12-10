@@ -1,1 +1,106 @@
-<p>accommodation-crud works!</p>
+<div class="container">
+    <h1 id> Hello Rade, let`s register an accommodation of yours! </h1>
+    
+    <h1> We`ll start with some base info.</h1>
+    
+    <div id="base-info" class="form">
+        <label for="name"> Something unique and authentic </label>
+        <input type="text" id="name" placeholder="Accommodation name">
+        <label for="short-desc"> Make it short and memorable (max 75 characters) </label>
+        <input type="text" id="short-desc" placeholder="Short description">
+        <label for="min-cap"> Make it as flexible as possible  </label>
+        <span>
+            <input type="number" id="min-cap" min="0" max="20" placeholder="Minimal capacity">
+            <input type="number" id="max-cap" min="1" max="20" placeholder="Maximal capacity">
+        </span>
+        <span>
+            <select id="type">
+                <option value="placeHolder">Pick the type of your unit</option>
+                <option value="Appartment">Appartment</option>
+                <option value="Studio">Studio</option>
+                <option value="Room">Room</option>
+            </select>
+           <span class="radios">
+                <input type="radio" id="automatic" name="reservation_approval" value="true">
+                <label for="automatic">Allow automatic reservation (advised)</label>
+           </span>
+
+            <span class="radios">
+                <input type="radio" id="manual" name="reservation_approval" value="false">
+                <label for="manual">Review each reservation request manually</label>
+            </span>
+
+        </span>
+    </div>
+
+    <!-- <h1> Let`s take a dive into details! </h1> -->
+    <h1> Let`s now move on to Address info! </h1>
+
+    <div id="address" class="form">
+        <input type="text" id="country" placeholder="Country">
+       
+        <span>
+            <input type="text" id="city" placeholder="City">
+            <input type="text" id="zip-code" placeholder="Zip code">
+        </span>
+        <span>
+            <input type="text" id="street" placeholder="Street">
+            <input type="text" id="number" placeholder="Street No.">
+        </span>
+
+        <label for="longitude"> If the location on the map isn`t pointing to the exact location of your unit please insert longitude and latitude you get from another map service. </label>
+        <span>
+            <input type="text" id="longitude" placeholder="Longitude">
+            <input type="text" id="latitude" placeholder="Latitude">
+        </span>
+
+        <div id="map"></div>
+    </div>
+
+    <h1> Here we need as much details as possible. </h1>
+
+    <div id="details">
+        <label for="desc"> Be as creative and honest as you please, here you have the full freedom to represent your unit as best as you can. So don`t be stingy on words, describe it to the fullest of details! </label>
+        <textarea id="desc" rows="4" cols="50" placeholder="Description"></textarea>
+
+    </div>
+
+    <h1> The more you provide, the more you`ll attract! </h1>
+
+    <div id="amenities">
+        <div class="amenity-wrapper"  *ngFor="let amenity of amenities; index as i" >
+            <input type="checkbox" [id]="'check-' + i" [checked]="checkedAmenities[i]" (change)="toggleAmenity($event, i)">
+            <label class="wrapper-label" [for]="'check-' + i">
+                <app-amenity [amenity]="amenity" [checked]="checkedAmenities[i]"></app-amenity>
+            </label>
+        </div>
+    </div>
+
+    <h1> Finally tell us what is your free cancellation period policy. </h1>
+
+    <label for="cancellation-policy"> Give as much flexibility, but be carefull to not hurt your bussines. </label>
+    <div id="cancellation-policy">
+        <select id="policy">
+                <option value="placeHolder">Pick the cancellation period policy</option>
+                <option value="3"> 3 days before the reservation</option>
+                <option value="7"> 7 days before the reservation </option>
+                <option value="14"> 14 days before the reservation </option>
+                <option value="30"> 1 month before the reservation </option>
+                <option value="custom"> Custom </option>
+                <option value="0"> None </option>
+        </select>
+        <input type="number" id="custom" min="0" max="60" placeholder="Custom free cancellation period policy">
+    </div>
+
+    <div id="photos">
+        <!-- <img *ngFor="let url of photos.slice(0,5); let i = index" [src]="url" [class]="'item-' + (i + 1)" alt="Photo" /> -->
+
+        <div class="item-1 temp"></div>
+        <div class="item-2 temp"></div>
+        <div class="item-3 temp"></div>
+        <div class="item-4 temp"></div>
+        <div class="item-5 temp"></div>
+
+        <!-- <button type="button" class="item-5 shader"> View gallery </button> -->
+    </div>
+</div>

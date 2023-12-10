@@ -30,7 +30,8 @@ import { AccommodationCrudComponent } from './accommodation-crud/accommodation-c
     RouterModule
   ],
   exports: [
-    PhotosComponent
+    PhotosComponent,
+    AccommodationCrudComponent
   ]
 })
 export class AccommodationInfoModule { }
