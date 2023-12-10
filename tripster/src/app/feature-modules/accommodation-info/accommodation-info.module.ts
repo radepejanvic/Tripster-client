@@ -29,7 +29,8 @@ import { RentComponent } from './rent/rent.component';
     RouterModule
   ],
   exports: [
-    PhotosComponent
+    PhotosComponent,
+    RatingComponent
   ]
 })
 export class AccommodationInfoModule { }

@@ -12,6 +12,7 @@ import { UserNavbarComponent } from './navbar/user-navbar/user-navbar.component'
 import { AdminNavbarComponent } from './navbar/admin-navbar/admin-navbar.component';
 import { FilterPageComponent } from './filter-page/filter-page.component';
 import { FilterModule } from '../filter/filter.module';
+import { CardsModule } from '../cards/cards.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { FilterModule } from '../filter/filter.module';
     AuthorizationModule,
     UserRegistrationModule,
     UserAccountUpdateModule,
-    FilterModule
+    FilterModule,
+    CardsModule
   ],
   exports: [
     NavbarComponent,
