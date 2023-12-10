@@ -10,7 +10,7 @@ import { FilterPageComponent } from 'src/app/feature-modules/layout/filter-page/
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },//default route
   { path: 'home', component: HomeComponent },
-  { path: 'accommodationInfo', component: PhotosComponent },
+  { path: 'accommodationInfo/:id', component: PhotosComponent },
   {path:'login',component:LoginComponent},
   { path: 'updateAccount', component:UserAccountUpdateComponent,canActivate:[AuthGuard], data: {role: ['ROLE_HOST','ROLE_GUEST']}},
   { path: 'filterPage', component:FilterPageComponent }
