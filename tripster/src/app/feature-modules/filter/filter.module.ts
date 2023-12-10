@@ -6,6 +6,8 @@ import { GuestRatingFilterComponent } from './guest-rating-filter/guest-rating-f
 import { ReservationStatusFilterComponent } from './reservation-status-filter/reservation-status-filter.component';
 import { TimeFilterComponent } from './time-filter/time-filter.component';
 import { UserTypeStatusFilterComponent } from './user-type-status-filter/user-type-status-filter.component';
+import { AccommodationRequestsFilterComponent } from './accommodation-requests-filter/accommodation-requests-filter.component';
+import { ReviewFilterComponent } from './review-filter/review-filter.component';
 
 
 
@@ -16,7 +18,9 @@ import { UserTypeStatusFilterComponent } from './user-type-status-filter/user-ty
     GuestRatingFilterComponent,
     ReservationStatusFilterComponent,
     TimeFilterComponent,
-    UserTypeStatusFilterComponent
+    UserTypeStatusFilterComponent,
+    AccommodationRequestsFilterComponent,
+    ReviewFilterComponent
   ],
   imports: [
     CommonModule
@@ -27,7 +31,9 @@ import { UserTypeStatusFilterComponent } from './user-type-status-filter/user-ty
     GuestRatingFilterComponent,
     ReservationStatusFilterComponent,
     TimeFilterComponent,
-    UserTypeStatusFilterComponent
+    UserTypeStatusFilterComponent,
+    AccommodationRequestsFilterComponent,
+    ReviewFilterComponent
   ]
 })
 export class FilterModule { }
