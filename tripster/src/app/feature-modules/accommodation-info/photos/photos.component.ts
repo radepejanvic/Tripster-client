@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AccommodationInfoService } from '../accommodation-info.service';
 import { Accommodation } from '../model/accommodation.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-photos',
@@ -15,25 +16,29 @@ export class PhotosComponent implements OnInit {
   accommodation!: Accommodation;
   photos!: string[];
 
-  constructor(private service: AccommodationInfoService) { }
+  constructor(private route:ActivatedRoute,
+    private service: AccommodationInfoService) { }
 
   ngOnInit(): void {
-    this.service.getAccommodation(12).subscribe({
-      next: (result: Accommodation) => {
-        this.accommodation = result;
-      },
-      error: (err: any) => {
-        console.error('Error fetching accommodation info', err);
-      }
-    });
-
-    this.service.getPhotos(12).subscribe({
-      next: (result: string[]) => {
-        this.photos = result;
-      },
-      error: (err: any) => {
-        console.error('Error fetching photos', err);
-      }
+    this.route.params.subscribe((params)=>{
+      const id = +params['id']
+      this.service.getAccommodation(id).subscribe({
+        next: (result: Accommodation) => {
+          this.accommodation = result;
+        },
+        error: (err: any) => {
+          console.error('Error fetching accommodation info', err);
+        }
+      });
+  
+      this.service.getPhotos(id).subscribe({
+        next: (result: string[]) => {
+          this.photos = result;
+        },
+        error: (err: any) => {
+          console.error('Error fetching photos', err);
+        }
+      })
     })
 
   }
