@@ -13,6 +13,7 @@ import { RentComponent } from './rent/rent.component';
 import { AccommodationCrudComponent } from './accommodation-crud/accommodation-crud.component';
 import { PhotoUploadComponent } from './photo-upload/photo-upload.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { PriceListComponent } from './price-list/price-list.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     ReviewsComponent,
     RentComponent,
     AccommodationCrudComponent,
-    PhotoUploadComponent
+    PhotoUploadComponent,
+    PriceListComponent
   ],
   imports: [
     CommonModule,
