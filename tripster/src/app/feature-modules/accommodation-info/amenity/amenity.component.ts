@@ -7,4 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class AmenityComponent {
   @Input() amenity: string | undefined;
+  @Input() checked: boolean = false;
 }

@@ -2,6 +2,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 200px;
+    height: 70px;
+    cursor: pointer;
+    background-color: white;
+    transition: background-color 0.4s ease-out;
+}
+
+/* #amenity:hover, */
+#amenity.checked {
+    background-color: black;
 }
 
 img {
@@ -13,4 +25,12 @@ p {
     text-align: center;
     font-weight: 400;
     font-size: 16px;
+    color: black;
+}
+
+/* #amenity:hover img,
+#amenity:hover p, */
+#amenity.checked img,
+#amenity.checked p {
+    filter: brightness(0) invert(1);
 }

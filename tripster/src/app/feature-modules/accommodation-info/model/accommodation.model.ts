@@ -17,3 +17,11 @@ export interface Accommodation {
     automaticReservation: boolean,
     status: string;
 }
+
+export interface PriceList {
+    start: Date;
+    end: Date;
+    standard: number;
+    weekend: number;
+    holiday: number;
+}

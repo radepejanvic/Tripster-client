@@ -14,6 +14,7 @@ import { AuthorizationModule } from './feature-modules/authorization/authorizati
 import { HttpClientModule } from '@angular/common/http';
 import { Interceptor } from './feature-modules/authorization/interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 
 
@@ -33,7 +34,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     AuthorizationModule,
     UserAccountUpdateModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxDropzoneModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

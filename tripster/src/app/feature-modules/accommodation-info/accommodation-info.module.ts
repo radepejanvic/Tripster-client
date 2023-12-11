@@ -11,6 +11,11 @@ import { RatingStatsComponent } from './rating-stats/rating-stats.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { RentComponent } from './rent/rent.component';
 import { AccommodationCrudComponent } from './accommodation-crud/accommodation-crud.component';
+import { PhotoUploadComponent } from './photo-upload/photo-upload.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { PriceListComponent } from './price-list/price-list.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,15 +27,21 @@ import { AccommodationCrudComponent } from './accommodation-crud/accommodation-c
     RatingStatsComponent,
     ReviewsComponent,
     RentComponent,
-    AccommodationCrudComponent
+    AccommodationCrudComponent,
+    PhotoUploadComponent,
+    PriceListComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    NgxDropzoneModule,
+    BrowserModule,
+    FormsModule
   ],
   exports: [
-    PhotosComponent
+    PhotosComponent,
+    AccommodationCrudComponent
   ]
 })
 export class AccommodationInfoModule { }
