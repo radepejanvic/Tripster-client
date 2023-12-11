@@ -16,6 +16,8 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { PriceListComponent } from './price-list/price-list.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { FormsModule } from '@angular/forms';
     RentComponent,
     AccommodationCrudComponent,
     PhotoUploadComponent,
-    PriceListComponent
+    PriceListComponent,
+    MapComponent
   ],
   imports: [
     CommonModule,
@@ -37,11 +40,13 @@ import { FormsModule } from '@angular/forms';
     RouterModule,
     NgxDropzoneModule,
     BrowserModule,
-    FormsModule
+    FormsModule,
+    GoogleMapsModule
   ],
   exports: [
     PhotosComponent,
-    AccommodationCrudComponent
+    AccommodationCrudComponent,
+    OverviewComponent
   ]
 })
 export class AccommodationInfoModule { }

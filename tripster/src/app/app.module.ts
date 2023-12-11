@@ -15,7 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Interceptor } from './feature-modules/authorization/interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxDropzoneModule } from 'ngx-dropzone';
-
+import { GoogleMapsModule } from '@angular/google-maps'
 
 
 @NgModule({
@@ -35,7 +35,8 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     UserAccountUpdateModule,
     HttpClientModule,
     FormsModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    GoogleMapsModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

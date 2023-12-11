@@ -8,7 +8,9 @@
     <div class="map">
         <h1> Location </h1>
         <h3> {{accommodation?.street}} {{accommodation?.number}}, {{accommodation?.city}}, {{accommodation?.country}}, {{accommodation?.zipCode}} </h3>
-        <img src="./assets/images/mapa.png"/>
+
+        <app-map [address]="formatAddress()"></app-map>
+        <!-- <app-map [latitude]="accommodation.latitude" [longitude]="accommodation.longitude"></app-map> -->
     </div>
 
     <div class="amenities">
