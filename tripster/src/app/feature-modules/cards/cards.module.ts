@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { AccommodationInfoCardComponent } from './accommodation-info-card/accommodation-info-card.component';
 import { AccommodationInfoModule } from '../accommodation-info/accommodation-info.module';
 import { RouterModule } from '@angular/router';
+import { AccommodationRequestCardComponent } from './accommodation-request-card/accommodation-request-card.component';
 
 
 @NgModule({
   declarations: [
-    AccommodationInfoCardComponent
+    AccommodationInfoCardComponent,
+    AccommodationRequestCardComponent
   ],
   imports: [
     CommonModule,
@@ -15,7 +17,8 @@ import { RouterModule } from '@angular/router';
     RouterModule
   ],
   exports:[
-    AccommodationInfoCardComponent
+    AccommodationInfoCardComponent,
+    AccommodationRequestCardComponent
   ]
 })
 export class CardsModule { }
