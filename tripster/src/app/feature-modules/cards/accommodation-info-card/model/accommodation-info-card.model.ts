@@ -7,6 +7,7 @@ export interface AccommodationInfoCard{
     number: string,
     shortDescription: string,
     amenities: string[],
+    price:number,
     numOfGuests: number,
     duration: number,
     rating: number,
