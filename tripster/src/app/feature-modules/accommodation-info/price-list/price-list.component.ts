@@ -13,6 +13,7 @@ export class PriceListComponent {
   standard!: number;
   weekend!: number;
   holiday!: number;
+  selectedRow: number = -1;
 
   priceLists: PriceList[] = [];
 
@@ -39,6 +40,17 @@ export class PriceListComponent {
     this.standard = 0;
     this.weekend = 0;
     this.holiday = 0;
+  }
+
+  selectRow(index: number): void {
+    this.selectedRow = index;
+  }
+
+  removeRow(): void {
+    if (this.selectedRow !== -1) {
+      this.priceLists.splice(this.selectedRow, 1);
+      this.selectedRow = -1;
+    }
   }
 
 }
