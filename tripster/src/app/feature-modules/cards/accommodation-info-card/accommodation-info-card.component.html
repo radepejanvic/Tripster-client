@@ -1,4 +1,4 @@
-<div class="card mb-3" >
+<div class="card mb-3" [routerLink]="['/accommodationInfo', accommodation.id]">
     <div class="row g-0" style="height: 100%;">
 
         <img src="./assets/images/hotel-1.jpeg" class="img-fluid rounded-start col-md-4" alt="...">
@@ -6,9 +6,9 @@
         <div class="col-md-5" >
             <div class="card-body">
 
-                <h5 class="card-title">Hotel Norrebro</h5>
-                <p class="card-text"><small class="text-body-secondary">London</small></p>
-                <p class="card-text short-description">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <h5 class="card-title">{{accommodation.name}}</h5>
+                <p class="card-text"><small class="text-body-secondary">{{accommodation.city}}, {{accommodation.street}} {{accommodation.number}}</small></p>
+                <p class="card-text short-description">{{accommodation.shortDescription}}</p>
                 <div class="row mt-2" >
                     <p *ngFor="let amenity of amenities" style="width: fit-content;">{{amenity}}</p>
                 </div>
@@ -19,10 +19,10 @@
             <div class="card-body">
                 <app-rating ></app-rating>            
                 <div class="price-info">
-                    <p class="card-text text-end price">230</p>
-                    <p class="card-text text-end">3 nights, 2 guests</p>
+                    <p class="card-text text-end price">{{accommodation.price}}€</p>
+                    <p class="card-text text-end">{{accommodation.duration}} nights, {{accommodation.numOfGuests}} guests</p>
                     <div class="d-flex flex-row-reverse">
-                        <button type="button" class="btn btn-outline-dark mt-2">Book now</button>
+                        <button type="button" class="btn btn-outline-dark mt-2" >Book now</button>
                     </div>
                 </div>
             </div>
