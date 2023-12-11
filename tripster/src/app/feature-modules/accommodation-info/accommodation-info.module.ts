@@ -17,6 +17,7 @@ import { PriceListComponent } from './price-list/price-list.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
     RentComponent,
     AccommodationCrudComponent,
     PhotoUploadComponent,
-    PriceListComponent
+    PriceListComponent,
+    MapComponent
   ],
   imports: [
     CommonModule,
