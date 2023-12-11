@@ -10,6 +10,7 @@ import { UserRegistrationModule } from '../user-registration/user-registration.m
 import { UserAccountUpdateModule } from '../user-account-update/user-account-update';
 import { UserNavbarComponent } from './navbar/user-navbar/user-navbar.component';
 import { AdminNavbarComponent } from './navbar/admin-navbar/admin-navbar.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AdminNavbarComponent } from './navbar/admin-navbar/admin-navbar.compone
     AccommodationInfoModule,
     AuthorizationModule,
     UserRegistrationModule,
-    UserAccountUpdateModule
+    UserAccountUpdateModule,
+    GoogleMapsModule
   ],
   exports: [
     NavbarComponent,

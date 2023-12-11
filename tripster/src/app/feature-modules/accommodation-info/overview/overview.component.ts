@@ -8,4 +8,11 @@ import { Accommodation } from '../model/accommodation.model';
 })
 export class OverviewComponent {
   @Input() accommodation: Accommodation | undefined;
+
+  myLatLng: { lat: number, lng: number } = { lat: 42.546, lng: 21.882 };
+  mapOptions: google.maps.MapOptions = {
+    center: this.myLatLng,
+    zoom: 15
+  };
+
 }
