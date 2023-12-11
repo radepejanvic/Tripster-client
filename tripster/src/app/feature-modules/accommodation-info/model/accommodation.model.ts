@@ -13,7 +13,7 @@ export interface Accommodation {
     zipCode: string,
     street: string,
     number: string,
-    latituded: number,
+    latitude: number,
     longitude: number,
     description: string,
     amenities: string[],
