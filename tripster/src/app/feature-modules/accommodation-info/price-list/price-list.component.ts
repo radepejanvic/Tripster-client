@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { PriceList } from '../model/accommodation.model';
 
 @Component({
@@ -7,6 +7,8 @@ import { PriceList } from '../model/accommodation.model';
   styleUrl: './price-list.component.css'
 })
 export class PriceListComponent {
+
+  @ViewChild('tableScroll') tableScroll!: ElementRef;
 
   start: Date = new Date();
   end: Date = new Date();
@@ -34,6 +36,7 @@ export class PriceListComponent {
 
     };
     this.priceLists.push(newPriceList);
+    this.scrollToBottom();
 
     this.start = new Date();
     this.end = new Date();
@@ -50,6 +53,13 @@ export class PriceListComponent {
     if (this.selectedRow !== -1) {
       this.priceLists.splice(this.selectedRow, 1);
       this.selectedRow = -1;
+    }
+  }
+
+  scrollToBottom(): void {
+    if (this.tableScroll) {
+      const containerElem = this.tableScroll.nativeElement;
+      containerElem.scrollTop = containerElem.scrollHeight;
     }
   }
 

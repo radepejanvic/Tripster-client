@@ -37,9 +37,10 @@
         <button class="btn btn-outline-dark" (click)="addPriceList()"> Create new pricelist</button>
     </div>
     
-    <div id="table" class="vertical-wrapper"> 
-    <table>
-        <tr>
+    <div id="table-container" class="vertical-wrapper"> 
+    <div #tableScroll id="table-scroll">
+        <table class="temp">
+        <tr id="table-header">
             <th class="id">Id</th>
             <th>Start date</th>
             <th>End date</th>
@@ -56,6 +57,7 @@
             <td>{{price.holiday}} €</td>
         </tr>
     </table>
+    </div>
 
     <button id="remove-pricelist" class="btn btn-outline-dark" (click)="removeRow()"> Remove pricelist </button>
     </div>
