@@ -1,6 +1,12 @@
 <div id="#price-list" class="wrapper">
 
     <div id="add-price-list"> 
+        <select id="policy">
+                <option value="placeHolder"> Pick the pricing strategy </option>
+                <option value="true"> Per night (advised) </option>
+                <option value="false"> Per guest per night </option>
+        </select>
+
         <div class="wrapper">
             <mat-card class="calendar">
                 <mat-calendar [(selected)]="start"></mat-calendar>
