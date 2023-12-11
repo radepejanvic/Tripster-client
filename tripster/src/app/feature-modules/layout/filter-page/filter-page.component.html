@@ -23,12 +23,14 @@
         <div class="container col-8 ">
             <p class="searchResults">{{numberOfResults}} Search Results For </p>
             <p class="title">{{title}}</p>
-            <div *ngFor="let accommodation of accommodations">
-                
+            <div *ngFor="let accommodation of accommodations" >
+
                 <app-accommodation-info-card [accommodation]="accommodation"></app-accommodation-info-card>
-                  
             </div>
-            
+            <div *ngFor="let accommodation of accommodationRequests" >
+
+                <app-accommodation-request-card [accommodation]="accommodation"></app-accommodation-request-card>
+            </div>
         </div>
     
 
