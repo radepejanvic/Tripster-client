@@ -12,7 +12,8 @@
 }
 
 input,
-select {
+select,
+button {
     height: 50px;
     margin-bottom: 20px;
     border-radius: 10px;
@@ -90,4 +91,38 @@ input[type="checkbox"] {
 
 #policy {
     margin-right: 1%;
+}
+
+#end-title {
+    margin-top: 20px;
+}
+
+#add-new {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+    /* background-color: #f0f0f0; */
+    /* border-radius: 10px; */
+}
+
+button {
+    width: 50%;
+    background-color: white;
+    font-size: 18px;
+
+}
+
+#reset {
+    color: red;
+    border-color: red;
+    transition: background-color 0.2s ease-out, color 0.2s ease-out;
+}
+
+#reset:hover {
+    color: white;
+    border-color: red;
+    background-color: red;
 }
