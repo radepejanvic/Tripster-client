@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PriceList } from '../model/accommodation.model';
 
 @Component({
   selector: 'app-price-list',
@@ -9,20 +10,35 @@ export class PriceListComponent {
 
   start: Date = new Date();
   end: Date = new Date();
+  standard!: number;
+  weekend!: number;
+  holiday!: number;
 
-  priceLists: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-  // formatDate(date: Date): string {
-  //   const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: 'short', year: 'numeric' };
-  //   return date.toLocaleDateString('en-GB', options)
-  //     .replace(/(\d+) (\w+) (\d+)/, '$1. $2 $3');
-  // }
+  priceLists: PriceList[] = [];
 
   formatDate(date: Date): string {
     const day = date.getDate();
     const month = new Intl.DateTimeFormat('en', { month: 'short' }).format(date);
     const year = date.getFullYear();
     return `${day}. ${month} ${year}.`;
+  }
+
+  addPriceList() {
+    const newPriceList: PriceList = {
+      start: this.start,
+      end: this.end,
+      standard: this.standard,
+      weekend: this.weekend,
+      holiday: this.holiday,
+
+    };
+    this.priceLists.push(newPriceList);
+
+    this.start = new Date();
+    this.end = new Date();
+    this.standard = 0;
+    this.weekend = 0;
+    this.holiday = 0;
   }
 
 }

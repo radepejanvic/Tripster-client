@@ -4,36 +4,54 @@
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
+    width: fill;
+    height: fit-content;
+    flex: 1;
+    border: 3px solid #f0f0f0;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
 }
 
 th,
 td {
     height: 50px;
-    border: 1px solid black;
-    border-radius: 10px;
     padding: 8px;
 }
 
 tr:nth-child(even) {
     background-color: #f0f0f0;
+    cursor: pointer;
 }
 
 #add-price-list {
+    flex: 1;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    width: 640px;
+    min-width: 640px;
+    height: fit-content;
     padding: 10px;
     background-color: #f0f0f0;
     border-radius: 10px;
+    margin-right: 20px;
 }
 
 .wrapper {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.vertical-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.vertical-wrapper label {
+    margin: 0;
+    font-size: 14px;
 }
 
 label {
@@ -48,7 +66,6 @@ label {
 
 input,
 button {
-    /* flex: 1; */
     height: 50px;
     margin-bottom: 20px;
     border-radius: 10px;
@@ -61,6 +78,8 @@ button {
     background-color: white;
 }
 
-/* .error {
-    margin-right: 10px;
-} */
+th,
+td,
+.id {
+    text-align: center;
+}

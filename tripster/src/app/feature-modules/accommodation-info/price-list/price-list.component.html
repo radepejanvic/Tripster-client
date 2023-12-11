@@ -1,4 +1,4 @@
-<div id="#price-list">
+<div id="#price-list" class="wrapper">
 
     <div id="add-price-list"> 
         <div class="wrapper">
@@ -13,26 +13,41 @@
             Selected date range: {{formatDate(start)}} - {{formatDate(end)}}
         </label>
         <div class="wrapper">
-            <input class="error" type="number" placeholder="Standard">
-            <input class="error" type="number" placeholder="Weekend">
-            <input type="number" placeholder="Holiday">
-        </div>
-        <!-- <input type="range" min="10" max="300"> -->
-        <button class="btn btn-outline-dark"> Create new pricelist</button>
-    </div>
+            <div class="vertical-wrapper">
+                <label for="standard"> Standard price </label>
+                <input id="standard" type="number" [(ngModel)]="standard" placeholder="Standard">
+            </div>
 
+            <div class="vertical-wrapper">
+                <label for="weekend"> Weekend price </label>
+                <input id="weekend" type="number"  [(ngModel)]="weekend" placeholder="Weekend">
+            </div>
+
+            <div class="vertical-wrapper">
+                <label for="standard"> Holiday price </label>
+                <input id="holiday" type="number"  [(ngModel)]="holiday" placeholder="Holiday">
+            </div>
+        </div>
+        <button class="btn btn-outline-dark" (click)="addPriceList()"> Create new pricelist</button>
+    </div>
+    
     <table>
         <tr>
-            <th>Id</th>
+            <th class="id">Id</th>
             <th>Start date</th>
             <th>End date</th>
             <th>Standard price</th>
+            <th>Weekend price</th>
+            <th>Holiday price</th>
         </tr>
         <tr *ngFor="let price of priceLists; index as i">
             <td class="id">{{i + 1}}</td>
-            <td>Some random info</td>
-            <td>Some random info</td>
-            <td>Some random info</td>
+            <td>{{formatDate(price.start)}}</td>
+            <td>{{formatDate(price.end)}}</td>
+            <td>{{price.standard}} €</td>
+            <td>{{price.weekend}} €</td>
+            <td>{{price.holiday}} €</td>
         </tr>
     </table>
+
 </div>

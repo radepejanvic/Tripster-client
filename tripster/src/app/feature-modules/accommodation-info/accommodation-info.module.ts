@@ -14,6 +14,8 @@ import { AccommodationCrudComponent } from './accommodation-crud/accommodation-c
 import { PhotoUploadComponent } from './photo-upload/photo-upload.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { PriceListComponent } from './price-list/price-list.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { PriceListComponent } from './price-list/price-list.component';
     CommonModule,
     MaterialModule,
     RouterModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    BrowserModule,
+    FormsModule
   ],
   exports: [
     PhotosComponent,
