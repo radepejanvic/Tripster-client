@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { GeocodingService } from '../geocoding.service';
 
 @Component({
@@ -32,11 +32,12 @@ export class MapComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
     if (changes['address']) {
-      this.centerByAddress;
+      this.centerByAddress();
     }
     if (changes['latitude'] || changes['longitude']) {
-      this.centerByLatLong;
+      this.centerByLatLong();
     }
   }
 
@@ -44,11 +45,13 @@ export class MapComponent implements OnInit, OnChanges {
     this.geocodingService.getLocation(this.address).subscribe((data: any) => {
       this.center = data.results[0].geometry.location;
     });
+    this.map.setCenter(this.center);
   }
 
   centerByLatLong() {
     this.center.lat = this.latitude;
     this.center.lng = this.longitude;
+    this.map.setCenter(this.center);
   }
 
 }
