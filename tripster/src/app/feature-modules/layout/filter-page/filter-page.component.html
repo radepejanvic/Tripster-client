@@ -1,38 +1,46 @@
-<div class="container ">
-    <div class="container row " >
+<div class="container">
+	<div class="container row">
+		<div class="container col-4 filter">
+			<div class="container">
+				<p><i class="bi bi-arrow-left-square"></i></p>
+				<p class="title">{{ filterTitle }}</p>
+				<app-basic-filter
+					(filterOneChange)="onBaseFilter($event)"
+				></app-basic-filter>
+				<app-additional-filter></app-additional-filter>
+				<app-guest-rating-filter></app-guest-rating-filter>
+				<app-reservation-status-filter></app-reservation-status-filter>
+				<app-time-filter></app-time-filter>
+				<app-user-type-status-filter></app-user-type-status-filter>
+				<app-accommodation-requests-filter></app-accommodation-requests-filter>
+				<app-review-filter></app-review-filter>
+				<div class="container row justify-content-center mt-3 mb-3">
+					<button
+						type="submit"
+						class="btn btn-outline-secondary col-4"
+						(click)="sendRequest()"
+					>
+						Search
+					</button>
+				</div>
+			</div>
+		</div>
 
-        <div class="container col-4 filter" >
-            <div class="container">
-                <p><i class="bi bi-arrow-left-square" ></i></p>
-                <p class="title">{{filterTitle}}</p>
-                <app-basic-filter></app-basic-filter>
-                <app-additional-filter></app-additional-filter>
-                <app-guest-rating-filter></app-guest-rating-filter>
-                <app-reservation-status-filter></app-reservation-status-filter>
-                <app-time-filter></app-time-filter>
-                <app-user-type-status-filter></app-user-type-status-filter>
-                <app-accommodation-requests-filter></app-accommodation-requests-filter>
-                <app-review-filter></app-review-filter>
-                <div class=" container row justify-content-center mt-3 mb-3" >
-                        <button type="submit" class="btn  btn-outline-secondary col-4" >Search</button>
-                </div>
-            </div>
-            
-        </div>
-    
-        <div class="container col-8 ">
-            <p class="searchResults">{{numberOfResults}} Search Results For </p>
-            <p class="title">{{title}}</p>
-            <div *ngFor="let accommodation of accommodations" >
-
-                <app-accommodation-info-card [accommodation]="accommodation"></app-accommodation-info-card>
-            </div>
-            <div *ngFor="let accommodation of accommodationRequests" >
-
-                <app-accommodation-request-card [accommodation]="accommodation"></app-accommodation-request-card>
-            </div>
-        </div>
-    
-
-    </div>
+		<div class="container col-8">
+			<p class="searchResults">
+				{{ numberOfResults }} Search Results For
+			</p>
+			<p class="title">{{ title }}</p>
+			<div *ngFor="let accommodation of accommodations">
+				<app-accommodation-info-card
+					[accommodation]="accommodation"
+				></app-accommodation-info-card>
+			</div>
+			<div *ngFor="let accommodation of accommodationRequests">
+				<app-accommodation-request-card
+					[accommodation]="accommodation"
+				></app-accommodation-request-card>
+			</div>
+		</div>
+	</div>
 </div>

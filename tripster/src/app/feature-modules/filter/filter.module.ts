@@ -8,8 +8,7 @@ import { TimeFilterComponent } from './time-filter/time-filter.component';
 import { UserTypeStatusFilterComponent } from './user-type-status-filter/user-type-status-filter.component';
 import { AccommodationRequestsFilterComponent } from './accommodation-requests-filter/accommodation-requests-filter.component';
 import { ReviewFilterComponent } from './review-filter/review-filter.component';
-
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,12 +19,10 @@ import { ReviewFilterComponent } from './review-filter/review-filter.component';
     TimeFilterComponent,
     UserTypeStatusFilterComponent,
     AccommodationRequestsFilterComponent,
-    ReviewFilterComponent
+    ReviewFilterComponent,
   ],
-  imports: [
-    CommonModule
-  ],
-  exports:[
+  imports: [CommonModule, ReactiveFormsModule],
+  exports: [
     BasicFilterComponent,
     AdditionalFilterComponent,
     GuestRatingFilterComponent,
@@ -33,7 +30,7 @@ import { ReviewFilterComponent } from './review-filter/review-filter.component';
     TimeFilterComponent,
     UserTypeStatusFilterComponent,
     AccommodationRequestsFilterComponent,
-    ReviewFilterComponent
-  ]
+    ReviewFilterComponent,
+  ],
 })
-export class FilterModule { }
+export class FilterModule {}
