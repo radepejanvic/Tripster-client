@@ -15,9 +15,9 @@ export class BasicFilterComponent {
 	});
 
 	@Output()
-	filterOneChange = new EventEmitter<any>();
+	filterChange = new EventEmitter<any>();
 
 	onFilterChange() {
-		this.filterOneChange.emit(this.basicFilter.value);
+		this.filterChange.emit(this.basicFilter.value);
 	}
 }
