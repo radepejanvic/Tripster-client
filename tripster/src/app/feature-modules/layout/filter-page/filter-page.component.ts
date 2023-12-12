@@ -34,7 +34,7 @@ export class FilterPageComponent implements OnInit {
 		// 		this.accommodationRequests = value;
 		// 	});
 		this.mainFormGroup = this.fb.group({
-			baseFilter: this.fb.group({
+			basicFilter: this.fb.group({
 				destination: new FormControl(''),
 				checkIn: new FormControl('', Validators.required),
 				checkOut: new FormControl('', Validators.required),
@@ -43,12 +43,12 @@ export class FilterPageComponent implements OnInit {
 		});
 	}
 
-	onBaseFilter(data: any) {
-		this.mainFormGroup.get('baseFilter')?.patchValue(data);
+	onBasicFilter(data: any) {
+		this.mainFormGroup.get('basicFilter')?.patchValue(data);
 	}
 
 	sendRequest() {
-		if (this.mainFormGroup.get('baseFilter')?.valid) {
+		if (this.mainFormGroup.get('basicFilter')?.valid) {
 			console.log(this.mainFormGroup.get('baseFilter')?.value);
 		}
 	}
