@@ -67,10 +67,10 @@ export class AccommodationCrudComponent implements OnInit {
       cancelDuration: this.form.value.cancelDuration || 0,
       pricePerNight: this.form.value.pricePerNight || true
     };
-    console.log(accommodation);
     this.accommodationService.addAccommodation(accommodation).subscribe({
-      next: (_) => {
-        console.log(accommodation);
+      next: (response: Accommodation) => {
+        console.log(response);
+        sessionStorage.setItem('newAccommodation', response.id ? response.id.toString() : '0');
       },
       error: (err: any) => {
         console.error('Greska prilikom post metode',err);

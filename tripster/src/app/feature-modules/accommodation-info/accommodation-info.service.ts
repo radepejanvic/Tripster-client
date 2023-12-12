@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Accommodation } from './model/accommodation.model';
 import { Observable, map } from 'rxjs';
@@ -31,6 +31,19 @@ export class AccommodationInfoService {
 
   addAccommodation(accommodation: Accommodation): Observable<Accommodation> {
     return this.http.post<Accommodation>(environment.apiHost + 'accommodations', accommodation);
+  }
+
+  uploadPhotos(id: number, photos: File[]): void {
+
+    const formData = new FormData();
+    for (let i = 0; i < photos.length; i++) {
+      formData.append('photo', photos[i]);
+    }
+
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+
+    this.http.post<any>(`${environment.apiHost}${id}`, formData, {headers});
   }
 
 }

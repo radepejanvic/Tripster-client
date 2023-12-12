@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { NgxDropzoneChangeEvent } from 'ngx-dropzone';
 
 @Component({
