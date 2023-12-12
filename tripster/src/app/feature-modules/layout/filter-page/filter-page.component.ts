@@ -4,32 +4,59 @@ import { AccommodationInfoService } from '../../accommodation-info/accommodation
 import { AccommodationInfoCard } from '../../cards/accommodation-info-card/model/accommodation-info-card.model';
 import { FilterService } from '../../filter/filter.service';
 import { AccommodationRequest } from '../../cards/accommodation-request-card/model/accommodation-request.mode';
+import { BasicFilterComponent } from '../../filter/basic-filter/basic-filter.component';
+import {
+	FormBuilder,
+	FormControl,
+	FormGroup,
+	Validators,
+} from '@angular/forms';
 
 @Component({
-  selector: 'app-filter-page',
-  templateUrl: './filter-page.component.html',
-  styleUrl: './filter-page.component.css'
+	selector: 'app-filter-page',
+	templateUrl: './filter-page.component.html',
+	styleUrl: './filter-page.component.css',
 })
-export class FilterPageComponent implements OnInit{
-  constructor(private service:FilterService){}
-  ngOnInit(): void {
-    this.service.getAccommodationByFiltersForGuest("dfgdfg").subscribe(
-      (value:AccommodationInfoCard[]) =>{
-        this.accommodations = value;
-      }
-    )
-    this.service.getAccommodationRequestByFiltersForAdmin("sdfdfdf").subscribe(
-      (value:AccommodationRequest[])=>{
-        this.accommodationRequests = value;
-      }
-    )
-  }
+export class FilterPageComponent implements OnInit {
+	constructor(private service: FilterService, private fb: FormBuilder) {}
 
-  filterTitle:string = "Your search"
-  numberOfResults:string = "120"
-  title:string = "Copenhagen, Dec 9-12, 2 guests, 1 room"
+	mainFormGroup: FormGroup;
 
-  accommodations:AccommodationInfoCard[];
-  accommodationRequests:AccommodationRequest[];
- 
+	ngOnInit(): void {
+		this.service
+			.getAccommodationByFiltersForGuest('dfgdfg')
+			.subscribe((value: AccommodationInfoCard[]) => {
+				this.accommodations = value;
+			});
+		// this.service
+		// 	.getAccommodationRequestByFiltersForAdmin('sdfdfdf')
+		// 	.subscribe((value: AccommodationRequest[]) => {
+		// 		this.accommodationRequests = value;
+		// 	});
+		this.mainFormGroup = this.fb.group({
+			baseFilter: this.fb.group({
+				destination: new FormControl(''),
+				checkIn: new FormControl('', Validators.required),
+				checkOut: new FormControl('', Validators.required),
+				numberOfGuest: new FormControl('', Validators.min(0)),
+			}),
+		});
+	}
+
+	onBaseFilter(data: any) {
+		this.mainFormGroup.get('baseFilter')?.patchValue(data);
+	}
+
+	sendRequest() {
+		if (this.mainFormGroup.get('baseFilter')?.valid) {
+			console.log(this.mainFormGroup.get('baseFilter')?.value);
+		}
+	}
+
+	filterTitle: string = 'Your search';
+	numberOfResults: string = '120';
+	title: string = 'Copenhagen, Dec 9-12, 2 guests, 1 room';
+
+	accommodations: AccommodationInfoCard[];
+	accommodationRequests: AccommodationRequest[];
 }
