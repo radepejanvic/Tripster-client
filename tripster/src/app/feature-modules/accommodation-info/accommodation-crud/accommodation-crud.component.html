@@ -1,113 +1,230 @@
 <div class="container">
-    <h1 id> Hello Rade, let`s register an accommodation of yours! </h1>
-    
-    <h1> We`ll start with some base info.</h1>
-    
+  <form [formGroup]="form">
+    <h1 id>Hello Rade, let`s register an accommodation of yours!</h1>
+
+    <h1>We`ll start with some base info.</h1>
+
     <div id="base-info" class="form">
-        <label for="name"> Something unique and authentic </label>
-        <input type="text" id="name" [(ngModel)]="accommodation.name" placeholder="Accommodation name">
-        <label for="short-desc"> Make it short and memorable (max 75 characters) </label>
-        <input type="text" id="short-desc" [(ngModel)]="accommodation.shortDescription" placeholder="Short description">
-        <label for="min-cap"> Make it as flexible as possible  </label>
-        <span>
-            <input type="number" id="min-cap" min="0" max="20" [(ngModel)]="accommodation.minCap" placeholder="Minimal capacity">
-            <input type="number" id="max-cap" min="1" max="20" [(ngModel)]="accommodation.maxCap" placeholder="Maximal capacity">
+      <label for="name"> Something unique and authentic </label>
+      <input
+        type="text"
+        id="name"
+        formControlName="name"
+        placeholder="Accommodation name"
+      />
+      <label for="short-desc">
+        Make it short and memorable (max 75 characters)
+      </label>
+      <input
+        type="text"
+        id="short-desc"
+        formControlName="shortDescription"
+        placeholder="Short description"
+      />
+      <label for="min-cap"> Make it as flexible as possible </label>
+      <span>
+        <input
+          type="number"
+          id="min-cap"
+          min="0"
+          max="20"
+          formControlName="minCap"
+          placeholder="Minimal capacity"
+        />
+        <input
+          type="number"
+          id="max-cap"
+          min="1"
+          max="20"
+          formControlName="maxCap"
+          placeholder="Maximal capacity"
+        />
+      </span>
+      <span>
+        <select id="type" formControlName="type">
+          <option value="placeHolder" disabled>
+            Pick the type of your unit
+          </option>
+          <option value="APARTMENT">Apartment</option>
+          <option value="STUDIO">Studio</option>
+          <option value="ROOM">Room</option>
+        </select>
+        <span class="radios">
+          <input
+            type="radio"
+            id="automatic"
+            name="automaticReservation"
+            value="true"
+            formControlName="automaticReservation"
+          />
+          <label for="automatic">Allow automatic reservation (advised)</label>
         </span>
-        <span>
-            <select id="type" [(ngModel)]="accommodation.type">
-                <option value="placeHolder">Pick the type of your unit</option>
-                <option value="Appartment">Appartment</option>
-                <option value="Studio">Studio</option>
-                <option value="Room">Room</option>
-            </select>
-           <span class="radios">
-                <input type="radio" id="automatic" name="reservation_approval" value="true" [(ngModel)]="accommodation.automaticReservation">
-                <label for="automatic">Allow automatic reservation (advised)</label>
-           </span>
 
-            <span class="radios">
-                <input type="radio" id="manual" name="reservation_approval" value="false" [(ngModel)]="accommodation.automaticReservation">
-                <label for="manual">Review each reservation request manually</label>
-            </span>
-
+        <span class="radios">
+          <input
+            type="radio"
+            id="manual"
+            name="automaticReservation"
+            value="false"
+            formControlName="automaticReservation"
+          />
+          <label for="manual">Review each reservation request manually</label>
         </span>
+      </span>
     </div>
 
     <!-- <h1> Let`s take a dive into details! </h1> -->
-    <h1> Let`s now move on to Address info! </h1>
+    <h1>Let`s now move on to Address info!</h1>
 
     <div id="address" class="form">
-        <input type="text" id="country" [(ngModel)]="accommodation.country" placeholder="Country">
-       
-        <span>
-            <input type="text" id="city" [(ngModel)]="accommodation.city" placeholder="City">
-            <input type="text" id="zip-code" [(ngModel)]="accommodation.zipCode" placeholder="Zip code">
-        </span>
-        <span>
-            <input type="text" id="street" [(ngModel)]="accommodation.street" placeholder="Street">
-            <input type="text" id="number" [(ngModel)]="accommodation.number" placeholder="Street No.">
-        </span>
+      <input
+        type="text"
+        id="country"
+        formControlName="country"
+        placeholder="Country"
+      />
+      <!-- (ngModelChange)="onAdressChange()" -->
 
-        <label for="longitude"> If the location on the map isn`t pointing to the exact location of your unit please insert longitude and latitude you get from another map service. </label>
-        <span>
-            <input type="text" id="longitude" [(ngModel)]="accommodation.longitude" placeholder="Longitude">
-            <input type="text" id="latitude" [(ngModel)]="accommodation.latitude" placeholder="Latitude">
-        </span>
+      <span>
+        <input
+          type="text"
+          id="city"
+          formControlName="city"
+          placeholder="City"
+        />
+        <input
+          type="text"
+          id="zip-code"
+          formControlName="zipCode"
+          placeholder="Zip code"
+        />
+      </span>
+      <span>
+        <input
+          type="text"
+          id="street"
+          formControlName="street"
+          placeholder="Street"
+        />
+        <input
+          type="text"
+          id="number"
+          formControlName="number"
+          placeholder="Street No."
+        />
+      </span>
 
-        <div id="map">
-            <app-map [address]="formatAddress()" ></app-map>
-        </div>
+      <label for="longitude">
+        If the location on the map isn`t pointing to the exact location of your
+        unit please insert longitude and latitude you get from another map
+        service.
+      </label>
+      <span>
+        <input
+          type="text"
+          id="longitude"
+          formControlName="longitude"
+          placeholder="Longitude"
+        />
+        <input
+          type="text"
+          id="latitude"
+          formControlName="latitude"
+          placeholder="Latitude"
+        />
+      </span>
+
+      <!-- <div id="map">
+      <app-map [address]="onAdressChange()"></app-map>
+    </div> -->
     </div>
 
-    <h1> Here we need as much details as possible. </h1>
+    <h1>Here we need as much details as possible.</h1>
 
     <div id="details">
-        <label for="desc"> Be as creative and honest as you please, here you have the full freedom to represent your unit as best as you can. So don`t be stingy on words, describe it to the fullest of details! </label>
-        <textarea id="desc" rows="4" cols="50" [(ngModel)]="accommodation.description" placeholder="Description"></textarea>
-
+      <label for="desc">
+        Be as creative and honest as you please, here you have the full freedom
+        to represent your unit as best as you can. So don`t be stingy on words,
+        describe it to the fullest of details!
+      </label>
+      <textarea
+        id="desc"
+        rows="4"
+        cols="50"
+        formControlName="description"
+        placeholder="Description"
+      ></textarea>
     </div>
 
-    <h1> The more you provide, the more you`ll attract! </h1>
+    <h1>The more you provide, the more you`ll attract!</h1>
 
-    <div id="amenities">
-        <div class="amenity-wrapper"  *ngFor="let amenity of amenities; index as i" >
-            <input type="checkbox" [id]="'check-' + i" [checked]="checkedAmenities[i]" (change)="toggleAmenity($event, i)">
-            <label class="wrapper-label" [for]="'check-' + i">
-                <app-amenity [amenity]="amenity" [checked]="checkedAmenities[i]"></app-amenity>
-            </label>
-        </div>
+    <div id="amenities" formArrayName="amenities">
+      <div
+        class="amenity-wrapper"
+        *ngFor="let amenity of amenities; index as i"
+      >
+        <input
+          type="checkbox"
+          [id]="'check-' + i"
+          (change)="toggleAmenity($event, i)"
+          [checked]="checkedAmenities[i]"
+        />
+        <!-- value="i"
+          [formControlName]="amenity" -->
+        <label class="wrapper-label" [for]="'check-' + i">
+          <app-amenity
+            [amenity]="i"
+            [checked]="checkedAmenities[i]"
+          ></app-amenity>
+        </label>
+      </div>
     </div>
 
-    <h1> Finally tell us what is your free cancellation period policy. </h1>
+    <h1>Finally tell us what is your free cancellation period policy.</h1>
 
-    <label for="cancellation-policy"> Give as much flexibility, but be carefull to not hurt your bussines. </label>
+    <label for="cancellation-policy">
+      Give as much flexibility, but be carefull to not hurt your bussines.
+    </label>
     <div id="cancellation-policy">
-        <select id="policy">
-                <option value="placeHolder">Pick the cancellation period policy</option>
-                <option value="3"> 3 days before the reservation</option>
-                <option value="7"> 7 days before the reservation </option>
-                <option value="14"> 14 days before the reservation </option>
-                <option value="30"> 1 month before the reservation </option>
-                <option value="custom"> Custom </option>
-                <option value="0"> None </option>
-        </select>
-        <input type="number" id="custom" min="0" max="60" placeholder="Custom free cancellation period policy">
+      <select id="policy" formControlName="cancelDuration">
+        <option value="placeHolder" disabled>
+          Pick the cancellation period policy
+        </option>
+        <option value="3">3 days before the reservation</option>
+        <option value="7">7 days before the reservation</option>
+        <option value="14">14 days before the reservation</option>
+        <option value="30">1 month before the reservation</option>
+        <option value="custom" disabled>Custom</option>
+        <option value="0">None</option>
+      </select>
+      <input
+        type="number"
+        id="custom"
+        min="0"
+        max="60"
+        placeholder="Custom free cancellation period policy"
+      />
     </div>
+  </form>
 
-    <h1> Show us the photos of your unit. </h1>
+  <h1>Show us the photos of your unit.</h1>
 
-    <app-photo-upload></app-photo-upload>
+  <app-photo-upload></app-photo-upload>
 
-    <h1> Now let`s define price lists for your unit. </h1>
+  <h1>Now let`s define price lists for your unit.</h1>
 
-    <app-price-list></app-price-list>
+  <app-price-list></app-price-list>
 
-    <h1 id="end-title"> Wrapping up registrastion! </h1>
+  <h1 id="end-title">Wrapping up registrastion!</h1>
 
-    <div id="add-new">
-        <button class="btn btn-outline-dark" (click)="checkData()"> Register this accommodation </button>
-        <button id="reset" > Reset all fields </button>
-    </div>
-
-
+  <div id="add-new">
+    <button
+      class="btn btn-outline-dark"
+      type="submit"
+      (click)="addAccommodation()"
+    >
+      Register this accommodation
+    </button>
+    <button id="reset">Reset all fields</button>
+  </div>
 </div>

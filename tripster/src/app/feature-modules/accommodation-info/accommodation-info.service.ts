@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Accommodation } from './model/accommodation.model';
 import { Observable, map } from 'rxjs';
+import { environment } from 'src/env/env';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,10 @@ export class AccommodationInfoService {
   private getDataUrl(base64String: string): string {
     const contentType = 'image/jpeg';
     return `data:${contentType};base64,${base64String}`;
+  }
+
+  addAccommodation(accommodation: Accommodation): Observable<Accommodation> {
+    return this.http.post<Accommodation>(environment.apiHost + 'accommodations', accommodation);
   }
 
 }

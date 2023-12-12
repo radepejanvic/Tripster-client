@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Accommodation } from '../model/accommodation.model';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AccommodationInfoService } from '../accommodation-info.service';
 
 @Component({
   selector: 'app-accommodation-crud',
@@ -10,26 +12,30 @@ export class AccommodationCrudComponent implements OnInit {
   amenities: string[] = [];
   checkedAmenities: boolean[] = [];
 
-  accommodation: Accommodation = {
-    status: '',
-    name: '',
-    shortDescription: '',
-    minCap: 0,
-    maxCap: 0,
-    type: '',
-    automaticReservation: true,
-    country: '',
-    city: '',
-    zipCode: '',
-    street: '',
-    number: '',
-    latitude: 0,
-    longitude: 0,
-    description: '',
-    amenities: [],
-    cancelDuration: 0,
-    pricePerNight: true
-  };
+  form = new FormGroup({
+    name: new FormControl('', [Validators.required]),
+    shortDescription: new FormControl('', [Validators.required]),
+    minCap: new FormControl(0, [Validators.required]),
+    maxCap: new FormControl(0, [Validators.required]),
+    type: new FormControl('', [Validators.required]),
+    automaticReservation: new FormControl(true, [Validators.required]),
+    country: new FormControl('', [Validators.required]),
+    city: new FormControl('', [Validators.required]),
+    zipCode: new FormControl('', [Validators.required]),
+    street: new FormControl('', [Validators.required]),
+    number: new FormControl('', [Validators.required]),
+    latitude: new FormControl(0, [Validators.required]),
+    longitude: new FormControl(0, [Validators.required]),
+    description: new FormControl('', [Validators.required]),
+    cancelDuration: new FormControl(0, [Validators.required]),
+    pricePerNight: new FormControl(true, [Validators.required])
+  });
+  
+  constructor(private accommodationService: AccommodationInfoService){
+    
+  }
+
+
 
   ngOnInit(): void {
 
@@ -39,17 +45,51 @@ export class AccommodationCrudComponent implements OnInit {
     this.checkedAmenities = new Array(this.amenities.length).fill(false);
   }
 
+  addAccommodation(): void {
+    const accommodation: Accommodation = {
+      status: 'NEW',
+      ownerId: 4,
+      name: this.form.value.name || '',
+      shortDescription: this.form.value.shortDescription || '',
+      minCap: this.form.value.minCap || 0,
+      maxCap: this.form.value.maxCap || 0,
+      type: this.form.value.type || '',
+      automaticReservation: this.form.value.automaticReservation || true,
+      country: this.form.value.country || '',
+      city: this.form.value.city || '',
+      zipCode: this.form.value.zipCode || '',
+      street: this.form.value.street || '',
+      number: this.form.value.number || '',
+      latitude: this.form.value.latitude || 0,
+      longitude: this.form.value.longitude || 0,
+      description: this.form.value.description || '',
+      amenities: this.getCheckedAmenities() || [],
+      cancelDuration: this.form.value.cancelDuration || 0,
+      pricePerNight: this.form.value.pricePerNight || true
+    };
+    console.log(accommodation);
+    this.accommodationService.addAccommodation(accommodation).subscribe({
+      next: (_) => {
+        console.log(accommodation);
+      },
+      error: (err: any) => {
+        console.error('Greska prilikom post metode',err);
+      }
+    }) 
+  }
+
   toggleAmenity(event: any, index: number): void {
     this.checkedAmenities[index] = event.target.checked;
+    console.log()
   }
 
-  formatAddress(): string {
-    return `${this.accommodation.street} ${this.accommodation.number}, ${this.accommodation.city}, ${this.accommodation.country}`;
+  getCheckedAmenities(): number[] {
+  const checked: number[] = [];
+  for (let i = 0; i < this.checkedAmenities.length; i++) {
+    if (this.checkedAmenities[i]) {
+      checked.push(i);
+    }
   }
-
-  checkData() {
-    console.log(this.accommodation);
-  }
-
-
+  return checked;
+}
 }

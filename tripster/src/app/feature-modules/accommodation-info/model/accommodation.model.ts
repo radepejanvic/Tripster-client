@@ -16,9 +16,10 @@ export interface Accommodation {
     latitude: number,
     longitude: number,
     description: string,
-    amenities: string[],
+    amenities: number[],
     cancelDuration: number,
     pricePerNight: boolean
+    calendar?: any
 }
 
 export interface PriceList {

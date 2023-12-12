@@ -6,6 +6,6 @@ import { Component, Input } from '@angular/core';
   styleUrl: './amenity.component.css'
 })
 export class AmenityComponent {
-  @Input() amenity: string | undefined;
+  @Input() amenity: number | undefined;
   @Input() checked: boolean = false;
 }
