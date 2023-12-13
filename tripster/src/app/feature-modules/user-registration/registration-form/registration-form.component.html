@@ -21,9 +21,6 @@
                     <div class="basic-info-div">
                         <div class="pop-up-text-div">
                             <input type="email" class="form-control" id="email" formControlName="email" placeholder="email@gmail.com">
-                            <!-- <input type="text" class="form-control" formControlName="userNameInput" id="userNameInput" placeholder="user name"> 
-                                OVDE TREBA STAVITI NESTO ZA UNOS TAJPA
-                            -->
                             <input type="password" class="form-control" id="password1" formControlName="password1" placeholder="password">
                             <input type="password" class="form-control" id="password2" formControlName="password2" placeholder="password again">
                             <div class="radio-btn-group form-control">
@@ -64,8 +61,11 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn cancel-btn mybtn" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn register-btn mybtn" (click)="register()" >Register</button>
+                <button type="button" class="btn cancel-btn mybtn" id="close-btn" data-bs-dismiss="modal">Close</button>
+                <div class="reg-btn-div">
+                    <label id="error-text" class="error-text">{{errorText}}</label>
+                    <button type="button" class="btn register-btn mybtn" (click)="register()" >Register</button>
+                </div>
             </div>
         </div> 
     </div>

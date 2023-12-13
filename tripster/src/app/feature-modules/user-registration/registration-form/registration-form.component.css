@@ -97,3 +97,13 @@
     justify-content: space-between;
     
 }
+
+.reg-btn-div {
+    display: flex;
+    align-items: center;
+}
+
+.error-text {
+    color: red;
+    margin-right: 5px;
+}

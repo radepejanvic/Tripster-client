@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { RegistrationFormService } from '../registration-form.service';
 import { Registration, UserType, UserStatus } from '../model/user.model';
+import { AuthorizationService } from '../../authorization/authorization.service';
 
 @Component({
   selector: 'app-registration-form',
@@ -11,10 +13,12 @@ import { Registration, UserType, UserStatus } from '../model/user.model';
 })
 export class RegistrationFormComponent {
 
-  constructor(private service: RegistrationFormService) { }
+  @Output() registrationSubmit = new EventEmitter<null>(); 
+
+  constructor(private service: RegistrationFormService, private router: Router, private authService: AuthorizationService) { }
 
   registrationForm = new FormGroup({
-    email: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.email]),
     password1: new FormControl('', [Validators.required]),
     password2: new FormControl('', [Validators.required]),
     userType: new FormControl('GUEST', [Validators.required]),
@@ -28,37 +32,63 @@ export class RegistrationFormComponent {
     number: new FormControl('', [Validators.required]),
   })
 
-  register(): void {
-    const registration: Registration = {
-      email: this.registrationForm.value.email || "",
-      password: this.registrationForm.value.password1 || "",
-      //UserStatus
-      //UserType
-      //userType: userTypeFromString(),
-      userType: UserType[this.registrationForm.value.userType as keyof typeof UserType],
-      userStatus: UserStatus[("ACTIVE") as keyof typeof UserStatus],
-      name: this.registrationForm.value.name || '',
-      surname: this.registrationForm.value.surname || '',
-      phone: this.registrationForm.value.phone || '',
-      country: this.registrationForm.value.country || '',
-      city: this.registrationForm.value.city || '',
-      zipCode: this.registrationForm.value.zipCode || '',
-      street: this.registrationForm.value.street || '',
-      number: this.registrationForm.value.number || ''
-    }
+  public errorText: string = '';
 
-    this.service.register(registration).subscribe({
-      next: (_) => {
-        console.log("Uspesan zahtev!")
+  register(): void {
+    this.errorText = '';
+    if(this.validateForm()) {
+      const registration: Registration = {
+        email: this.registrationForm.value.email || "",
+        password: this.registrationForm.value.password1 || "",
+        userType: UserType[this.registrationForm.value.userType as keyof typeof UserType],
+        status: UserStatus["NEW" as keyof typeof UserStatus],
+        name: this.registrationForm.value.name || '',
+        surname: this.registrationForm.value.surname || '',
+        phone: this.registrationForm.value.phone || '',
+        country: this.registrationForm.value.country || '',
+        city: this.registrationForm.value.city || '',
+        zipCode: this.registrationForm.value.zipCode || '',
+        street: this.registrationForm.value.street || '',
+        number: this.registrationForm.value.number || ''
       }
+      
+      this.service.register(registration).subscribe(
+        (response: string) => {
+          this.registrationSubmit.emit();
+          document.getElementById("close-btn")?.click();
+          this.router.navigate(["login"]);
+          
+        },
+        (error: string) => {
+          console.log('User name exists.');
+          this.errorText = 'User name exists.'
+        },
+      
+      );
     }
-    );
 
   }
 
-  // userTypeFromString(stringVal : string) : UserType {
-  //   let actualVal = stringVal || 'GUEST';
-  //   return UserType[GUEST];
-  // }
+  private validateForm(): boolean{
+     if (this.registrationForm.value.password1 != this.registrationForm.value.password2){
+      this.errorText = "Passwords do not match.";
+      return false;
+    }
+    if (this.registrationForm.value.password1) {
+      if (this.registrationForm.value.password1.length < 5) {
+        this.errorText = "Password too short.";
+        return false;
+      }
+    }
+    if(!this.registrationForm.get("email")?.valid){
+      this.errorText = "Email is not valid.";
+      return false;
+    }
+    if (!this.registrationForm.valid){
+      this.errorText = "Not all fields submitted."
+      return false;
+    }
+    return true;
+  }
 
 }

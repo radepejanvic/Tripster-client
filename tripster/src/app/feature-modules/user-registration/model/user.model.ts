@@ -2,7 +2,7 @@ export interface Registration {
     email: string;
     password: string;
     userType: UserType;
-    userStatus?: UserStatus;
+    status: UserStatus;
 
     name: string;
     surname: string
