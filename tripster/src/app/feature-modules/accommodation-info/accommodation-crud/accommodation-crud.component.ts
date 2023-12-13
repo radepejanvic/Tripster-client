@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Accommodation } from '../model/accommodation.model';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { AccommodationInfoService } from '../accommodation-info.service';
 
 @Component({
@@ -15,8 +15,8 @@ export class AccommodationCrudComponent implements OnInit {
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
     shortDescription: new FormControl('', [Validators.required]),
-    minCap: new FormControl(0, [Validators.required]),
-    maxCap: new FormControl(0, [Validators.required]),
+    minCap: new FormControl(1, [Validators.required]),
+    maxCap: new FormControl(1, [Validators.required]),
     type: new FormControl('', [Validators.required]),
     automaticReservation: new FormControl(true, [Validators.required]),
     country: new FormControl('', [Validators.required]),
@@ -31,9 +31,7 @@ export class AccommodationCrudComponent implements OnInit {
     pricePerNight: new FormControl(true, [Validators.required])
   });
   
-  constructor(private accommodationService: AccommodationInfoService){
-    
-  }
+  constructor(private accommodationService: AccommodationInfoService){  }
 
 
 
@@ -46,13 +44,18 @@ export class AccommodationCrudComponent implements OnInit {
   }
 
   onSubmit(): void {
+
+    if (!this.form.valid) {
+      console.error('Form isn`t valid');
+      return;
+    }
     const accommodation: Accommodation = {
       status: 'NEW',
       ownerId: 4,
       name: this.form.value.name || '',
       shortDescription: this.form.value.shortDescription || '',
-      minCap: this.form.value.minCap || 0,
-      maxCap: this.form.value.maxCap || 0,
+      minCap: this.form.value.minCap || 1,
+      maxCap: this.form.value.maxCap || 1,
       type: this.form.value.type || '',
       automaticReservation: this.form.value.automaticReservation || true,
       country: this.form.value.country || '',
@@ -73,7 +76,7 @@ export class AccommodationCrudComponent implements OnInit {
         sessionStorage.setItem('newAccommodation', response.id ? response.id.toString() : '0');
       },
       error: (err: any) => {
-        console.error('Greska prilikom post metode',err);
+        console.error('Failed to register new accommodation.',err);
       }
     }) 
   }
@@ -84,12 +87,122 @@ export class AccommodationCrudComponent implements OnInit {
   }
 
   getCheckedAmenities(): number[] {
-  const checked: number[] = [];
-  for (let i = 0; i < this.checkedAmenities.length; i++) {
-    if (this.checkedAmenities[i]) {
-      checked.push(i);
+    const checked: number[] = [];
+    for (let i = 0; i < this.checkedAmenities.length; i++) {
+      if (this.checkedAmenities[i]) {
+        checked.push(i);
+      }
     }
+    return checked;
   }
-  return checked;
-}
+
+  setCustomValidators() {
+    this.form.setValidators(this.capValidator.bind(this));
+    this.form.setValidators(this.shortDescValidator.bind(this));
+    this.form.updateValueAndValidity();
+  }
+
+  capValidator(control: AbstractControl): ValidationErrors | null {
+
+    const minCap = control.get('minCap')?.value;
+    const maxCap = control.get('maxCap')?.value;
+
+    if(maxCap < minCap) {
+      return {'capacityError': true, 'message': 'MinCap can`t be greater than MaxCap.'}
+    }
+
+    return null;
+  }
+
+  shortDescValidator(control: AbstractControl): ValidationErrors | null {
+    const shortDescription = control.get('shortDescription')?.value;
+
+    if(shortDescription.length > 75) {
+      return {'descriptionError': true, 'message': 'Short description can`t be longer than 75 characters.'}
+    }
+
+    return null;
+  }
+
+  isValidName(): boolean {
+    const name = this.form.get('name');
+    return !!name?.hasError('required') && !!name?.touched;
+  }
+
+  isValidShortDescription(): boolean {
+    const shortDescription = this.form.get('shortDescription');
+    return !!shortDescription?.hasError('required') && !!shortDescription?.touched;
+  }
+
+  isValidMinCap(): boolean {
+    const minCap = this.form.get('minCap');
+    return !!minCap?.hasError('required') && !!minCap?.touched;
+  }
+
+  isValidMaxCap(): boolean {
+    const maxCap = this.form.get('maxCap');
+    return !!maxCap?.touched && !!maxCap?.hasError('required');
+  }
+
+  isValidType(): boolean {
+    const type = this.form.get('type');
+    return !!type?.hasError('required') && !!type?.touched;
+  }
+
+  isValidAutomaticReservation(): boolean {
+    const automaticReservation = this.form.get('automaticReservation');
+    return !!automaticReservation?.hasError('required') && !!automaticReservation?.touched;
+  }
+
+  isValidCountry(): boolean {
+    const country = this.form.get('country');
+    return !!country?.hasError('required') && !!country?.touched;
+  }
+
+  isValidCity(): boolean {
+    const city = this.form.get('city');
+    return !!city?.hasError('required') && !!city?.touched;
+  }
+
+  isValidZipCode(): boolean {
+    const zipCode = this.form.get('zipCode');
+    return !!zipCode?.hasError('required') && !!zipCode?.touched;
+  }
+
+  isValidStreet(): boolean {
+    const street = this.form.get('street');
+    return !!street?.hasError('required') && !!street?.touched;
+  }
+
+  isValidNumber(): boolean {
+    const number = this.form.get('number');
+    return !!number?.hasError('required') && !!number?.touched;
+  }
+
+  isValidLatitude(): boolean {
+    const latitude = this.form.get('latitude');
+    return !!latitude?.hasError('required') && !!latitude?.touched;
+  }
+
+  isValidLongitude(): boolean {
+    const longitude = this.form.get('longitude');
+    return !!longitude?.hasError('required') && !!longitude?.touched;
+  }
+
+  isValidDescription(): boolean {
+    const description = this.form.get('description');
+    return !!description?.hasError('required') && !!description?.touched;
+  }
+
+  isValidCancelDuration(): boolean {
+    const cancelDuration = this.form.get('cancelDuration');
+    return !!cancelDuration?.hasError('required') && !!cancelDuration?.touched;
+  }
+
+  isValidPricePerNight(): boolean {
+    const pricePerNight = this.form.get('pricePerNight');
+    return !!pricePerNight?.hasError('required') && !!pricePerNight?.touched;
+  }
+
+
 }
