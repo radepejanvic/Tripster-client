@@ -40,6 +40,7 @@ export class AccommodationCrudComponent implements OnInit {
 
     this.route.params.subscribe((params) => {
       this.id = +params['id'];
+      sessionStorage.setItem('updatedAccommodation', this.id.toString());
     });
 
     if (this.id) {
@@ -149,7 +150,6 @@ export class AccommodationCrudComponent implements OnInit {
     this.accommodationService.updateAccommodation(this.accommodation).subscribe({
       next: (response: Accommodation) => {
         console.log(response);
-        sessionStorage.setItem('newAccommodation', response.id ? response.id.toString() : '0');
       },
       error: (err: any) => {
         console.error(`Failed to update accommodation ${this.id}.`, err);
