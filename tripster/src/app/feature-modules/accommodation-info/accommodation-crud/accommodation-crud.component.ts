@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Accommodation } from '../model/accommodation.model';
 import { AbstractControl, FormArray, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { AccommodationInfoService } from '../accommodation-info.service';
@@ -9,6 +9,7 @@ import { AccommodationInfoService } from '../accommodation-info.service';
   styleUrl: './accommodation-crud.component.css'
 })
 export class AccommodationCrudComponent implements OnInit {
+  @Input() id?: number;
   amenities: string[] = [];
   checkedAmenities: boolean[] = [];
 
@@ -30,10 +31,8 @@ export class AccommodationCrudComponent implements OnInit {
     cancelDuration: new FormControl(0, [Validators.required]),
     pricePerNight: new FormControl(true, [Validators.required])
   });
-  
-  constructor(private accommodationService: AccommodationInfoService){  }
 
-
+  constructor(private accommodationService: AccommodationInfoService) { }
 
   ngOnInit(): void {
 
@@ -76,9 +75,9 @@ export class AccommodationCrudComponent implements OnInit {
         sessionStorage.setItem('newAccommodation', response.id ? response.id.toString() : '0');
       },
       error: (err: any) => {
-        console.error('Failed to register new accommodation.',err);
+        console.error('Failed to register new accommodation.', err);
       }
-    }) 
+    })
   }
 
   toggleAmenity(event: any, index: number): void {
@@ -107,8 +106,8 @@ export class AccommodationCrudComponent implements OnInit {
     const minCap = control.get('minCap')?.value;
     const maxCap = control.get('maxCap')?.value;
 
-    if(maxCap < minCap) {
-      return {'capacityError': true, 'message': 'MinCap can`t be greater than MaxCap.'}
+    if (maxCap < minCap) {
+      return { 'capacityError': true, 'message': 'MinCap can`t be greater than MaxCap.' }
     }
 
     return null;
@@ -117,8 +116,8 @@ export class AccommodationCrudComponent implements OnInit {
   shortDescValidator(control: AbstractControl): ValidationErrors | null {
     const shortDescription = control.get('shortDescription')?.value;
 
-    if(shortDescription.length > 75) {
-      return {'descriptionError': true, 'message': 'Short description can`t be longer than 75 characters.'}
+    if (shortDescription.length > 75) {
+      return { 'descriptionError': true, 'message': 'Short description can`t be longer than 75 characters.' }
     }
 
     return null;
