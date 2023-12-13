@@ -43,19 +43,27 @@ export class AccommodationCrudComponent implements OnInit {
       sessionStorage.setItem('updatedAccommodation', this.id.toString());
     });
 
+    this.initializeAmenities();
+
     if (this.id) {
       this.accommodationService.getAccommodation(this.id).subscribe({
         next: (response: Accommodation) => {
           this.accommodation = response;
           this.mapAccommodationToForm();
+          for (let amenity of this.accommodation.amenities) {
+            this.checkedAmenities[amenity] = true;
+          }
+          console.log(this.checkedAmenities);
         },
         error: (err: any) => {
           console.error('Failed to get the accommodation', err);
         }
       })
     }
-    // logic for loading all amenities
-    for (let i = 0; i < 30; i++) {
+  }
+
+  initializeAmenities() {
+    for (let i = 0; i < 12; i++) {
       this.amenities.push("Some amenity");
     }
     this.checkedAmenities = new Array(this.amenities.length).fill(false);
