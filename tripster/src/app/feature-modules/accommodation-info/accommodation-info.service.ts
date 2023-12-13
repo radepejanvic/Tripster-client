@@ -30,7 +30,11 @@ export class AccommodationInfoService {
   }
 
   addAccommodation(accommodation: Accommodation): Observable<Accommodation> {
-    return this.http.post<Accommodation>(environment.apiHost + 'accommodations', accommodation);
+    return this.http.post<Accommodation>(`${environment.apiHost}accommodations`, accommodation);
+  }
+
+  updateAccommodation(accommodation: Accommodation): Observable<Accommodation> {
+    return this.http.put<Accommodation>(`${environment.apiHost}accommodations`, accommodation);
   }
 
   uploadPhotos(id: number, photos: File[]): Observable<number> {
@@ -43,7 +47,7 @@ export class AccommodationInfoService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
 
-    return this.http.post<number>(`${environment.apiHost}photos/${id}`, formData, {headers});
+    return this.http.post<number>(`${environment.apiHost}photos/${id}`, formData, { headers });
   }
 
 }
