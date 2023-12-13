@@ -18,7 +18,7 @@ export class PhotosComponent implements OnInit {
   constructor(private service: AccommodationInfoService) { }
 
   ngOnInit(): void {
-    this.service.getAccommodation(12).subscribe({
+    this.service.getAccommodation(1).subscribe({
       next: (result: Accommodation) => {
         this.accommodation = result;
       },
@@ -27,7 +27,7 @@ export class PhotosComponent implements OnInit {
       }
     });
 
-    this.service.getPhotos(12).subscribe({
+    this.service.getPhotos(1).subscribe({
       next: (result: string[]) => {
         this.photos = result;
       },
