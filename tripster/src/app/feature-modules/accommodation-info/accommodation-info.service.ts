@@ -33,7 +33,7 @@ export class AccommodationInfoService {
     return this.http.post<Accommodation>(environment.apiHost + 'accommodations', accommodation);
   }
 
-  uploadPhotos(id: number, photos: File[]): void {
+  uploadPhotos(id: number, photos: File[]): Observable<number> {
 
     const formData = new FormData();
     for (let i = 0; i < photos.length; i++) {
@@ -43,7 +43,7 @@ export class AccommodationInfoService {
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
 
-    this.http.post<any>(`${environment.apiHost}${id}`, formData, {headers});
+    return this.http.post<number>(`${environment.apiHost}photos/${id}`, formData, {headers});
   }
 
 }

@@ -205,6 +205,19 @@
         placeholder="Custom free cancellation period policy"
       />
     </div>
+
+    <h1 id="end-title">Wrapping up registrastion!</h1>
+
+    <div id="add-new">
+      <button
+        class="btn btn-outline-dark"
+        type="submit"
+        (click)="addAccommodation()"
+      >
+        Register this accommodation
+      </button>
+      <button id="reset">Reset all fields</button>
+    </div>
   </form>
 
   <h1>Show us the photos of your unit.</h1>
@@ -214,17 +227,4 @@
   <h1>Now let`s define price lists for your unit.</h1>
 
   <app-price-list></app-price-list>
-
-  <h1 id="end-title">Wrapping up registrastion!</h1>
-
-  <div id="add-new">
-    <button
-      class="btn btn-outline-dark"
-      type="submit"
-      (click)="addAccommodation()"
-    >
-      Register this accommodation
-    </button>
-    <button id="reset">Reset all fields</button>
-  </div>
 </div>
