@@ -1,5 +1,6 @@
-import { Component, Output } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { NgxDropzoneChangeEvent } from 'ngx-dropzone';
+import { AccommodationInfoService } from '../accommodation-info.service';
 
 @Component({
   selector: 'app-photo-upload',
@@ -7,8 +8,11 @@ import { NgxDropzoneChangeEvent } from 'ngx-dropzone';
   styleUrl: './photo-upload.component.css'
 })
 export class PhotoUploadComponent {
+  submitted: boolean = false;
   files: File[] = [];
   urls: string[] = [];
+
+  constructor(private accommodationService: AccommodationInfoService){}
 
   onDrop(event: NgxDropzoneChangeEvent): void {
     if (event.addedFiles) {
@@ -43,4 +47,27 @@ export class PhotoUploadComponent {
 
     reader.readAsDataURL(file);
   }
+
+  uploadPhotos(): void {
+    const id = sessionStorage.getItem('newAccommodation');
+    if(id != null && this.files.length <= 10 && this.files.length >= 5 ) {
+      this.accommodationService.uploadPhotos(+id, this.files).subscribe({
+        next: (response: number) => {
+          console.log(`Uploaded ${response} photos to accommodation with id: ${id}`);
+          this.files = [];
+          this.urls = [];
+        },
+        error: (err: any) => {
+          console.error('Failed to upload photos', err);
+        }
+      })
+    }
+  }
+
+  removePhotos(): void {
+    this.files = [];
+    this.urls = [];
+  }
+
+
 }
