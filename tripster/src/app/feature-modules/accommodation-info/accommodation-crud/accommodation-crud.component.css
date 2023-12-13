@@ -125,3 +125,7 @@ button {
     border-color: red;
     background-color: red;
 }
+
+.validator {
+    color: red;
+}

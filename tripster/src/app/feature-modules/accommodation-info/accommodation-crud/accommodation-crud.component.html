@@ -1,11 +1,14 @@
 <div class="container">
-  <form [formGroup]="form">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <h1 id>Hello Rade, let`s register an accommodation of yours!</h1>
 
     <h1>We`ll start with some base info.</h1>
 
     <div id="base-info" class="form">
       <label for="name"> Something unique and authentic </label>
+      <label *ngIf="isValidName()" class="validator">
+        The name is required.
+      </label>
       <input
         type="text"
         id="name"
@@ -15,6 +18,10 @@
       <label for="short-desc">
         Make it short and memorable (max 75 characters)
       </label>
+      <label *ngIf="isValidShortDescription()" class="validator">
+        The short description is required and must be shorter than 75
+        characters.
+      </label>
       <input
         type="text"
         id="short-desc"
@@ -22,12 +29,15 @@
         placeholder="Short description"
       />
       <label for="min-cap"> Make it as flexible as possible </label>
+      <label *ngIf="isValidMaxCap() || isValidMinCap()" class="validator">
+        Fields are required.
+      </label>
       <span>
         <input
           type="number"
           id="min-cap"
-          min="0"
-          max="20"
+          min="1"
+          max="10"
           formControlName="minCap"
           placeholder="Minimal capacity"
         />
@@ -35,11 +45,14 @@
           type="number"
           id="max-cap"
           min="1"
-          max="20"
+          max="10"
           formControlName="maxCap"
           placeholder="Maximal capacity"
         />
       </span>
+      <label *ngIf="isValidType()" class="validator">
+        The field is required.
+      </label>
       <span>
         <select id="type" formControlName="type">
           <option value="placeHolder" disabled>
@@ -50,6 +63,9 @@
           <option value="ROOM">Room</option>
         </select>
         <span class="radios">
+          <label *ngIf="isValidAutomaticReservation()" class="validator">
+            The type is required.
+          </label>
           <input
             type="radio"
             id="automatic"
@@ -77,6 +93,9 @@
     <h1>Let`s now move on to Address info!</h1>
 
     <div id="address" class="form">
+      <label *ngIf="isValidCountry()" class="validator">
+        The country is required.
+      </label>
       <input
         type="text"
         id="country"
@@ -85,6 +104,9 @@
       />
       <!-- (ngModelChange)="onAdressChange()" -->
 
+      <label *ngIf="isValidCity() || isValidZipCode()" class="validator">
+        The country an zip code are required.
+      </label>
       <span>
         <input
           type="text"
@@ -99,6 +121,9 @@
           placeholder="Zip code"
         />
       </span>
+      <label *ngIf="isValidStreet() || isValidNumber()" class="validator">
+        The street and number are required.
+      </label>
       <span>
         <input
           type="text"
@@ -133,10 +158,6 @@
           placeholder="Latitude"
         />
       </span>
-
-      <!-- <div id="map">
-      <app-map [address]="onAdressChange()"></app-map>
-    </div> -->
     </div>
 
     <h1>Here we need as much details as possible.</h1>
@@ -146,6 +167,9 @@
         Be as creative and honest as you please, here you have the full freedom
         to represent your unit as best as you can. So don`t be stingy on words,
         describe it to the fullest of details!
+      </label>
+      <label *ngIf="isValidDescription()" class="validator">
+        The description is required.
       </label>
       <textarea
         id="desc"
@@ -185,6 +209,9 @@
     <label for="cancellation-policy">
       Give as much flexibility, but be carefull to not hurt your bussines.
     </label>
+    <label *ngIf="isValidCancelDuration()" class="validator">
+      The cancellation policy is required.
+    </label>
     <div id="cancellation-policy">
       <select id="policy" formControlName="cancelDuration">
         <option value="placeHolder" disabled>
@@ -205,6 +232,15 @@
         placeholder="Custom free cancellation period policy"
       />
     </div>
+
+    <h1 id="end-title">Wrapping up registrastion!</h1>
+
+    <div id="add-new">
+      <button class="btn btn-outline-dark" type="submit">
+        Register this accommodation
+      </button>
+      <button id="reset">Reset all fields</button>
+    </div>
   </form>
 
   <h1>Show us the photos of your unit.</h1>
@@ -214,17 +250,4 @@
   <h1>Now let`s define price lists for your unit.</h1>
 
   <app-price-list></app-price-list>
-
-  <h1 id="end-title">Wrapping up registrastion!</h1>
-
-  <div id="add-new">
-    <button
-      class="btn btn-outline-dark"
-      type="submit"
-      (click)="addAccommodation()"
-    >
-      Register this accommodation
-    </button>
-    <button id="reset">Reset all fields</button>
-  </div>
 </div>

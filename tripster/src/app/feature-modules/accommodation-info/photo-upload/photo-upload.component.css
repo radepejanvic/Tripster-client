@@ -40,3 +40,39 @@
     height: 200px;
     margin-bottom: 10px;
 }
+
+#add-new {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+}
+
+button {
+    height: 50px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid black;
+    width: 50%;
+    background-color: white;
+    font-size: 18px;
+}
+
+#reset {
+    color: red;
+    border-color: red;
+    transition: background-color 0.2s ease-out, color 0.2s ease-out;
+}
+
+#reset:hover {
+    color: white;
+    border-color: red;
+    background-color: red;
+}
+
+.validator {
+    color: red;
+}
