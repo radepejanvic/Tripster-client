@@ -4,7 +4,7 @@
 
     <h1>We`ll start with some base info.</h1>
 
-    <div id="base-info" class="form">
+    <div id="base-info" class="form" (ngSubmit)="onSubmit()">
       <label for="name"> Something unique and authentic </label>
       <input
         type="text"
@@ -209,11 +209,7 @@
     <h1 id="end-title">Wrapping up registrastion!</h1>
 
     <div id="add-new">
-      <button
-        class="btn btn-outline-dark"
-        type="submit"
-        (click)="addAccommodation()"
-      >
+      <button class="btn btn-outline-dark" type="submit">
         Register this accommodation
       </button>
       <button id="reset">Reset all fields</button>

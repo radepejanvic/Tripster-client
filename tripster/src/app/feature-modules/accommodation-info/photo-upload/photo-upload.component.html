@@ -12,6 +12,12 @@
 
   <h1>The preview of uploaded photos.</h1>
 
+  <label *ngIf="files.length < 5" class="validator">
+    You need to upload at least 5 photos.
+  </label>
+  <label *ngIf="files.length > 10" class="validator">
+    You reached the limit of 10 photos per unit.
+  </label>
   <div id="preview">
     <img *ngFor="let url of urls" [src]="url" alt="Preview" />
   </div>
@@ -22,6 +28,6 @@
     <button class="btn btn-outline-dark" type="submit" (click)="uploadPhotos()">
       Upload photos
     </button>
-    <button id="reset">Remove all photos</button>
+    <button id="reset" (click)="removePhotos()">Remove all photos</button>
   </div>
 </div>

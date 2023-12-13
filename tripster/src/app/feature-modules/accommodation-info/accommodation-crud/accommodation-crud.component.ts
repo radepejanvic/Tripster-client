@@ -45,7 +45,7 @@ export class AccommodationCrudComponent implements OnInit {
     this.checkedAmenities = new Array(this.amenities.length).fill(false);
   }
 
-  addAccommodation(): void {
+  onSubmit(): void {
     const accommodation: Accommodation = {
       status: 'NEW',
       ownerId: 4,

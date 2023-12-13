@@ -8,6 +8,7 @@ import { AccommodationInfoService } from '../accommodation-info.service';
   styleUrl: './photo-upload.component.css'
 })
 export class PhotoUploadComponent {
+  submitted: boolean = false;
   files: File[] = [];
   urls: string[] = [];
 
@@ -47,9 +48,9 @@ export class PhotoUploadComponent {
     reader.readAsDataURL(file);
   }
 
-  uploadPhotos(): boolean {
+  uploadPhotos(): void {
     const id = sessionStorage.getItem('newAccommodation');
-    if(id != null) {
+    if(id != null && this.files.length <= 10 && this.files.length >= 5 ) {
       this.accommodationService.uploadPhotos(+id, this.files).subscribe({
         next: (response: number) => {
           console.log(`Uploaded ${response} photos to accommodation with id: ${id}`);
@@ -60,9 +61,12 @@ export class PhotoUploadComponent {
           console.error('Failed to upload photos', err);
         }
       })
-      return true;
     }
-    return false;
+  }
+
+  removePhotos(): void {
+    this.files = [];
+    this.urls = [];
   }
 
 
