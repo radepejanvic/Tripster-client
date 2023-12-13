@@ -1,31 +1,33 @@
 <div class="container">
     <div id="photos">
-        <img class="item-1" src="./assets/images/accommodation.jpg"/> 
-        <img class="item-2" src="./assets/images/accommodation.jpg"/>
-        <img class="item-3" src="./assets/images/accommodation.jpg"/>
-        <img class="item-4" src="./assets/images/accommodation.jpg"/>
-        <img class="item5" src="./assets/images/accommodation.jpg"/>
+        <img *ngFor="let url of photos.slice(0,5); let i = index" [src]="url" [class]="'item-' + (i + 1)" alt="Photo" />
+        
+        <button type="button" class="item-5 shader"> View gallery </button>
     </div>
-
+    
     <div id="title">
         <div>
-            <h1>Hotel Norrebro</h1>
-            <h4>3-star hotel located in center of Copenhagen</h4>
+            <h1>{{accommodation.name}}</h1>
+            <h4>{{accommodation.shortDescription}}</h4>
         </div>
         
         <app-rating></app-rating>
     </div>
-
+    
     <div id="menu">
-            <button>Overview</button>
-            <button>Amenities</button>
-            <button>Reviews</button>
-            <button>Rent</button>
+        <button type="button">Overview</button>
+        <button type="button">Amenities</button>
+        <button type="button">Reviews</button>
+        <button type="button">Rent</button>
     </div>
-    <hr/>
-    <app-overview></app-overview>
-    <hr/>
-    <app-rent></app-rent>
-    <hr/>
-    <app-reviews></app-reviews>
+    
+    <hr>
+    <div id="canvas">
+        <app-overview [accommodation]="accommodation"></app-overview>
+        <hr>
+        <app-rent [name]="accommodation.name"></app-rent>
+        <hr>
+        <app-reviews></app-reviews>
+    </div>
+
 </div>

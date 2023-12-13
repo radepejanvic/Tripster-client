@@ -14,7 +14,8 @@ import { AuthorizationModule } from './feature-modules/authorization/authorizati
 import { HttpClientModule } from '@angular/common/http';
 import { Interceptor } from './feature-modules/authorization/interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { GoogleMapsModule } from '@angular/google-maps'
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
     UserRegistrationModule,
@@ -33,11 +35,15 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     UserAccountUpdateModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule, 
+    NgxDropzoneModule,
+    GoogleMapsModule
   ],
-  providers: [{      provide: HTTP_INTERCEPTORS,
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
     useClass: Interceptor,
-    multi: true,}     ],
+    multi: true,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

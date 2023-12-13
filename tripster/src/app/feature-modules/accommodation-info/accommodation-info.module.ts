@@ -10,7 +10,14 @@ import { ReviewComponent } from './review/review.component';
 import { RatingStatsComponent } from './rating-stats/rating-stats.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { RentComponent } from './rent/rent.component';
-
+import { AccommodationCrudComponent } from './accommodation-crud/accommodation-crud.component';
+import { PhotoUploadComponent } from './photo-upload/photo-upload.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { PriceListComponent } from './price-list/price-list.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
@@ -21,15 +28,26 @@ import { RentComponent } from './rent/rent.component';
     ReviewComponent,
     RatingStatsComponent,
     ReviewsComponent,
-    RentComponent
+    RentComponent,
+    AccommodationCrudComponent,
+    PhotoUploadComponent,
+    PriceListComponent,
+    MapComponent
   ],
   imports: [
     CommonModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    NgxDropzoneModule,
+    BrowserModule,
+    FormsModule,
+    GoogleMapsModule,
+    ReactiveFormsModule
   ],
   exports: [
-    PhotosComponent
+    PhotosComponent,
+    AccommodationCrudComponent,
+    OverviewComponent
   ]
 })
 export class AccommodationInfoModule { }

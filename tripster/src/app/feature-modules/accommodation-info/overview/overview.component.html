@@ -1,45 +1,28 @@
 <div id="overview">
+  <div class="description">
+    <h1>Description</h1>
+    <p>{{ accommodation?.description }}</p>
+  </div>
 
-    <div class="description">
-        <h1> Description </h1>
-        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Voluptatibus vel necessitatibus facilis ut rerum voluptas
-            ratione dolores inventore facere, quia unde eaque ullam 
-            repellendus magni beatae explicabo dolorem. Quisquam est
-            beatae eos tenetur aspernatur, iste officia ullam cum maxime
-            quidem perferendis ducimus veritatis. At, unde dolorem? 
-            Aliquam autem consequuntur magnam similique distinctio 
-            soluta delectus, ipsa, sapiente vitae impedit commodi at.
-            Excepturi fugit repellat qui facere ab aspernatur, maxime
-            non pariatur minima similique nam asperiores sed quam ratione
-            obcaecati a nisi consequuntur quo natus est ut quis fugiat
-            accusantium unde? Nemo sapiente dolorum dolore ea earum! Eaque
-            vel, quibusdam repellat possimus doloribus sit deleniti. Dicta
-            inventore perspiciatis rem, a deserunt omnis atque asperiores 
-            quisquam molestiae possimus iste molestias? Qui ratione ipsum 
-            expedita omnis dolore quia sunt mollitia labore temporibus quam, 
-            veritatis repudiandae. Vero non vel, cum voluptatum temporibus, 
-            voluptas laboriosam impedit minima quo, recusandae cumque 
-            molestiae natus corrupti iusto aut incidunt.</p>
+  <div class="map">
+    <h1>Location</h1>
+    <h3>
+      {{ accommodation?.street }} {{ accommodation?.number }},
+      {{ accommodation?.city }}, {{ accommodation?.country }},
+      {{ accommodation?.zipCode }}
+    </h3>
+
+    <app-map [address]="formatAddress()"></app-map>
+    <!-- <app-map [latitude]="accommodation.latitude" [longitude]="accommodation.longitude"></app-map> -->
+  </div>
+
+  <div class="amenities">
+    <h1>Amenities</h1>
+    <div>
+      <app-amenity
+        *ngFor="let amenity of accommodation?.amenities"
+        [amenity]="amenity"
+      ></app-amenity>
     </div>
-
-    <div class="map">
-        <h1> Location </h1>
-        <h3> Miletićeva 23, Novi Sad, Srbija, 21132</h3>
-        <img src="./assets/images/mapa.png"/>
-    </div>
-
-    <div class="amenities">
-        <h1> Amenities </h1>
-        <div>
-            <app-amenity></app-amenity>
-            <app-amenity></app-amenity>
-            <app-amenity></app-amenity>
-            <app-amenity></app-amenity>
-            <app-amenity></app-amenity>
-            <app-amenity></app-amenity>
-            <app-amenity></app-amenity>
-        </div>
-    </div>
-
+  </div>
 </div>
