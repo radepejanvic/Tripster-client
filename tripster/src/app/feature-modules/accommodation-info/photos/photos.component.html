@@ -1,33 +1,38 @@
 <div class="container">
-    <div id="photos">
-        <img *ngFor="let url of photos.slice(0,5); let i = index" [src]="url" [class]="'item-' + (i + 1)" alt="Photo" />
-        
-        <button type="button" class="item-5 shader"> View gallery </button>
-    </div>
-    
-    <div id="title">
-        <div>
-            <h1>{{accommodation.name}}</h1>
-            <h4>{{accommodation.shortDescription}}</h4>
-        </div>
-        
-        <app-rating></app-rating>
-    </div>
-    
-    <div id="menu">
-        <button type="button">Overview</button>
-        <button type="button">Amenities</button>
-        <button type="button">Reviews</button>
-        <button type="button">Rent</button>
-    </div>
-    
-    <hr>
-    <div id="canvas">
-        <app-overview [accommodation]="accommodation"></app-overview>
-        <hr>
-        <app-rent [name]="accommodation.name"></app-rent>
-        <hr>
-        <app-reviews></app-reviews>
+  <div id="photos">
+    <img
+      *ngFor="let url of photos.slice(0, 5); let i = index"
+      [src]="url"
+      [class]="'item-' + (i + 1)"
+      alt="Photo"
+    />
+
+    <button type="button" class="item-5 shader">View gallery</button>
+  </div>
+
+  <div id="title">
+    <div>
+      <h1>{{ accommodation.name }}</h1>
+      <h4>{{ accommodation.shortDescription }}</h4>
     </div>
 
+    <app-rating></app-rating>
+  </div>
+
+  <div id="menu">
+    <button type="button">Overview</button>
+    <button type="button">Amenities</button>
+    <button type="button">Reviews</button>
+    <button type="button">Rent</button>
+    <button type="button" [routerLink]="['/updateAccommodation', id]" >Manage</button>
+  </div>
+
+  <hr />
+  <div id="canvas">
+    <app-overview [accommodation]="accommodation"></app-overview>
+    <hr />
+    <app-rent [name]="accommodation.name"></app-rent>
+    <hr />
+    <app-reviews></app-reviews>
+  </div>
 </div>

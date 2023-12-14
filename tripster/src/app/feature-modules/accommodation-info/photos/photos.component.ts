@@ -4,51 +4,43 @@ import { Accommodation } from '../model/accommodation.model';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-photos',
-  templateUrl: './photos.component.html',
-  styleUrl: './photos.component.css'
+	selector: 'app-photos',
+	templateUrl: './photos.component.html',
+	styleUrl: './photos.component.css',
 })
 export class PhotosComponent implements OnInit {
+	id!: number;
 
-  @Input() id: number | undefined;
+	choice: string = 'overview';
+	accommodation!: Accommodation;
+	photos!: string[];
 
-  choice: string = "overview";
-  accommodation!: Accommodation;
-  photos!: string[];
+	constructor(
+		private route: ActivatedRoute,
+		private service: AccommodationInfoService
+	) {}
 
-  constructor(private route:ActivatedRoute,
-    private service: AccommodationInfoService) { }
+	ngOnInit(): void {
+		this.route.params.subscribe((params) => {
+			this.id = +params['id'];
+		});
 
-  ngOnInit(): void {
-    this.route.params.subscribe((params)=>{
-      const id = +params['id']
-      this.service.getAccommodation(id).subscribe({
-        next: (result: Accommodation) => {
-          this.accommodation = result;
-        },
-        error: (err: any) => {
-          console.error('Error fetching accommodation info', err);
-        }
-      });
-  
-      this.service.getPhotos(id).subscribe({
-        next: (result: string[]) => {
-          this.photos = result;
-        },
-        error: (err: any) => {
-          console.error('Error fetching photos', err);
-        }
-      })
-    })
+		this.service.getAccommodation(this.id).subscribe({
+			next: (result: Accommodation) => {
+				this.accommodation = result;
+			},
+			error: (err: any) => {
+				console.error('Error fetching accommodation info', err);
+			},
+		});
 
-  }
-
-  onClick(choice: string): void {
-    this.choice = choice;
-  }
-
-  justClick() {
-    console.log('Neki tekst');
-  }
-
+		this.service.getPhotos(this.id).subscribe({
+			next: (result: string[]) => {
+				this.photos = result;
+			},
+			error: (err: any) => {
+				console.error('Error fetching photos', err);
+			},
+		});
+	}
 }

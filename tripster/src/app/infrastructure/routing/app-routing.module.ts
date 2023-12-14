@@ -29,6 +29,9 @@ const routes: Routes = [
 		canActivate: [AuthGuard],
 		data: { role: ['ROLE_HOST', 'ROLE_GUEST'] },
 	},
+
+	{ path: 'addAccommodation', component: AccommodationCrudComponent },
+	{ path: 'updateAccommodation/:id', component: AccommodationCrudComponent },
 ];
 
 @NgModule({

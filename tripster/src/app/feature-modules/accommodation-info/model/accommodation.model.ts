@@ -13,8 +13,8 @@ export interface Accommodation {
     zipCode: string,
     street: string,
     number: string,
-    latitude: number,
-    longitude: number,
+    // latitude: number,
+    // longitude: number,
     description: string,
     amenities: number[],
     cancelDuration: number,
@@ -26,7 +26,7 @@ export interface PriceList {
     accommodationId?: number,
     start: Date;
     end: Date;
-    standard: number;
-    weekend: number;
-    holiday: number;
+    price: number;
+    weekend?: number;
+    holiday?: number;
 }
