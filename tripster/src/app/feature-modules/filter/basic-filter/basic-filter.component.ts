@@ -14,7 +14,7 @@ import {
 })
 export class BasicFilterComponent {
 	basicFilter = new FormGroup({
-		destination: new FormControl(null),
+		destination: new FormControl(),
 		checkIn: new FormControl(),
 		checkOut: new FormControl(),
 		numberOfGuest: new FormControl(0),
