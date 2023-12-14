@@ -14,10 +14,10 @@ import {
 })
 export class BasicFilterComponent {
 	basicFilter = new FormGroup({
-		destination: new FormControl(),
-		checkIn: new FormControl(),
-		checkOut: new FormControl(),
-		numberOfGuest: new FormControl(0),
+		destination: new FormControl(null),
+		checkIn: new FormControl(null),
+		checkOut: new FormControl(null),
+		numberOfGuest: new FormControl(null),
 	});
 
 	@Output()

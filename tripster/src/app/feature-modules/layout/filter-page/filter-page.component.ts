@@ -39,16 +39,16 @@ export class FilterPageComponent implements OnInit {
 		// 	});
 		this.mainFormGroup = this.fb.group({
 			basicFilter: this.fb.group({
-				destination: new FormControl(''),
+				destination: new FormControl(null),
 				checkIn: new FormControl('', Validators.required),
 				checkOut: new FormControl('', Validators.required),
-				numberOfGuest: new FormControl('', Validators.min(0)),
+				numberOfGuest: new FormControl(null, Validators.min(0)),
 			}),
 			additionalFilter: this.fb.group({
 				amenities: [],
 				type: [],
-				minPrice: new FormControl(0),
-				maxPrice: new FormControl(0),
+				minPrice: new FormControl(null),
+				maxPrice: new FormControl(null),
 			}),
 		});
 	}
@@ -78,20 +78,43 @@ export class FilterPageComponent implements OnInit {
 		const additionalFilter =
 			this.mainFormGroup.get('additionalFilter')?.value;
 		const basicFilter = this.mainFormGroup.get('basicFilter')?.value;
-		const params = new HttpParams()
+
+		var params = new HttpParams()
 			.set('start', new Date(basicFilter.checkIn).getTime())
-			.set('end', new Date(basicFilter.checkOut).getTime())
-			.set('amenities', additionalFilter.amenities)
-			.set('minPrice', additionalFilter.minPrice)
-			.set('type', additionalFilter.type);
-		if (basicFilter.destination != '') {
-			params.set('city', basicFilter.destination);
+			.set('end', new Date(basicFilter.checkOut).getTime());
+
+		if (
+			basicFilter.destination !== null &&
+			basicFilter.destination !== ''
+		) {
+			console.log('city');
+			params = params.append('city', basicFilter.destination);
 		}
-		if (basicFilter.numberOfGuest != '') {
-			params.set('numOfGuests', basicFilter.numberOfGuest);
+		if (basicFilter.numberOfGuest !== null) {
+			console.log('numOfGuests');
+			params = params.append('numOfGuests', basicFilter.numberOfGuest);
 		}
-		if (additionalFilter.maxPrice != 0) {
-			params.set('maxPrice', additionalFilter.maxPrice);
+		if (additionalFilter.maxPrice !== null) {
+			console.log('maxPrice');
+			params = params.append('maxPrice', additionalFilter.maxPrice);
+		}
+		if (additionalFilter.minPrice !== null) {
+			console.log('minPrice');
+			params = params.append('minPrice', additionalFilter.minPrice);
+		}
+		if (
+			additionalFilter.amenities !== null &&
+			additionalFilter.amenities.length !== 0
+		) {
+			console.log('amenities');
+			params = params.append('amenities', additionalFilter.amenities);
+		}
+		if (
+			additionalFilter.type !== null &&
+			additionalFilter.type.length !== 0
+		) {
+			console.log('type');
+			params = params.append('type', additionalFilter.type);
 		}
 
 		return params;

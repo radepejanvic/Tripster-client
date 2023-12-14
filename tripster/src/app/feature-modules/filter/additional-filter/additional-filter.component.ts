@@ -29,8 +29,8 @@ export class AdditionalFilterComponent {
 			)
 		);
 
-		this.additonalFilter.addControl('minPrice', new FormControl(0));
-		this.additonalFilter.addControl('maxPrice', new FormControl(0));
+		this.additonalFilter.addControl('minPrice', new FormControl(null));
+		this.additonalFilter.addControl('maxPrice', new FormControl(null));
 	}
 
 	getSelectedCheckboxes() {
