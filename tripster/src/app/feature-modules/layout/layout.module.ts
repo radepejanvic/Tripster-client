@@ -13,31 +13,33 @@ import { AdminNavbarComponent } from './navbar/admin-navbar/admin-navbar.compone
 import { FilterPageComponent } from './filter-page/filter-page.component';
 import { FilterModule } from '../filter/filter.module';
 import { CardsModule } from '../cards/cards.module';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
-  declarations: [
-    NavbarComponent,
-    HomeComponent,
-    FooterComponent,
-    UserNavbarComponent,
-    AdminNavbarComponent,
-    FilterPageComponent,
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    AccommodationInfoModule,
-    AuthorizationModule,
-    UserRegistrationModule,
-    UserAccountUpdateModule,
-    FilterModule,
-    CardsModule
-  ],
-  exports: [
-    NavbarComponent,
-    HomeComponent,
-    FooterComponent,
-    FilterPageComponent
-  ]
+	declarations: [
+		NavbarComponent,
+		HomeComponent,
+		FooterComponent,
+		UserNavbarComponent,
+		AdminNavbarComponent,
+		FilterPageComponent,
+	],
+	imports: [
+		CommonModule,
+		RouterModule,
+		AccommodationInfoModule,
+		AuthorizationModule,
+		UserRegistrationModule,
+		UserAccountUpdateModule,
+		FilterModule,
+		CardsModule,
+		GoogleMapsModule,
+	],
+	exports: [
+		NavbarComponent,
+		HomeComponent,
+		FooterComponent,
+		FilterPageComponent,
+	],
 })
-export class LayoutModule { }
+export class LayoutModule {}

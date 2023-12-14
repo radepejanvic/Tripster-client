@@ -1,0 +1,146 @@
+#price-list {
+    width: 100%;
+    height: 100%;
+}
+
+table {
+    width: 100%;
+    height: fit-content;
+    border: 3px solid #f0f0f0;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+}
+
+th,
+td {
+    height: 50px;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+#add-price-list {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    min-width: 640px;
+    height: fit-content;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.vertical-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.vertical-wrapper label {
+    margin: 0;
+    font-size: 14px;
+}
+
+label {
+    margin: 20px 0px 20px 0px;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.calendar {
+    width: 300px;
+}
+
+input,
+button,
+select {
+    height: 50px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+button {
+    margin: 0;
+    width: 100%;
+    background-color: white;
+}
+
+th,
+td,
+.id {
+    text-align: center;
+}
+
+#table-container {
+    flex: 1;
+    width: 100%;
+}
+
+#remove-pricelist {
+    width: 100%;
+}
+
+tr.selected {
+    background-color: pink;
+    cursor: pointer;
+}
+
+#table-scroll {
+    width: 100%;
+    max-height: 580px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+#table-header {
+    position: sticky;
+    top: 0;
+    background-color: #f9f9f9;
+    z-index: 1;
+}
+
+#add-new {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+}
+
+button {
+    height: 50px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid black;
+    width: 50%;
+    background-color: white;
+    font-size: 18px;
+}
+
+#reset {
+    color: red;
+    border-color: red;
+    transition: background-color 0.2s ease-out, color 0.2s ease-out;
+}
+
+#reset:hover {
+    color: white;
+    border-color: red;
+    background-color: red;
+}

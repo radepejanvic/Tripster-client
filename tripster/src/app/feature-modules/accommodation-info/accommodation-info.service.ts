@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Accommodation } from './model/accommodation.model';
 import { Observable, map } from 'rxjs';
+import { environment } from 'src/env/env';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,23 @@ export class AccommodationInfoService {
   private getDataUrl(base64String: string): string {
     const contentType = 'image/jpeg';
     return `data:${contentType};base64,${base64String}`;
+  }
+
+  addAccommodation(accommodation: Accommodation): Observable<Accommodation> {
+    return this.http.post<Accommodation>(environment.apiHost + 'accommodations', accommodation);
+  }
+
+  uploadPhotos(id: number, photos: File[]): Observable<number> {
+
+    const formData = new FormData();
+    for (let i = 0; i < photos.length; i++) {
+      formData.append('photo', photos[i]);
+    }
+
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+
+    return this.http.post<number>(`${environment.apiHost}photos/${id}`, formData, {headers});
   }
 
 }

@@ -1,21 +1,28 @@
 <div id="overview">
+  <div class="description">
+    <h1>Description</h1>
+    <p>{{ accommodation?.description }}</p>
+  </div>
 
-    <div class="description">
-        <h1> Description </h1>
-        <p> {{accommodation?.description}} </p>
+  <div class="map">
+    <h1>Location</h1>
+    <h3>
+      {{ accommodation?.street }} {{ accommodation?.number }},
+      {{ accommodation?.city }}, {{ accommodation?.country }},
+      {{ accommodation?.zipCode }}
+    </h3>
+
+    <app-map [address]="formatAddress()"></app-map>
+    <!-- <app-map [latitude]="accommodation.latitude" [longitude]="accommodation.longitude"></app-map> -->
+  </div>
+
+  <div class="amenities">
+    <h1>Amenities</h1>
+    <div>
+      <app-amenity
+        *ngFor="let amenity of accommodation?.amenities"
+        [amenity]="amenity"
+      ></app-amenity>
     </div>
-
-    <div class="map">
-        <h1> Location </h1>
-        <h3> {{accommodation?.street}} {{accommodation?.number}}, {{accommodation?.city}}, {{accommodation?.country}}, {{accommodation?.zipCode}} </h3>
-        <img src="./assets/images/mapa.png"/>
-    </div>
-
-    <div class="amenities">
-        <h1> Amenities </h1>
-        <div>
-            <app-amenity *ngFor="let amenity of accommodation?.amenities" [amenity]="amenity"></app-amenity>
-        </div>
-    </div>
-
+  </div>
 </div>

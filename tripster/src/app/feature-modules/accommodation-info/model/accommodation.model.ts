@@ -1,19 +1,32 @@
 export interface Accommodation {
     id?: number,
-    name: string,
     ownerId?: number,
+    status: string;
+    name: string,
+    shortDescription: string,
+    minCap: number,
+    maxCap: number,
+    type: string,
+    automaticReservation: boolean,
     country: string,
     city: string,
     zipCode: string,
     street: string,
     number: string,
-    shortDescription: string,
+    latitude: number,
+    longitude: number,
     description: string,
-    amenities: string[],
-    minCap: number,
-    maxCap: number,
+    amenities: number[],
     cancelDuration: number,
-    type: string,
-    automaticReservation: boolean,
-    status: string;
+    pricePerNight: boolean
+    calendar?: any
+}
+
+export interface PriceList {
+    accommodationId?: number,
+    start: Date;
+    end: Date;
+    standard: number;
+    weekend: number;
+    holiday: number;
 }

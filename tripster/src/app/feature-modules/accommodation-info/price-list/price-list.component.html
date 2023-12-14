@@ -1,0 +1,105 @@
+<div id="#price-list" class="wrapper">
+  <div id="add-price-list">
+    <select id="policy">
+      <option value="placeHolder">Pick the pricing strategy</option>
+      <option value="true">Per night (advised)</option>
+      <option value="false">Per guest per night</option>
+    </select>
+
+    <div class="wrapper">
+      <mat-card class="calendar">
+        <mat-calendar [(selected)]="start"></mat-calendar>
+      </mat-card>
+      <mat-card class="calendar">
+        <mat-calendar [(selected)]="end"></mat-calendar>
+      </mat-card>
+    </div>
+    <label>
+      Selected date range: {{ formatDate(start) }} - {{ formatDate(end) }}
+    </label>
+    <div class="wrapper">
+      <div class="vertical-wrapper">
+        <label for="standard"> Standard price </label>
+        <input
+          id="standard"
+          type="number"
+          [(ngModel)]="standard"
+          placeholder="Standard"
+        />
+      </div>
+
+      <div class="vertical-wrapper">
+        <label for="weekend"> Weekend price </label>
+        <input
+          id="weekend"
+          type="number"
+          [(ngModel)]="weekend"
+          placeholder="Weekend"
+        />
+      </div>
+
+      <div class="vertical-wrapper">
+        <label for="standard"> Holiday price </label>
+        <input
+          id="holiday"
+          type="number"
+          [(ngModel)]="holiday"
+          placeholder="Holiday"
+        />
+      </div>
+    </div>
+    <button
+      class="btn btn-outline-dark"
+      style="width: 100%"
+      (click)="addPriceList()"
+    >
+      Create new pricelist
+    </button>
+  </div>
+
+  <div id="table-container" class="vertical-wrapper">
+    <div #tableScroll id="table-scroll">
+      <table class="temp">
+        <tr id="table-header">
+          <th class="id">Id</th>
+          <th>Start date</th>
+          <th>End date</th>
+          <th>Standard price</th>
+          <th>Weekend price</th>
+          <th>Holiday price</th>
+        </tr>
+        <tr
+          *ngFor="let price of priceLists; index as i"
+          (click)="selectRow(i)"
+          [class.selected]="selectedRow === i"
+        >
+          <td class="id">{{ i + 1 }}</td>
+          <td>{{ formatDate(price.start) }}</td>
+          <td>{{ formatDate(price.end) }}</td>
+          <td>{{ price.standard }} €</td>
+          <td>{{ price.weekend }} €</td>
+          <td>{{ price.holiday }} €</td>
+        </tr>
+      </table>
+    </div>
+
+    <button
+      id="remove-pricelist"
+      class="btn btn-outline-dark"
+      (click)="removeRow()"
+    >
+      Remove pricelist
+    </button>
+  </div>
+</div>
+<h1 id="end-title" style="margin-top: 20px">
+  Complete pricelist registration!
+</h1>
+
+<div id="add-new">
+  <button class="btn btn-outline-dark" type="submit">
+    <!-- (click)="addAccommodation()" -->
+    Add pricelists
+  </button>
+  <button id="reset">Remove all pricelists</button>
+</div>
