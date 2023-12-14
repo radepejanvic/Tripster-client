@@ -46,7 +46,7 @@ export class FilterPageComponent implements OnInit {
 			}),
 			additionalFilter: this.fb.group({
 				amenities: [],
-				type: [],
+				type: new FormControl(null),
 				minPrice: new FormControl(null),
 				maxPrice: new FormControl(null),
 			}),
@@ -104,10 +104,7 @@ export class FilterPageComponent implements OnInit {
 		) {
 			params = params.append('amenities', additionalFilter.amenities);
 		}
-		if (
-			additionalFilter.type !== null &&
-			additionalFilter.type.length !== 0
-		) {
+		if (additionalFilter.type !== null && additionalFilter.type !== '') {
 			params = params.append('type', additionalFilter.type);
 		}
 
