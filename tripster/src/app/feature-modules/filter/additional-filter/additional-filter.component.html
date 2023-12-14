@@ -47,8 +47,9 @@
 			>
 				<label class="check-label">
 					<input
-						type="checkbox"
-						[formControlName]="accommodationType"
+						type="radio"
+						[value]="accommodationType"
+						formControlName="type"
 						class="check-box"
 						(change)="onFilterChange()"
 					/>{{ accommodationType }}

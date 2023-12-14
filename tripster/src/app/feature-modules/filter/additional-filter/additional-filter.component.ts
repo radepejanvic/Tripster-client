@@ -22,15 +22,10 @@ export class AdditionalFilterComponent {
 				this.formBuilder.control(false)
 			)
 		);
-		this.accommodationTypes.forEach((item) =>
-			this.additonalFilter.addControl(
-				item,
-				this.formBuilder.control(false)
-			)
-		);
 
 		this.additonalFilter.addControl('minPrice', new FormControl(null));
 		this.additonalFilter.addControl('maxPrice', new FormControl(null));
+		this.additonalFilter.addControl('type', new FormControl(null));
 	}
 
 	getSelectedCheckboxes() {
@@ -40,7 +35,8 @@ export class AdditionalFilterComponent {
 			(key) =>
 				this.additonalFilter.value[key] &&
 				key !== 'minPrice' &&
-				key !== 'maxPrice'
+				key !== 'maxPrice' &&
+				key !== 'type'
 		);
 		return selectedCheckboxes;
 	}
@@ -49,21 +45,9 @@ export class AdditionalFilterComponent {
 	filterChange = new EventEmitter<any>();
 
 	onFilterChange() {
-		const types: string[] = [];
-		const selectedAmenities: string[] = [];
-
-		const selectedItems = this.getSelectedCheckboxes();
-		selectedItems.forEach((item) => {
-			if (this.accommodationTypes.includes(item)) {
-				types.push(item);
-			} else {
-				selectedAmenities.push(item);
-			}
-		});
-
 		this.filterChange.emit({
-			amenities: this.getAmenityIds(selectedAmenities),
-			type: types,
+			amenities: this.getAmenityIds(this.getSelectedCheckboxes()),
+			type: this.additonalFilter.get('type')?.value,
 			minPrice: this.additonalFilter.get('minPrice')?.value,
 			maxPrice: this.additonalFilter.get('maxPrice')?.value,
 		});
