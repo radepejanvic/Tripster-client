@@ -22,8 +22,7 @@ import { AuthorizationService } from '../../authorization/authorization.service'
 })
 export class FilterPageComponent implements OnInit {
 	filterTitle: string = 'Your search';
-	numberOfResults: string = '120';
-	title: string = 'Copenhagen, Dec 9-12, 2 guests, 1 room';
+	title: string = 'Search results';
 
 	accommodations: AccommodationInfoCard[];
 	accommodationRequests: AccommodationRequest[];
@@ -33,7 +32,10 @@ export class FilterPageComponent implements OnInit {
 		private service: FilterService,
 		private fb: FormBuilder,
 		private authService: AuthorizationService
-	) {}
+	) {
+		this.accommodations = [];
+		this.accommodationRequests = [];
+	}
 
 	mainFormGroup: FormGroup;
 
