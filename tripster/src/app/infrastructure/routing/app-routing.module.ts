@@ -20,6 +20,12 @@ const routes: Routes = [
 		data: { role: ['ROLE_HOST', 'ROLE_GUEST'] },
 	},
 	{ path: 'filterPage', component: FilterPageComponent },
+	{
+		path: 'accommodationRequests',
+		component: FilterPageComponent,
+		canActivate: [AuthGuard],
+		data: { role: ['ROLE_ADMIN'] },
+	},
 	{ path: 'accommodationInfo', component: PhotosComponent },
 	{ path: 'login', component: LoginComponent },
 	{ path: 'addAccommodation', component: AccommodationCrudComponent },

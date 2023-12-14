@@ -5,9 +5,11 @@
 				<p><i class="bi bi-arrow-left-square"></i></p>
 				<p class="title">{{ filterTitle }}</p>
 				<app-basic-filter
+					*ngIf="role != 'ROLE_ADMIN'"
 					(filterChange)="onBasicFilter($event)"
 				></app-basic-filter>
 				<app-additional-filter
+					*ngIf="role != 'ROLE_ADMIN'"
 					(filterChange)="onAdditionalFilter($event)"
 				></app-additional-filter>
 				<app-guest-rating-filter
@@ -21,7 +23,8 @@
 					*ngIf="false"
 				></app-user-type-status-filter>
 				<app-accommodation-requests-filter
-					*ngIf="false"
+					*ngIf="role == 'ROLE_ADMIN'"
+					(filterChange)="onAccommodationRequestsFilter($event)"
 				></app-accommodation-requests-filter>
 				<app-review-filter *ngIf="false"></app-review-filter>
 				<div class="container row justify-content-center mt-3 mb-3">

@@ -13,6 +13,7 @@ import {
 } from '@angular/forms';
 import { HttpParams } from '@angular/common/http';
 import { Amenity } from 'src/app/shared/enum/amenity.enum';
+import { AuthorizationService } from '../../authorization/authorization.service';
 
 @Component({
 	selector: 'app-filter-page',
@@ -26,17 +27,29 @@ export class FilterPageComponent implements OnInit {
 
 	accommodations: AccommodationInfoCard[];
 	accommodationRequests: AccommodationRequest[];
+	role: string = '';
 
-	constructor(private service: FilterService, private fb: FormBuilder) {}
+	constructor(
+		private service: FilterService,
+		private fb: FormBuilder,
+		private authService: AuthorizationService
+	) {}
 
 	mainFormGroup: FormGroup;
 
 	ngOnInit(): void {
-		// this.service
-		// 	.getAccommodationRequestByFiltersForAdmin('sdfdfdf')
-		// 	.subscribe((value: AccommodationRequest[]) => {
-		// 		this.accommodationRequests = value;
-		// 	});
+		this.authService.userState.subscribe((result) => {
+			this.role = result;
+		});
+
+		if (this.role == 'ROLE_ADMIN') {
+			this.service
+				.getAccommodationRequestByFiltersForAdmin(new HttpParams())
+				.subscribe((value: AccommodationRequest[]) => {
+					this.accommodationRequests = value;
+				});
+		}
+
 		this.mainFormGroup = this.fb.group({
 			basicFilter: this.fb.group({
 				destination: new FormControl(null),
@@ -50,6 +63,9 @@ export class FilterPageComponent implements OnInit {
 				minPrice: new FormControl(null),
 				maxPrice: new FormControl(null),
 			}),
+			accommodationRequestsFilter: this.fb.group({
+				requestType: [],
+			}),
 		});
 	}
 
@@ -59,18 +75,25 @@ export class FilterPageComponent implements OnInit {
 	onAdditionalFilter(data: any) {
 		this.mainFormGroup.get('additionalFilter')?.patchValue(data);
 	}
+	onAccommodationRequestsFilter(data: any) {
+		this.mainFormGroup.get('accommodationRequestsFilter')?.patchValue(data);
+	}
 
 	sendRequest() {
-		if (this.mainFormGroup.get('basicFilter')?.valid) {
-			let params = this.getParams();
-
-			console.log(params.toString());
-
+		if (this.role == 'ROLE_ADMIN') {
 			this.service
-				.getAccommodationByFiltersForGuest(params)
-				.subscribe((value: AccommodationInfoCard[]) => {
-					this.accommodations = value;
+				.getAccommodationRequestByFiltersForAdmin(this.getAdminParams())
+				.subscribe((value: AccommodationRequest[]) => {
+					this.accommodationRequests = value;
 				});
+		} else {
+			if (this.mainFormGroup.get('basicFilter')?.valid) {
+				this.service
+					.getAccommodationByFiltersForGuest(this.getParams())
+					.subscribe((value: AccommodationInfoCard[]) => {
+						this.accommodations = value;
+					});
+			}
 		}
 	}
 
@@ -108,6 +131,22 @@ export class FilterPageComponent implements OnInit {
 			params = params.append('type', additionalFilter.type);
 		}
 
+		return params;
+	}
+	getAdminParams(): HttpParams {
+		var params = new HttpParams();
+		const accommodationRequestsFilter = this.mainFormGroup.get(
+			'accommodationRequestsFilter'
+		)?.value;
+		if (
+			accommodationRequestsFilter.requestType !== null &&
+			accommodationRequestsFilter.requestType.length !== 0
+		) {
+			params = params.append(
+				'statusList',
+				accommodationRequestsFilter.requestType
+			);
+		}
 		return params;
 	}
 }
