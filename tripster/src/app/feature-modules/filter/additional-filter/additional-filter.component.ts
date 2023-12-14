@@ -8,7 +8,7 @@ import { Amenity } from 'src/app/shared/enum/amenity.enum';
 	styleUrl: './additional-filter.component.css',
 })
 export class AdditionalFilterComponent {
-	amenities: string[] = Object.values(Amenity);
+	amenities: string[] = ['WIFI', 'KITCHEN', 'PARKING'];
 	accommodationTypes: string[] = ['ROOM', 'STUDIO', 'APARTMENT'];
 
 	additonalFilter: FormGroup;
@@ -29,8 +29,8 @@ export class AdditionalFilterComponent {
 			)
 		);
 
-		this.additonalFilter.addControl('minPrice', new FormControl());
-		this.additonalFilter.addControl('maxPrice', new FormControl());
+		this.additonalFilter.addControl('minPrice', new FormControl(0));
+		this.additonalFilter.addControl('maxPrice', new FormControl(0));
 	}
 
 	getSelectedCheckboxes() {
@@ -52,8 +52,8 @@ export class AdditionalFilterComponent {
 		const types: string[] = [];
 		const selectedAmenities: string[] = [];
 
-		const oldList = this.getSelectedCheckboxes();
-		oldList.forEach((item) => {
+		const selectedItems = this.getSelectedCheckboxes();
+		selectedItems.forEach((item) => {
 			if (this.accommodationTypes.includes(item)) {
 				types.push(item);
 			} else {
@@ -62,10 +62,19 @@ export class AdditionalFilterComponent {
 		});
 
 		this.filterChange.emit({
-			amenities: selectedAmenities,
+			amenities: this.getAmenityIds(selectedAmenities),
 			type: types,
 			minPrice: this.additonalFilter.get('minPrice')?.value,
 			maxPrice: this.additonalFilter.get('maxPrice')?.value,
 		});
+	}
+
+	getAmenityIds(list: string[]): number[] {
+		let ids: number[] = [];
+		list.forEach((item) => {
+			ids.push(this.amenities.indexOf(item) + 1);
+		});
+
+		return ids;
 	}
 }
