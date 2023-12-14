@@ -1,9 +1,7 @@
 export interface AccommodationInfoCard {
 	id?: number;
 	name: string;
-	city: string;
-	street: string;
-	number: string;
+	address: string;
 	shortDescription: string;
 	amenities: string[];
 	price: number;
