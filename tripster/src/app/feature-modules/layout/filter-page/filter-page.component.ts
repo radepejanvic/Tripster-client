@@ -87,33 +87,27 @@ export class FilterPageComponent implements OnInit {
 			basicFilter.destination !== null &&
 			basicFilter.destination !== ''
 		) {
-			console.log('city');
 			params = params.append('city', basicFilter.destination);
 		}
 		if (basicFilter.numberOfGuest !== null) {
-			console.log('numOfGuests');
 			params = params.append('numOfGuests', basicFilter.numberOfGuest);
 		}
 		if (additionalFilter.maxPrice !== null) {
-			console.log('maxPrice');
 			params = params.append('maxPrice', additionalFilter.maxPrice);
 		}
 		if (additionalFilter.minPrice !== null) {
-			console.log('minPrice');
 			params = params.append('minPrice', additionalFilter.minPrice);
 		}
 		if (
 			additionalFilter.amenities !== null &&
 			additionalFilter.amenities.length !== 0
 		) {
-			console.log('amenities');
 			params = params.append('amenities', additionalFilter.amenities);
 		}
 		if (
 			additionalFilter.type !== null &&
 			additionalFilter.type.length !== 0
 		) {
-			console.log('type');
 			params = params.append('type', additionalFilter.type);
 		}
 
