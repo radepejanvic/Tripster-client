@@ -26,7 +26,7 @@ export interface PriceList {
     accommodationId?: number,
     start: Date;
     end: Date;
-    standard: number;
-    weekend: number;
-    holiday: number;
+    price: number;
+    weekend?: number;
+    holiday?: number;
 }

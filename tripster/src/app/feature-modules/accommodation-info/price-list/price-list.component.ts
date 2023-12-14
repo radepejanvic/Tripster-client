@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { PriceList } from '../model/accommodation.model';
+import { AccommodationInfoService } from '../accommodation-info.service';
 
 @Component({
   selector: 'app-price-list',
@@ -12,12 +13,14 @@ export class PriceListComponent {
 
   start: Date = new Date();
   end: Date = new Date();
-  standard!: number;
+  price!: number;
   weekend!: number;
   holiday!: number;
   selectedRow: number = -1;
 
   priceLists: PriceList[] = [];
+
+  constructor(private accommodationService: AccommodationInfoService) { }
 
   formatDate(date: Date): string {
     const day = date.getDate();
@@ -30,17 +33,18 @@ export class PriceListComponent {
     const newPriceList: PriceList = {
       start: this.start,
       end: this.end,
-      standard: this.standard,
-      weekend: this.weekend,
-      holiday: this.holiday,
+      price: this.price,
+      // weekend: this.weekend,
+      // holiday: this.holiday,
 
     };
     this.priceLists.push(newPriceList);
+    console.log(newPriceList.start, ' - ', newPriceList.end);
     this.scrollToBottom();
 
     this.start = new Date();
     this.end = new Date();
-    this.standard = 0;
+    this.price = 0;
     this.weekend = 0;
     this.holiday = 0;
   }
@@ -61,6 +65,42 @@ export class PriceListComponent {
       const containerElem = this.tableScroll.nativeElement;
       containerElem.scrollTop = containerElem.scrollHeight;
     }
+  }
+
+  postPriceLists(): void {
+
+    const id = sessionStorage.getItem('newAccommodation');
+    if (!id) { return; }
+
+    this.accommodationService.addPricelists(+id, this.priceLists).subscribe({
+      next: (response: number) => {
+        console.log(`New calendar has ${response} days!`);
+        this.priceLists = [];
+      },
+      error: (err: any) => {
+        console.error('Post pricelists failed.', err);
+      }
+    })
+
+  }
+
+  putPriceLists(): void {
+
+    console.log('Usao');
+
+    const id = sessionStorage.getItem('newAccommodation');
+    if (!id) { return; }
+
+    this.accommodationService.updatePricelists(+id, this.priceLists).subscribe({
+      next: (response: number) => {
+        console.log(`Updated calendar has ${response} days!`);
+        this.priceLists = [];
+      },
+      error: (err: any) => {
+        console.error('Put pricelists failed.', err);
+      }
+    })
+
   }
 
 }

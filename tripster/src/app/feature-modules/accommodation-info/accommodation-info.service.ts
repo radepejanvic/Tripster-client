@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Accommodation } from './model/accommodation.model';
+import { Accommodation, PriceList } from './model/accommodation.model';
 import { Observable, map } from 'rxjs';
 import { environment } from 'src/env/env';
 
@@ -48,6 +48,14 @@ export class AccommodationInfoService {
     headers.append('Content-Type', 'multipart/form-data');
 
     return this.http.post<number>(`${environment.apiHost}photos/${id}`, formData, { headers });
+  }
+
+  addPricelists(id: number, pricelists: PriceList[]): Observable<number> {
+    return this.http.post<number>(`${environment.apiHost}accommodations/price/${id}`, pricelists);
+  }
+
+  updatePricelists(id: number, pricelists: PriceList[]): Observable<number> {
+    return this.http.put<number>(`${environment.apiHost}accommodations/price/${id}`, pricelists);
   }
 
 }
