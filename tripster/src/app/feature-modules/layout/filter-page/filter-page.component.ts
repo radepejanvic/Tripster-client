@@ -20,6 +20,13 @@ import { Amenity } from 'src/app/shared/enum/amenity.enum';
 	styleUrl: './filter-page.component.css',
 })
 export class FilterPageComponent implements OnInit {
+	filterTitle: string = 'Your search';
+	numberOfResults: string = '120';
+	title: string = 'Copenhagen, Dec 9-12, 2 guests, 1 room';
+
+	accommodations: AccommodationInfoCard[];
+	accommodationRequests: AccommodationRequest[];
+
 	constructor(private service: FilterService, private fb: FormBuilder) {}
 
 	mainFormGroup: FormGroup;
@@ -32,7 +39,7 @@ export class FilterPageComponent implements OnInit {
 		// 	});
 		this.mainFormGroup = this.fb.group({
 			basicFilter: this.fb.group({
-				destination: new FormControl(null),
+				destination: new FormControl(''),
 				checkIn: new FormControl('', Validators.required),
 				checkOut: new FormControl('', Validators.required),
 				numberOfGuest: new FormControl('', Validators.min(0)),
@@ -40,8 +47,8 @@ export class FilterPageComponent implements OnInit {
 			additionalFilter: this.fb.group({
 				amenities: [],
 				type: [],
-				minPrice: new FormControl(''),
-				maxPrice: new FormControl(''),
+				minPrice: new FormControl(0),
+				maxPrice: new FormControl(0),
 			}),
 		});
 	}
@@ -55,19 +62,10 @@ export class FilterPageComponent implements OnInit {
 
 	sendRequest() {
 		if (this.mainFormGroup.get('basicFilter')?.valid) {
-			const additionalFilter =
-				this.mainFormGroup.get('additionalFilter')?.value;
-			const basicFilter = this.mainFormGroup.get('basicFilter')?.value;
-			const params = new HttpParams()
-				.set('city', basicFilter.destination)
-				.set('start', new Date(basicFilter.checkIn).getTime())
-				.set('end', new Date(basicFilter.checkOut).getTime())
-				.set('numOfGuests', basicFilter.numberOfGuest)
-				.set('amenities', additionalFilter.amenities)
-				.set('minPrice', additionalFilter.minPrice)
-				.set('maxPrice', additionalFilter.maxPrice)
-				.set('type', additionalFilter.type);
+			let params = this.getParams();
+
 			console.log(params.toString());
+
 			this.service
 				.getAccommodationByFiltersForGuest(params)
 				.subscribe((value: AccommodationInfoCard[]) => {
@@ -76,10 +74,26 @@ export class FilterPageComponent implements OnInit {
 		}
 	}
 
-	filterTitle: string = 'Your search';
-	numberOfResults: string = '120';
-	title: string = 'Copenhagen, Dec 9-12, 2 guests, 1 room';
+	getParams(): HttpParams {
+		const additionalFilter =
+			this.mainFormGroup.get('additionalFilter')?.value;
+		const basicFilter = this.mainFormGroup.get('basicFilter')?.value;
+		const params = new HttpParams()
+			.set('start', new Date(basicFilter.checkIn).getTime())
+			.set('end', new Date(basicFilter.checkOut).getTime())
+			.set('amenities', additionalFilter.amenities)
+			.set('minPrice', additionalFilter.minPrice)
+			.set('type', additionalFilter.type);
+		if (basicFilter.destination != '') {
+			params.set('city', basicFilter.destination);
+		}
+		if (basicFilter.numberOfGuest != '') {
+			params.set('numOfGuests', basicFilter.numberOfGuest);
+		}
+		if (additionalFilter.maxPrice != 0) {
+			params.set('maxPrice', additionalFilter.maxPrice);
+		}
 
-	accommodations: AccommodationInfoCard[];
-	accommodationRequests: AccommodationRequest[];
+		return params;
+	}
 }
