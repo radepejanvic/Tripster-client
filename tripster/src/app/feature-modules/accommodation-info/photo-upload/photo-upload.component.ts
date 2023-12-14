@@ -8,11 +8,10 @@ import { AccommodationInfoService } from '../accommodation-info.service';
   styleUrl: './photo-upload.component.css'
 })
 export class PhotoUploadComponent {
-  submitted: boolean = false;
   files: File[] = [];
   urls: string[] = [];
 
-  constructor(private accommodationService: AccommodationInfoService){}
+  constructor(private accommodationService: AccommodationInfoService) { }
 
   onDrop(event: NgxDropzoneChangeEvent): void {
     if (event.addedFiles) {
@@ -50,7 +49,7 @@ export class PhotoUploadComponent {
 
   uploadPhotos(): void {
     const id = sessionStorage.getItem('newAccommodation');
-    if(id != null && this.files.length <= 10 && this.files.length >= 5 ) {
+    if (id != null && this.files.length <= 10 && this.files.length >= 5) {
       this.accommodationService.uploadPhotos(+id, this.files).subscribe({
         next: (response: number) => {
           console.log(`Uploaded ${response} photos to accommodation with id: ${id}`);

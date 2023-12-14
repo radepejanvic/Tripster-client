@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AccommodationInfoService } from '../accommodation-info.service';
 import { Accommodation } from '../model/accommodation.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-photos',
@@ -9,16 +10,21 @@ import { Accommodation } from '../model/accommodation.model';
 })
 export class PhotosComponent implements OnInit {
 
-  @Input() id: number | undefined;
+  id!: number;
 
   choice: string = "overview";
   accommodation!: Accommodation;
   photos!: string[];
 
-  constructor(private service: AccommodationInfoService) { }
+  constructor(private route: ActivatedRoute, private service: AccommodationInfoService) { }
 
   ngOnInit(): void {
-    this.service.getAccommodation(12).subscribe({
+
+    this.route.params.subscribe((params) => {
+      this.id = +params['id'];
+    })
+
+    this.service.getAccommodation(this.id).subscribe({
       next: (result: Accommodation) => {
         this.accommodation = result;
       },
@@ -27,7 +33,7 @@ export class PhotosComponent implements OnInit {
       }
     });
 
-    this.service.getPhotos(12).subscribe({
+    this.service.getPhotos(this.id).subscribe({
       next: (result: string[]) => {
         this.photos = result;
       },
@@ -35,15 +41,8 @@ export class PhotosComponent implements OnInit {
         console.error('Error fetching photos', err);
       }
     })
-
-  }
-
-  onClick(choice: string): void {
-    this.choice = choice;
-  }
-
-  justClick() {
-    console.log('Neki tekst');
   }
 
 }
+
+

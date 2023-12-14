@@ -23,7 +23,7 @@
         <input
           id="standard"
           type="number"
-          [(ngModel)]="standard"
+          [(ngModel)]="price"
           placeholder="Standard"
         />
       </div>
@@ -69,16 +69,16 @@
           <th>Holiday price</th>
         </tr>
         <tr
-          *ngFor="let price of priceLists; index as i"
+          *ngFor="let list of priceLists; index as i"
           (click)="selectRow(i)"
           [class.selected]="selectedRow === i"
         >
           <td class="id">{{ i + 1 }}</td>
-          <td>{{ formatDate(price.start) }}</td>
-          <td>{{ formatDate(price.end) }}</td>
-          <td>{{ price.standard }} €</td>
-          <td>{{ price.weekend }} €</td>
-          <td>{{ price.holiday }} €</td>
+          <td>{{ formatDate(list.start) }}</td>
+          <td>{{ formatDate(list.end) }}</td>
+          <td>{{ list.price }} €</td>
+          <td>{{ list.weekend }} €</td>
+          <td>{{ list.holiday }} €</td>
         </tr>
       </table>
     </div>
@@ -97,9 +97,8 @@
 </h1>
 
 <div id="add-new">
-  <button class="btn btn-outline-dark" type="submit">
-    <!-- (click)="addAccommodation()" -->
+  <button class="btn btn-outline-dark" type="submit" (click)="postPriceLists()">
     Add pricelists
   </button>
-  <button id="reset">Remove all pricelists</button>
+  <button id="reset" (click)="putPriceLists()">Remove all pricelists</button>
 </div>

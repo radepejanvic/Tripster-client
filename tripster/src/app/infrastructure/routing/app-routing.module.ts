@@ -10,9 +10,10 @@ import { AccommodationCrudComponent } from 'src/app/feature-modules/accommodatio
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },//default route
   { path: 'home', component: HomeComponent },
-  { path: 'accommodationInfo', component: PhotosComponent },
+  { path: 'accommodationInfo/:id', component: PhotosComponent },
   { path: 'login', component: LoginComponent },
   { path: 'addAccommodation', component: AccommodationCrudComponent },
+  { path: 'updateAccommodation/:id', component: AccommodationCrudComponent },
   { path: 'updateAccount', component: UserAccountUpdateComponent, canActivate: [AuthGuard], data: { role: ['ROLE_HOST', 'ROLE_GUEST'] } }
 ];
 
