@@ -3,7 +3,6 @@ export interface AccommodationInfoCard {
 	name: string;
 	address: string;
 	shortDescription: string;
-	amenities: string[];
 	price: number;
 	pricePerNight: number;
 	numOfGuests: number;
