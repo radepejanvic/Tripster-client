@@ -9,20 +9,30 @@ import { FilterPageComponent } from 'src/app/feature-modules/layout/filter-page/
 import { AccommodationCrudComponent } from 'src/app/feature-modules/accommodation-info/accommodation-crud/accommodation-crud.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },//default route
-  { path: 'home', component: HomeComponent },
-  { path: 'accommodationInfo/:id', component: PhotosComponent },
-  {path:'login',component:LoginComponent},
-  { path: 'updateAccount', component:UserAccountUpdateComponent,canActivate:[AuthGuard], data: {role: ['ROLE_HOST','ROLE_GUEST']}},
-  { path: 'filterPage', component:FilterPageComponent }
-  { path: 'accommodationInfo', component: PhotosComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'addAccommodation', component: AccommodationCrudComponent },
-  { path: 'updateAccount', component: UserAccountUpdateComponent, canActivate: [AuthGuard], data: { role: ['ROLE_HOST', 'ROLE_GUEST'] } }
+	{ path: '', redirectTo: 'home', pathMatch: 'full' }, //default route
+	{ path: 'home', component: HomeComponent },
+	{ path: 'accommodationInfo/:id', component: PhotosComponent },
+	{ path: 'login', component: LoginComponent },
+	{
+		path: 'updateAccount',
+		component: UserAccountUpdateComponent,
+		canActivate: [AuthGuard],
+		data: { role: ['ROLE_HOST', 'ROLE_GUEST'] },
+	},
+	{ path: 'filterPage', component: FilterPageComponent },
+	{ path: 'accommodationInfo', component: PhotosComponent },
+	{ path: 'login', component: LoginComponent },
+	{ path: 'addAccommodation', component: AccommodationCrudComponent },
+	{
+		path: 'updateAccount',
+		component: UserAccountUpdateComponent,
+		canActivate: [AuthGuard],
+		data: { role: ['ROLE_HOST', 'ROLE_GUEST'] },
+	},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forRoot(routes)],
+	exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
