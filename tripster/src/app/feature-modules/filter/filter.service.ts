@@ -21,10 +21,11 @@ export class FilterService {
 	}
 
 	getAccommodationRequestByFiltersForAdmin(
-		some: any
+		params: HttpParams
 	): Observable<AccommodationRequest[]> {
 		return this.http.get<AccommodationRequest[]>(
-			environment.apiHost + 'accommodations/admin'
+			environment.apiHost + 'accommodations/admin',
+			{ params }
 		);
 	}
 }
