@@ -3,6 +3,6 @@ export interface AccommodationRequest {
 	name: string;
 	address: string;
 	shortDescription: string;
-	timestap: string;
-	status: number;
+	timeStamp: number;
+	status: string;
 }
