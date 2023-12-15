@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Accommodation, PriceList } from './model/accommodation.model';
+import { Accommodation, PriceList, PriceListAdapter } from './model/accommodation.model';
 import { Observable, map } from 'rxjs';
 import { environment } from 'src/env/env';
 
@@ -56,6 +56,10 @@ export class AccommodationInfoService {
 
   updatePricelists(id: number, pricelists: PriceList[]): Observable<number> {
     return this.http.put<number>(`${environment.apiHost}accommodations/price/${id}`, pricelists);
+  }
+
+  getPricelists(id: number): Observable<PriceListAdapter[]> {
+    return this.http.get<PriceListAdapter[]>(`${environment.apiHost}accommodations/pricelists/${id}`);
   }
 
 }

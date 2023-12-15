@@ -30,3 +30,11 @@ export interface PriceList {
     weekend?: number;
     holiday?: number;
 }
+
+
+export interface PriceListAdapter {
+    accommodationId?: number,
+    start: number[];
+    end: number[];
+    price: number;
+}

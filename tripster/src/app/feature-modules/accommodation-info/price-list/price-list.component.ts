@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { PriceList } from '../model/accommodation.model';
+import { PriceList, PriceListAdapter } from '../model/accommodation.model';
 import { AccommodationInfoService } from '../accommodation-info.service';
 
 @Component({
@@ -86,9 +86,7 @@ export class PriceListComponent {
 
   putPriceLists(): void {
 
-    console.log('Usao');
-
-    const id = sessionStorage.getItem('newAccommodation');
+    const id = sessionStorage.getItem('updatedAccommodation');
     if (!id) { return; }
 
     this.accommodationService.updatePricelists(+id, this.priceLists).subscribe({
@@ -101,6 +99,59 @@ export class PriceListComponent {
       }
     })
 
+  }
+
+  getPricelists(): void {
+    const id = sessionStorage.getItem('updatedAccommodation');
+    if (!id) { return; }
+
+    this.accommodationService.getPricelists(+id).subscribe({
+      next: (response: PriceListAdapter[]) => {
+        console.log(`Retrieved ${response.length} different pricelists!`);
+
+        this.priceLists = this.adapterToPricelist(response);
+      },
+      error: (err: any) => {
+        console.error('Get pricelists failed.', err);
+      }
+    })
+  }
+
+
+  adapterToPricelist(adapters: PriceListAdapter[]): PriceList[] {
+    return adapters.map((adapter) => {
+      const startDate = this.arrayToDate(adapter.start);
+      const endDate = this.arrayToDate(adapter.end);
+
+      if (!startDate || !endDate) {
+        return {
+          accommodationId: adapter.accommodationId,
+          start: new Date(),
+          end: new Date(),
+          price: adapter.price,
+        };
+      }
+
+      return {
+        accommodationId: adapter.accommodationId,
+        start: startDate,
+        end: endDate,
+        price: adapter.price,
+      };
+    });
+  }
+
+  arrayToDate(dateArray: number[]): Date | null {
+    if (dateArray.length !== 3) {
+      console.error('Invalid date array format. Expecting [year, month, day].');
+      return null;
+    }
+
+    const [year, month, day] = dateArray;
+
+    const date = new Date(year, month - 1, day);
+
+    return date;
   }
 
 }
