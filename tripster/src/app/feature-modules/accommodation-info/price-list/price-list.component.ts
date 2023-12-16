@@ -1,5 +1,5 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { PriceList } from '../model/accommodation.model';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { PriceList, PriceListAdapter } from '../model/accommodation.model';
 import { AccommodationInfoService } from '../accommodation-info.service';
 
 @Component({
@@ -7,10 +7,11 @@ import { AccommodationInfoService } from '../accommodation-info.service';
   templateUrl: './price-list.component.html',
   styleUrl: './price-list.component.css'
 })
-export class PriceListComponent {
+export class PriceListComponent implements OnInit {
 
   @ViewChild('tableScroll') tableScroll!: ElementRef;
 
+  id!: number;
   start: Date = new Date();
   end: Date = new Date();
   price!: number;
@@ -20,7 +21,16 @@ export class PriceListComponent {
 
   priceLists: PriceList[] = [];
 
+  activePricelists: PriceList[] = [];
+
+  mode = 'add';
+
   constructor(private accommodationService: AccommodationInfoService) { }
+
+  ngOnInit(): void {
+    this.setIdAndMode();
+    this.getPricelists();
+  }
 
   formatDate(date: Date): string {
     const day = date.getDate();
@@ -69,13 +79,12 @@ export class PriceListComponent {
 
   postPriceLists(): void {
 
-    const id = sessionStorage.getItem('newAccommodation');
-    if (!id) { return; }
-
-    this.accommodationService.addPricelists(+id, this.priceLists).subscribe({
+    this.accommodationService.addPricelists(this.id, this.priceLists).subscribe({
       next: (response: number) => {
         console.log(`New calendar has ${response} days!`);
         this.priceLists = [];
+        this.getPricelists();
+        this.mode = 'update';
       },
       error: (err: any) => {
         console.error('Post pricelists failed.', err);
@@ -86,21 +95,83 @@ export class PriceListComponent {
 
   putPriceLists(): void {
 
-    console.log('Usao');
-
-    const id = sessionStorage.getItem('newAccommodation');
-    if (!id) { return; }
-
-    this.accommodationService.updatePricelists(+id, this.priceLists).subscribe({
+    this.accommodationService.updatePricelists(this.id, this.priceLists).subscribe({
       next: (response: number) => {
         console.log(`Updated calendar has ${response} days!`);
         this.priceLists = [];
+        this.getPricelists();
       },
       error: (err: any) => {
         console.error('Put pricelists failed.', err);
       }
     })
 
+  }
+
+  getPricelists(): void {
+
+    this.accommodationService.getPricelists(this.id).subscribe({
+      next: (response: PriceListAdapter[]) => {
+        console.log(`Retrieved ${response.length} different pricelists!`);
+
+        this.activePricelists = this.adapterToPricelist(response);
+      },
+      error: (err: any) => {
+        console.error('Get pricelists failed.', err);
+      }
+    })
+  }
+
+
+  adapterToPricelist(adapters: PriceListAdapter[]): PriceList[] {
+    return adapters.map((adapter) => {
+      const startDate = this.arrayToDate(adapter.start);
+      const endDate = this.arrayToDate(adapter.end);
+
+      if (!startDate || !endDate) {
+        return {
+          accommodationId: adapter.accommodationId,
+          start: new Date(),
+          end: new Date(),
+          price: adapter.price,
+        };
+      }
+
+      return {
+        accommodationId: adapter.accommodationId,
+        start: startDate,
+        end: endDate,
+        price: adapter.price,
+      };
+    });
+  }
+
+  arrayToDate(dateArray: number[]): Date | null {
+    if (dateArray.length !== 3) {
+      console.error('Invalid date array format. Expecting [year, month, day].');
+      return null;
+    }
+
+    const [year, month, day] = dateArray;
+
+    const date = new Date(year, month - 1, day);
+
+    return date;
+  }
+
+  setIdAndMode() {
+    let id = sessionStorage.getItem('updatedAccommodation');
+    if (id && !isNaN(+id)) {
+      this.id = +id;
+      this.mode = 'update';
+      return;
+    }
+
+    id = sessionStorage.getItem('newAccommodation');
+    if (id && !isNaN(+id)) {
+      this.id = +id;
+      // this.mode = 'add';
+    }
   }
 
 }

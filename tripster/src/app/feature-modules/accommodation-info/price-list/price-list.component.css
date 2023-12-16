@@ -144,3 +144,11 @@ button {
     border-color: red;
     background-color: red;
 }
+
+.active-pricelists {
+    width: 100%;
+}
+
+tr:hover {
+    background-color: pink;
+}

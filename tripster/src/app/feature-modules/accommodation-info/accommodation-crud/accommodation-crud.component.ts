@@ -14,6 +14,8 @@ export class AccommodationCrudComponent implements OnInit {
   accommodation!: Accommodation;
   amenities: string[] = [];
   checkedAmenities: boolean[] = [];
+  mode: string = 'add';
+
 
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -46,6 +48,7 @@ export class AccommodationCrudComponent implements OnInit {
     this.initializeAmenities();
 
     if (this.id) {
+      this.mode = 'update';
       this.accommodationService.getAccommodation(this.id).subscribe({
         next: (response: Accommodation) => {
           this.accommodation = response;
@@ -144,6 +147,7 @@ export class AccommodationCrudComponent implements OnInit {
       next: (response: Accommodation) => {
         console.log(response);
         sessionStorage.setItem('newAccommodation', response.id ? response.id.toString() : '0');
+        this.mode = 'main-form';
       },
       error: (err: any) => {
         console.error('Failed to register new accommodation.', err);
@@ -206,6 +210,10 @@ export class AccommodationCrudComponent implements OnInit {
     }
 
     return null;
+  }
+
+  handleModeChange(mode: string) {
+    this.mode = mode;
   }
 
   isValidName(): boolean {
