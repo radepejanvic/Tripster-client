@@ -14,6 +14,7 @@ import {
 import { HttpParams } from '@angular/common/http';
 import { Amenity } from 'src/app/shared/enum/amenity.enum';
 import { AuthorizationService } from '../../authorization/authorization.service';
+import { UtilService } from 'src/app/shared/util.service';
 
 @Component({
 	selector: 'app-filter-page',
@@ -31,7 +32,8 @@ export class FilterPageComponent implements OnInit {
 	constructor(
 		private service: FilterService,
 		private fb: FormBuilder,
-		private authService: AuthorizationService
+		private authService: AuthorizationService,
+		private util: UtilService
 	) {
 		this.accommodations = [];
 		this.accommodationRequests = [];
@@ -94,6 +96,10 @@ export class FilterPageComponent implements OnInit {
 					.getAccommodationByFiltersForGuest(this.getParams())
 					.subscribe((value: AccommodationInfoCard[]) => {
 						this.accommodations = value;
+
+						value.map((item) => {
+							item.url = this.util.base64ToDataURL(item.photo);
+						});
 					});
 			}
 		}
