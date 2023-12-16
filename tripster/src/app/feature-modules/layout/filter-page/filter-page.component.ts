@@ -51,6 +51,9 @@ export class FilterPageComponent implements OnInit {
 				.getAccommodationRequestByFiltersForAdmin(new HttpParams())
 				.subscribe((value: AccommodationRequest[]) => {
 					this.accommodationRequests = value;
+					value.map((item) => {
+						item.url = this.util.base64ToDataURL(item.photo);
+					});
 				});
 		}
 
@@ -89,6 +92,9 @@ export class FilterPageComponent implements OnInit {
 				.getAccommodationRequestByFiltersForAdmin(this.getAdminParams())
 				.subscribe((value: AccommodationRequest[]) => {
 					this.accommodationRequests = value;
+					value.map((item) => {
+						item.url = this.util.base64ToDataURL(item.photo);
+					});
 				});
 		} else {
 			if (this.mainFormGroup.get('basicFilter')?.valid) {

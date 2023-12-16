@@ -22,7 +22,10 @@
 
 		<div class="col-md-3">
 			<div class="card-body">
-				<app-rating></app-rating>
+				<app-rating
+					[rating]="accommodation.rating"
+					[reviews]="accommodation.numOfReviews"
+				></app-rating>
 				<div class="price-info">
 					<p class="card-text text-end price">
 						{{ accommodation.price }}€
