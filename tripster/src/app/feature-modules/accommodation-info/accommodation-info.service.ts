@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Accommodation, PriceList, PriceListAdapter } from './model/accommodation.model';
 import { Observable, map } from 'rxjs';
 import { environment } from 'src/env/env';
+import { UtilService } from 'src/app/shared/util.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccommodationInfoService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private util: UtilService) { }
 
   getAccommodation(id: number): Observable<Accommodation> {
     return this.http.get<Accommodation>(`${environment.apiHost}accommodations/${id}`);
@@ -18,15 +19,10 @@ export class AccommodationInfoService {
   getPhotos(id: number): Observable<string[]> {
     return this.http.get<string[]>(`${environment.apiHost}photos/${id}`).pipe(
       map((base64Strings: string[]) => {
-        const dataUrls = base64Strings.map(base64 => this.getDataUrl(base64));
+        const dataUrls = base64Strings.map(base64 => this.util.base64ToDataURL(base64));
         return dataUrls;
       })
     );
-  }
-
-  private getDataUrl(base64String: string): string {
-    const contentType = 'image/jpeg';
-    return `data:${contentType};base64,${base64String}`;
   }
 
   addAccommodation(accommodation: Accommodation): Observable<Accommodation> {
