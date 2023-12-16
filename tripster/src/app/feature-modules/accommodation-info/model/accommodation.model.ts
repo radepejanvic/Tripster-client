@@ -37,4 +37,6 @@ export interface PriceListAdapter {
     start: number[];
     end: number[];
     price: number;
+    weekend?: number;
+    holiday?: number;
 }

@@ -1,3 +1,28 @@
+<div *ngIf="activePricelists.length != 0" #tableScroll id="table-scroll" class="active-pricelists">
+  <h1> Accommodation availability and prices. </h1>
+  <table>
+    <tr id="table-header">
+      <th class="id">Id</th>
+      <th>Start date</th>
+      <th>End date</th>
+      <th>Standard price</th>
+      <th>Weekend price</th>
+      <th>Holiday price</th>
+    </tr>
+    <tr
+      *ngFor="let list of activePricelists; index as i"
+    >
+      <td class="id">{{ i + 1 }}</td>
+      <td>{{ formatDate(list.start) }}</td>
+      <td>{{ formatDate(list.end) }}</td>
+      <td>{{ list.price }} €</td>
+      <td>{{ list.weekend }} €</td>
+      <td>{{ list.holiday }} €</td>
+    </tr>
+  </table>
+</div>
+
+
 <div id="#price-list" class="wrapper">
   <div id="add-price-list">
     <select id="policy">

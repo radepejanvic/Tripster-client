@@ -20,6 +20,8 @@ export class PriceListComponent {
 
   priceLists: PriceList[] = [];
 
+  activePricelists: PriceList[] = [];
+
   constructor(private accommodationService: AccommodationInfoService) { }
 
   formatDate(date: Date): string {
@@ -109,7 +111,7 @@ export class PriceListComponent {
       next: (response: PriceListAdapter[]) => {
         console.log(`Retrieved ${response.length} different pricelists!`);
 
-        this.priceLists = this.adapterToPricelist(response);
+        this.activePricelists = this.adapterToPricelist(response);
       },
       error: (err: any) => {
         console.error('Get pricelists failed.', err);
