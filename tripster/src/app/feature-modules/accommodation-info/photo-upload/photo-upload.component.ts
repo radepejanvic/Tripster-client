@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgxDropzoneChangeEvent } from 'ngx-dropzone';
 import { AccommodationInfoService } from '../accommodation-info.service';
 
@@ -8,6 +8,8 @@ import { AccommodationInfoService } from '../accommodation-info.service';
   styleUrl: './photo-upload.component.css'
 })
 export class PhotoUploadComponent {
+  @Output() mode: EventEmitter<string> = new EventEmitter<string>();
+
   files: File[] = [];
   urls: string[] = [];
 
@@ -55,6 +57,7 @@ export class PhotoUploadComponent {
           console.log(`Uploaded ${response} photos to accommodation with id: ${id}`);
           this.files = [];
           this.urls = [];
+          this.mode.emit('photo-upload');
         },
         error: (err: any) => {
           console.error('Failed to upload photos', err);
