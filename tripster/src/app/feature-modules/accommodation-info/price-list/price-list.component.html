@@ -124,17 +124,18 @@
 </h1>
 
 <div id="add-new">
-  <button class="btn btn-outline-dark" type="submit" (click)="postPriceLists()">
+  <button *ngIf="mode == 'add'" class="btn btn-outline-dark" type="submit" (click)="postPriceLists()">
     Add pricelists
   </button>
 
-  <button class="btn btn-outline-dark" type="submit" (click)="putPriceLists()">
+  <button *ngIf="mode == 'update'" class="btn btn-outline-dark" type="submit" (click)="putPriceLists()">
     Update pricelists
   </button>
 
-  <button class="btn btn-outline-dark" type="submit" (click)="getPricelists()">
+  <!-- <button class="btn btn-outline-dark" type="submit" (click)="getPricelists()">
     Get all pricelists
-  </button>
+  </button> -->
 
-  <button id="reset" (click)="putPriceLists()">Remove all pricelists</button>
+  <!-- <button id="reset" (click)="putPriceLists()">Remove all pricelists</button> -->
+  <button id="reset">Finish</button>
 </div>

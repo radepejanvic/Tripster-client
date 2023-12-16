@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { PriceList, PriceListAdapter } from '../model/accommodation.model';
 import { AccommodationInfoService } from '../accommodation-info.service';
 
@@ -7,10 +7,11 @@ import { AccommodationInfoService } from '../accommodation-info.service';
   templateUrl: './price-list.component.html',
   styleUrl: './price-list.component.css'
 })
-export class PriceListComponent {
+export class PriceListComponent implements OnInit {
 
   @ViewChild('tableScroll') tableScroll!: ElementRef;
 
+  id!: number;
   start: Date = new Date();
   end: Date = new Date();
   price!: number;
@@ -22,7 +23,14 @@ export class PriceListComponent {
 
   activePricelists: PriceList[] = [];
 
+  mode = 'add';
+
   constructor(private accommodationService: AccommodationInfoService) { }
+
+  ngOnInit(): void {
+    this.setIdAndMode();
+    this.getPricelists();
+  }
 
   formatDate(date: Date): string {
     const day = date.getDate();
@@ -71,13 +79,12 @@ export class PriceListComponent {
 
   postPriceLists(): void {
 
-    const id = sessionStorage.getItem('newAccommodation');
-    if (!id) { return; }
-
-    this.accommodationService.addPricelists(+id, this.priceLists).subscribe({
+    this.accommodationService.addPricelists(this.id, this.priceLists).subscribe({
       next: (response: number) => {
         console.log(`New calendar has ${response} days!`);
         this.priceLists = [];
+        this.getPricelists();
+        this.mode = 'update';
       },
       error: (err: any) => {
         console.error('Post pricelists failed.', err);
@@ -88,13 +95,11 @@ export class PriceListComponent {
 
   putPriceLists(): void {
 
-    const id = sessionStorage.getItem('updatedAccommodation');
-    if (!id) { return; }
-
-    this.accommodationService.updatePricelists(+id, this.priceLists).subscribe({
+    this.accommodationService.updatePricelists(this.id, this.priceLists).subscribe({
       next: (response: number) => {
         console.log(`Updated calendar has ${response} days!`);
         this.priceLists = [];
+        this.getPricelists();
       },
       error: (err: any) => {
         console.error('Put pricelists failed.', err);
@@ -104,10 +109,8 @@ export class PriceListComponent {
   }
 
   getPricelists(): void {
-    const id = sessionStorage.getItem('updatedAccommodation');
-    if (!id) { return; }
 
-    this.accommodationService.getPricelists(+id).subscribe({
+    this.accommodationService.getPricelists(this.id).subscribe({
       next: (response: PriceListAdapter[]) => {
         console.log(`Retrieved ${response.length} different pricelists!`);
 
@@ -154,6 +157,21 @@ export class PriceListComponent {
     const date = new Date(year, month - 1, day);
 
     return date;
+  }
+
+  setIdAndMode() {
+    let id = sessionStorage.getItem('updatedAccommodation');
+    if (id && !isNaN(+id)) {
+      this.id = +id;
+      this.mode = 'update';
+      return;
+    }
+
+    id = sessionStorage.getItem('newAccommodation');
+    if (id && !isNaN(+id)) {
+      this.id = +id;
+      // this.mode = 'add';
+    }
   }
 
 }
