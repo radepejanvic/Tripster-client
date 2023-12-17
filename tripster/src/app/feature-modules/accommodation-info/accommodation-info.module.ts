@@ -20,34 +20,35 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { MapComponent } from './map/map.component';
 
 @NgModule({
-  declarations: [
-    PhotosComponent,
-    RatingComponent,
-    OverviewComponent,
-    AmenityComponent,
-    ReviewComponent,
-    RatingStatsComponent,
-    ReviewsComponent,
-    RentComponent,
-    AccommodationCrudComponent,
-    PhotoUploadComponent,
-    PriceListComponent,
-    MapComponent
-  ],
-  imports: [
-    CommonModule,
-    MaterialModule,
-    RouterModule,
-    NgxDropzoneModule,
-    BrowserModule,
-    FormsModule,
-    GoogleMapsModule,
-    ReactiveFormsModule
-  ],
-  exports: [
-    PhotosComponent,
-    AccommodationCrudComponent,
-    OverviewComponent
-  ]
+	declarations: [
+		PhotosComponent,
+		RatingComponent,
+		OverviewComponent,
+		AmenityComponent,
+		ReviewComponent,
+		RatingStatsComponent,
+		ReviewsComponent,
+		RentComponent,
+		AccommodationCrudComponent,
+		PhotoUploadComponent,
+		PriceListComponent,
+		MapComponent,
+	],
+	imports: [
+		CommonModule,
+		MaterialModule,
+		RouterModule,
+		NgxDropzoneModule,
+		BrowserModule,
+		FormsModule,
+		GoogleMapsModule,
+		ReactiveFormsModule,
+	],
+	exports: [
+		PhotosComponent,
+		RatingComponent,
+		AccommodationCrudComponent,
+		OverviewComponent,
+	],
 })
-export class AccommodationInfoModule { }
+export class AccommodationInfoModule {}

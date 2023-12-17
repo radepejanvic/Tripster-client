@@ -1,0 +1,8 @@
+<label class="mb-2 title">Time filters</label>
+<div class="mb-3">
+    <div *ngFor="let time of timeFilters" class="mb-1 amenities" >
+            <label class="check-label">
+                <input type="checkbox" [value]="time" class="check-box" >{{ time }}
+            </label>
+    </div>
+</div>
