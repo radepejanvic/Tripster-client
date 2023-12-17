@@ -5,7 +5,7 @@
             <p>{{review.reviewerName}} {{review.reviewerSurname}}</p>
         </div>
 
-        <app-rating></app-rating>
+        <app-rating [rate]="review.rate"></app-rating>
     </div>
     <p> {{review.comment}} </p>
     <hr/>
