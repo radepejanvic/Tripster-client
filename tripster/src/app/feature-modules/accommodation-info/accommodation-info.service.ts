@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Accommodation, PriceList, PriceListAdapter } from './model/accommodation.model';
+import { Accommodation, PriceList, PriceListAdapter, Review } from './model/accommodation.model';
 import { Observable, map } from 'rxjs';
 import { environment } from 'src/env/env';
 import { UtilService } from 'src/app/shared/util.service';
@@ -56,6 +56,10 @@ export class AccommodationInfoService {
 
   getPricelists(id: number): Observable<PriceListAdapter[]> {
     return this.http.get<PriceListAdapter[]>(`${environment.apiHost}accommodations/pricelists/${id}`);
+  }
+
+  getReviews(id: number): Observable<Review[]> {
+    return this.http.get<Review[]>(`${environment.apiHost}accommodations/reviews/${id}`);
   }
 
 }

@@ -1,9 +1,10 @@
 <div id="rating">
-	<div class="review-stat">
-		<h3>Excellent</h3>
-		<h4>{{ reviews }} reviews</h4>
-	</div>
-	<div class="rate">
-		<p>{{ rating }}</p>
-	</div>
-</div>
+    <div class="review-stat">
+        <h3>{{getRateName()}}</h3>
+        <h4 *ngIf="reviews!=undefined">{{reviews}} reviews</h4>
+    </div>
+    <div class="rate">
+        <p> {{rating}} </p>
+    </div>
+ </div>
+

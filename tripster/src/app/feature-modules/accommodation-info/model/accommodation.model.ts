@@ -40,3 +40,15 @@ export interface PriceListAdapter {
     weekend?: number;
     holiday?: number;
 }
+
+export interface Review {
+    id?: number,
+    title: string,
+    rate: number,
+    comment: string,
+    status: string,
+    reviewerId: number,
+    reviewerName: string,
+    reviewerSurname: string,
+    reviewedId: number;
+}
