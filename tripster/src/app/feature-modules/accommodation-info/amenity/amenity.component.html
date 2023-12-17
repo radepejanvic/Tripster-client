@@ -1,4 +1,4 @@
 <div id="amenity" [class.checked]="checked">
-   <img src="./assets/amenities/wifi.svg"/>
-   <p> {{amenity}} </p>
+   <img *ngIf="amenity !== undefined" src="{{ amenities[amenity][1] }}"/>
+   <p *ngIf="amenity !== undefined">{{ amenities[amenity][0] }}</p>
 </div>
