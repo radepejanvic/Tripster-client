@@ -6,8 +6,8 @@ import { Component, Input } from '@angular/core';
   styleUrl: './rating.component.css',
 })
 export class RatingComponent {
-  @Input() rating!: number;
-  @Input() reviews!: number;
+  @Input() rating: number;
+  @Input() reviews: number;
 
   getRateName(): string {
     switch (Math.ceil(this.rating)) {
