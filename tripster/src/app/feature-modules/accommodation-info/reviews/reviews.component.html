@@ -2,11 +2,7 @@
 
     <div id="review-list">
         <h1> Reviews </h1>
-        <app-review></app-review>
-        <app-review></app-review>
-        <app-review></app-review>
-        <app-review></app-review>
-        <app-review></app-review>
+        <app-review *ngFor="let review of reviews" [review]="review"></app-review>
     </div>
 
     <div>
