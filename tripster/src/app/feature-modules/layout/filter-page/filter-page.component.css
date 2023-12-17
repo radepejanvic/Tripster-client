@@ -1,0 +1,25 @@
+
+.bi-arrow-left-square{
+    font-size: 40px;
+}
+
+.container p{
+    margin-top: 12px;
+}
+
+.filter{
+    height: fit-content;
+    min-height: 75vh;
+    background-color: #F0F0F0;
+}
+
+.searchResults{
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.title{
+    margin-top: 12px;
+    font-size: 24px;
+    font-weight: 600;
+}

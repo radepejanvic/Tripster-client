@@ -12,7 +12,6 @@ import { ActivatedRoute } from '@angular/router';
 export class AccommodationCrudComponent implements OnInit {
   id?: number;
   accommodation!: Accommodation;
-  amenities: string[] = [];
   checkedAmenities: boolean[] = [];
   mode: string = 'add';
 
@@ -54,7 +53,7 @@ export class AccommodationCrudComponent implements OnInit {
           this.accommodation = response;
           this.mapAccommodationToForm();
           for (let amenity of this.accommodation.amenities) {
-            this.checkedAmenities[amenity] = true;
+            this.checkedAmenities[amenity - 1] = true;
           }
           console.log(this.checkedAmenities);
         },
@@ -66,10 +65,7 @@ export class AccommodationCrudComponent implements OnInit {
   }
 
   initializeAmenities() {
-    for (let i = 0; i < 12; i++) {
-      this.amenities.push("Some amenity");
-    }
-    this.checkedAmenities = new Array(this.amenities.length).fill(false);
+    this.checkedAmenities = new Array(12).fill(false);
   }
 
   mapAccommodationToForm(): void {
@@ -178,7 +174,7 @@ export class AccommodationCrudComponent implements OnInit {
     const checked: number[] = [];
     for (let i = 0; i < this.checkedAmenities.length; i++) {
       if (this.checkedAmenities[i]) {
-        checked.push(i);
+        checked.push(i + 1);
       }
     }
     return checked;

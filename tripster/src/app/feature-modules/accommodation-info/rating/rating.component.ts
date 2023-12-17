@@ -3,15 +3,14 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-rating',
   templateUrl: './rating.component.html',
-  styleUrl: './rating.component.css'
+  styleUrl: './rating.component.css',
 })
 export class RatingComponent {
-
-  @Input() rate!: number;
+  @Input() rating!: number;
   @Input() reviews!: number;
 
   getRateName(): string {
-    switch (Math.ceil(this.rate)) {
+    switch (Math.ceil(this.rating)) {
       case 1: return 'Bad';
       case 2: return 'Poor';
       case 3: return 'Average';

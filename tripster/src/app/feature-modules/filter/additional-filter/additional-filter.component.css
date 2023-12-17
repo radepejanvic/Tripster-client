@@ -1,0 +1,16 @@
+.check-box{
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    margin-right: 5px;
+    vertical-align: top;
+}
+
+.title{
+    font-size: 20px;
+    font-weight: 600;
+}
+.check-label{
+    font-size: medium;
+    font-weight: 500;
+}

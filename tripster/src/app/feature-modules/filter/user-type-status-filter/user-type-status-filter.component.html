@@ -1,0 +1,16 @@
+<label class="mb-2 title">User type</label>
+<div class="mb-3">
+    <div *ngFor="let type of userTypes" class="mb-1 amenities" >
+            <label class="check-label">
+                <input type="checkbox" [value]="type" class="check-box" >{{ type }}
+            </label>
+    </div>
+</div>
+<label class="mb-2 title">User status</label>
+<div class="mb-3">
+    <div *ngFor="let status of userStatus" class="mb-1 amenities" >
+            <label class="check-label">
+                <input type="checkbox" [value]="status" class="check-box" >{{ status }}
+            </label>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+<label class="mb-2 title">Guest rating</label>
+<div class="mb-3">
+    <div *ngFor="let guestRating of guestRatings" class="mb-1 amenities" >
+            <label class="check-label">
+                <input type="checkbox" [value]="guestRating" class="check-box" >{{ guestRating }}
+            </label>
+    </div>
+</div>
