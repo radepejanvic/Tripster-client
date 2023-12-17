@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-rating',
@@ -7,4 +7,17 @@ import { Component } from '@angular/core';
 })
 export class RatingComponent {
 
+  @Input() rate!: number;
+  @Input() reviews!: number;
+
+  getRateName(): string {
+    switch (Math.ceil(this.rate)) {
+      case 1: return 'Bad';
+      case 2: return 'Poor';
+      case 3: return 'Average';
+      case 4: return 'Good';
+      case 5: return 'Excellent';
+      default: return '';
+    }
+  }
 }
