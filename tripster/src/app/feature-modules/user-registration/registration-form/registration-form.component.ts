@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { RegistrationFormService } from '../registration-form.service';
-import { Registration, UserType, UserStatus } from '../model/user.model';
+import { PersonCRUD, UserType, UserStatus } from '../model/user.model';
 import { AuthorizationService } from '../../authorization/authorization.service';
 
 @Component({
@@ -24,7 +24,7 @@ export class RegistrationFormComponent {
     userType: new FormControl('GUEST', [Validators.required]),
     name: new FormControl('', [Validators.required]),
     surname: new FormControl('', [Validators.required]),
-    phone: new FormControl('', [Validators.required]),
+    phone: new FormControl('', [Validators.required, Validators.pattern('^[0-9]{5,}$')]),
     country: new FormControl('', [Validators.required]),
     city: new FormControl('', [Validators.required]),
     zipCode: new FormControl('', [Validators.required]),
@@ -37,7 +37,7 @@ export class RegistrationFormComponent {
   register(): void {
     this.errorText = '';
     if(this.validateForm()) {
-      const registration: Registration = {
+      const registration: PersonCRUD = {
         email: this.registrationForm.value.email || "",
         password: this.registrationForm.value.password1 || "",
         userType: UserType[this.registrationForm.value.userType as keyof typeof UserType],

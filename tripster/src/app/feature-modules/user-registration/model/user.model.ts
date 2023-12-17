@@ -1,5 +1,6 @@
-export interface Registration {
+export interface PersonCRUD {
     email: string;
+    id?: bigint;
     password: string;
     userType: UserType;
     status: UserStatus;
