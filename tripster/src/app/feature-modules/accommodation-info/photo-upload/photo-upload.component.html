@@ -1,4 +1,20 @@
 <div id="photo-upload">
+
+  <h1 *ngIf=" mode=='update' "> Current photos of this unit. </h1>
+  <div class="preview" *ngIf="mode === 'update'">
+    <img
+      *ngFor="let photo of savedPhotos"
+      [src]="photo.bytes"
+      [alt]="photo.id.toString()"
+      [class.selected]="isSelected(photo.id)"
+      (click)="toggleSelection(photo.id)"
+    />
+  </div>
+  <div class="add-new">
+    <button class="reset" (click)="removeSelectedPhotos()">Remove selected photos</button>
+  </div>
+ 
+
   <ngx-dropzone id="drop-zone" (change)="onDrop($event)">
     <img
       id="icon"
@@ -7,27 +23,32 @@
       class="dropzone-image"
     />
     <h1>Browse or drop your photos here.</h1>
-    <!-- <p> The order you upload them determines their priority. </p> -->
   </ngx-dropzone>
 
   <h1>The preview of uploaded photos.</h1>
 
-  <label *ngIf="files.length < 5" class="validator">
+  <label *ngIf="mode == 'add' && files.length < 5" class="validator">
     You need to upload at least 5 photos.
   </label>
-  <label *ngIf="files.length > 10" class="validator">
+  <label *ngIf="mode == 'add' && files.length > 10" class="validator">
     You reached the limit of 10 photos per unit.
   </label>
-  <div id="preview">
+  <label *ngIf="mode == 'update' && savedPhotos.length + files.length > 10" class="validator">
+    You can`t have more than 10 photos in total.
+  </label>
+  <div class="preview">
     <img *ngFor="let url of urls" [src]="url" alt="Preview" />
   </div>
 
   <h1 id="end-title">Upload photos!</h1>
 
-  <div id="add-new">
-    <button class="btn btn-outline-dark" type="submit" (click)="uploadPhotos()">
+  <div class="add-new">
+    <button *ngIf="mode == 'add'" class="btn btn-outline-dark" type="submit" (click)="uploadPhotos()">
       Upload photos
     </button>
-    <button id="reset" (click)="removePhotos()">Remove all photos</button>
+    <button *ngIf="mode == 'update'" class="btn btn-outline-dark" type="submit" (click)="updatePhotos()">
+      Update photos
+    </button>
+    <button class="reset" (click)="removePhotos()">Remove all photos</button>
   </div>
 </div>

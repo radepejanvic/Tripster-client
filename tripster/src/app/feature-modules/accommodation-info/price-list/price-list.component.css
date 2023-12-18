@@ -152,3 +152,8 @@ button {
 tr:hover {
     background-color: pink;
 }
+
+.validator {
+    color: red;
+    margin: 10px 0px 0px 0px;
+}

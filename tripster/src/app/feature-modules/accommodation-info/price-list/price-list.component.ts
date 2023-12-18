@@ -40,6 +40,9 @@ export class PriceListComponent implements OnInit {
   }
 
   addPriceList() {
+    if (this.start > this.end || this.price <= 0) {
+      return;
+    }
     const newPriceList: PriceList = {
       start: this.start,
       end: this.end,
@@ -172,6 +175,12 @@ export class PriceListComponent implements OnInit {
       this.id = +id;
       // this.mode = 'add';
     }
+  }
+
+  getMinDate(): Date {
+    let date: Date = new Date();
+    date.setHours(0, 0, 0, 0);
+    return date;
   }
 
 }

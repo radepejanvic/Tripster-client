@@ -245,7 +245,7 @@
 
   <h1 *ngIf="mode == 'update' || mode == 'main-form'" >Show us the photos of your unit.</h1>
 
-  <app-photo-upload *ngIf="mode == 'update' || mode == 'main-form'" (mode)="handleModeChange($event)"></app-photo-upload>
+  <app-photo-upload *ngIf="mode == 'update' || mode == 'main-form'" (step)="handleModeChange($event)"></app-photo-upload>
 
   <h1 *ngIf="mode == 'update' || mode == 'photo-upload'" >Now let`s define price lists for your unit.</h1>
 
