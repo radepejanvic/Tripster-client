@@ -52,3 +52,8 @@ export interface Review {
     reviewerSurname: string,
     reviewedId: number;
 }
+
+export interface Photo {
+    id: number;
+    bytes: string;
+}
