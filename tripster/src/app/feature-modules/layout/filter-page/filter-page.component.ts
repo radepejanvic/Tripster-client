@@ -27,6 +27,7 @@ export class FilterPageComponent implements OnInit {
 
 	accommodations: AccommodationInfoCard[];
 	accommodationRequests: AccommodationRequest[];
+	hostAccommodation: AccommodationInfoCard[];
 	role: string = '';
 
 	constructor(
@@ -51,6 +52,17 @@ export class FilterPageComponent implements OnInit {
 				.getAccommodationRequestByFiltersForAdmin(new HttpParams())
 				.subscribe((value: AccommodationRequest[]) => {
 					this.accommodationRequests = value;
+					value.map((item) => {
+						item.url = this.util.base64ToDataURL(item.photo);
+					});
+				});
+		}
+		if (this.role == 'ROLE_HOST') {
+			this.service
+				.getAccommodationForHost(this.authService.getPersonId())
+				.subscribe((value: AccommodationInfoCard[]) => {
+					this.hostAccommodation = value;
+
 					value.map((item) => {
 						item.url = this.util.base64ToDataURL(item.photo);
 					});

@@ -12,9 +12,10 @@ import { HttpStatusCode } from '@angular/common/http';
 	styleUrl: './login.component.css',
 })
 export class LoginComponent implements OnInit {
-
-	constructor(private authService: AuthorizationService,
-		private router: Router) { }
+	constructor(
+		private authService: AuthorizationService,
+		private router: Router
+	) {}
 	ngOnInit(): void {
 		// this.router.navigate(['home'])
 		// document.getElementById("login")?.click()
@@ -22,34 +23,34 @@ export class LoginComponent implements OnInit {
 
 	loginForm = new FormGroup({
 		username: new FormControl('', [Validators.email, Validators.required]),
-		password: new FormControl('', Validators.required)
-	})
+		password: new FormControl('', Validators.required),
+	});
 
 	public errorText: string = '';
 
 	login(): void {
 		if (this.loginForm.valid) {
-
 			const login: Login = {
-				email: this.loginForm.value.username || "",
-				password: this.loginForm.value.password || ""
-			}
+				email: this.loginForm.value.username || '',
+				password: this.loginForm.value.password || '',
+			};
 
 			this.authService.login(login).subscribe(
-
 				(response: AuthResponse) => {
 					localStorage.setItem('user', response.token);
+					localStorage.setItem('personID', response.personID);
+					localStorage.setItem('userID', response.userID);
 					this.authService.setRole();
 					this.router.navigate(['home']);
-					document.getElementById("close")?.click()
+					document.getElementById('close')?.click();
+				},
+				(error: string) => {
+					let text: string = error.toString();
+					this.errorText = text.replace('Error: ', '');
 				}
-				, (error: string) => {
-					let text: string = error.toString()
-					this.errorText = text.replace("Error: ", "")
-				}
-			)
+			);
 		} else {
-			this.errorText = "Bad data."
+			this.errorText = 'Bad data.';
 		}
 	}
-} 
+}
