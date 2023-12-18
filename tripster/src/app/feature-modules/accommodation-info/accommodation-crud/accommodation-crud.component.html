@@ -84,7 +84,7 @@
             value="false"
             formControlName="automaticReservation"
           />
-          <label for="manual">Review each reservation request manually</label>
+          <label for="manual">Review reservation requests manually</label>
         </span>
       </span>
     </div>
@@ -204,6 +204,24 @@
       </div>
     </div>
 
+    <h1>How would you like to price a stay.</h1>
+
+    <div id="cancellation-policy">
+      <select id="policy">
+        <option value="placeHolder" disabled>Pick the pricing strategy</option>
+        <option value="true">Per night (advised)</option>
+        <option value="false">Per guest per night</option>
+      </select>
+      <input
+        type="number"
+        id="custom"
+        min="0"
+        max="60"
+        disabled
+        placeholder="Custom pricing policy"
+      />
+    </div>
+
     <h1>Finally tell us what is your free cancellation period policy.</h1>
 
     <label for="cancellation-policy">
@@ -229,6 +247,7 @@
         id="custom"
         min="0"
         max="60"
+        disabled
         placeholder="Custom free cancellation period policy"
       />
     </div>
