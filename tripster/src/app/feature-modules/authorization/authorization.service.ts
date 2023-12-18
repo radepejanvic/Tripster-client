@@ -56,11 +56,13 @@ export class AuthorizationService {
 		return null;
 	}
 
-	getPersonId(): string {
-		return localStorage.getItem('personID') || '';
+	getPersonId(): number {
+		const personID = localStorage.getItem('personID') || '';
+		return parseInt(personID, 10);
 	}
-	getUserId(): string {
-		return localStorage.getItem('userID') || '';
+	getUserId(): number {
+		const userID = localStorage.getItem('userID') || '';
+		return parseInt(userID, 10);
 	}
 	isLoggedIn(): boolean {
 		return localStorage.getItem('user') != null;
