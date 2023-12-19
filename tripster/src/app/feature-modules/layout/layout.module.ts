@@ -10,29 +10,36 @@ import { UserRegistrationModule } from '../user-registration/user-registration.m
 import { UserAccountUpdateModule } from '../user-account-update/user-account-update';
 import { UserNavbarComponent } from './navbar/user-navbar/user-navbar.component';
 import { AdminNavbarComponent } from './navbar/admin-navbar/admin-navbar.component';
+import { FilterPageComponent } from './filter-page/filter-page.component';
+import { FilterModule } from '../filter/filter.module';
+import { CardsModule } from '../cards/cards.module';
 import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
-  declarations: [
-    NavbarComponent,
-    HomeComponent,
-    FooterComponent,
-    UserNavbarComponent,
-    AdminNavbarComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    AccommodationInfoModule,
-    AuthorizationModule,
-    UserRegistrationModule,
-    UserAccountUpdateModule,
-    GoogleMapsModule
-  ],
-  exports: [
-    NavbarComponent,
-    HomeComponent,
-    FooterComponent
-  ]
+	declarations: [
+		NavbarComponent,
+		HomeComponent,
+		FooterComponent,
+		UserNavbarComponent,
+		AdminNavbarComponent,
+		FilterPageComponent,
+	],
+	imports: [
+		CommonModule,
+		RouterModule,
+		AccommodationInfoModule,
+		AuthorizationModule,
+		UserRegistrationModule,
+		UserAccountUpdateModule,
+		FilterModule,
+		CardsModule,
+		GoogleMapsModule,
+	],
+	exports: [
+		NavbarComponent,
+		HomeComponent,
+		FooterComponent,
+		FilterPageComponent,
+	],
 })
-export class LayoutModule { }
+export class LayoutModule {}

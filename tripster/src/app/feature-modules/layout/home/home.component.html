@@ -40,7 +40,7 @@
                             placeholder="Where are you traveling to?" aria-label="Where are you traveling to?">
                         </div>
 
-                        <i class="bi bi-arrow-right-square col-1 icon-style"></i>
+                        <i class="bi bi-arrow-right-square col-1 icon-style" [routerLink]="['/filterPage']"></i>
 
                     </form>
 
@@ -130,7 +130,7 @@
 
             </div>
 
-            <div class="card col-3" style="width: 24%; margin-left: 1%;" routerLink="/addAccommodation" routerLinkActive="router-link-active">
+            <div class="card col-3" style="width: 24%; margin-left: 1%;" [routerLink]="['/addAccommodation']">
 
                 <div class="position-relative">
                     
@@ -151,7 +151,7 @@
             </div>
 
            
-            <div class="card col-3" style="width: 24%; margin-left: 1%;" routerLink="/accommodationInfo" routerLinkActive="router-link-active">
+            <div class="card col-3" style="width: 24%; margin-left: 1%;" [routerLink]="['/accommodationInfo', 1]">
 
             <div class="position-relative">
                 

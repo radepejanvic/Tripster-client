@@ -144,3 +144,16 @@ button {
     border-color: red;
     background-color: red;
 }
+
+.active-pricelists {
+    width: 100%;
+}
+
+tr:hover {
+    background-color: pink;
+}
+
+.validator {
+    color: red;
+    margin: 10px 0px 0px 0px;
+}

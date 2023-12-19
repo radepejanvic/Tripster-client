@@ -22,7 +22,7 @@
     margin-right: 10px;
 }
 
-#preview {
+.preview {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -36,12 +36,13 @@
     margin-bottom: 20px;
 }
 
-#preview img {
+.preview img {
     height: 200px;
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
-#add-new {
+.add-new {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -61,13 +62,13 @@ button {
     font-size: 18px;
 }
 
-#reset {
+.reset {
     color: red;
     border-color: red;
     transition: background-color 0.2s ease-out, color 0.2s ease-out;
 }
 
-#reset:hover {
+.reset:hover {
     color: white;
     border-color: red;
     background-color: red;
@@ -75,4 +76,8 @@ button {
 
 .validator {
     color: red;
+}
+
+.preview img.selected {
+    border: 4px solid red;
 }

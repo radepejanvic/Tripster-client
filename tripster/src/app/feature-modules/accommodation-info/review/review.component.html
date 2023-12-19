@@ -1,12 +1,12 @@
 <div id="review">
     <div id="header">
         <div>
-            <h3> Excellent value for the price!</h3>
-            <p> Nikola Trajkovic</p>
+            <h3>{{review.title}}</h3>
+            <p>{{review.reviewerName}} {{review.reviewerSurname}}</p>
         </div>
 
-        <app-rating></app-rating>
+        <app-rating [rating]="review.rate"></app-rating>
     </div>
-    <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, natus. Odit temporibus at tempore ea consequatur deserunt delectus facilis dolores.</p>
+    <p> {{review.comment}} </p>
     <hr/>
 </div>

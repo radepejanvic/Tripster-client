@@ -1,0 +1,9 @@
+<label class="mb-2 title">Reservation status</label>
+<div class="mb-3">
+    <div *ngFor="let status of reservationStatus" class="mb-1 amenities" >
+            <label class="check-label">
+                <input type="checkbox" [value]="status" class="check-box" >{{ status }}
+            </label>
+    </div>
+</div>
+

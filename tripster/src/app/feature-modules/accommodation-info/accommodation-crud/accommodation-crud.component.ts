@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Accommodation } from '../model/accommodation.model';
 import { AbstractControl, FormArray, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { AccommodationInfoService } from '../accommodation-info.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-accommodation-crud',
@@ -9,8 +10,11 @@ import { AccommodationInfoService } from '../accommodation-info.service';
   styleUrl: './accommodation-crud.component.css'
 })
 export class AccommodationCrudComponent implements OnInit {
-  amenities: string[] = [];
+  id?: number;
+  accommodation!: Accommodation;
   checkedAmenities: boolean[] = [];
+  mode: string = 'add';
+
 
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -24,32 +28,70 @@ export class AccommodationCrudComponent implements OnInit {
     zipCode: new FormControl('', [Validators.required]),
     street: new FormControl('', [Validators.required]),
     number: new FormControl('', [Validators.required]),
-    latitude: new FormControl(0, [Validators.required]),
-    longitude: new FormControl(0, [Validators.required]),
+    // latitude: new FormControl(0, [Validators.required]),
+    // longitude: new FormControl(0, [Validators.required]),
     description: new FormControl('', [Validators.required]),
     cancelDuration: new FormControl(0, [Validators.required]),
     pricePerNight: new FormControl(true, [Validators.required])
   });
-  
-  constructor(private accommodationService: AccommodationInfoService){  }
 
-
+  constructor(private route: ActivatedRoute, private accommodationService: AccommodationInfoService) { }
 
   ngOnInit(): void {
 
-    for (let i = 0; i < 30; i++) {
-      this.amenities.push("Some amenity");
+    this.route.params.subscribe((params) => {
+      this.id = +params['id'];
+      sessionStorage.setItem('updatedAccommodation', this.id.toString());
+    });
+
+    this.initializeAmenities();
+
+    if (this.id) {
+      this.mode = 'update';
+      this.accommodationService.getAccommodation(this.id).subscribe({
+        next: (response: Accommodation) => {
+          this.accommodation = response;
+          this.mapAccommodationToForm();
+          for (let amenity of this.accommodation.amenities) {
+            this.checkedAmenities[amenity - 1] = true;
+          }
+          console.log(this.checkedAmenities);
+        },
+        error: (err: any) => {
+          console.error('Failed to get the accommodation', err);
+        }
+      })
     }
-    this.checkedAmenities = new Array(this.amenities.length).fill(false);
   }
 
-  onSubmit(): void {
+  initializeAmenities() {
+    this.checkedAmenities = new Array(12).fill(false);
+  }
 
-    if (!this.form.valid) {
-      console.error('Form isn`t valid');
-      return;
-    }
-    const accommodation: Accommodation = {
+  mapAccommodationToForm(): void {
+    this.form.patchValue({
+      name: this.accommodation.name,
+      shortDescription: this.accommodation.shortDescription,
+      minCap: this.accommodation.minCap,
+      maxCap: this.accommodation.maxCap,
+      type: this.accommodation.type,
+      automaticReservation: this.accommodation.automaticReservation,
+      country: this.accommodation.country,
+      city: this.accommodation.city,
+      zipCode: this.accommodation.zipCode,
+      street: this.accommodation.street,
+      number: this.accommodation.number,
+      // latitude: this.accommodation.latitude,
+      // longitude: this.accommodation.longitude,
+      description: this.accommodation.description,
+      cancelDuration: this.accommodation.cancelDuration,
+      pricePerNight: this.accommodation.pricePerNight
+    });
+  }
+
+  mapFormToAccommodation() {
+    this.accommodation = {
+      id: this.id ? this.id : NaN,
       status: 'NEW',
       ownerId: 4,
       name: this.form.value.name || '',
@@ -63,34 +105,76 @@ export class AccommodationCrudComponent implements OnInit {
       zipCode: this.form.value.zipCode || '',
       street: this.form.value.street || '',
       number: this.form.value.number || '',
-      latitude: this.form.value.latitude || 0,
-      longitude: this.form.value.longitude || 0,
+      // latitude: this.form.value.latitude || 0,
+      // longitude: this.form.value.longitude || 0,
       description: this.form.value.description || '',
       amenities: this.getCheckedAmenities() || [],
       cancelDuration: this.form.value.cancelDuration || 0,
       pricePerNight: this.form.value.pricePerNight || true
     };
-    this.accommodationService.addAccommodation(accommodation).subscribe({
+  }
+
+  onSubmit(): void {
+    this.mapFormToAccommodation()
+    console.log(this.accommodation);
+    if (!this.form.valid) {
+      Object.keys(this.form.controls).forEach((controlName) => {
+        const control = this.form.get(controlName);
+        if (control?.invalid) {
+          // Log or handle the invalid control here
+          console.error(`Control '${controlName}' is invalid. Errors: `, control.errors);
+        }
+      });
+      return;
+    }
+
+    this.mapFormToAccommodation();
+
+    if (this.id) {
+      this.updateAccommodation();
+    } else {
+      this.addAccommodation();
+    }
+
+  }
+
+  addAccommodation() {
+    this.accommodationService.addAccommodation(this.accommodation).subscribe({
       next: (response: Accommodation) => {
         console.log(response);
         sessionStorage.setItem('newAccommodation', response.id ? response.id.toString() : '0');
+        this.mode = 'main-form';
       },
       error: (err: any) => {
-        console.error('Failed to register new accommodation.',err);
+        console.error('Failed to register new accommodation.', err);
       }
-    }) 
+    })
   }
+
+  updateAccommodation() {
+
+    console.log('Ovde ga logujem: ', this.accommodation);
+
+    this.accommodationService.updateAccommodation(this.accommodation).subscribe({
+      next: (response: Accommodation) => {
+        console.log(response);
+      },
+      error: (err: any) => {
+        console.error(`Failed to update accommodation ${this.id}.`, err);
+      }
+    })
+  }
+
 
   toggleAmenity(event: any, index: number): void {
     this.checkedAmenities[index] = event.target.checked;
-    console.log()
   }
 
   getCheckedAmenities(): number[] {
     const checked: number[] = [];
     for (let i = 0; i < this.checkedAmenities.length; i++) {
       if (this.checkedAmenities[i]) {
-        checked.push(i);
+        checked.push(i + 1);
       }
     }
     return checked;
@@ -107,8 +191,8 @@ export class AccommodationCrudComponent implements OnInit {
     const minCap = control.get('minCap')?.value;
     const maxCap = control.get('maxCap')?.value;
 
-    if(maxCap < minCap) {
-      return {'capacityError': true, 'message': 'MinCap can`t be greater than MaxCap.'}
+    if (maxCap < minCap) {
+      return { 'capacityError': true, 'message': 'MinCap can`t be greater than MaxCap.' }
     }
 
     return null;
@@ -117,11 +201,15 @@ export class AccommodationCrudComponent implements OnInit {
   shortDescValidator(control: AbstractControl): ValidationErrors | null {
     const shortDescription = control.get('shortDescription')?.value;
 
-    if(shortDescription.length > 75) {
-      return {'descriptionError': true, 'message': 'Short description can`t be longer than 75 characters.'}
+    if (shortDescription.length > 75) {
+      return { 'descriptionError': true, 'message': 'Short description can`t be longer than 75 characters.' }
     }
 
     return null;
+  }
+
+  handleModeChange(mode: string) {
+    this.mode = mode;
   }
 
   isValidName(): boolean {

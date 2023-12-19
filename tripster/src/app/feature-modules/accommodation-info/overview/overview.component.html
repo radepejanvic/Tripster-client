@@ -21,7 +21,7 @@
     <div>
       <app-amenity
         *ngFor="let amenity of accommodation?.amenities"
-        [amenity]="amenity"
+        [amenity]="amenity - 1"
       ></app-amenity>
     </div>
   </div>
