@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { PersonCRUD } from '../user-registration/model/user.model';
 import { Observable } from 'rxjs';
 import { environment } from 'src/env/env';
-import { PersonUpdate } from './model/user-update.model';
+import { DeleteStatus, PersonUpdate } from './model/user-update.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +20,8 @@ export class UserAccountUpdateService {
     return this.http.get<PersonUpdate>(environment.apiHost+'person/'+id);
   }
 
-  deleteUser(id: number): Observable<string> {
-    return this.http.delete<string>(environment.apiHost+'person/'+id);
+  deleteUser(id: number): Observable<DeleteStatus> {
+    return this.http.delete<DeleteStatus>(environment.apiHost+'person/'+id);
   }
 
 }

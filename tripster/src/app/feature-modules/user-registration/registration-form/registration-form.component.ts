@@ -56,8 +56,9 @@ export class RegistrationFormComponent {
         (response: string) => {
           this.registrationSubmit.emit();
           document.getElementById("close-btn")?.click();
+          alert("Verification email for your account is sent.");
           this.router.navigate(["home"]);
-          this.router.navigate(["login"]);
+          //this.router.navigate(["login"]);
           
         },
         (error: string) => {

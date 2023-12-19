@@ -21,3 +21,9 @@ export interface PersonUpdate {
     number: string;
     
 }
+
+export enum DeleteStatus {
+    SUCCESS = "SUCCESS", 
+    NO_USER_FOUND = "NO_USER_FOUND",
+    HAS_RESERVATIONS = "HAS_RESERVATIONS"
+}

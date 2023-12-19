@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserAccountUpdateService } from '../user-account-update.service';
 import { PersonCRUD, UserStatus, UserType } from '../../user-registration/model/user.model';
-import { PersonUpdate } from '../model/user-update.model';
+import { DeleteStatus, PersonUpdate } from '../model/user-update.model';
 import { AuthorizationService } from '../../authorization/authorization.service';
 import { Observable } from 'rxjs';
 import { data, error } from 'jquery';
@@ -100,23 +100,25 @@ export class UserAccountUpdateComponent implements OnInit {
     deleteProfile(): void {
         this.errorText = '';
         this.service.deleteUser(this.authService.getUserId()).subscribe(
-            (response: string) => {
+            (response: DeleteStatus) => {
                 console.log(response);
-                // switch (response) {
-                //     case 200:
-                //         this.errorText = 'Account deleted';
+                switch (response) {
+                    case DeleteStatus.SUCCESS:
+                        this.errorText = 'Account deleted';
                         this.clearLocalStorage();
                         this.router.navigate(["home"]);
-                //         //funkcije za brisanje naloga iz lokal storidza
-                //         break;
-                //     case 402:
-                //         this.errorText = 'You have some reservations left.';
-                //         break;
-                //     case 404:
-                //         this.errorText = 'User does not exist.';
-                //         break;
+                        this.clearLocalStorage();
+                        location.reload();
+                        //funkcije za brisanje naloga iz lokal storidza
+                        break;
+                    case DeleteStatus.HAS_RESERVATIONS:
+                        this.errorText = 'You have some reservations left.';
+                        break;
+                    case DeleteStatus.NO_USER_FOUND:
+                        this.errorText = 'User does not exist.';
+                        break;
 
-                // }
+                }
             }
         )
     }
@@ -129,6 +131,7 @@ export class UserAccountUpdateComponent implements OnInit {
             return false;
         }
         //Napraviti password update kasnije
+        // verovatno ce trebati zaseban DTO
         // if(this.accountUpdateForm.value.password1){
         //     if (this.accountUpdateForm.value.password1.length < 5) {
         //         this.errorText = "Password too short.";
