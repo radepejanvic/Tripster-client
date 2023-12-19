@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Interval, PriceList, PriceListAdapter } from '../model/accommodation.model';
+import { PriceList, PriceListAdapter } from '../model/accommodation.model';
 import { AccommodationInfoService } from '../accommodation-info.service';
 
 @Component({
@@ -186,7 +186,7 @@ export class PriceListComponent implements OnInit {
   }
 
   disableInterval(): void {
-    let interval: Interval = {
+    let interval: PriceList = {
       start: this.start,
       end: this.end
     }
@@ -198,7 +198,7 @@ export class PriceListComponent implements OnInit {
         this.getPricelists();
       },
       error: (err: any) => {
-        console.error('Failed to disable interval');
+        console.error('Failed to disable interval', err);
       }
     })
 

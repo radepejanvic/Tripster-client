@@ -26,7 +26,7 @@ export interface PriceList {
     accommodationId?: number,
     start: Date;
     end: Date;
-    price: number;
+    price?: number;
     weekend?: number;
     holiday?: number;
 }
@@ -56,9 +56,4 @@ export interface Review {
 export interface Photo {
     id: number;
     bytes: string;
-}
-
-export interface Interval {
-    start: Date;
-    end: Date;
 }
