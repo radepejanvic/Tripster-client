@@ -14,6 +14,7 @@ import { FilterPageComponent } from './filter-page/filter-page.component';
 import { FilterModule } from '../filter/filter.module';
 import { CardsModule } from '../cards/cards.module';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { HostNavbarComponent } from './navbar/host-navbar/host-navbar.component';
 
 @NgModule({
 	declarations: [
@@ -23,6 +24,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 		UserNavbarComponent,
 		AdminNavbarComponent,
 		FilterPageComponent,
+  HostNavbarComponent,
 	],
 	imports: [
 		CommonModule,

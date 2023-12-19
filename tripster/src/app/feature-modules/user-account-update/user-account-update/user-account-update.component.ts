@@ -106,10 +106,7 @@ export class UserAccountUpdateComponent implements OnInit {
                     case DeleteStatus.SUCCESS:
                         this.errorText = 'Account deleted';
                         this.clearLocalStorage();
-                        this.router.navigate(["home"]);
-                        this.clearLocalStorage();
-                        location.reload();
-                        //funkcije za brisanje naloga iz lokal storidza
+                        this.router.navigate(['home']);
                         break;
                     case DeleteStatus.HAS_RESERVATIONS:
                         this.errorText = 'You have some reservations left.';

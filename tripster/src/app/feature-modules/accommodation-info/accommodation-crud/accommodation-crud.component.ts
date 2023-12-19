@@ -3,6 +3,7 @@ import { Accommodation } from '../model/accommodation.model';
 import { AbstractControl, FormArray, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { AccommodationInfoService } from '../accommodation-info.service';
 import { ActivatedRoute } from '@angular/router';
+import { AuthorizationService } from '../../authorization/authorization.service';
 
 @Component({
   selector: 'app-accommodation-crud',
@@ -35,7 +36,7 @@ export class AccommodationCrudComponent implements OnInit {
     pricePerNight: new FormControl(true, [Validators.required])
   });
 
-  constructor(private route: ActivatedRoute, private accommodationService: AccommodationInfoService) { }
+  constructor(private route: ActivatedRoute, private accommodationService: AccommodationInfoService, private authorizationService: AuthorizationService) { }
 
   ngOnInit(): void {
 
@@ -93,7 +94,7 @@ export class AccommodationCrudComponent implements OnInit {
     this.accommodation = {
       id: this.id ? this.id : NaN,
       status: 'NEW',
-      ownerId: 4,
+      ownerId: this.authorizationService.getPersonId(),
       name: this.form.value.name || '',
       shortDescription: this.form.value.shortDescription || '',
       minCap: this.form.value.minCap || 1,
