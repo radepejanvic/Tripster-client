@@ -11,6 +11,7 @@ export class RentComponent {
   @Input() name?: string;
   selectedDateRange?: DateRange<Date>;
 
+
   _onSelectedChange(date: Date): void {
     if (
       this.selectedDateRange &&

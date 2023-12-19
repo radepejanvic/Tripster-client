@@ -56,6 +56,7 @@ export class RegistrationFormComponent {
         (response: string) => {
           this.registrationSubmit.emit();
           document.getElementById("close-btn")?.click();
+          this.router.navigate(["home"]);
           this.router.navigate(["login"]);
           
         },

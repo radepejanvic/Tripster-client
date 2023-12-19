@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserAccountUpdateService } from '../user-account-update.service';
 import { PersonCRUD, UserStatus, UserType } from '../../user-registration/model/user.model';
+import { PersonUpdate } from '../model/user-update.model';
 
 @Component({
     selector: 'app-user-account-update',
@@ -36,7 +37,9 @@ export class UserAccountUpdateComponent {
     updateProfile(): void {
         this.errorText = '';
         if(this.validateForm()) {
-            const update: PersonCRUD = {
+            const update: PersonUpdate = {
+                id: 11,
+                adressId: 11,
                 email: "vetkonetko@gmail.com",
                 password: this.accountUpdateForm.value.password1 || "",
                 userType: UserType["GUEST" as keyof typeof UserType],
@@ -50,10 +53,12 @@ export class UserAccountUpdateComponent {
                 street: this.accountUpdateForm.value.street || '',
                 number: this.accountUpdateForm.value.number || ''
             }
-            
+            console.log(update);
             this.service.updateUser(update).subscribe(
-                (response: PersonCRUD) => {
+                (response: PersonUpdate) => {
                     console.log(response);
+                    alert("Account updated.")
+                    //document.getElementById("account-update-show");
                 }
             );
         }
