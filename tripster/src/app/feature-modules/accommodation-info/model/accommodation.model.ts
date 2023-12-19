@@ -57,3 +57,8 @@ export interface Photo {
     id: number;
     bytes: string;
 }
+
+export interface Interval {
+    start: Date;
+    end: Date;
+}
