@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { PersonCRUD } from '../user-registration/model/user.model';
 import { Observable } from 'rxjs';
@@ -11,14 +11,17 @@ import { PersonUpdate } from './model/user-update.model';
 export class UserAccountUpdateService {
 
   constructor(private http: HttpClient) { }
-
-  // getUser(token: string): 
+ 
   updateUser(user: PersonUpdate): Observable<PersonUpdate> {
     return this.http.put<PersonUpdate>(environment.apiHost+'person/update', user);
   }
 
-  // getUser(): Observable<PersonCRUD> {
-  //   return this.http.post<P
-  // }
+  getUser(id: number): Observable<PersonUpdate> {
+    return this.http.get<PersonUpdate>(environment.apiHost+'person/'+id);
+  }
+
+  deleteUser(id: number): Observable<string> {
+    return this.http.delete<string>(environment.apiHost+'person/'+id);
+  }
 
 }

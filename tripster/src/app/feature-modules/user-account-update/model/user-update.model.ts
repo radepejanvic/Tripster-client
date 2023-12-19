@@ -12,7 +12,7 @@ export interface PersonUpdate {
     surname: string
     phone: string;
     
-    adressId: number;
+    adressId?: number;
 
     country: string;
     city: string;

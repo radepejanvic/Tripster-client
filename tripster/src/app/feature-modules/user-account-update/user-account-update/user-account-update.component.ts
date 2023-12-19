@@ -1,32 +1,64 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserAccountUpdateService } from '../user-account-update.service';
 import { PersonCRUD, UserStatus, UserType } from '../../user-registration/model/user.model';
 import { PersonUpdate } from '../model/user-update.model';
+import { AuthorizationService } from '../../authorization/authorization.service';
+import { Observable } from 'rxjs';
+import { data, error } from 'jquery';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-user-account-update',
     templateUrl: './user-account-update.component.html',
     styleUrl: './user-account-update.component.css'
 })
-export class UserAccountUpdateComponent {
+export class UserAccountUpdateComponent implements OnInit {
 
-    constructor(private service: UserAccountUpdateService) {}
+    constructor(private service: UserAccountUpdateService,
+                private authService: AuthorizationService,
+                private router: Router ) {}
 
-    accountUpdateForm = new FormGroup({
-        //Email mora ostati nepromenjiv
-        //email: new FormControl('', [Validators.email]),
-        password1: new FormControl('ww6kPYJrr0d1A8D', [Validators.required]),
-        password2: new FormControl('ww6kPYJrr0d1A8D', [Validators.required]),
-        name: new FormControl('Jane', [Validators.required]),
-        surname: new FormControl('Glassford', [Validators.required]),
-        phone: new FormControl('980-847-8405', [Validators.required]),
-        street: new FormControl('32583 Strosin Run', [Validators.required]),
-        number: new FormControl('401', [Validators.required]),
-        city: new FormControl('Niagara Falls', [Validators.required]),
-        zipCode : new FormControl('5185', [Validators.required]),
-        country : new FormControl('Heard Island and McDonald Islands', [Validators.required])
-    })
+    private user: PersonUpdate;
+
+    accountUpdateForm: FormGroup = new FormGroup({
+        password1: new FormControl('123123'),
+        password2: new FormControl(''),
+        name: new FormControl('', [Validators.required]),
+        surname: new FormControl('', [Validators.required]),
+        phone: new FormControl('', [Validators.required]),
+        street: new FormControl('', [Validators.required]),
+        number: new FormControl('', [Validators.required]),
+        city: new FormControl('', [Validators.required]),
+        zipCode : new FormControl('', [Validators.required]),
+        country : new FormControl('', [Validators.required])
+    });
+    public email: string = '';
+
+    ngOnInit(): void {
+       
+        this.service.getUser(this.authService.getPersonId()).subscribe(
+            (data: PersonUpdate) => {
+                this.user = data;
+                this.email = data.email;
+                this.accountUpdateForm.patchValue({
+                password1: data.password, 
+                password2: data.password,
+                name: data.name,
+                surname: data.surname,
+                phone: data.phone,
+                street: data.street,
+                number: data.number,
+                city: data.city,
+                zipCode : data.zipCode,
+                country : data.country
+                })
+            },
+            (error: any) => {
+                console.log("Error fetching data.", error);
+            }
+        )
+    }    
 
     public errorText: string = '';
 
@@ -38,8 +70,8 @@ export class UserAccountUpdateComponent {
         this.errorText = '';
         if(this.validateForm()) {
             const update: PersonUpdate = {
-                id: 11,
-                adressId: 11,
+                id: this.authService.getPersonId(),
+                
                 email: "vetkonetko@gmail.com",
                 password: this.accountUpdateForm.value.password1 || "",
                 userType: UserType["GUEST" as keyof typeof UserType],
@@ -53,7 +85,7 @@ export class UserAccountUpdateComponent {
                 street: this.accountUpdateForm.value.street || '',
                 number: this.accountUpdateForm.value.number || ''
             }
-            console.log(update);
+            //console.log(update);
             this.service.updateUser(update).subscribe(
                 (response: PersonUpdate) => {
                     console.log(response);
@@ -67,24 +99,53 @@ export class UserAccountUpdateComponent {
 
     deleteProfile(): void {
         this.errorText = '';
+        this.service.deleteUser(this.authService.getUserId()).subscribe(
+            (response: string) => {
+                console.log(response);
+                // switch (response) {
+                //     case 200:
+                //         this.errorText = 'Account deleted';
+                        this.clearLocalStorage();
+                        this.router.navigate(["home"]);
+                //         //funkcije za brisanje naloga iz lokal storidza
+                //         break;
+                //     case 402:
+                //         this.errorText = 'You have some reservations left.';
+                //         break;
+                //     case 404:
+                //         this.errorText = 'User does not exist.';
+                //         break;
+
+                // }
+            }
+        )
     }
+
+    //HELPER FUNCTIONS : 
 
     private validateForm(): boolean {
         if(this.accountUpdateForm.value.password1 != this.accountUpdateForm.value.password2) {
             this.errorText = "Passwords do not match.";
             return false;
         }
-        if(this.accountUpdateForm.value.password1){
-            if (this.accountUpdateForm.value.password1.length < 5) {
-                this.errorText = "Password too short.";
-                return false;
-            }
-        }
+        //Napraviti password update kasnije
+        // if(this.accountUpdateForm.value.password1){
+        //     if (this.accountUpdateForm.value.password1.length < 5) {
+        //         this.errorText = "Password too short.";
+        //         return false;
+        //     }
+        // }
         if(!this.accountUpdateForm.valid) {
             this.errorText = "Not all fields submitted."
             return false;
         }
         return true;
+    }
+
+    private clearLocalStorage(): void {
+        localStorage.removeItem('personID');
+        localStorage.removeItem('userID');
+        localStorage.removeItem('user');
     }
 
 }
