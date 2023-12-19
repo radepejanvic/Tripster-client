@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Accommodation, Photo, PriceList, PriceListAdapter, Review } from './model/accommodation.model';
+import { Accommodation, Interval, Photo, PriceList, PriceListAdapter, Review } from './model/accommodation.model';
 import { Observable, map } from 'rxjs';
 import { environment } from 'src/env/env';
 import { UtilService } from 'src/app/shared/util.service';
@@ -78,6 +78,10 @@ export class AccommodationInfoService {
 
   getReviews(id: number): Observable<Review[]> {
     return this.http.get<Review[]>(`${environment.apiHost}accommodations/reviews/${id}`);
+  }
+
+  disableInterval(id: number, interval: Interval): Observable<number> {
+    return this.http.post<number>(`${environment.apiHost}accommodations/price/${id}`, interval);
   }
 
 }
