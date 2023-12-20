@@ -5,32 +5,34 @@
         
         <mat-card class="calendar">
         <mat-calendar (selectedChange)="_onSelectedChange($event)"
+                    [minDate]="today"
                     [selected]="selectedDateRange"></mat-calendar>
         </mat-card>
     </div>
 
-    <div id="preview">
+    <form [formGroup]="reservationForm" id="preview" (ngSubmit)="onSubmit()">
         <h1> Reservation preview </h1>
         <p> Review reservation details before finalizing your decision. </p>
         
         <span>
             <label> Start date: </label>
-            <input type="text" disabled="true" placeholder="Pick from calendar">
+            <input type="text" disabled="true" placeholder="Pick from calendar" value="selectedDateRange.start" >
         </span>
         <span>
             <label> End date: </label>
-            <input type="text" disabled="true" placeholder="Pick from calendar">
+            <input type="text" disabled="true" placeholder="Pick from calendar" value="selectedDateRange.end">
         </span>
         <span>
             <label> Number of guests: </label>
-            <input type="number" placeholder="Number of guests" min="1">
+            <input type="number" placeholder="Number of guests" min="1" formControlName="guestsNo">
         </span>
         <span>
             <label> Total price: </label>
-            <input type="text" disabled="true" placeholder="Total price">
+            <input type="text" disabled="true" placeholder="Total price" value="totalPrice">
         </span>
-        <button type="button " class="btn btn-outline-dark"> Make a reservation </button>
-    </div>
+        <button type="submit " class="btn btn-outline-dark"> Make a reservation </button>
+        <label>{{errorText}}</label>
+    </form>
 </div>
 
 
