@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { UserAccountUpdateComponent } from "./user-account-update/user-account-update.component";
 
 @NgModule({
@@ -7,7 +8,9 @@ import { UserAccountUpdateComponent } from "./user-account-update/user-account-u
         UserAccountUpdateComponent
     ],
     imports: [
-        CommonModule
+        CommonModule, 
+        FormsModule,
+        ReactiveFormsModule
     ],
     exports: [
         UserAccountUpdateComponent

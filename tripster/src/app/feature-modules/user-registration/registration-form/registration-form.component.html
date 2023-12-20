@@ -17,17 +17,26 @@
                 
             </div>
             <div class="modal-body">
-                <form class="registration-form" id="registration-form" layout="grid">
+                <form [formGroup]="registrationForm" class="registration-form" id="registration-form"  layout="grid">
                     <div class="basic-info-div">
                         <div class="pop-up-text-div">
-                            <input type="text" class="form-control" id="userNameInput" placeholder="user name">
-                            <input type="password" class="form-control" id="password1" placeholder="password">
-                            <input type="password" class="form-control" id="password2" placeholder="password again">
-                            <input type="email" class="form-control" id="email" placeholder="email@gmail.com">
-                            <input type="text" class="form-control" id="first-name" placeholder="first name">
-                            <input type="text" class="form-control" id="last-name" placeholder="last name">
-                            <input type="tel" class="form-control" id="phone-number" placeholder="phone number"><br/>
+                            <input type="email" class="form-control" id="email" formControlName="email" placeholder="email@gmail.com">
+                            <input type="password" class="form-control" id="password1" formControlName="password1" placeholder="password">
+                            <input type="password" class="form-control" id="password2" formControlName="password2" placeholder="password again">
+                            <div class="radio-btn-group form-control">
+                                <label>You are: </label><br>
+                                <label>
+                                <input type="radio" name="userType" formControlName="userType" value="GUEST" checked>
+                                Guest</label>
+                                <label>
+                                <input type="radio" name="userType" formControlName="userType" value="HOST">
+                                Host</label>                            
+                            </div>
+                            <input type="text" class="form-control" id="name" formControlName="name" placeholder="first name">
+                            <input type="text" class="form-control" id="surname" formControlName="surname" placeholder="last name">
+                            <input type="tel" class="form-control" id="phone" formControlName="phone" placeholder="phone number"><br/>
                         </div>
+                        <!-- Ovde treba da se izmeni tako da postoji drag drop -->
                         <div class="pop-up-image-div">
                             <div >
                                 <img class="dummy-profile-input"
@@ -40,22 +49,25 @@
 
                     <p class="text">Adress:</p> 
                     <div class="input-row">
-                        <input type="text" class="form-control medium-input" id="street" placeholder="street">
-                        <input type="text" class="form-control small-input" id="number" placeholder="number">
+                        <input type="text" class="form-control medium-input" id="street" formControlName="street" placeholder="street">
+                        <input type="text" class="form-control small-input" id="number"  formControlName="number" placeholder="number">
                     </div>
                     <div class="input-row">
-                        <input type="text" class="form-control medium-input" id="city" placeholder="city">
-                        <input type="text" class="form-control small-input" id="postal-code" placeholder="postal code">
+                        <input type="text" class="form-control medium-input" id="city" formControlName="city" placeholder="city">
+                        <input type="text" class="form-control small-input" id="zipCode" formControlName="zipCode" placeholder="postal code">
                     </div>
-                    <input type="text" class="form-control medium-input" id="country" placeholder="country">
+                    <input type="text" class="form-control medium-input" id="country" formControlName="country" placeholder="country">
                     
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn cancel-btn mybtn" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn register-btn mybtn">Register</button>
+                <button type="button" class="btn cancel-btn mybtn" id="close-btn" data-bs-dismiss="modal">Close</button>
+                <div class="reg-btn-div">
+                    <label id="error-text" class="error-text">{{errorText}}</label>
+                    <button type="button" class="btn register-btn mybtn" (click)="register()" >Register</button>
+                </div>
             </div>
-        </div>
+        </div> 
     </div>
 </div>
 

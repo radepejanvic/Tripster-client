@@ -27,6 +27,10 @@
 
 }
 
+.passwordField {
+    width: 100%;
+}
+
 .profile-photo {
     /*display: non;*/
     border-radius: 100%;
@@ -57,10 +61,6 @@
     color: #000
 }
 
-.text {
-    /*font-family: "Poppins", 'Times New Roman', Times, serif, "sans-serif";*/
-}
-
 .dummy-profile-input {
     border-radius: 50%;
     width: 170px;
@@ -69,11 +69,21 @@
     
 }
 
-
 .adress-div {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.hidden {
+    /* width: 100%; */
+    display: none;
+}
+
+.shown {
+    display: inline;
+    width: 50%;
+    margin-top: 15px;
 }
 
 button {
@@ -84,4 +94,10 @@ button {
 #delete-btn {
     color: red;
     border-color: red;
+    margin-bottom: 100px;
+}
+
+.error-text {
+    color: red;
+    margin-top: 20px;
 }

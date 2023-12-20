@@ -6,12 +6,12 @@
         <div class="modal-dialog">
         <div class="modal-content">
 
-            <div class="modal-header row">
+            <div class="modal-header row" id="header">
             <h4 class="font-text col-6">Log in</h4>
-            <i class="bi bi-box-arrow-in-right col-6" style="font-size: 50px;"></i>
+            <i class="bi bi-door-open col-6" style="font-size: 50px;"></i>
             </div>
             
-            <div class="modal-body">
+            <div class="modal-body" id="modal-body">
             <form [formGroup]='loginForm' (submit)="login()">
     
                 <div class="mb-3">
@@ -19,7 +19,7 @@
                 
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" formControlName="username" aria-describedby="basic-addon2">
-                        <span class="input-group-text" id="basic-addon2">&#64;example.com</span>
+                        <!-- <span class="input-group-text" id="basic-addon2">&#64;example.com</span> -->
                     </div>
         
                 </div>
@@ -28,16 +28,16 @@
                     <label for="exampleInputPassword1" class="form-label font">Password</label>
                     <input type="password" class="form-control" formControlName="password" id="exampleInputPassword1">
                 </div>
-                <div class="mb-3 form-check">
+                <!-- <div class="mb-3 form-check">
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                     <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                </div>
+                </div> -->
                 
                 <div id="error" class="form-text" style="color: red; font-size: medium;" >{{errorText}}</div>
             </form>            
         </div>
         
-            <div class="modal-footer">
+            <div class="modal-footer" id="footer">
             <button type="button" class="btn  btn-outline-dark"  id="close" data-bs-dismiss="modal" >Close</button>
             <button type="submit" class="btn  btn-secondary" (click)="login()">Log in</button>
 

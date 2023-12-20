@@ -6,35 +6,55 @@
                         src="https://media-s3-us-east-1.ceros.com/centaur-financial-platforms/images/2020/12/14/964e7b7d25cf55f625013e4382cd0986/shutterstock-485490535-customer-icon-blue.png" />
                     <!-- <input type="file" id="myfile" style="display:none" /> -->
             </div>
-            <div class="pop-up-text-div">
-                <p class="text">Personal info :</p>
-                <input type="text" class="form-control" id="name" [value] = "name">
-                <input type="text" class="form-control" id="surname" [value] = "surname">
-                <input type="email" class="form-control" id="email" [value] = "email">
-                <input type="tel" class="form-control" id="phone" [value] = "phone"><br />
-                <input type="password" class="form-control" id="password1" placeholder="********">
-                <input type="password" class="form-control" id="password2" placeholder="********">
-                <p class="text">Adress:</p>
+            <form [formGroup]="accountUpdateForm">
+                <div id="pop-up-text-div" class="pop-up-text-div">
+                    <p class="text">Personal info :</p>
+                    <input type="text" class="form-control" id="name" formControlName = "name">
+                    <input type="text" class="form-control" id="surname" formControlName = "surname">
+                    <label  class="form-control" >{{email}}</label>
+                    <input type="tel" class="form-control" id="phone" formControlName = "phone">
+                    <p class="text">Adress:</p>
+                    
+                    <input type="text" class="form-control" id="country" formControlName = "country">
+                    <input type="text" class="form-control" id="city" formControlName = "city">
+                    <input type="text" class="form-control" id="postal-code" formControlName = "zipCode">
+                    <input type="text" class="form-control" id="street" formControlName = "street">
+                    <input type="text" class="form-control" id="number" formControlName = "number">
+                    
+                    <button type="button" class="btn btn-outline-dark" (click)="showPasswordFields()">Change password</button>
+                    <div id="passwordFieldsDiv" class="hidden">
+                        <input type="password" class="form-control passwordField" id="password1" formControlName="password1">
+                        <input type="password" class="form-control passwordField" id="password2" formControlName="password2">
+                    </div>
+                    <label id="error-text" class="error-text">{{errorText}}</label>
+                    <button type="button" class="btn btn-outline-dark" (click)="updateProfile()">
+                        Update profile
+                    </button>
+                    <button type="button" class="btn btn-outline-dark" id="delete-btn" (click)="deleteProfile()">
+                        Delete profile
+                    </button>
                 
-                <input type="text" class="form-control" id="country" [value] = "country">
-                <input type="text" class="form-control" id="city" [value] = "city">
-                <input type="text" class="form-control" id="postal-code" [value] = "zipCode">
-                <input type="text" class="form-control" id="street" [value] = "street">
-                <input type="text" class="form-control" id="number" [value] = "number">
-                
-                
-
-                <button type="button" class="btn btn-outline-dark">
-                    Update profile
-                </button>
-                <button type="button" class="btn btn-outline-dark" id="delete-btn">
-                    Delete profile
-                </button>
-                
+                </div>
+            </form>
+        </div>
+    </form>
+    <div class="modal" id="account-update-modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Account updated</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Account has been successfully updated.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                </div>
             </div>
         </div>
-
-
-        
-    </form>
+    </div>
 </div>

@@ -12,3 +12,17 @@
     margin: 0;
     text-align: right;
 }
+
+#header {
+    border-bottom: none;
+}
+
+#footer {
+    border-top: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+#modal-body {
+    margin: 30px;
+}

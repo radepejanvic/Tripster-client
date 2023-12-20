@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { UserAccountUpdateModule } from './feature-modules/user-account-update/user-account-update';
 import { AppRoutingModule } from './infrastructure/routing/app-routing.module';
@@ -35,6 +35,7 @@ import { GoogleMapsModule } from '@angular/google-maps'
     UserAccountUpdateModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule, 
     NgxDropzoneModule,
     GoogleMapsModule
   ],
