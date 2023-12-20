@@ -31,10 +31,13 @@ export class RentComponent implements OnInit {
   end: Date; 
   today: Date;
   id: number;
+  minCap: number;
+  maxCap: number;
   pricePerNight: boolean = true;
   totalPrice: number;
   calendar: Day[] = [];
   errorText: string = '';
+  successText: string = '';
 
   reservationForm: FormGroup = new FormGroup({
    
@@ -61,7 +64,11 @@ export class RentComponent implements OnInit {
       }
     )
     this.accommodationService.getAccommodation(this.id).subscribe({
-      next: (accommodation : Accommodation) => { this.pricePerNight = accommodation.pricePerNight; },
+      next: (accommodation : Accommodation) => { 
+        this.pricePerNight = accommodation.pricePerNight; 
+        this.minCap = accommodation.minCap;
+        this.maxCap = accommodation.maxCap;
+      },
       error: (error: any) => { console.error("Failed to get pricing type from the accommodation.", error); }
     })
   }
@@ -69,18 +76,8 @@ export class RentComponent implements OnInit {
 
   onSubmit() {
     this.errorText = '';
-    if (!this.reservationForm.valid) { 
-      this.errorText = "Form is invalid.";
-      return;
-    }
-    if (!this.areDatesValid()) {
-      this.errorText = "Start date cannot be after end date."
-      return;
-    }
-    if (!this.isDateRangeContinual()) {
-      this.errorText = "Selected dates include invalid dates.";
-      return;
-    }
+    this.successText = '';
+    if(!this.validateInput()) return;
     const reservation: Reservation = {
       start: this.reservationForm.value.start || new Date, 
       end: this.reservationForm.value.end || new Date,
@@ -94,15 +91,38 @@ export class RentComponent implements OnInit {
     this.reservationService.addReservation(reservation).subscribe(
         (response: Reservation) => {
           console.log("Reservation added successfully.", response);
-          
+          this.successText = 'Reservation created successfully.';
         },
         (error: any) => {
           console.error("Failed to create a reservation.", error);
-
         }
     ) 
   }
   
+  validateInput(): boolean {
+    if (!this.reservationForm.valid) { 
+      this.errorText = "Form is invalid.";
+      return false;
+    }
+    if (!this.areDatesValid()) {
+      this.errorText = "Start date cannot be after end date."
+      return false;
+    }
+    if (!this.isDateRangeContinual()) {
+      this.errorText = "Selected dates include invalid dates.";
+      return false;
+    }
+    if(this.reservationForm.value.guestsNo > this.maxCap) {
+      this.errorText = "Selected guest number of guests is too large."
+      return false;
+    }
+    if(this.reservationForm.value.guestsNo < this.minCap) {
+      this.errorText = "Selected guest number of guests is too small."
+      return false;
+    }
+    return true;
+  }
+
   calculateDuration(): number {
     const end = this.reservationForm.value.end?.valueOf() || 0;
     const start = this.reservationForm.value.start?.valueOf() || 0;

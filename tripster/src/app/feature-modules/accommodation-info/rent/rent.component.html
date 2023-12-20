@@ -39,7 +39,7 @@
                 </span>
                 <span>
                     <label> Number of guests: </label>
-                    <input type="number" placeholder="Number of guests" min="1" formControlName="guestsNo">
+                    <input type="number" placeholder="Number of guests" min={{minCap}} max={{maxCap}} formControlName="guestsNo">
                 </span>
                 <span>
                     <label> Total price: </label>
@@ -47,6 +47,7 @@
                 </span>
                 <button type="submit " class="btn btn-outline-dark"> Make a reservation </button>
                 <label class="validator">{{errorText}}</label>
+                <label class="green-text">{{successText}}</label>
             </div>
         </div>
     </form>

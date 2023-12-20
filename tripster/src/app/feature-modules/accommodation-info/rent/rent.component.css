@@ -48,6 +48,11 @@ p {
     margin: 10px;
 }
 
+.green-text {
+    color: green;
+    margin: 10px;
+}
+
 .reservation-wrapper {
     display: flex;
     justify-content: space-between;
