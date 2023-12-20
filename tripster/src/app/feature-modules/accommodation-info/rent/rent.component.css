@@ -29,11 +29,11 @@ span {
     margin-bottom: 20px;
 }
 
-#rent {
+/* #rent {
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-}
+} */
 
 p {
     margin-bottom: 20px;
@@ -46,4 +46,10 @@ p {
 .validator {
     color: red;
     margin: 10px;
+}
+
+.reservation-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
 }
