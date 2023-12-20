@@ -81,7 +81,7 @@ export class AccommodationInfoService {
   }
 
   disableInterval(id: number, interval: Interval): Observable<number> {
-    return this.http.post<number>(`${environment.apiHost}accommodations/price/${id}`, interval);
+    return this.http.post<number>(`${environment.apiHost}accommodations/calendar/${id}`, interval);
   }
 
 }
