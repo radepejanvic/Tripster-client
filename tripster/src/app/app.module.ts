@@ -16,6 +16,7 @@ import { Interceptor } from './feature-modules/authorization/interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { GoogleMapsModule } from '@angular/google-maps'
+import { CalendarModule } from 'primeng/calendar';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { GoogleMapsModule } from '@angular/google-maps'
     FormsModule,
     ReactiveFormsModule, 
     NgxDropzoneModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    CalendarModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

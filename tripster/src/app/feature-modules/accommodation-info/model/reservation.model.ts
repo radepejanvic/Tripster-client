@@ -13,3 +13,8 @@ export interface Day {
     date: Date,
     price: number
 }
+
+export interface DayAdapter {
+    date: number[],
+    price: number
+}

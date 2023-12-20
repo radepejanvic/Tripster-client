@@ -18,6 +18,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MapComponent } from './map/map.component';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
 	declarations: [
@@ -43,6 +44,7 @@ import { MapComponent } from './map/map.component';
 		FormsModule,
 		GoogleMapsModule,
 		ReactiveFormsModule,
+		CalendarModule
 	],
 	exports: [
 		PhotosComponent,

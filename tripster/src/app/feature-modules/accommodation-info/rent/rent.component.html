@@ -1,37 +1,55 @@
 <div id="rent">
-    <div>
-        <h1> Make a reservation for {{name}} </h1>
-        <p> Pick the time frame that best suits you. </p>
-        
-        <mat-card class="calendar">
-        <mat-calendar (selectedChange)="_onSelectedChange($event)"
-                    [minDate]="today"
-                    [selected]="selectedDateRange"></mat-calendar>
-        </mat-card>
-    </div>
-
     <form [formGroup]="reservationForm" id="preview" (ngSubmit)="onSubmit()">
-        <h1> Reservation preview </h1>
-        <p> Review reservation details before finalizing your decision. </p>
-        
-        <span>
-            <label> Start date: </label>
-            <input type="text" disabled="true" placeholder="Pick from calendar" value="selectedDateRange.start" >
-        </span>
-        <span>
-            <label> End date: </label>
-            <input type="text" disabled="true" placeholder="Pick from calendar" value="selectedDateRange.end">
-        </span>
-        <span>
-            <label> Number of guests: </label>
-            <input type="number" placeholder="Number of guests" min="1" formControlName="guestsNo">
-        </span>
-        <span>
-            <label> Total price: </label>
-            <input type="text" disabled="true" placeholder="Total price" value="totalPrice">
-        </span>
-        <button type="submit " class="btn btn-outline-dark"> Make a reservation </button>
-        <label>{{errorText}}</label>
+        <div>
+            <div>
+                <h1> Make a reservation for {{name}} </h1>
+                <p> Pick the time frame that best suits you. </p>        
+                <div class="date-picker-wrapper">
+                    <div class="datePicker">
+                        <mat-form-field>
+                            <mat-label>Check in</mat-label>
+                            <input matInput [matDatepicker]="checkinPicker" formControlName="start" [matDatepickerFilter]="rangeFilter" readonly>
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="checkinPicker"></mat-datepicker-toggle>
+                            <mat-datepicker #checkinPicker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="datePicker">
+                        <mat-form-field>
+                            <mat-label>Check out</mat-label>
+                            <input matInput [matDatepicker]="checkoutPicker" formControlName="end" [matDatepickerFilter]="dateFilter" readonly>
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="checkoutPicker"></mat-datepicker-toggle>
+                            <mat-datepicker #checkoutPicker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h1> Reservation preview </h1>
+                <p> Review reservation details before finalizing your decision. </p>
+                
+                <span>
+                    <label> Start date: </label>
+                    <!-- <label class="form-control">{{util.formatDate(start)}}</label> -->
+                    <!-- <input type="text" disabled="true" placeholder="Pick from calendar" [(ngModel)]="util.formatDate(start)" > -->
+                </span>
+                <span>
+                    <label> End date: </label>
+                    <input type="text" disabled="true" placeholder="Pick from calendar" value="">
+                </span>
+                <span>
+                    <label> Number of guests: </label>
+                    <input type="number" placeholder="Number of guests" min="1" formControlName="guestsNo">
+                </span>
+                <span>
+                    <label> Total price: </label>
+                    <input type="text" disabled="true" placeholder="Total price" value="totalPrice">
+                </span>
+                <button type="submit " class="btn btn-outline-dark"> Make a reservation </button>
+                <label>{{errorText}}</label>
+            </div>
+        </div>
     </form>
 </div>
 

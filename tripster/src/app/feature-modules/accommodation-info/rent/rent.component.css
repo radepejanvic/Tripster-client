@@ -38,3 +38,7 @@ span {
 p {
     margin-bottom: 20px;
 }
+
+.date-picker-wrapper {
+    display: flex;
+}

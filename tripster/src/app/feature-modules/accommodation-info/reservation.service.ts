@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UtilService } from 'src/app/shared/util.service';
-import { Day, Reservation } from './model/reservation.model';
+import { Day, DayAdapter, Reservation } from './model/reservation.model';
 import { Observable } from 'rxjs';
 import { environment } from 'src/env/env';
 
@@ -16,8 +16,8 @@ export class ReservationService {
     return this.http.post<Reservation>(`${environment.apiHost}reservations`, reservation);
   }
 
-  getCalendar(id: number): Observable<Day[]> {
-    return this.http.get<Day[]>(`${environment.apiHost}accommodations/calendar/${id}`);
+  getCalendar(id: number): Observable<DayAdapter[]> {
+    return this.http.get<DayAdapter[]>(`${environment.apiHost}accommodations/calendar/${id}`);
   }
 
 }
