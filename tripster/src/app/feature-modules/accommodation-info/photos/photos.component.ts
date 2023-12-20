@@ -47,6 +47,6 @@ export class PhotosComponent implements OnInit {
 	}
 
 	isAuthorized(): boolean {
-		return this.authorization.getPersonId() == this.accommodation.ownerId;
+		return this.authorization.isLoggedIn() && this.authorization.getRole() == 'ROLE_HOST' && this.authorization.getPersonId() == this.accommodation.ownerId;
 	}
 }
