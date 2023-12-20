@@ -14,7 +14,7 @@ export class PhotoUploadComponent implements OnInit {
   id: number;
   files: File[] = [];
   urls: string[] = [];
-  mode: string;
+  mode: string = 'add';
 
   savedPhotos: Photo[] = [];
   selectedPhotos: number[] = [];
