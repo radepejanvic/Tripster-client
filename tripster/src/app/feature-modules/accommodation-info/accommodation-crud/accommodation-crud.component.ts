@@ -33,7 +33,7 @@ export class AccommodationCrudComponent implements OnInit {
     // longitude: new FormControl(0, [Validators.required]),
     description: new FormControl('', [Validators.required]),
     cancelDuration: new FormControl(0, [Validators.required]),
-    pricePerNight: new FormControl(true, [Validators.required])
+    pricePerNight: new FormControl('true', [Validators.required])
   });
 
   constructor(private route: ActivatedRoute, private accommodationService: AccommodationInfoService, private authorizationService: AuthorizationService) { }
@@ -86,7 +86,7 @@ export class AccommodationCrudComponent implements OnInit {
       // longitude: this.accommodation.longitude,
       description: this.accommodation.description,
       cancelDuration: this.accommodation.cancelDuration,
-      pricePerNight: this.accommodation.pricePerNight
+      pricePerNight: this.accommodation.pricePerNight ? 'true' : 'false'
     });
   }
 
@@ -111,7 +111,7 @@ export class AccommodationCrudComponent implements OnInit {
       description: this.form.value.description || '',
       amenities: this.getCheckedAmenities() || [],
       cancelDuration: this.form.value.cancelDuration || 0,
-      pricePerNight: this.form.value.pricePerNight || true,
+      pricePerNight: this.form.value.pricePerNight == 'true',
       rating: 0,
       numOfReviews: 0
     };
@@ -119,12 +119,10 @@ export class AccommodationCrudComponent implements OnInit {
 
   onSubmit(): void {
     this.mapFormToAccommodation()
-    console.log(this.accommodation);
     if (!this.form.valid) {
       Object.keys(this.form.controls).forEach((controlName) => {
         const control = this.form.get(controlName);
         if (control?.invalid) {
-          // Log or handle the invalid control here
           console.error(`Control '${controlName}' is invalid. Errors: `, control.errors);
         }
       });

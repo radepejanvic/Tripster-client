@@ -207,7 +207,7 @@
     <h1>How would you like to price a stay.</h1>
 
     <div id="cancellation-policy">
-      <select id="policy">
+      <select id="policy" formControlName="pricePerNight">
         <option value="placeHolder" disabled>Pick the pricing strategy</option>
         <option value="true">Per night (advised)</option>
         <option value="false">Per guest per night</option>
@@ -255,9 +255,15 @@
     <h1 id="end-title">Wrapping up registrastion!</h1>
 
     <div id="add-new">
-      <button class="btn btn-outline-dark" type="submit">
+
+      <button *ngIf="mode=='add'" class="btn btn-outline-dark" type="submit">
         Register this accommodation
       </button>
+
+      <button *ngIf="mode=='update'" class="btn btn-outline-dark" type="submit">
+        Update this accommodation
+      </button>
+
       <button id="reset">Reset all fields</button>
     </div>
   </form>
