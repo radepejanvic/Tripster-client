@@ -31,8 +31,8 @@ export class AccommodationCrudComponent implements OnInit {
     // latitude: new FormControl(0, [Validators.required]),
     // longitude: new FormControl(0, [Validators.required]),
     description: new FormControl('', [Validators.required]),
-    cancelDuration: new FormControl(0, [Validators.required])
-    // pricePerNight: new FormControl(true, [Validators.required])
+    cancelDuration: new FormControl(0, [Validators.required]),
+    pricePerNight: new FormControl(true, [Validators.required])
   });
 
   constructor(private route: ActivatedRoute, private accommodationService: AccommodationInfoService) { }
@@ -85,7 +85,7 @@ export class AccommodationCrudComponent implements OnInit {
       // longitude: this.accommodation.longitude,
       description: this.accommodation.description,
       cancelDuration: this.accommodation.cancelDuration,
-      // pricePerNight: this.accommodation.pricePerNight
+      pricePerNight: this.accommodation.pricePerNight
     });
   }
 
@@ -110,7 +110,7 @@ export class AccommodationCrudComponent implements OnInit {
       description: this.form.value.description || '',
       amenities: this.getCheckedAmenities() || [],
       cancelDuration: this.form.value.cancelDuration || 0,
-      pricePerNight: true,
+      pricePerNight: this.form.value.pricePerNight || true,
       rating: 0,
       numOfReviews: 0
     };

@@ -1,6 +1,6 @@
 <div class="container">
   <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="mode == 'update' || mode == 'add'">
-    <h1 id>Hello Rade, let`s register an accommodation of yours!</h1>
+    <h1 style="font-size: 30px;">Hello Rade, let`s register your new accommodation!</h1>
 
     <h1>We`ll start with some base info.</h1>
 
@@ -84,7 +84,7 @@
             value="false"
             formControlName="automaticReservation"
           />
-          <label for="manual">Review each reservation request manually</label>
+          <label for="manual">Review reservation requests manually</label>
         </span>
       </span>
     </div>
@@ -204,6 +204,24 @@
       </div>
     </div>
 
+    <h1>How would you like to price a stay.</h1>
+
+    <div id="cancellation-policy">
+      <select id="policy">
+        <option value="placeHolder" disabled>Pick the pricing strategy</option>
+        <option value="true">Per night (advised)</option>
+        <option value="false">Per guest per night</option>
+      </select>
+      <input
+        type="number"
+        id="custom"
+        min="0"
+        max="60"
+        disabled
+        placeholder="Custom pricing policy"
+      />
+    </div>
+
     <h1>Finally tell us what is your free cancellation period policy.</h1>
 
     <label for="cancellation-policy">
@@ -229,6 +247,7 @@
         id="custom"
         min="0"
         max="60"
+        disabled
         placeholder="Custom free cancellation period policy"
       />
     </div>
@@ -245,7 +264,7 @@
 
   <h1 *ngIf="mode == 'update' || mode == 'main-form'" >Show us the photos of your unit.</h1>
 
-  <app-photo-upload *ngIf="mode == 'update' || mode == 'main-form'" (mode)="handleModeChange($event)"></app-photo-upload>
+  <app-photo-upload *ngIf="mode == 'update' || mode == 'main-form'" (step)="handleModeChange($event)"></app-photo-upload>
 
   <h1 *ngIf="mode == 'update' || mode == 'photo-upload'" >Now let`s define price lists for your unit.</h1>
 

@@ -25,24 +25,31 @@
 
 <div id="#price-list" class="wrapper">
   <div id="add-price-list">
-    <select id="policy">
-      <option value="placeHolder">Pick the pricing strategy</option>
-      <option value="true">Per night (advised)</option>
-      <option value="false">Per guest per night</option>
-    </select>
-
     <div class="wrapper">
       <mat-card class="calendar">
-        <mat-calendar [(selected)]="start"></mat-calendar>
+        <mat-calendar [minDate]="getMinDate()" [(selected)]="start"></mat-calendar>
       </mat-card>
       <mat-card class="calendar">
-        <mat-calendar [(selected)]="end"></mat-calendar>
+        <mat-calendar [minDate]="getMinDate()" [(selected)]="end"></mat-calendar>
       </mat-card>
     </div>
-    <label>
-      Selected date range: {{ formatDate(start) }} - {{ formatDate(end) }}
+      <label *ngIf="start > end" class="validator">
+        End date can`t be before start date!
+      </label>
+      <label>
+        Selected date range: {{ formatDate(start) }} - {{ formatDate(end) }}
+      </label>
+
+      <select id="policy" [(ngModel)]="availability" *ngIf="mode == 'update'">
+        <option value="placeHolder" disabled>Pick the action you want to perform</option>
+        <option value="true">Make interval available and define a price</option>
+        <option value="false">Disable an interval</option>
+      </select>
+
+      <label *ngIf="price <= 0" style="margin-bottom: 10px;" class="validator">
+        Price can`t be 0€!
     </label>
-    <div class="wrapper">
+    <div class="wrapper" *ngIf="availability === 'true'">
       <div class="vertical-wrapper">
         <label for="standard"> Standard price </label>
         <input
@@ -76,11 +83,21 @@
       </div>
     </div>
     <button
+      *ngIf="availability === 'true'"
       class="btn btn-outline-dark"
       style="width: 100%"
       (click)="addPriceList()"
     >
       Create new pricelist
+    </button>
+
+    <button
+      *ngIf="availability === 'false'"
+      class="btn btn-outline-dark"
+      style="width: 100%"
+      (click)="disableInterval()"
+    >
+      Disable the interval
     </button>
   </div>
 

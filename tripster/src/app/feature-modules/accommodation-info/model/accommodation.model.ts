@@ -55,3 +55,13 @@ export interface Review {
     reviewerSurname: string,
     reviewedId: number;
 }
+
+export interface Photo {
+    id: number;
+    bytes: string;
+}
+
+export interface Interval {
+    start: Date;
+    end: Date;
+}

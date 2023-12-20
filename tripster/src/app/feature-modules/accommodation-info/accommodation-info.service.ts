@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Accommodation, PriceList, PriceListAdapter, Review } from './model/accommodation.model';
+import { Accommodation, Interval, Photo, PriceList, PriceListAdapter, Review } from './model/accommodation.model';
 import { Observable, map } from 'rxjs';
 import { environment } from 'src/env/env';
 import { UtilService } from 'src/app/shared/util.service';
@@ -24,6 +24,24 @@ export class AccommodationInfoService {
       })
     );
   }
+
+  getPhotosWithIds(id: number): Observable<Photo[]> {
+    return this.http.get<Photo[]>(`${environment.apiHost}photos/crud/${id}`).pipe(
+      map((photos: Photo[]) => {
+        return photos.map(photo => {
+          return {
+            id: photo.id,
+            bytes: this.util.base64ToDataURL(photo.bytes)
+          };
+        });
+      })
+    );
+  }
+
+  deleteBatchPhotos(ids: number[]): Observable<number> {
+    return this.http.request<number>('delete', `${environment.apiHost}photos`, { body: ids });
+  }
+
 
   addAccommodation(accommodation: Accommodation): Observable<Accommodation> {
     return this.http.post<Accommodation>(`${environment.apiHost}accommodations`, accommodation);
@@ -60,6 +78,10 @@ export class AccommodationInfoService {
 
   getReviews(id: number): Observable<Review[]> {
     return this.http.get<Review[]>(`${environment.apiHost}accommodations/reviews/${id}`);
+  }
+
+  disableInterval(id: number, interval: Interval): Observable<number> {
+    return this.http.post<number>(`${environment.apiHost}accommodations/price/${id}`, interval);
   }
 
 }

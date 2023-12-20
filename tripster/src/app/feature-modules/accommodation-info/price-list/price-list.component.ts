@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { PriceList, PriceListAdapter } from '../model/accommodation.model';
+import { Interval, PriceList, PriceListAdapter } from '../model/accommodation.model';
 import { AccommodationInfoService } from '../accommodation-info.service';
 
 @Component({
@@ -21,9 +21,11 @@ export class PriceListComponent implements OnInit {
 
   priceLists: PriceList[] = [];
 
+  availability: string = 'true';
   activePricelists: PriceList[] = [];
 
   mode = 'add';
+
 
   constructor(private accommodationService: AccommodationInfoService) { }
 
@@ -40,6 +42,9 @@ export class PriceListComponent implements OnInit {
   }
 
   addPriceList() {
+    if (this.start > this.end || this.price <= 0) {
+      return;
+    }
     const newPriceList: PriceList = {
       start: this.start,
       end: this.end,
@@ -172,6 +177,31 @@ export class PriceListComponent implements OnInit {
       this.id = +id;
       // this.mode = 'add';
     }
+  }
+
+  getMinDate(): Date {
+    let date: Date = new Date();
+    date.setHours(0, 0, 0, 0);
+    return date;
+  }
+
+  disableInterval(): void {
+    let interval: Interval = {
+      start: this.start,
+      end: this.end
+    }
+
+    this.accommodationService.disableInterval(this.id, interval).subscribe({
+      next: (response: number) => {
+        console.log(`Disabled ${response} dates.`);
+        this.priceLists = [];
+        this.getPricelists();
+      },
+      error: (err: any) => {
+        console.error('Failed to disable interval');
+      }
+    })
+
   }
 
 }
