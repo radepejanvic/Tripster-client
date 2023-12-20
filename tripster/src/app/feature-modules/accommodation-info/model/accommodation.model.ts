@@ -19,7 +19,10 @@ export interface Accommodation {
     amenities: number[],
     cancelDuration: number,
     pricePerNight: boolean
-    calendar?: any
+    calendar?: any,
+    rating: number,
+    numOfReviews: number
+
 }
 
 export interface PriceList {

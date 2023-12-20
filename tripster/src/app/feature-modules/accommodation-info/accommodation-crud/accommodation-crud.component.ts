@@ -110,7 +110,9 @@ export class AccommodationCrudComponent implements OnInit {
       description: this.form.value.description || '',
       amenities: this.getCheckedAmenities() || [],
       cancelDuration: this.form.value.cancelDuration || 0,
-      pricePerNight: this.form.value.pricePerNight || true
+      pricePerNight: this.form.value.pricePerNight || true,
+      rating: 0,
+      numOfReviews: 0
     };
   }
 
