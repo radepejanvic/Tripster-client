@@ -16,7 +16,8 @@
       <h4>{{ accommodation.shortDescription }}</h4>
     </div>
 
-    <app-rating></app-rating>
+    <app-rating [reviews]="accommodation.numOfReviews"
+                [rating]="accommodation.rating" ></app-rating>
   </div>
 
   <div id="menu">
