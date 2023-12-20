@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AccommodationInfoService } from '../accommodation-info.service';
 import { Accommodation } from '../model/accommodation.model';
 import { ActivatedRoute } from '@angular/router';
+import { AuthorizationService } from '../../authorization/authorization.service';
 
 @Component({
 	selector: 'app-photos',
@@ -17,8 +18,9 @@ export class PhotosComponent implements OnInit {
 
 	constructor(
 		private route: ActivatedRoute,
-		private service: AccommodationInfoService
-	) {}
+		private service: AccommodationInfoService,
+		private authorization: AuthorizationService
+	) { }
 
 	ngOnInit(): void {
 		this.route.params.subscribe((params) => {
@@ -42,5 +44,9 @@ export class PhotosComponent implements OnInit {
 				console.error('Error fetching photos', err);
 			},
 		});
+	}
+
+	isAuthorized(): boolean {
+		return this.authorization.isLoggedIn() && this.authorization.getRole() == 'ROLE_HOST' && this.authorization.getPersonId() == this.accommodation.ownerId;
 	}
 }

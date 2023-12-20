@@ -17,31 +17,41 @@ const routes: Routes = [
 		path: 'updateAccount',
 		component: UserAccountUpdateComponent,
 		canActivate: [AuthGuard],
-		data: { role: ['ROLE_HOST', 'ROLE_GUEST'] },
+		data: { role: ['ROLE_HOST', 'ROLE_GUEST'] }
 	},
 	{ path: 'filterPage', component: FilterPageComponent },
 	{
 		path: 'accommodationRequests',
 		component: FilterPageComponent,
 		canActivate: [AuthGuard],
-		data: { role: ['ROLE_ADMIN'] },
+		data: { role: ['ROLE_ADMIN'] }
 	},
 	{ path: 'accommodationInfo', component: PhotosComponent },
 	{ path: 'login', component: LoginComponent },
-	{ path: 'addAccommodation', component: AccommodationCrudComponent },
 	{
 		path: 'updateAccount',
 		component: UserAccountUpdateComponent,
 		canActivate: [AuthGuard],
-		data: { role: ['ROLE_HOST', 'ROLE_GUEST'] },
+		data: { role: ['ROLE_HOST', 'ROLE_GUEST'] }
 	},
 
-	{ path: 'addAccommodation', component: AccommodationCrudComponent },
-	{ path: 'updateAccommodation/:id', component: AccommodationCrudComponent },
+	{
+		path: 'addAccommodation',
+		component: AccommodationCrudComponent,
+		canActivate: [AuthGuard],
+		data: { role: ['ROLE_HOST'] }
+	},
+
+	{
+		path: 'updateAccommodation/:id',
+		component: AccommodationCrudComponent,
+		canActivate: [AuthGuard],
+		data: { role: ['ROLE_HOST'] }
+	}
 ];
 
 @NgModule({
 	imports: [RouterModule.forRoot(routes)],
 	exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
