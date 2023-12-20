@@ -8,7 +8,7 @@
                     <div class="datePicker">
                         <mat-form-field>
                             <mat-label>Check in</mat-label>
-                            <input matInput [matDatepicker]="checkinPicker" formControlName="start" [matDatepickerFilter]="rangeFilter"
+                            <input matInput [matDatepicker]="checkinPicker" formControlName="start" [matDatepickerFilter]="dateFilter"
                             readonly>
                             <mat-datepicker-toggle matIconSuffix [for]="checkinPicker"></mat-datepicker-toggle>
                             <mat-datepicker #checkinPicker ></mat-datepicker>

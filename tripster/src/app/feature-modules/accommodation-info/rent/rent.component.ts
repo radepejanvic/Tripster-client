@@ -6,6 +6,9 @@ import { AuthorizationService } from '../../authorization/authorization.service'
 import { ReservationService } from '../reservation.service';
 import { UtilService } from 'src/app/shared/util.service';
 import { ActivatedRoute } from '@angular/router';
+import { AccommodationInfoService } from '../accommodation-info.service';
+import { error } from 'jquery';
+import { Accommodation } from '../model/accommodation.model';
 
 @Component({
   selector: 'app-rent',
@@ -18,14 +21,17 @@ export class RentComponent implements OnInit {
 
   constructor(private authorizationService: AuthorizationService, 
               private reservationService: ReservationService,
+              private accommodationService: AccommodationInfoService,
               private util: UtilService,
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute 
+              ) {}
 
   
   start: Date;
   end: Date; 
   today: Date;
   id: number;
+  pricePerNight: boolean = true;
   totalPrice: number;
   calendar: Day[] = [];
   errorText: string = '';
@@ -54,6 +60,10 @@ export class RentComponent implements OnInit {
         }
       }
     )
+    this.accommodationService.getAccommodation(this.id).subscribe({
+      next: (accommodation : Accommodation) => { this.pricePerNight = accommodation.pricePerNight; },
+      error: (error: any) => { console.error("Failed to get pricing type from the accommodation.", error); }
+    })
   }
 
 
@@ -63,52 +73,39 @@ export class RentComponent implements OnInit {
       this.errorText = "Form is invalid.";
       return;
     }
-    if(!this.isDateRangeContinual()) {
+    if (!this.areDatesValid()) {
+      this.errorText = "Start date cannot be after end date."
+      return;
+    }
+    if (!this.isDateRangeContinual()) {
       this.errorText = "Selected dates include invalid dates.";
       return;
     }
     const reservation: Reservation = {
-      start: this.start || new Date, 
-      end: this.end || new Date,
+      start: this.reservationForm.value.start || new Date, 
+      end: this.reservationForm.value.end || new Date,
       duration: this.calculateDuration(),
       guestsNo: this.reservationForm.value.guestsNo,
       //Ovde se poziva racunanje cene
-      price: this.reservationForm.value.price,
+      price: this.calculatePrice(),
       guestId: this.authorizationService.getPersonId(),
       accommodationId: this.id
     }
     this.reservationService.addReservation(reservation).subscribe(
         (response: Reservation) => {
-          console.log("Reservation added successfully.");
-          console.log(response);
+          console.log("Reservation added successfully.", response);
           
         },
         (error: any) => {
           console.error("Failed to create a reservation.", error);
+
         }
     ) 
   }
-
-  setCustomValidators() {
-    this.reservationForm.setValidators(this.capValidator.bind(this));
-    this.reservationForm.updateValueAndValidity();
-  }
-
-  capValidator(control: AbstractControl): ValidationErrors | null {
-
-    const start = control.get('start')?.value;
-    const end = control.get('end')?.value;
-
-    if (start > end) {
-      return { 'dateError': true, 'message': 'Start date can`t be after than end date.' }
-    }
-
-    return null;
-  }
-
+  
   calculateDuration(): number {
-    const end = this.end?.valueOf() || 0;
-    const start = this.start?.valueOf() || 0;
+    const end = this.reservationForm.value.end?.valueOf() || 0;
+    const start = this.reservationForm.value.start?.valueOf() || 0;
     if (end == 0 || start == 0) {
       return 0;
     }
@@ -116,7 +113,6 @@ export class RentComponent implements OnInit {
   } 
 
   dateFilter = (date: Date | null): boolean => {
-    // Check if the given date exists in the availableDates array
     return this.calendar.some(day =>
       this.isSameDay(date, day.date)
     );
@@ -130,14 +126,6 @@ export class RentComponent implements OnInit {
       date1.getDate() === date2.getDate()
     );
   }
-
-  rangeFilter = (date: Date | null): boolean => {
-      if (!date || !this.calendar) {
-        return false;
-      }
-      return this.calendar.some(availableDate => this.isSameDay(availableDate.date, date));
-          
-    };
 
   adapterToDay(adapters: DayAdapter[]): Day[] {
     return adapters.map((adapter) => {
@@ -156,22 +144,36 @@ export class RentComponent implements OnInit {
     });
   }
 
+  areDatesValid(): boolean {
+     return this.reservationForm.value.start < this.reservationForm.value.end;
+  }
+
   isDateRangeContinual(): boolean {
     let checkDay = new Date();
     checkDay.setDate(this.reservationForm.value.start.getDate());
     while(checkDay < this.reservationForm.value.end) {
       checkDay.setDate(checkDay.getDate() + 1);
-      if(!this.rangeFilter(checkDay)) {
+      if(!this.dateFilter(checkDay)) {
         return false;
       }
     }
     return true;
   }
 
-  calculatePrice(): number {
-    //Ovde treba da se racuna cena na osnovu oznake u apartmanu
-    //    
-    return 0;
+  calculatePrice(): number {  
+    let price = 0;
+    let checkDay = new Date();
+    checkDay.setDate(this.reservationForm.value.start.getDate());
+    while(checkDay < this.reservationForm.value.end) {
+      let diff = this.calendar.find(date => this.isSameDay(date.date, checkDay))?.price;
+      if (this.pricePerNight) {
+        if(diff) price = price + diff;
+      } else {
+        if(diff) price = price + diff * this.reservationForm.value.guestsNo;
+      }
+      checkDay.setDate(checkDay.getDate() + 1);
+    }
+    return price;
   }
 
 }
