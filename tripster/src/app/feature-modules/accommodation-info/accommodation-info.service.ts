@@ -12,6 +12,10 @@ export class AccommodationInfoService {
 
   constructor(private http: HttpClient, private util: UtilService) { }
 
+  options = {
+    withCredentials: true
+  };
+
   getAccommodation(id: number): Observable<Accommodation> {
     return this.http.get<Accommodation>(`${environment.apiHost}accommodations/${id}`);
   }
@@ -81,7 +85,7 @@ export class AccommodationInfoService {
   }
 
   disableInterval(id: number, interval: Interval): Observable<number> {
-    return this.http.post<number>(`${environment.apiHost}accommodations/price/${id}`, interval);
+    return this.http.post<number>(`${environment.apiHost}accommodations/calendar/${id}`, interval);
   }
 
 }

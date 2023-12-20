@@ -6,14 +6,15 @@ import { GeocodingService } from '../geocoding.service';
   templateUrl: './map.component.html',
   styleUrl: './map.component.css'
 })
-export class MapComponent implements OnInit, OnChanges {
+export class MapComponent implements OnInit {
 
   @Input() address: string = '';
-  @Input() latitude: number = 0;
-  @Input() longitude: number = 0;
 
   center!: google.maps.LatLngLiteral;
   map!: google.maps.Map;
+
+  myLatLng: { lat: number, lng: number } = { lat: 42.546, lng: 21.882 };
+
   mapOptions: google.maps.MapOptions = {
     maxZoom: 17,
     zoom: 13,
@@ -22,36 +23,21 @@ export class MapComponent implements OnInit, OnChanges {
 
   constructor(private geocodingService: GeocodingService) { }
   ngOnInit() {
-    if (this.address != '') {
-      this.centerByAddress();
-    }
 
-    if (this.latitude != 0 && this.longitude != 0) {
-      this.centerByLatLong();
-    }
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-    if (changes['address']) {
-      this.centerByAddress();
-    }
-    if (changes['latitude'] || changes['longitude']) {
-      this.centerByLatLong();
-    }
-  }
-
-  centerByAddress() {
-    this.geocodingService.getLocation(this.address).subscribe((data: any) => {
-      this.center = data.results[0].geometry.location;
+    this.geocodingService.search(this.address).subscribe({
+      next: (result: any) => {
+        console.log(result);
+        this.myLatLng = { lat: Number(result[0].lat), lng: Number(result[0].lon) };
+        console.log(this.myLatLng);
+        this.mapOptions = {
+          center: this.myLatLng,
+          zoom: 15
+        };
+      },
+      error: (err: any) => {
+        console.error('Failed to find location.', err);
+      }
     });
-    this.map.setCenter(this.center);
   }
-
-  centerByLatLong() {
-    this.center.lat = this.latitude;
-    this.center.lng = this.longitude;
-    this.map.setCenter(this.center);
-  }
-
 }
+
