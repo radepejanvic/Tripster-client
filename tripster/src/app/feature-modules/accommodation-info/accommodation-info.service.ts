@@ -12,6 +12,10 @@ export class AccommodationInfoService {
 
   constructor(private http: HttpClient, private util: UtilService) { }
 
+  options = {
+    withCredentials: true
+  };
+
   getAccommodation(id: number): Observable<Accommodation> {
     return this.http.get<Accommodation>(`${environment.apiHost}accommodations/${id}`);
   }
