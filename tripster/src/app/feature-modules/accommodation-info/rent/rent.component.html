@@ -8,17 +8,17 @@
                     <div class="datePicker">
                         <mat-form-field>
                             <mat-label>Check in</mat-label>
-                            <input matInput [matDatepicker]="checkinPicker" formControlName="start" [matDatepickerFilter]="rangeFilter" readonly>
-                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <input matInput [matDatepicker]="checkinPicker" formControlName="start" [matDatepickerFilter]="rangeFilter"
+                            readonly>
                             <mat-datepicker-toggle matIconSuffix [for]="checkinPicker"></mat-datepicker-toggle>
-                            <mat-datepicker #checkinPicker></mat-datepicker>
+                            <mat-datepicker #checkinPicker ></mat-datepicker>
                         </mat-form-field>
                     </div>
                     <div class="datePicker">
                         <mat-form-field>
                             <mat-label>Check out</mat-label>
-                            <input matInput [matDatepicker]="checkoutPicker" formControlName="end" [matDatepickerFilter]="dateFilter" readonly>
-                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <input matInput [matDatepicker]="checkoutPicker" formControlName="end" [matDatepickerFilter]="dateFilter"
+                            readonly>
                             <mat-datepicker-toggle matIconSuffix [for]="checkoutPicker"></mat-datepicker-toggle>
                             <mat-datepicker #checkoutPicker></mat-datepicker>
                         </mat-form-field>
@@ -31,12 +31,11 @@
                 
                 <span>
                     <label> Start date: </label>
-                    <!-- <label class="form-control">{{util.formatDate(start)}}</label> -->
-                    <!-- <input type="text" disabled="true" placeholder="Pick from calendar" [(ngModel)]="util.formatDate(start)" > -->
+                    <input type="text" disabled="true" placeholder="Pick from calendar">
                 </span>
                 <span>
                     <label> End date: </label>
-                    <input type="text" disabled="true" placeholder="Pick from calendar" value="">
+                    <input type="text" disabled="true" placeholder="Pick from calendar">
                 </span>
                 <span>
                     <label> Number of guests: </label>
@@ -47,7 +46,7 @@
                     <input type="text" disabled="true" placeholder="Total price" value="totalPrice">
                 </span>
                 <button type="submit " class="btn btn-outline-dark"> Make a reservation </button>
-                <label>{{errorText}}</label>
+                <label class="validator">{{errorText}}</label>
             </div>
         </div>
     </form>

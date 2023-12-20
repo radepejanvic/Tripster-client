@@ -24,6 +24,7 @@ export class RentComponent implements OnInit {
   
   start: Date;
   end: Date; 
+  today: Date;
   id: number;
   totalPrice: number;
   calendar: Day[] = [];
@@ -58,17 +59,20 @@ export class RentComponent implements OnInit {
 
   onSubmit() {
     this.errorText = '';
-    console.log(this.reservationForm);
     if (!this.reservationForm.valid) { 
       this.errorText = "Form is invalid.";
       return;
-     }
-     console.log(this.util.formatDate(this.start));
+    }
+    if(!this.isDateRangeContinual()) {
+      this.errorText = "Selected dates include invalid dates.";
+      return;
+    }
     const reservation: Reservation = {
       start: this.start || new Date, 
       end: this.end || new Date,
       duration: this.calculateDuration(),
       guestsNo: this.reservationForm.value.guestsNo,
+      //Ovde se poziva racunanje cene
       price: this.reservationForm.value.price,
       guestId: this.authorizationService.getPersonId(),
       accommodationId: this.id
@@ -83,9 +87,6 @@ export class RentComponent implements OnInit {
           console.error("Failed to create a reservation.", error);
         }
     ) 
-
-    
-    
   }
 
   setCustomValidators() {
@@ -131,14 +132,14 @@ export class RentComponent implements OnInit {
   }
 
   rangeFilter = (date: Date | null): boolean => {
-        if (!date || !this.calendar) {
-          return false;
-        }
-        return this.calendar.some(availableDate => this.isSameDay(availableDate.date, date));
-           
+      if (!date || !this.calendar) {
+        return false;
+      }
+      return this.calendar.some(availableDate => this.isSameDay(availableDate.date, date));
+          
     };
 
-    adapterToDay(adapters: DayAdapter[]): Day[] {
+  adapterToDay(adapters: DayAdapter[]): Day[] {
     return adapters.map((adapter) => {
       const date = this.util.arrayToDate(adapter.date);
 
@@ -153,6 +154,24 @@ export class RentComponent implements OnInit {
           price: adapter.price
       };
     });
+  }
+
+  isDateRangeContinual(): boolean {
+    let checkDay = new Date();
+    checkDay.setDate(this.reservationForm.value.start.getDate());
+    while(checkDay < this.reservationForm.value.end) {
+      checkDay.setDate(checkDay.getDate() + 1);
+      if(!this.rangeFilter(checkDay)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  calculatePrice(): number {
+    //Ovde treba da se racuna cena na osnovu oznake u apartmanu
+    //    
+    return 0;
   }
 
 }

@@ -42,3 +42,8 @@ p {
 .date-picker-wrapper {
     display: flex;
 }
+
+.validator {
+    color: red;
+    margin: 10px;
+}
