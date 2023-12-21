@@ -68,7 +68,17 @@ export class FilterPageComponent implements OnInit {
 					});
 				});
 		}
+		if (this.role == 'ROLE_GUEST') {
+			this.service
+				.getAllAccommodations()
+				.subscribe((value: AccommodationInfoCard[]) => {
+					this.accommodations = value;
 
+					value.map((item) => {
+						item.url = this.util.base64ToDataURL(item.photo);
+					});
+				});
+		}
 		this.mainFormGroup = this.fb.group({
 			basicFilter: this.fb.group({
 				destination: new FormControl(null),

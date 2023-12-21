@@ -1,56 +1,93 @@
 <div id="rent">
-    <form [formGroup]="reservationForm" id="preview" (ngSubmit)="onSubmit()">
-        <div class="reservation-wrapper">
-            <div>
-                <h1> Make a reservation for {{name}} </h1>
-                <p> Pick the time frame that best suits you. </p>        
-                <div class="date-picker-wrapper">
-                    <div class="datePicker">
-                        <mat-form-field>
-                            <mat-label>Check in</mat-label>
-                            <input matInput [matDatepicker]="checkinPicker" formControlName="start" [matDatepickerFilter]="dateFilter"
-                            readonly>
-                            <mat-datepicker-toggle matIconSuffix [for]="checkinPicker"></mat-datepicker-toggle>
-                            <mat-datepicker #checkinPicker ></mat-datepicker>
-                        </mat-form-field>
-                    </div>
-                    <div class="datePicker">
-                        <mat-form-field>
-                            <mat-label>Check out</mat-label>
-                            <input matInput [matDatepicker]="checkoutPicker" formControlName="end" [matDatepickerFilter]="dateFilter"
-                            readonly>
-                            <mat-datepicker-toggle matIconSuffix [for]="checkoutPicker"></mat-datepicker-toggle>
-                            <mat-datepicker #checkoutPicker></mat-datepicker>
-                        </mat-form-field>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <h1> Reservation preview </h1>
-                <p> Review reservation details before finalizing your decision. </p>
-                
-                <span>
-                    <label> Start date: </label>
-                    <input type="text" disabled="true" placeholder="Pick from calendar">
-                </span>
-                <span>
-                    <label> End date: </label>
-                    <input type="text" disabled="true" placeholder="Pick from calendar">
-                </span>
-                <span>
-                    <label> Number of guests: </label>
-                    <input type="number" placeholder="Number of guests" min={{minCap}} max={{maxCap}} formControlName="guestsNo">
-                </span>
-                <span>
-                    <label> Total price: </label>
-                    <input type="text" disabled="true" placeholder="Total price" value="totalPrice">
-                </span>
-                <button type="submit " class="btn btn-outline-dark"> Make a reservation </button>
-                <label class="validator">{{errorText}}</label>
-                <label class="green-text">{{successText}}</label>
-            </div>
-        </div>
-    </form>
+	<form [formGroup]="reservationForm" id="preview" (ngSubmit)="onSubmit()">
+		<div class="reservation-wrapper">
+			<div>
+				<h1>Make a reservation for {{ name }}</h1>
+				<p>Pick the time frame that best suits you.</p>
+				<div class="date-picker-wrapper">
+					<div class="datePicker">
+						<mat-form-field>
+							<mat-label>Check in</mat-label>
+							<input
+								matInput
+								[matDatepicker]="checkinPicker"
+								formControlName="start"
+								[matDatepickerFilter]="dateFilter"
+								readonly
+							/>
+							<mat-datepicker-toggle
+								matIconSuffix
+								[for]="checkinPicker"
+							></mat-datepicker-toggle>
+							<mat-datepicker #checkinPicker></mat-datepicker>
+						</mat-form-field>
+					</div>
+					<div class="datePicker">
+						<mat-form-field>
+							<mat-label>Check out</mat-label>
+							<input
+								matInput
+								[matDatepicker]="checkoutPicker"
+								formControlName="end"
+								[matDatepickerFilter]="dateFilter"
+								readonly
+							/>
+							<mat-datepicker-toggle
+								matIconSuffix
+								[for]="checkoutPicker"
+							></mat-datepicker-toggle>
+							<mat-datepicker #checkoutPicker></mat-datepicker>
+						</mat-form-field>
+					</div>
+				</div>
+			</div>
+			<div>
+				<h1>Reservation preview</h1>
+				<p>
+					Review reservation details before finalizing your decision.
+				</p>
+
+				<span>
+					<label> Start date: </label>
+					<input
+						type="text"
+						disabled="true"
+						placeholder="Pick from calendar"
+					/>
+				</span>
+				<span>
+					<label> End date: </label>
+					<input
+						type="text"
+						disabled="true"
+						placeholder="Pick from calendar"
+					/>
+				</span>
+				<span>
+					<label> Number of guests: </label>
+					<input
+						type="number"
+						placeholder="Number of guests"
+						min="{{ minCap }}"
+						max="{{ maxCap }}"
+						formControlName="guestsNo"
+					/>
+				</span>
+				<span>
+					<label> Total price: </label>
+					<input
+						type="text"
+						disabled="true"
+						placeholder="Total price"
+						value="{{ totalPrice }}"
+					/>
+				</span>
+				<button type="submit " class="btn btn-outline-dark">
+					Make a reservation
+				</button>
+				<label class="validator">{{ errorText }}</label>
+				<label class="green-text">{{ successText }}</label>
+			</div>
+		</div>
+	</form>
 </div>
-
-

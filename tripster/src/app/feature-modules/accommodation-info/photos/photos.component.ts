@@ -15,12 +15,15 @@ export class PhotosComponent implements OnInit {
 	choice: string = 'overview';
 	accommodation!: Accommodation;
 	photos!: string[];
+	role: string;
 
 	constructor(
 		private route: ActivatedRoute,
 		private service: AccommodationInfoService,
 		private authorization: AuthorizationService
-	) { }
+	) {
+		this.role = authorization.getRole();
+	}
 
 	ngOnInit(): void {
 		this.route.params.subscribe((params) => {
@@ -47,6 +50,10 @@ export class PhotosComponent implements OnInit {
 	}
 
 	isAuthorized(): boolean {
-		return this.authorization.isLoggedIn() && this.authorization.getRole() == 'ROLE_HOST' && this.authorization.getPersonId() == this.accommodation.ownerId;
+		return (
+			this.authorization.isLoggedIn() &&
+			this.authorization.getRole() == 'ROLE_HOST' &&
+			this.authorization.getPersonId() == this.accommodation.ownerId
+		);
 	}
 }
