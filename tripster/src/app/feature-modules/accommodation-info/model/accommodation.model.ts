@@ -49,7 +49,7 @@ export interface Review {
     title: string,
     rate: number,
     comment: string,
-    status: string,
+    status?: string,
     reviewerId: number,
     reviewerName: string,
     reviewerSurname: string,
