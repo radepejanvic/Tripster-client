@@ -18,6 +18,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MapComponent } from './map/map.component';
+import { ReviewFormComponent } from './review-form/review-form.component';
 
 @NgModule({
 	declarations: [
@@ -33,6 +34,7 @@ import { MapComponent } from './map/map.component';
 		PhotoUploadComponent,
 		PriceListComponent,
 		MapComponent,
+  ReviewFormComponent,
 	],
 	imports: [
 		CommonModule,
