@@ -19,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MapComponent } from './map/map.component';
 import { ReviewFormComponent } from './review-form/review-form.component';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
 	declarations: [
@@ -34,7 +35,7 @@ import { ReviewFormComponent } from './review-form/review-form.component';
 		PhotoUploadComponent,
 		PriceListComponent,
 		MapComponent,
-  ReviewFormComponent,
+		ReviewFormComponent,
 	],
 	imports: [
 		CommonModule,
@@ -45,6 +46,7 @@ import { ReviewFormComponent } from './review-form/review-form.component';
 		FormsModule,
 		GoogleMapsModule,
 		ReactiveFormsModule,
+		CalendarModule
 	],
 	exports: [
 		PhotosComponent,
@@ -53,4 +55,4 @@ import { ReviewFormComponent } from './review-form/review-form.component';
 		OverviewComponent,
 	],
 })
-export class AccommodationInfoModule {}
+export class AccommodationInfoModule { }

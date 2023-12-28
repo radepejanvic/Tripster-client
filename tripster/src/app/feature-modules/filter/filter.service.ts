@@ -33,4 +33,9 @@ export class FilterService {
 			environment.apiHost + 'accommodations/host/' + id
 		);
 	}
+	getAllAccommodations(): Observable<AccommodationInfoCard[]> {
+		return this.http.get<AccommodationInfoCard[]>(
+			environment.apiHost + 'accommodations/guest'
+		);
+	}
 }

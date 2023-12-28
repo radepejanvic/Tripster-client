@@ -1,41 +1,52 @@
 <div class="container">
-  <div id="photos">
-    <img
-      *ngFor="let url of photos.slice(0, 5); let i = index"
-      [src]="url"
-      [class]="'item-' + (i + 1)"
-      alt="Photo"
-    />
+	<div id="photos">
+		<img
+			*ngFor="let url of photos.slice(0, 5); let i = index"
+			[src]="url"
+			[class]="'item-' + (i + 1)"
+			alt="Photo"
+		/>
 
-    <button type="button" class="item-5 shader">View gallery</button>
-  </div>
+		<button type="button" class="item-5 shader">View gallery</button>
+	</div>
 
-  <div id="title">
-    <div>
-      <h1>{{ accommodation.name }}</h1>
-      <h4>{{ accommodation.shortDescription }}</h4>
-    </div>
+	<div id="title">
+		<div>
+			<h1>{{ accommodation.name }}</h1>
+			<h4>{{ accommodation.shortDescription }}</h4>
+		</div>
 
-    <app-rating [reviews]="accommodation.numOfReviews"
-                [rating]="accommodation.rating" ></app-rating>
-  </div>
+		<app-rating
+			[reviews]="accommodation.numOfReviews"
+			[rating]="accommodation.rating"
+		></app-rating>
+	</div>
 
-  <div id="menu">
-    <button type="button">Overview</button>
-    <button type="button">Amenities</button>
-    <button type="button">Reviews</button>
-    <button type="button">Rent</button>
-    <button type="button" *ngIf="isAuthorized()" [routerLink]="['/updateAccommodation', id]" >Manage</button>
-  </div>
+	<div id="menu">
+		<button type="button">Overview</button>
+		<button type="button">Amenities</button>
+		<button type="button">Reviews</button>
+		<button type="button">Rent</button>
+		<button
+			type="button"
+			*ngIf="isAuthorized()"
+			[routerLink]="['/updateAccommodation', id]"
+		>
+			Manage
+		</button>
+	</div>
 
-  <hr />
-  <div id="canvas">
-    <app-overview [accommodation]="accommodation"></app-overview>
-    <hr />
-    <app-rent [name]="accommodation.name"></app-rent>
-    <hr />
-    <app-review-form [id]="id"></app-review-form>
-    <hr />
-    <app-reviews [id]="id"></app-reviews>
-  </div>
+	<hr />
+	<div id="canvas">
+		<app-overview [accommodation]="accommodation"></app-overview>
+		<hr />
+		<app-rent
+			[name]="accommodation.name"
+			*ngIf="role == 'ROLE_GUEST'"
+		></app-rent>
+		<hr />
+    	<app-review-form [id]="id"></app-review-form>
+		<hr />
+		<app-reviews [id]="id"></app-reviews>
+	</div>
 </div>
