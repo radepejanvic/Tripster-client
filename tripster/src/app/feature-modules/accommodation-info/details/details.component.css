@@ -19,7 +19,6 @@ h1 {
     display: flex;
     align-items: center;
     height: 50px;
-    /* background-color: pink; */
 }
 
 img {
@@ -29,4 +28,36 @@ img {
 p {
     margin: 0px 0px 0px 10px;
     font-size: 16px;
+}
+
+.owner_icon {
+    margin: 0px 0px 16px 10px;
+    height: 20px;
+}
+
+button {
+    height: 50px;
+    width: 48%;
+    background-color: white;
+    font-size: 18px;
+    margin: 0;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid black;
+    display: block;
+}
+
+#report {
+    color: red;
+    border-color: red;
+    transition: background-color 0.2s ease-out, color 0.2s ease-out;
+}
+
+#report:hover {
+    color: white;
+    background-color: red;
+}
+
+.buttons {
+    justify-content: space-between;
 }

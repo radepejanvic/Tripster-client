@@ -23,8 +23,12 @@
 
     <div id="owner_details">
         <h1> Owner`s info </h1>
+        <!-- <div class="detail"> -->
+            <!-- <img class="owner_icon" src="./assets/icons/add_comment.svg"> -->
+            <!-- <img class="owner_icon" src="./assets/icons/report.svg"> -->
+        <!-- </div> -->
         
-         <div class="detail">
+        <div class="detail">
             <img src="./assets/icons/person.svg">
             <p> Name: <b>{{accommodation.minCap}} - {{accommodation.maxCap}} people</b></p>
         </div>
@@ -36,5 +40,12 @@
             <img src="./assets/icons/phone.svg">
             <p> Phone: <b>{{getPricingStrategy()}}</b></p>
         </div>
+
+        <div class="detail buttons">
+            <button id="report"> Report </button>
+            <button class="btn btn-outline-dark"> Review </button>
+        </div>
+
+
     </div>
 </div>
