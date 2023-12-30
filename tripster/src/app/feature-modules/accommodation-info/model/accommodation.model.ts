@@ -50,6 +50,7 @@ export interface Review {
     rate: number,
     comment: string,
     status?: string,
+    timeStamp?: string,
     reviewerId: number,
     reviewerName?: string,
     reviewerSurname?: string,
