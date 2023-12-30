@@ -51,8 +51,8 @@ export interface Review {
     comment: string,
     status?: string,
     reviewerId: number,
-    reviewerName: string,
-    reviewerSurname: string,
+    reviewerName?: string,
+    reviewerSurname?: string,
     reviewedId: number;
 }
 
