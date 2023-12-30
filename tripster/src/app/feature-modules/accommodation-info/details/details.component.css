@@ -1,0 +1,32 @@
+#details {
+    display: flex;
+}
+
+#accommodation_details {
+    flex: 1;
+}
+
+#owner_details {
+    flex: 1;
+}
+
+h1 {
+    font-weight: 500;
+    font-size: 24px;
+}
+
+.detail {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    /* background-color: pink; */
+}
+
+img {
+    height: 35px;
+}
+
+p {
+    margin: 0px 0px 0px 10px;
+    font-size: 16px;
+}

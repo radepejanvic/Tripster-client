@@ -20,6 +20,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { MapComponent } from './map/map.component';
 import { ReviewFormComponent } from './review-form/review-form.component';
 import { CalendarModule } from 'primeng/calendar';
+import { DetailsComponent } from './details/details.component';
 
 @NgModule({
 	declarations: [
@@ -36,6 +37,7 @@ import { CalendarModule } from 'primeng/calendar';
 		PriceListComponent,
 		MapComponent,
 		ReviewFormComponent,
+  DetailsComponent,
 	],
 	imports: [
 		CommonModule,
