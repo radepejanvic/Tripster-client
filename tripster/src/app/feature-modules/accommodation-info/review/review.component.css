@@ -17,6 +17,7 @@ h3 {
 img {
     height: 18px;
     transition: height 0.3s ease;
+    cursor: pointer;
 }
 
 img:hover {
