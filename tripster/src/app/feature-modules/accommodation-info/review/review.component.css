@@ -10,8 +10,17 @@
 
 h3 {
     margin: 0;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
+}
+
+img {
+    height: 18px;
+    transition: height 0.3s ease;
+}
+
+img:hover {
+    height: 24px;
 }
 
 p {
