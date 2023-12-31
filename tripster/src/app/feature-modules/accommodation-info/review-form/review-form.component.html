@@ -1,6 +1,7 @@
 <div id="review_form">
     <h1> Leave a review </h1>
-    <p> Tell us what you liked and didn`t like about this vacation</p>
+    <p *ngIf="type == 'accommodation-review'"> Tell us what you did and did not like about this <b>unit</b> </p>
+    <p *ngIf="type == 'user-review'"> Tell us what you did and did not like about this <b>owner</b> </p>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <input type="text"
             name="review_title"

@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Review } from '../model/accommodation.model';
 import { ReviewService } from '../review.service';
 import { AuthorizationService } from '../../authorization/authorization.service';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-review-form',
@@ -14,7 +14,11 @@ export class ReviewFormComponent implements OnInit {
   id!: number;
   type!: string;
 
-  constructor(private reviewService: ReviewService, private authorizationService: AuthorizationService, @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(
+    private reviewService: ReviewService,
+    private authorizationService: AuthorizationService,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogRef: MatDialogRef<ReviewFormComponent>) { }
 
   form = new FormGroup({
     title: new FormControl('', [Validators.required]),
@@ -51,6 +55,8 @@ export class ReviewFormComponent implements OnInit {
     } else {
       this.addUserReview();
     }
+
+    this.dialogRef.close();
   }
 
   addAccommodationReview() {
