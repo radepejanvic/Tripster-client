@@ -41,7 +41,7 @@
             <p> Phone: <b>{{host.phone}}</b></p>
         </div>
 
-        <div class="detail buttons">
+        <div *ngIf="reviewable"  class="detail buttons">
             <button id="report"> Report </button>
             <button class="btn btn-outline-dark" (click)="openReviewFormDialog()"> Review </button>
         </div>

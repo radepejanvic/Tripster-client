@@ -4,6 +4,8 @@ import { UserAccountUpdateService } from '../../user-account-update/user-account
 import { PersonUpdate } from '../../user-account-update/model/user-update.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ReviewFormComponent } from '../review-form/review-form.component';
+import { ReviewService } from '../review.service';
+import { AuthorizationService } from '../../authorization/authorization.service';
 
 @Component({
   selector: 'app-details',
@@ -12,10 +14,13 @@ import { ReviewFormComponent } from '../review-form/review-form.component';
 })
 export class DetailsComponent implements OnInit {
   @Input() accommodation: Accommodation;
-
   host!: PersonUpdate;
+  reviewable: boolean = false;
 
-  constructor(private userService: UserAccountUpdateService, public dialog: MatDialog) { }
+  constructor(private userService: UserAccountUpdateService,
+    private reviewService: ReviewService,
+    private authorizationService: AuthorizationService,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -28,11 +33,14 @@ export class DetailsComponent implements OnInit {
       next: (response: PersonUpdate) => {
         this.host = response;
         console.log(this.host);
+        this.setReviewable();
       },
       error: (err: any) => {
         console.error('Error fetching host data.', err);
       }
     });
+
+
   }
 
   getPricingStrategy(): string {
@@ -58,5 +66,16 @@ export class DetailsComponent implements OnInit {
     });
   }
 
+
+  setReviewable(): void {
+    this.reviewService.canReviewHost(this.host.id, this.authorizationService.getPersonId()).subscribe({
+      next: (response: boolean) => {
+        this.reviewable = response;
+      },
+      error: (err: any) => {
+        console.error('Error checking user reviewability.', err);
+      }
+    });
+  }
 
 }
