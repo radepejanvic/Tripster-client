@@ -11,17 +11,21 @@ import { DeleteStatus, PersonUpdate } from './model/user-update.model';
 export class UserAccountUpdateService {
 
   constructor(private http: HttpClient) { }
- 
+
   updateUser(user: PersonUpdate): Observable<PersonUpdate> {
-    return this.http.put<PersonUpdate>(environment.apiHost+'person/update', user);
+    return this.http.put<PersonUpdate>(environment.apiHost + 'person/update', user);
   }
 
   getUser(id: number): Observable<PersonUpdate> {
-    return this.http.get<PersonUpdate>(environment.apiHost+'person/'+id);
+    return this.http.get<PersonUpdate>(environment.apiHost + 'person/' + id);
   }
 
   deleteUser(id: number): Observable<DeleteStatus> {
-    return this.http.delete<DeleteStatus>(environment.apiHost+'person/'+id);
+    return this.http.delete<DeleteStatus>(environment.apiHost + 'person/' + id);
+  }
+
+  getHost(id: number): Observable<PersonUpdate> {
+    return this.http.get<PersonUpdate>(`${environment.apiHost}person/hosts/${id}`);
   }
 
 }
