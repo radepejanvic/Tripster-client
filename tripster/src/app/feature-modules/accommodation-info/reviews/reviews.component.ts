@@ -37,7 +37,7 @@ export class ReviewsComponent implements OnInit {
         this.reviewable = response;
       },
       error: (err: any) => {
-        console.error('Error checking reviewability.', err);
+        console.error('Error checking accommodation reviewability.', err);
       }
     });
 
