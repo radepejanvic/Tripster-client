@@ -11,8 +11,12 @@ export class ReviewService {
 
   constructor(private http: HttpClient) { }
 
-  addReview(review: Review): Observable<Review> {
+  addAccommodationReview(review: Review): Observable<Review> {
     return this.http.post<Review>(`${environment.apiHost}accommodations/reviews`, review);
+  }
+
+  addUserReview(review: Review): Observable<Review> {
+    return this.http.post<Review>(`${environment.apiHost}users/reviews`, review);
   }
 
 }
