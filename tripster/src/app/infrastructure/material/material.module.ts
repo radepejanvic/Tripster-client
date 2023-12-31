@@ -8,6 +8,9 @@ import {
   DefaultMatCalendarRangeStrategy,
   MatCalendar
 } from '@angular/material/datepicker';
+import {
+  MatDialogModule,
+} from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -26,7 +29,9 @@ import { MatSliderModule } from '@angular/material/slider';
     MatFormFieldModule,
     MatNativeDateModule,
     MatCardModule,
-    MatSliderModule
+    MatSliderModule,
+    MatDialogModule
+
     // MatCalendar
   ],
   exports: [
@@ -38,7 +43,8 @@ import { MatSliderModule } from '@angular/material/slider';
     MatNativeDateModule,
     MatCardModule,
     MatCalendar,
-    MatSliderModule
+    MatSliderModule,
+    MatDialogModule
   ],
   providers: [
     {

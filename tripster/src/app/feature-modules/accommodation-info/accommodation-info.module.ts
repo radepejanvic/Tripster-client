@@ -37,7 +37,7 @@ import { DetailsComponent } from './details/details.component';
 		PriceListComponent,
 		MapComponent,
 		ReviewFormComponent,
-  DetailsComponent,
+		DetailsComponent,
 	],
 	imports: [
 		CommonModule,
@@ -54,7 +54,7 @@ import { DetailsComponent } from './details/details.component';
 		PhotosComponent,
 		RatingComponent,
 		AccommodationCrudComponent,
-		OverviewComponent,
+		OverviewComponent
 	],
 })
 export class AccommodationInfoModule { }
