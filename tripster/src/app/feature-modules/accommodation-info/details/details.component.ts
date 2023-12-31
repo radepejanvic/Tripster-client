@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Accommodation } from '../model/accommodation.model';
 import { UserAccountUpdateService } from '../../user-account-update/user-account-update.service';
 import { PersonUpdate } from '../../user-account-update/model/user-update.model';
+import { MatDialog } from '@angular/material/dialog';
+import { ReviewFormComponent } from '../review-form/review-form.component';
 
 @Component({
   selector: 'app-details',
@@ -10,9 +12,10 @@ import { PersonUpdate } from '../../user-account-update/model/user-update.model'
 })
 export class DetailsComponent implements OnInit {
   @Input() accommodation: Accommodation;
+
   host!: PersonUpdate;
 
-  constructor(private userService: UserAccountUpdateService) { }
+  constructor(private userService: UserAccountUpdateService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -43,6 +46,16 @@ export class DetailsComponent implements OnInit {
       case 'ROOM': return 'Room';
       default: return 'Unit';
     }
+  }
+
+  openReviewFormDialog(): void {
+    this.dialog.open(ReviewFormComponent, {
+      width: '400px',
+      data: {
+        id: this.host.id,
+        type: 'user-review'
+      }
+    });
   }
 
 
