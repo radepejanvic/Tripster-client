@@ -18,6 +18,7 @@ h1 {
 img {
     width: 24px;
     transition: width 0.3s ease;
+    cursor: pointer;
 }
 
 img:hover {
