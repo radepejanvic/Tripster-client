@@ -46,7 +46,26 @@ export class ReviewFormComponent implements OnInit {
       console.error("Invalid form");
     }
 
-    this.reviewService.addReview(this.mapFormToReview()).subscribe({
+    if (this.type == 'accommodation-review') {
+      this.addAccommodationReview();
+    } else {
+      this.addUserReview();
+    }
+  }
+
+  addAccommodationReview() {
+    this.reviewService.addAccommodationReview(this.mapFormToReview()).subscribe({
+      next: (response: Review) => {
+        console.log(response);
+      },
+      error: (err: any) => {
+        console.error("Error posting new review.", err);
+      }
+    });
+  }
+
+  addUserReview() {
+    this.reviewService.addUserReview(this.mapFormToReview()).subscribe({
       next: (response: Review) => {
         console.log(response);
       },
