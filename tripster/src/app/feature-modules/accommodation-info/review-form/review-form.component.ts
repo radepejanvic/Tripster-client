@@ -33,12 +33,9 @@ export class ReviewFormComponent {
   }
 
   onSubmit(): void {
-    console.log(this.form.value.title, this.form.value.comment, this.form.value.rate);
     if (!this.form.valid) {
       console.error("Invalid form");
     }
-
-    console.log(this.mapFormToReview());
 
     this.reviewService.addReview(this.mapFormToReview()).subscribe({
       next: (response: Review) => {
