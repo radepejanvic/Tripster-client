@@ -1,15 +1,36 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Accommodation } from '../model/accommodation.model';
-import { PersonCRUD } from '../../user-registration/model/user.model';
+import { UserAccountUpdateService } from '../../user-account-update/user-account-update.service';
+import { PersonUpdate } from '../../user-account-update/model/user-update.model';
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
   styleUrl: './details.component.css'
 })
-export class DetailsComponent {
+export class DetailsComponent implements OnInit {
   @Input() accommodation: Accommodation;
-  @Input() owner: PersonCRUD;
+  host!: PersonUpdate;
+
+  constructor(private userService: UserAccountUpdateService) { }
+
+  ngOnInit(): void {
+
+    if (!this.accommodation.ownerId) {
+      console.error('Accommodation doesn`t contain host data.');
+      return;
+    }
+
+    this.userService.getHost(this.accommodation.ownerId).subscribe({
+      next: (response: PersonUpdate) => {
+        this.host = response;
+        console.log(this.host);
+      },
+      error: (err: any) => {
+        console.error('Error fetching host data.', err);
+      }
+    });
+  }
 
   getPricingStrategy(): string {
     return this.accommodation.pricePerNight ? 'price per night' : 'price per guest per night';
