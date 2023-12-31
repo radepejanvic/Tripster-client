@@ -55,6 +55,6 @@ import { DetailsComponent } from './details/details.component';
 		RatingComponent,
 		AccommodationCrudComponent,
 		OverviewComponent
-	],
+	]
 })
 export class AccommodationInfoModule { }

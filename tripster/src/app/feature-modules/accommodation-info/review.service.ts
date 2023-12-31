@@ -19,4 +19,11 @@ export class ReviewService {
     return this.http.post<Review>(`${environment.apiHost}users/reviews`, review);
   }
 
+  canReviewAccommodation(accommodation: number, guest: number): Observable<boolean> {
+    return this.http.get<boolean>(`${environment.apiHost}accommodations/reviews/${accommodation}/${guest}`);
+  }
+
+  canReviewHost(host: number, guest: number): Observable<boolean> {
+    return this.http.get<boolean>(`${environment.apiHost}users/reviews/${host}/${guest}`);
+  }
 }
