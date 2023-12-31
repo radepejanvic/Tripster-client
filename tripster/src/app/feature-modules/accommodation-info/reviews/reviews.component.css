@@ -9,6 +9,17 @@
 }
 
 h1 {
+    display: flex;
+    justify-content: space-between;
     font-weight: 500;
     font-size: 24px;
+}
+
+img {
+    width: 24px;
+    transition: width 0.3s ease;
+}
+
+img:hover {
+    width: 26px;
 }
