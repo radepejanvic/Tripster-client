@@ -21,6 +21,7 @@ import { MapComponent } from './map/map.component';
 import { ReviewFormComponent } from './review-form/review-form.component';
 import { CalendarModule } from 'primeng/calendar';
 import { DetailsComponent } from './details/details.component';
+import { ToggleButtonModule } from 'primeng/togglebutton';
 
 @NgModule({
 	declarations: [
@@ -48,7 +49,8 @@ import { DetailsComponent } from './details/details.component';
 		FormsModule,
 		GoogleMapsModule,
 		ReactiveFormsModule,
-		CalendarModule
+		CalendarModule,
+		ToggleButtonModule
 	],
 	exports: [
 		PhotosComponent,

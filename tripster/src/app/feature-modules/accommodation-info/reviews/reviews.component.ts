@@ -27,10 +27,8 @@ export class ReviewsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this.getAllAccommodationReviews();
-    // this.canReviewAccommodation();
-
-    this.getAllHostReviews();
+    this.getAllAccommodationReviews();
+    this.canReviewAccommodation();
 
   }
 
@@ -93,9 +91,14 @@ export class ReviewsComponent implements OnInit {
   toggleReviews(): void {
     if (this.checked) {
 
+      this.getAllHostReviews();
+      this.canReviewHost();
+
     } else {
+
       this.getAllAccommodationReviews();
       this.canReviewAccommodation();
+
     }
 
   }

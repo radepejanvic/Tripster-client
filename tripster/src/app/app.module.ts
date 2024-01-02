@@ -17,6 +17,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { GoogleMapsModule } from '@angular/google-maps'
 import { CalendarModule } from 'primeng/calendar';
+import { ToggleButtonModule } from 'primeng/togglebutton';
 
 
 @NgModule({
@@ -36,10 +37,11 @@ import { CalendarModule } from 'primeng/calendar';
     UserAccountUpdateModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
     NgxDropzoneModule,
     GoogleMapsModule,
-    CalendarModule
+    CalendarModule,
+    ToggleButtonModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

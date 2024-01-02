@@ -24,3 +24,14 @@ img {
 img:hover {
     width: 26px;
 }
+
+:host ::ng-deep .p-highlight.p-togglebutton,
+:host ::ng-deep .p-highlight.p-togglebutton:hover {
+    background: black;
+    border: none;
+    color: white;
+}
+
+:host ::ng-deep .p-togglebutton:focus {
+    box-shadow: 0 0 0 0.2rem white;
+}
