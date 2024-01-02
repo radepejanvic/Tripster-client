@@ -8,6 +8,7 @@ export interface PersonUpdate {
     userType: UserType;
     status: UserStatus;
 
+    userId?: number;
     name: string;
     surname: string
     phone: string;

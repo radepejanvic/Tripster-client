@@ -15,9 +15,9 @@ import { PersonUpdate } from '../../user-account-update/model/user-update.model'
 })
 export class ReviewsComponent implements OnInit {
   @Input() id!: number;
-  @Input() host!: number;
+  @Input() host!: PersonUpdate;
   reviews!: Review[];
-  reviewable: boolean = false;
+  reviewable: boolean = true;
   checked: boolean = false;
 
   constructor(private accommodationService: AccommodationInfoService,
@@ -28,18 +28,31 @@ export class ReviewsComponent implements OnInit {
   ngOnInit(): void {
 
     this.getAllAccommodationReviews();
-    this.canReviewAccommodation();
+    // this.canReviewAccommodation();
 
   }
 
   openReviewFormDialog(): void {
-    this.dialog.open(ReviewFormComponent, {
-      width: '400px',
-      data: {
-        id: this.id,
-        type: 'accommodation-review'
-      }
-    });
+    if (this.checked) {
+
+      this.dialog.open(ReviewFormComponent, {
+        width: '400px',
+        data: {
+          id: this.host.userId,
+          type: 'user-review'
+        }
+      });
+
+    } else {
+      this.dialog.open(ReviewFormComponent, {
+        width: '400px',
+        data: {
+          id: this.id,
+          type: 'accommodation-review'
+        }
+      });
+    }
+
   }
 
   getAllAccommodationReviews(): void {
@@ -66,7 +79,12 @@ export class ReviewsComponent implements OnInit {
   }
 
   getAllHostReviews(): void {
-    this.reviewService.getHostReviews(this.host).subscribe({
+    if (this.host.userId == undefined) {
+      console.error('Error fetching host data.');
+      return;
+    }
+
+    this.reviewService.getHostReviews(this.host.userId).subscribe({
       next: (response: Review[]) => {
         this.reviews = response;
 
@@ -78,7 +96,12 @@ export class ReviewsComponent implements OnInit {
   }
 
   canReviewHost(): void {
-    this.reviewService.canReviewHost(this.host, this.authorizationService.getPersonId()).subscribe({
+    if (this.host.userId == undefined) {
+      console.error('Error fetching host data.');
+      return;
+    }
+
+    this.reviewService.canReviewHost(this.host.userId, this.authorizationService.getUserId()).subscribe({
       next: (response: boolean) => {
         this.reviewable = response;
       },
@@ -94,12 +117,12 @@ export class ReviewsComponent implements OnInit {
     if (this.checked) {
 
       this.getAllHostReviews();
-      this.canReviewHost();
+      // this.canReviewHost();
 
     } else {
 
       this.getAllAccommodationReviews();
-      this.canReviewAccommodation();
+      // this.canReviewAccommodation();
 
     }
 

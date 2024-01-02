@@ -12,21 +12,14 @@ import { AuthorizationService } from '../../authorization/authorization.service'
   templateUrl: './details.component.html',
   styleUrl: './details.component.css'
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent {
   @Input() accommodation: Accommodation;
   @Input() host: PersonUpdate;
-  reviewable: boolean = false;
 
   constructor(private userService: UserAccountUpdateService,
     private reviewService: ReviewService,
     private authorizationService: AuthorizationService,
     public dialog: MatDialog) { }
-
-  ngOnInit(): void {
-
-    this.setReviewable();
-
-  }
 
   getPricingStrategy(): string {
     return this.accommodation.pricePerNight ? 'price per night' : 'price per guest per night';
@@ -39,28 +32,6 @@ export class DetailsComponent implements OnInit {
       case 'ROOM': return 'Room';
       default: return 'Unit';
     }
-  }
-
-  openReviewFormDialog(): void {
-    this.dialog.open(ReviewFormComponent, {
-      width: '400px',
-      data: {
-        id: this.host.id,
-        type: 'user-review'
-      }
-    });
-  }
-
-
-  setReviewable(): void {
-    this.reviewService.canReviewHost(this.host.id, this.authorizationService.getPersonId()).subscribe({
-      next: (response: boolean) => {
-        this.reviewable = response;
-      },
-      error: (err: any) => {
-        console.error('Error checking user reviewability.', err);
-      }
-    });
   }
 
 }
