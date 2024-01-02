@@ -30,4 +30,13 @@ export class ReviewService {
   getHostReviews(id: number): Observable<Review[]> {
     return this.http.get<Review[]>(`${environment.apiHost}users/reviews/${id}`);
   }
+
+  deleteAccommodationReview(id: number): Observable<boolean> {
+    return this.http.delete<boolean>(`${environment.apiHost}accommodations/reviews/${id}`);
+  }
+
+  deleteHostReview(id: number): Observable<boolean> {
+    return this.http.delete<boolean>(`${environment.apiHost}users/reviews/${id}`);
+  }
+
 }
