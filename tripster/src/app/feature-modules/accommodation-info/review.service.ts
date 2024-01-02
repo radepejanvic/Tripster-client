@@ -26,4 +26,8 @@ export class ReviewService {
   canReviewHost(host: number, guest: number): Observable<boolean> {
     return this.http.get<boolean>(`${environment.apiHost}users/reviews/${host}/${guest}`);
   }
+
+  getHostReviews(id: number): Observable<Review[]> {
+    return this.http.get<Review[]>(`${environment.apiHost}users/reviews/${id}`);
+  }
 }
