@@ -14,7 +14,7 @@ import { AuthorizationService } from '../../authorization/authorization.service'
 })
 export class DetailsComponent implements OnInit {
   @Input() accommodation: Accommodation;
-  host!: PersonUpdate;
+  @Input() host: PersonUpdate;
   reviewable: boolean = false;
 
   constructor(private userService: UserAccountUpdateService,
@@ -24,22 +24,7 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if (!this.accommodation.ownerId) {
-      console.error('Accommodation doesn`t contain host data.');
-      return;
-    }
-
-    this.userService.getHost(this.accommodation.ownerId).subscribe({
-      next: (response: PersonUpdate) => {
-        this.host = response;
-        console.log(this.host);
-        this.setReviewable();
-      },
-      error: (err: any) => {
-        console.error('Error fetching host data.', err);
-      }
-    });
-
+    this.setReviewable();
 
   }
 

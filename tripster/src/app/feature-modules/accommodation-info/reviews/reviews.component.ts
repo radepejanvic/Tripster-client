@@ -15,7 +15,7 @@ import { PersonUpdate } from '../../user-account-update/model/user-update.model'
 })
 export class ReviewsComponent implements OnInit {
   @Input() id!: number;
-  @Input() host!: PersonUpdate;
+  @Input() host!: number;
   reviews!: Review[];
   reviewable: boolean = false;
   checked: boolean = false;
@@ -66,7 +66,7 @@ export class ReviewsComponent implements OnInit {
   }
 
   getAllHostReviews(): void {
-    this.reviewService.getHostReviews(this.id).subscribe({
+    this.reviewService.getHostReviews(this.host).subscribe({
       next: (response: Review[]) => {
         this.reviews = response;
 
@@ -78,7 +78,7 @@ export class ReviewsComponent implements OnInit {
   }
 
   canReviewHost(): void {
-    this.reviewService.canReviewHost(this.host.id, this.authorizationService.getPersonId()).subscribe({
+    this.reviewService.canReviewHost(this.host, this.authorizationService.getPersonId()).subscribe({
       next: (response: boolean) => {
         this.reviewable = response;
       },

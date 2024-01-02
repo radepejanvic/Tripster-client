@@ -3,6 +3,8 @@ import { AccommodationInfoService } from '../accommodation-info.service';
 import { Accommodation } from '../model/accommodation.model';
 import { ActivatedRoute } from '@angular/router';
 import { AuthorizationService } from '../../authorization/authorization.service';
+import { UserAccountUpdateService } from '../../user-account-update/user-account-update.service';
+import { PersonUpdate } from '../../user-account-update/model/user-update.model';
 
 @Component({
 	selector: 'app-photos',
@@ -14,13 +16,15 @@ export class PhotosComponent implements OnInit {
 
 	choice: string = 'overview';
 	accommodation!: Accommodation;
+	host!: PersonUpdate;
 	photos!: string[];
 	role: string;
 
 	constructor(
 		private route: ActivatedRoute,
 		private service: AccommodationInfoService,
-		private authorization: AuthorizationService
+		private authorization: AuthorizationService,
+		private userService: UserAccountUpdateService
 	) {
 		this.role = authorization.getRole();
 	}
@@ -33,6 +37,7 @@ export class PhotosComponent implements OnInit {
 		this.service.getAccommodation(this.id).subscribe({
 			next: (result: Accommodation) => {
 				this.accommodation = result;
+				this.getHost();
 			},
 			error: (err: any) => {
 				console.error('Error fetching accommodation info', err);
@@ -55,5 +60,22 @@ export class PhotosComponent implements OnInit {
 			this.authorization.getRole() == 'ROLE_HOST' &&
 			this.authorization.getPersonId() == this.accommodation.ownerId
 		);
+	}
+
+	getHost() {
+		if (!this.accommodation.ownerId) {
+			console.error('Accommodation doesn`t contain host data.');
+			return;
+		}
+
+		this.userService.getHost(this.accommodation.ownerId).subscribe({
+			next: (response: PersonUpdate) => {
+				this.host = response;
+				console.log(this.host);
+			},
+			error: (err: any) => {
+				console.error('Error fetching host data.', err);
+			}
+		});
 	}
 }

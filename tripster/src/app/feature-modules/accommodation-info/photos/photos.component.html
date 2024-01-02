@@ -45,12 +45,12 @@
 			*ngIf="role == 'ROLE_GUEST'"
 		></app-rent>
 		<hr />
-		<app-details [accommodation]="accommodation"></app-details>
+		<app-details [accommodation]="accommodation" [host]="host"></app-details>
 		<!-- <hr *ngIf="role == 'ROLE_GUEST'"/>
     	<app-review-form 
 			[id]="id"
 			*ngIf="role == 'ROLE_GUEST'"></app-review-form> -->
 		<hr />
-		<app-reviews [id]="id"></app-reviews>
+		<app-reviews [id]="id" [host]="host.id"></app-reviews>
 	</div>
 </div>
