@@ -11,7 +11,7 @@ export interface PersonUpdate {
     name: string;
     surname: string
     phone: string;
-    
+
     adressId?: number;
 
     country: string;
@@ -19,11 +19,14 @@ export interface PersonUpdate {
     zipCode: string;
     street: string;
     number: string;
-    
+
+    rate?: number;
+    numOfReviews?: number;
+
 }
 
 export enum DeleteStatus {
-    SUCCESS = "SUCCESS", 
+    SUCCESS = "SUCCESS",
     NO_USER_FOUND = "NO_USER_FOUND",
     HAS_RESERVATIONS = "HAS_RESERVATIONS"
 }
