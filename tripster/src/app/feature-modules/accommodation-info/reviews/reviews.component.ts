@@ -89,6 +89,8 @@ export class ReviewsComponent implements OnInit {
   }
 
   toggleReviews(): void {
+    this.reviews = [];
+
     if (this.checked) {
 
       this.getAllHostReviews();

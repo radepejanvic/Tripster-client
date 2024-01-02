@@ -2,7 +2,7 @@
 
     <div id="review-list">
         <h1> Reviews <img *ngIf="reviewable" src="./assets/icons/add_review.svg"  (click)="openReviewFormDialog()"></h1>
-        <p-toggleButton class="toggle" [(ngModel)]="checked" onLabel="Host" offLabel="Accommodation"></p-toggleButton>
+        <p-toggleButton class="toggle" [(ngModel)]="checked" onLabel="Host" offLabel="Accommodation" (click)="toggleReviews()"></p-toggleButton>
         <app-review *ngFor="let review of reviews" [review]="review"></app-review>
     </div>
 
