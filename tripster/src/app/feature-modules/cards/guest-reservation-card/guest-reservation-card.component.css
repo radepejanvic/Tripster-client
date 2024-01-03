@@ -18,12 +18,12 @@ p {
 }
 
 .short-description {
-  margin-top: 40px;
+  margin-top: 70px;
 }
 
-.price-info {
+/* .price-info {
   margin-top: 20px;
-}
+} */
 .price {
   font-size: 16px;
   font-weight: 600;

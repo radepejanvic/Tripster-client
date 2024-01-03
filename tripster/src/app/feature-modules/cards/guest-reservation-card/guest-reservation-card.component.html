@@ -1,4 +1,4 @@
-<div class="card mb-3" [routerLink]="['/reservationInfo', reservation.id]">
+<div class="card mb-3" [routerLink]="['/accommodationInfo', reservation.id]">
   <div class="row g-0" style="height: 100%">
     <img
       src="{{ reservation.url }}"
@@ -12,19 +12,28 @@
         <p class="card-text">
           <small class="text-body-secondary">{{ reservation.address }}</small>
         </p>
+        <p class="card-text short-description mt-8">
+          {{ reservation.duration }} nights, {{ reservation.numOfGuest }} guests
+        </p>
+        <p class="card-text">
+          {{ reservation.timeStamp }}
+        </p>
       </div>
     </div>
 
     <div class="col-md-3">
       <div class="card-body">
-        <p class="card-text text-end">{{ reservation.address }}</p>
-        <p class="card-text text-end">
-          <small class="text-body-secondary">sadff</small>
-        </p>
-        <div class="mt-5">
-          <div class="row">
+        <div class="price-info">
+          <p class="card-text text-end">{{ reservation.status }}</p>
+
+          <p class="card-text text-end price">{{ reservation.price }}€</p>
+
+          <div
+            class="d-flex flex-row-reverse mt-4"
+            *ngIf="reservation.status == 'REJECTED'"
+          >
             <button type="button" class="btn btn-outline-danger mt-5">
-              Delete
+              Deleted
             </button>
           </div>
         </div>
