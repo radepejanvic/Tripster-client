@@ -8,12 +8,17 @@
     width: 300px;
 }
 
-input {
+input,
+button {
     border-radius: 10px;
     border: 1px solid;
-    height: 37px;
+    height: 50px;
     padding: 10px;
     width: 300px;
+}
+
+button {
+    width: 100%;
 }
 
 h1 {

@@ -7,7 +7,8 @@ import { Component, Input } from '@angular/core';
 })
 export class RatingComponent {
   @Input() rating: number;
-  @Input() reviews: number;
+  @Input() reviews?: number;
+  @Input() timeStamp?: string;
 
   getRateName(): string {
     switch (Math.ceil(this.rating)) {

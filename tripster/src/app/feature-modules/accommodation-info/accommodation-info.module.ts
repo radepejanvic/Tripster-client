@@ -18,7 +18,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MapComponent } from './map/map.component';
+import { ReviewFormComponent } from './review-form/review-form.component';
 import { CalendarModule } from 'primeng/calendar';
+import { DetailsComponent } from './details/details.component';
+import { ToggleButtonModule } from 'primeng/togglebutton';
 
 @NgModule({
 	declarations: [
@@ -34,6 +37,8 @@ import { CalendarModule } from 'primeng/calendar';
 		PhotoUploadComponent,
 		PriceListComponent,
 		MapComponent,
+		ReviewFormComponent,
+		DetailsComponent,
 	],
 	imports: [
 		CommonModule,
@@ -44,13 +49,14 @@ import { CalendarModule } from 'primeng/calendar';
 		FormsModule,
 		GoogleMapsModule,
 		ReactiveFormsModule,
-		CalendarModule
+		CalendarModule,
+		ToggleButtonModule
 	],
 	exports: [
 		PhotosComponent,
 		RatingComponent,
 		AccommodationCrudComponent,
-		OverviewComponent,
-	],
+		OverviewComponent
+	]
 })
-export class AccommodationInfoModule {}
+export class AccommodationInfoModule { }

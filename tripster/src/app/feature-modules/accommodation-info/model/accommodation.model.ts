@@ -49,10 +49,11 @@ export interface Review {
     title: string,
     rate: number,
     comment: string,
-    status: string,
+    status?: string,
+    timeStamp?: string,
     reviewerId: number,
-    reviewerName: string,
-    reviewerSurname: string,
+    reviewerName?: string,
+    reviewerSurname?: string,
     reviewedId: number;
 }
 

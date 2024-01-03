@@ -9,6 +9,29 @@
 }
 
 h1 {
+    display: flex;
+    justify-content: space-between;
     font-weight: 500;
     font-size: 24px;
+}
+
+img {
+    width: 24px;
+    transition: width 0.3s ease;
+    cursor: pointer;
+}
+
+img:hover {
+    width: 26px;
+}
+
+:host ::ng-deep .p-highlight.p-togglebutton,
+:host ::ng-deep .p-highlight.p-togglebutton:hover {
+    background: black;
+    border: none;
+    color: white;
+}
+
+:host ::ng-deep .p-togglebutton:focus {
+    box-shadow: 0 0 0 0.2rem white;
 }

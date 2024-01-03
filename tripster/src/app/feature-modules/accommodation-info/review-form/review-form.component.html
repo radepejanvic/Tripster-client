@@ -1,0 +1,27 @@
+<div id="review_form">
+    <h1> Leave a review </h1>
+    <p *ngIf="type == 'accommodation-review'"> Tell us what you did and did not like about this <b>unit</b> </p>
+    <p *ngIf="type == 'user-review'"> Tell us what you did and did not like about this <b>owner</b> </p>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <input type="text"
+            name="review_title"
+            id="review_title"
+            placeholder="Title"
+            formControlName="title">
+        <textarea name="review_comment"
+            id="review_comment" 
+            placeholder="Comment"
+            formControlName="comment"></textarea>
+        <div id="rates_form">
+            <p>1</p>
+            <p>2</p>
+            <p>3</p>
+            <p>4</p>
+            <p>5</p>
+        </div>
+        <mat-slider min="1" max="5" step="1" value="1">
+            <input matSliderThumb formControlName="rate">
+        </mat-slider>
+        <button type="submit" class="btn btn-outline-dark"> Add review </button>
+    </form>
+</div>

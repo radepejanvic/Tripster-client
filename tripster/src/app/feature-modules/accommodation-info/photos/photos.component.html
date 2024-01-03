@@ -39,12 +39,18 @@
 	<hr />
 	<div id="canvas">
 		<app-overview [accommodation]="accommodation"></app-overview>
-		<hr />
+		<hr *ngIf="role == 'ROLE_GUEST'"/>
 		<app-rent
 			[name]="accommodation.name"
 			*ngIf="role == 'ROLE_GUEST'"
 		></app-rent>
 		<hr />
-		<app-reviews [id]="id"></app-reviews>
+		<app-details [accommodation]="accommodation" [host]="host"></app-details>
+		<!-- <hr *ngIf="role == 'ROLE_GUEST'"/>
+    	<app-review-form 
+			[id]="id"
+			*ngIf="role == 'ROLE_GUEST'"></app-review-form> -->
+		<hr />
+		<app-reviews [id]="id" [host]="host"></app-reviews>
 	</div>
 </div>
