@@ -4,7 +4,9 @@ export interface Reservation {
   address: string;
   photo: string;
   url?: string;
-  timeStamp: number;
-  duration: string;
+  timeStamp: string;
+  numOfGuest: number;
+  duration: number;
   status: string;
+  price: number;
 }
