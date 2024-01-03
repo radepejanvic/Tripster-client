@@ -1,4 +1,8 @@
-<div class="card mb-3" [routerLink]="['/accommodationInfo', reservation.id]">
+<div
+  class="card mb-3"
+  [routerLink]="['/accommodationInfo', reservation.id]"
+  [ngClass]="{ opacity: checkStatus() }"
+>
   <div class="row g-0" style="height: 100%">
     <img
       src="{{ reservation.url }}"
@@ -34,6 +38,15 @@
           >
             <button type="button" class="btn btn-outline-danger mt-5">
               Deleted
+            </button>
+          </div>
+
+          <div
+            class="d-flex flex-row-reverse mt-4"
+            *ngIf="reservation.status == 'ACCEPTED'"
+          >
+            <button type="button" class="btn btn-outline-dark mt-5">
+              Cancel
             </button>
           </div>
         </div>

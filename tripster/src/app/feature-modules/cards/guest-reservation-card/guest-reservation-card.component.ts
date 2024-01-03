@@ -10,4 +10,8 @@ import { Reservation } from './model/reservation.model';
 export class GuestReservationCardComponent {
   @Input()
   reservation: Reservation;
+
+  checkStatus(): boolean {
+    return this.reservation.status == 'CANCELLED';
+  }
 }
