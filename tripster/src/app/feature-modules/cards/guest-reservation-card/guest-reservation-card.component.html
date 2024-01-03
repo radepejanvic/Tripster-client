@@ -1,0 +1,34 @@
+<div class="card mb-3" [routerLink]="['/reservationInfo', reservation.id]">
+  <div class="row g-0" style="height: 100%">
+    <img
+      src="{{ reservation.url }}"
+      class="img-fluid rounded-start col-md-4"
+      alt="..."
+    />
+
+    <div class="col-md-5">
+      <div class="card-body">
+        <h5 class="card-title">{{ reservation.name }}</h5>
+        <p class="card-text">
+          <small class="text-body-secondary">{{ reservation.address }}</small>
+        </p>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card-body">
+        <p class="card-text text-end">{{ reservation.address }}</p>
+        <p class="card-text text-end">
+          <small class="text-body-secondary">sadff</small>
+        </p>
+        <div class="mt-5">
+          <div class="row">
+            <button type="button" class="btn btn-outline-danger mt-5">
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
