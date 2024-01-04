@@ -88,12 +88,16 @@ export class AccommodationInfoService {
     return this.http.post<number>(`${environment.apiHost}accommodations/calendar/${id}`, interval);
   }
 
-  addToFavorites(guestId: number, accommodationId: number): Observable<number> {
+  toggleFavorite(guestId: number, accommodationId: number): Observable<number> {
     return this.http.post<number>(`${environment.apiHost}accommodations/favorites/${guestId}/${accommodationId}`, null);
   }
 
   getFavorites(id: number): Observable<Accommodation[]> {
     return this.http.get<Accommodation[]>(`${environment.apiHost}accommodations/favorites/${id}`);
+  }
+
+  isFavorite(guestId: number, accommodationId: number): Observable<boolean> {
+    return this.http.get<boolean>(`${environment.apiHost}accommodations/favorites/${guestId}/${accommodationId}`);
   }
 
 }
