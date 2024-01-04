@@ -35,7 +35,7 @@ export class DetailsComponent {
     }
   }
 
-  openReviewFormDialog(): void {
+  openReportFormDialog(): void {
     this.dialog.open(ReportFormComponent, {
       width: '400px',
       data: {
