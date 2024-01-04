@@ -27,6 +27,12 @@ const routes: Routes = [
     data: { role: ['ROLE_GUEST'] },
   },
   {
+    path: 'host/reservation',
+    component: FilterPageComponent,
+    canActivate: [AuthGuard],
+    data: { role: ['ROLE_HOST'] },
+  },
+  {
     path: 'accommodationRequests',
     component: FilterPageComponent,
     canActivate: [AuthGuard],
