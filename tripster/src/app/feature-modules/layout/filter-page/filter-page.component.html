@@ -1,61 +1,68 @@
 <div class="container">
-	<div class="container row">
-		<div class="container col-4 filter">
-			<div class="container">
-				<p><i class="bi bi-arrow-left-square"></i></p>
-				<p class="title">{{ filterTitle }}</p>
-				<app-basic-filter
-					*ngIf="role != 'ROLE_ADMIN'"
-					(filterChange)="onBasicFilter($event)"
-				></app-basic-filter>
-				<app-additional-filter
-					*ngIf="role != 'ROLE_ADMIN'"
-					(filterChange)="onAdditionalFilter($event)"
-				></app-additional-filter>
-				<app-guest-rating-filter
-					*ngIf="false"
-				></app-guest-rating-filter>
-				<app-reservation-status-filter
-					*ngIf="false"
-				></app-reservation-status-filter>
-				<app-time-filter *ngIf="false"></app-time-filter>
-				<app-user-type-status-filter
-					*ngIf="false"
-				></app-user-type-status-filter>
-				<app-accommodation-requests-filter
-					*ngIf="role == 'ROLE_ADMIN'"
-					(filterChange)="onAccommodationRequestsFilter($event)"
-				></app-accommodation-requests-filter>
-				<app-review-filter *ngIf="false"></app-review-filter>
-				<div class="container row justify-content-center mt-3 mb-3">
-					<button
-						type="submit"
-						class="btn btn-outline-secondary col-4"
-						(click)="sendRequest()"
-					>
-						Search
-					</button>
-				</div>
-			</div>
-		</div>
+  <div class="container row">
+    <div class="container col-4 filter">
+      <div class="container">
+        <p><i class="bi bi-arrow-left-square"></i></p>
+        <p class="title">{{ filterTitle }}</p>
+        <app-basic-filter
+          *ngIf="role != 'ROLE_ADMIN'"
+          (filterChange)="onBasicFilter($event)"
+        ></app-basic-filter>
+        <app-additional-filter
+          *ngIf="
+            role != 'ROLE_ADMIN' &&
+            !getCurrentURL().includes('guest/reservation')
+          "
+          (filterChange)="onAdditionalFilter($event)"
+        ></app-additional-filter>
+        <app-guest-rating-filter *ngIf="false"></app-guest-rating-filter>
+        <app-reservation-status-filter
+          (filterChange)="onReservationStatusFilter($event)"
+          *ngIf="getCurrentURL().includes('guest/reservation')"
+        ></app-reservation-status-filter>
+        <app-time-filter *ngIf="false"></app-time-filter>
+        <app-user-type-status-filter
+          *ngIf="false"
+        ></app-user-type-status-filter>
+        <app-accommodation-requests-filter
+          *ngIf="role == 'ROLE_ADMIN'"
+          (filterChange)="onAccommodationRequestsFilter($event)"
+        ></app-accommodation-requests-filter>
+        <app-review-filter *ngIf="false"></app-review-filter>
+        <div class="container row justify-content-center mt-3 mb-3">
+          <button
+            type="submit"
+            class="btn btn-outline-secondary col-4"
+            (click)="sendRequest()"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
 
-		<div class="container col-8">
-			<p class="title">{{ title }}</p>
-			<div *ngFor="let accommodation of accommodations">
-				<app-accommodation-info-card
-					[accommodation]="accommodation"
-				></app-accommodation-info-card>
-			</div>
-			<div *ngFor="let accommodation of accommodationRequests">
-				<app-accommodation-request-card
-					[accommodation]="accommodation"
-				></app-accommodation-request-card>
-			</div>
-			<div *ngFor="let accommodation of hostAccommodation">
-				<app-host-accommodation-card
-					[accommodation]="accommodation"
-				></app-host-accommodation-card>
-			</div>
-		</div>
-	</div>
+    <div class="container col-8">
+      <p class="title">{{ title }}</p>
+      <div *ngFor="let accommodation of accommodations">
+        <app-accommodation-info-card
+          [accommodation]="accommodation"
+        ></app-accommodation-info-card>
+      </div>
+      <div *ngFor="let accommodation of accommodationRequests">
+        <app-accommodation-request-card
+          [accommodation]="accommodation"
+        ></app-accommodation-request-card>
+      </div>
+      <div *ngFor="let accommodation of hostAccommodation">
+        <app-host-accommodation-card
+          [accommodation]="accommodation"
+        ></app-host-accommodation-card>
+      </div>
+      <div *ngFor="let reservation of guestReservation">
+        <app-guest-reservation-card
+          [reservation]="reservation"
+        ></app-guest-reservation-card>
+      </div>
+    </div>
+  </div>
 </div>
