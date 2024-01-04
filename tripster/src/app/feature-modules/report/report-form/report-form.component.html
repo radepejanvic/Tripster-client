@@ -2,7 +2,8 @@
     <h1> Report </h1>
     <p *ngIf="type == 'host-report'"> Why do you want to report this <b>owner</b>?</p>
     <p *ngIf="type == 'guest-report'"> Why do you want to report this <b>guest</b>?</p>
-    <p *ngIf="type == 'host-review-report' || type == 'accommodation-review-report'"> Why do you want to report this <b>review</b>?</p>
+    <p *ngIf="type == 'host-review-report'"> Why do you want to report this <b>review</b>?</p>
+    <p *ngIf="type == 'accommodation-review-report'"> Why do you want to report this <b>unit review</b>?</p>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
         <textarea name="reason"

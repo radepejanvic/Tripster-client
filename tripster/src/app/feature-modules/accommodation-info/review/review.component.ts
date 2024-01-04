@@ -59,7 +59,7 @@ export class ReviewComponent {
       width: '400px',
       data: {
         id: this.review.id,
-        type: 'accommodation-review-report'
+        type: this.checked ? 'host-review-report' : 'accommodation-review-report'
       }
     });
   }

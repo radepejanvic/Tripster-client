@@ -77,13 +77,20 @@ export class ReportFormComponent {
 
 
   reportHostReview(report: Report): void {
-
+    this.reportService.reportHostReview(report).subscribe({
+      next: (response: Report) => {
+        console.log(`Successfully reported user review with id: ${response.reviewId}`);
+      },
+      error: (err: any) => {
+        console.error(`Failed to report user review with id: ${this.id}`, err);
+      }
+    })
   }
 
   reportAccommodationReview(report: Report): void {
     this.reportService.reportAccommodationReview(report).subscribe({
       next: (response: Report) => {
-        console.log(`Successfully reported accommdoation review with id: ${response.reporteeId}`);
+        console.log(`Successfully reported accommdoation review with id: ${response.reviewId}`);
       },
       error: (err: any) => {
         console.error(`Failed to report accommodation review with id: ${this.id}`, err);
