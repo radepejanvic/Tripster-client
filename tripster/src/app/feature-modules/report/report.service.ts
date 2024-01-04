@@ -11,12 +11,8 @@ export class ReportService {
 
   constructor(private http: HttpClient) { }
 
-  reportHost(report: Report): Observable<Report> {
-    return this.http.post<Report>(`${environment.apiHost}users/reports/host`, report);
-  }
-
-  reportGuest(report: Report): Observable<Report> {
-    return this.http.post<Report>(`${environment.apiHost}users/reports/guest`, report);
+  reportUser(report: Report): Observable<Report> {
+    return this.http.post<Report>(`${environment.apiHost}users/reports`, report);
   }
 
   getAll(): Observable<Report[]> {
