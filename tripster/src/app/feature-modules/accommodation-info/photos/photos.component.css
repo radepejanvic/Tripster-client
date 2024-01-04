@@ -93,3 +93,11 @@ button:hover {
     height: 400px;
     background-color: red;
 }
+
+svg {
+    cursor: pointer;
+}
+
+.favorite {
+    fill: red;
+}

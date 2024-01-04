@@ -19,6 +19,7 @@ export class PhotosComponent implements OnInit {
 	host!: PersonUpdate;
 	photos!: string[];
 	role: string;
+	favorite: boolean = false;
 
 	constructor(
 		private route: ActivatedRoute,
@@ -38,6 +39,7 @@ export class PhotosComponent implements OnInit {
 			next: (result: Accommodation) => {
 				this.accommodation = result;
 				this.getHost();
+				this.isFavorite();
 			},
 			error: (err: any) => {
 				console.error('Error fetching accommodation info', err);
@@ -78,4 +80,39 @@ export class PhotosComponent implements OnInit {
 			}
 		});
 	}
+
+	toggleFavorite(): void {
+
+		if (this.accommodation.id == undefined) {
+			console.error('Error fetching accommodation id.');
+			return;
+		}
+
+		this.service.toggleFavorite(this.authorization.getPersonId(), this.accommodation.id).subscribe({
+			next: (response: number) => {
+				this.favorite = !this.favorite;
+				let message: string = this.favorite ? 'added to' : 'removed from';
+				console.log(`Succesfully ${message} favorites accommodation with id: ${response}`);
+			},
+			error: (err: any) => {
+				console.error('Error toggling favorite accommodation.', err);
+			}
+		});
+	}
+
+	isFavorite(): void {
+		if (this.accommodation.id == undefined) {
+			console.error('Error fetching accommodation id.');
+			return;
+		}
+		this.service.isFavorite(this.authorization.getPersonId(), this.accommodation.id).subscribe({
+			next: (response: boolean) => {
+				this.favorite = response;
+			},
+			error: (err: any) => {
+				console.error('Error checking if favorite accommodation.', err);
+			}
+		});
+	}
+
 }
