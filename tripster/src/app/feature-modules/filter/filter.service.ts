@@ -46,4 +46,13 @@ export class FilterService {
       environment.apiHost + 'reservations/guest/' + id
     );
   }
+  getGuestReservationByParams(
+    params: HttpParams,
+    id: number
+  ): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(
+      environment.apiHost + 'reservations/guest/filter/' + id,
+      { params }
+    );
+  }
 }
