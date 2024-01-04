@@ -92,7 +92,7 @@ export class PhotosComponent implements OnInit {
 			next: (response: number) => {
 				this.favorite = !this.favorite;
 				let message: string = this.favorite ? 'added to' : 'removed from';
-				console.log(`Succesfully ${message} accommodation with id: ${response}`);
+				console.log(`Succesfully ${message} favorites accommodation with id: ${response}`);
 			},
 			error: (err: any) => {
 				console.error('Error toggling favorite accommodation.', err);
