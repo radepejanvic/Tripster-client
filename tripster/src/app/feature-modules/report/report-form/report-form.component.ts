@@ -37,7 +37,8 @@ export class ReportFormComponent {
     const report: Report = {
       reason: this.form.value.reason || "",
       reporterId: this.authorizationService.getUserId(),
-      reporteeId: this.id
+      reporteeId: this.id,
+      reviewId: this.id
     }
 
     return report;
@@ -51,11 +52,13 @@ export class ReportFormComponent {
 
     let report: Report = this.mapFormToReport();
 
+    console.log(report);
+
     switch (this.type) {
       case 'host-report': this.reportUser(report); break;
       case 'guest-report': this.reportUser(report); break;
-      case 'host-review-report': this.reportHostReview(); break;
-      case 'accommodation-review-report': this.reportAccommodationReview(); break;
+      case 'host-review-report': this.reportHostReview(report); break;
+      case 'accommodation-review-report': this.reportAccommodationReview(report); break;
     }
 
     this.dialogRef.close();
@@ -73,12 +76,19 @@ export class ReportFormComponent {
   }
 
 
-  reportHostReview(): void {
+  reportHostReview(report: Report): void {
 
   }
 
-  reportAccommodationReview(): void {
-
+  reportAccommodationReview(report: Report): void {
+    this.reportService.reportAccommodationReview(report).subscribe({
+      next: (response: Report) => {
+        console.log(`Successfully reported accommdoation review with id: ${response.reporteeId}`);
+      },
+      error: (err: any) => {
+        console.error(`Failed to report accommodation review with id: ${this.id}`, err);
+      }
+    })
   }
 
 }

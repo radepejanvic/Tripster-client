@@ -15,6 +15,10 @@ export class ReportService {
     return this.http.post<Report>(`${environment.apiHost}users/reports`, report);
   }
 
+  reportAccommodationReview(report: Report): Observable<Report> {
+    return this.http.post<Report>(`${environment.apiHost}accommodations/reviews/reports`, report);
+  }
+
   getAll(): Observable<Report[]> {
     return this.http.get<Report[]>(`${environment.apiHost}users/reports`);
   }

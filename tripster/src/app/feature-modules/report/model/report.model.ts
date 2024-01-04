@@ -3,6 +3,7 @@ export interface Report {
     reason: string,
     reporterId: number,
     reporterEmail?: string,
-    reporteeId: number,
+    reporteeId?: number,
     reporteeEmail?: string,
+    reviewId?: number
 }
