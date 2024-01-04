@@ -1,1 +1,15 @@
-<p>report-form works!</p>
+<div id="review_form">
+    <h1> Report </h1>
+    <p *ngIf="type == 'host-report'"> Why do you want to report this <b>host</b></p>
+    <p *ngIf="type == 'guest-report'"> Why do you want to report this <b>guest</b></p>
+    <p *ngIf="type == 'host-review-report' || type == 'accommodation-review-report'"> Why do you want to report this <b>review</b></p>
+    <form [formGroup]="form">
+
+        <textarea name="reason"
+            id="reason" 
+            placeholder="Reason"
+            formControlName="reason"></textarea>
+    
+        <button type="submit" class="btn btn-outline-dark"> Report </button>
+    </form>
+</div>
