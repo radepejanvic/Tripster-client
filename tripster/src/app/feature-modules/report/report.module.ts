@@ -10,6 +10,9 @@ import { ReportFormComponent } from './report-form/report-form.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    ReportFormComponent
   ]
 })
 export class ReportModule { }
