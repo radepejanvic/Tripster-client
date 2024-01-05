@@ -18,6 +18,8 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { GoogleMapsModule } from '@angular/google-maps'
 import { CalendarModule } from 'primeng/calendar';
 import { ToggleButtonModule } from 'primeng/togglebutton';
+import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts'
+import { AnalyticsModule } from './feature-modules/analytics/analytics.module';
 
 
 @NgModule({
@@ -41,13 +43,16 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
     NgxDropzoneModule,
     GoogleMapsModule,
     CalendarModule,
-    ToggleButtonModule
+    ToggleButtonModule,
+    NgChartsModule,
+    AnalyticsModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: Interceptor,
     multi: true,
-  }],
+  }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

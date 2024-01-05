@@ -7,6 +7,7 @@ import { AuthGuard } from 'src/app/feature-modules/authorization/guard/auth.guar
 import { LoginComponent } from 'src/app/feature-modules/authorization/login/login.component';
 import { FilterPageComponent } from 'src/app/feature-modules/layout/filter-page/filter-page.component';
 import { AccommodationCrudComponent } from 'src/app/feature-modules/accommodation-info/accommodation-crud/accommodation-crud.component';
+import { AnalyticsComponent } from 'src/app/feature-modules/analytics/analytics/analytics.component';
 
 const routes: Routes = [
 	{ path: '', redirectTo: 'home', pathMatch: 'full' }, //default route
@@ -47,6 +48,13 @@ const routes: Routes = [
 		component: AccommodationCrudComponent,
 		canActivate: [AuthGuard],
 		data: { role: ['ROLE_HOST'] }
+	},
+
+	{
+		path: 'analytics',
+		component: AnalyticsComponent,
+		// canActivate: [AuthGuard],
+		// data: { role: ['ROLE_HOST'] }
 	}
 ];
 
