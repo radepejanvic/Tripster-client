@@ -1,3 +1,4 @@
-export interface AnnualAnalytics {
-
+export interface Analytics {
+    reservationsPerMonth: number[],
+    revenuePerMonth: number[]
 }
