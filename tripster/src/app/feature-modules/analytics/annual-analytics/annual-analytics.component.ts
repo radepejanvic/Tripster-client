@@ -1,54 +1,60 @@
-// import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app-annual-analytics',
-//   templateUrl: './annual-analytics.component.html',
-//   styleUrl: './annual-analytics.component.css'
-// })
-// export class AnnualAnalyticsComponent {
-
-// }
-
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Chart, ChartConfiguration, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 
 import Annotation from 'chartjs-plugin-annotation';
+import { AnalyticsService } from '../analytics.service';
+import { Analytics } from '../model/analytics.model';
+import { AuthorizationModule } from '../../authorization/authorization.module';
+import { AuthorizationService } from '../../authorization/authorization.service';
 
 @Component({
   selector: 'app-annual-analytics',
   templateUrl: './annual-analytics.component.html',
   styleUrl: './annual-analytics.component.css'
 })
-export class AnnualAnalyticsComponent {
+export class AnnualAnalyticsComponent implements OnInit {
   private newLabel? = 'New label';
+  analytics!: Analytics[];
+  lineChartData: ChartConfiguration['data'];
 
-  constructor() {
+
+  constructor(private analyticsService: AnalyticsService, private authorizationService: AuthorizationService) {
     Chart.register(Annotation);
   }
 
-  public lineChartData: ChartConfiguration['data'] = {
-    datasets: [
-      {
-        data: [65, 59, 80, 81, 56, 55, 40, 10, 23, 43, 13, 35, 90],
-        label: 'Series A',
-        fill: 'origin',
+  ngOnInit(): void {
+    this.analyticsService.getAnnual(this.authorizationService.getPersonId(), 2023).subscribe({
+      next: (response: Analytics[]) => {
+        this.analytics = response;
+        this.loadLineChartData();
+        console.log(`Succesfully fetched analytics for ${response.length} accommodations.`);
       },
-      {
-        data: [28, 48, 40, 19, 86, 27, 90, 90, 23, 10, 23, 12, 10],
-        label: 'Series B',
-        fill: 'origin',
-      },
-      {
-        data: [180, 480, 770, 90, 1000, 270, 400, 800, 122, 900, 1000, 1200, 860],
-        label: 'Series C',
-        yAxisID: 'y1',
-        fill: 'origin',
-      },
-    ],
-    labels: ['January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'],
-  };
+      error: (err: any) => {
+        console.error('Error fetching analytics.', err);
+      }
+    })
+  }
+
+  loadLineChartData(): void {
+    let datasets = [];
+
+    for (const analytic of this.analytics) {
+      datasets.push({
+        data: analytic.revenuePerMonth,
+        backgroundColor: 'rgba(0,0,0,0)',
+        label: analytic.name,
+        fill: 'origin'
+      })
+    }
+
+    this.lineChartData = {
+      datasets: datasets,
+      labels: ['January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December']
+    }
+
+  }
 
   public lineChartOptions: ChartConfiguration['options'] = {
     elements: {
