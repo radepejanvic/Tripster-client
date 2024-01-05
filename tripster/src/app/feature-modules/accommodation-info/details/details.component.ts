@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ReviewFormComponent } from '../review-form/review-form.component';
 import { ReviewService } from '../review.service';
 import { AuthorizationService } from '../../authorization/authorization.service';
+import { ReportFormComponent } from '../../report/report-form/report-form.component';
 
 @Component({
   selector: 'app-details',
@@ -32,6 +33,16 @@ export class DetailsComponent {
       case 'ROOM': return 'Room';
       default: return 'Unit';
     }
+  }
+
+  openReportFormDialog(): void {
+    this.dialog.open(ReportFormComponent, {
+      width: '400px',
+      data: {
+        id: this.host.userId,
+        type: 'host-report'
+      }
+    });
   }
 
 }

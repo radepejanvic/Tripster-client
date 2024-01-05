@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { Review } from '../model/accommodation.model';
 import { AuthorizationService } from '../../authorization/authorization.service';
 import { ReviewService } from '../review.service';
+import { ReportFormComponent } from '../../report/report-form/report-form.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-review',
@@ -13,14 +15,15 @@ export class ReviewComponent {
   @Input() checked: boolean;
 
   constructor(private reviewService: ReviewService,
-    private authorizationService: AuthorizationService) { }
+    private authorizationService: AuthorizationService,
+    public dialog: MatDialog) { }
 
   isDeletable(): boolean {
     return this.review.reviewerId == this.authorizationService.getUserId();
   }
 
   isReportable(): boolean {
-    return false;
+    return this.authorizationService.getRole() == 'ROLE_HOST';
   }
 
   deleteReview(): void {
@@ -49,8 +52,16 @@ export class ReviewComponent {
         }
       });
     }
+  }
 
-
+  openReportFormDialog(): void {
+    this.dialog.open(ReportFormComponent, {
+      width: '400px',
+      data: {
+        id: this.review.id,
+        type: this.checked ? 'host-review-report' : 'accommodation-review-report'
+      }
+    });
   }
 
 }

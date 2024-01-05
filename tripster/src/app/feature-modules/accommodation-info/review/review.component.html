@@ -2,7 +2,7 @@
     <div id="header">
         <div>
             <h3>{{review.title}} 
-                <img *ngIf="isReportable()" src="./assets/icons/report.svg">
+                <img *ngIf="isReportable()" (click)="openReportFormDialog()" src="./assets/icons/report.svg">
                 <img *ngIf="isDeletable()" (click)="deleteReview()" src="./assets/icons/delete.svg">
             </h3>
             <p>{{review.reviewerName}} {{review.reviewerSurname}}</p>

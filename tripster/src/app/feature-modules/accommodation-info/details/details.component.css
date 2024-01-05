@@ -31,8 +31,13 @@ p {
 }
 
 .owner_icon {
-    margin: 0px 0px 16px 10px;
     height: 20px;
+    transition: height 0.3s ease;
+    cursor: pointer;
+}
+
+.owner_icon:hover {
+    height: 24px;
 }
 
 button {
