@@ -1,22 +1,26 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import DatalabelsPlugin from 'chartjs-plugin-datalabels';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import { Analytics } from '../model/analytics.model';
+import { AnalyticsService } from '../analytics.service';
+import { AuthorizationService } from '../../authorization/authorization.service';
 
 @Component({
   selector: 'app-total-analytics',
   templateUrl: './total-analytics.component.html',
   styleUrl: './total-analytics.component.css'
 })
-export class TotalAnalyticsComponent {
+export class TotalAnalyticsComponent implements OnInit {
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+  analytics!: Analytics[];
 
   // Pie
   public pieChartOptions: ChartConfiguration['options'] = {
     plugins: {
       legend: {
         display: true,
-        position: 'top',
+        position: 'right',
       },
       datalabels: {
         formatter: (value: any, ctx: any) => {
@@ -28,17 +32,52 @@ export class TotalAnalyticsComponent {
     },
   };
 
-  public pieChartData: ChartData<'pie', number[], string | string[]> = {
-    labels: [['Download', 'Sales'], ['In', 'Store', 'Sales'], 'Mail Sales'],
-    datasets: [
-      {
-        data: [300, 500, 100],
-      },
-    ],
-  };
+  public pieChartData: ChartData<'pie', number[], string | string[]>;
 
   public pieChartType: ChartType = 'pie';
   public pieChartPlugins = [DatalabelsPlugin];
+
+  constructor(private analyticsService: AnalyticsService, private authorizationService: AuthorizationService) { }
+
+  ngOnInit(): void {
+    this.analyticsService.getTotal(this.authorizationService.getPersonId(), 1644447600000, 1707519600000).subscribe({
+      next: (response: Analytics[]) => {
+        this.analytics = response;
+        this.loadPieChartData();
+        console.log(`Pie: Succesfully fetched analytics for ${response.length} accommodations.`);
+      },
+      error: (err: any) => {
+        console.error('Pie: Error fetching analytics.', err);
+      }
+    })
+  }
+
+  loadPieChartData(): void {
+    let labels = [];
+    let data = [];
+
+    for (const analytic of this.analytics) {
+      console.log(analytic);
+      labels.push([analytic.name, 'Reservations: ' + analytic.totalReservations]);
+      data.push(analytic.totalRevenue);
+    }
+
+    this.pieChartData = {
+      labels: labels,
+      datasets: [
+        {
+          data: data,
+        },
+      ],
+    };
+
+    // this.lineChartData = {
+    //   datasets: datasets,
+    //   labels: ['January', 'February', 'March', 'April', 'May', 'June',
+    //     'July', 'August', 'September', 'October', 'November', 'December']
+    // }
+
+  }
 
   // events
   public chartClicked({
