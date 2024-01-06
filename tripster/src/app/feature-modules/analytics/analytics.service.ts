@@ -15,4 +15,8 @@ export class AnalyticsService {
     return this.http.get<Analytics[]>(`${environment.apiHost}analytics/${id}/${year}`);
   }
 
+  getTotal(id: number, start: number, end: number): Observable<Analytics[]> {
+    return this.http.get<Analytics[]>(`${environment.apiHost}analytics/${id}/${start}/${end}`);
+  }
+
 }
