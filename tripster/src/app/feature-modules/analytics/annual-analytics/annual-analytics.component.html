@@ -1,7 +1,7 @@
 <h1> 
-  Montlhy stats for each accommodation
+  Montlhy stats for the calendar year {{this.form.value.year}}
   
-  <p-toggleButton class="toggle" onLabel="Reservations" offLabel="Revenue"></p-toggleButton>
+  <p-toggleButton class="toggle" [(ngModel)]="checked" onLabel="Reservations" offLabel="Revenue" (click)="loadLineChartData()"></p-toggleButton>
 </h1>
 
 <canvas
@@ -23,18 +23,19 @@
   >
     <td> {{accommodations[i]}} </td>
     <td *ngFor="let label of lineChartData.labels; let j = index">
-      {{ d && d.data[j] }} €
+      {{ d && d.data[j] }} <span *ngIf="!checked">€</span>
     </td>
   </tr>
 </table>
 
-<form>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
   <label> Pick the year to display: </label>
   <input
           id="year"
           type="number"
           min="2022"
           max="2024"
+           formControlName="year"
           placeholder="Pick the year"
         />
 

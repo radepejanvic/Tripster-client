@@ -5,6 +5,7 @@ import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
 import { AnalyticsComponent } from './analytics/analytics.component';
 import { TotalAnalyticsComponent } from './total-analytics/total-analytics.component';
 import { ToggleButtonModule } from 'primeng/togglebutton';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -16,7 +17,9 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
   imports: [
     CommonModule,
     NgChartsModule,
-    ToggleButtonModule
+    ToggleButtonModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     { provide: NgChartsConfiguration, useValue: { generateColors: true } }

@@ -7,6 +7,7 @@ import { AnalyticsService } from '../analytics.service';
 import { Analytics } from '../model/analytics.model';
 import { AuthorizationModule } from '../../authorization/authorization.module';
 import { AuthorizationService } from '../../authorization/authorization.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-annual-analytics',
@@ -14,11 +15,14 @@ import { AuthorizationService } from '../../authorization/authorization.service'
   styleUrl: './annual-analytics.component.css'
 })
 export class AnnualAnalyticsComponent implements OnInit {
-  private newLabel? = 'New label';
   analytics!: Analytics[];
   lineChartData: ChartConfiguration['data'];
   accommodations: string[] = [];
   checked: boolean = false;
+
+  form = new FormGroup({
+    year: new FormControl(new Date().getFullYear(), Validators.required),
+  });
 
   public lineChartOptions: ChartConfiguration['options'] = {
     elements: {
@@ -37,7 +41,13 @@ export class AnnualAnalyticsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.analyticsService.getAnnual(this.authorizationService.getPersonId(), 2023).subscribe({
+    this.getAnnualAnalytics(new Date().getFullYear());
+  }
+
+  getAnnualAnalytics(year: number): void {
+    console.log(this.form.value.year);
+
+    this.analyticsService.getAnnual(this.authorizationService.getPersonId(), year).subscribe({
       next: (response: Analytics[]) => {
         this.analytics = response;
         this.loadLineChartData();
@@ -54,7 +64,7 @@ export class AnnualAnalyticsComponent implements OnInit {
 
     for (const analytic of this.analytics) {
       datasets.push({
-        data: analytic.revenuePerMonth,
+        data: this.checked ? analytic.reservationsPerMonth : analytic.revenuePerMonth,
         backgroundColor: 'rgba(0,0,0,0)',
         label: analytic.name,
         fill: 'origin'
@@ -68,5 +78,18 @@ export class AnnualAnalyticsComponent implements OnInit {
         'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     }
   }
+
+  onSubmit(): void {
+    if (!this.form.valid) {
+      console.log('Invalid form.');
+      return;
+    }
+
+    let year = this.form.value.year || new Date().getFullYear();
+    this.getAnnualAnalytics(year);
+
+  }
+
+
 
 }
