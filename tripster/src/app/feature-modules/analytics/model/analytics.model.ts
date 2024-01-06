@@ -3,4 +3,6 @@ export interface Analytics {
     name: string,
     reservationsPerMonth: number[],
     revenuePerMonth: number[]
+    totalReservations: number,
+    totalRevenue: number
 }
