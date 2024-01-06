@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { AnnualAnalyticsComponent } from './annual-analytics/annual-analytics.component';
 import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
 import { AnalyticsComponent } from './analytics/analytics.component';
+import { TotalAnalyticsComponent } from './total-analytics/total-analytics.component';
 
 
 @NgModule({
   declarations: [
     AnnualAnalyticsComponent,
-    AnalyticsComponent
+    AnalyticsComponent,
+    TotalAnalyticsComponent
   ],
   imports: [
     CommonModule,
