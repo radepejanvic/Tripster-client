@@ -17,7 +17,20 @@ export class AnnualAnalyticsComponent implements OnInit {
   private newLabel? = 'New label';
   analytics!: Analytics[];
   lineChartData: ChartConfiguration['data'];
+  accommodations: string[] = [];
+  checked: boolean = false;
 
+  public lineChartOptions: ChartConfiguration['options'] = {
+    elements: {
+      line: {
+        tension: 0.5,
+      },
+    }
+  };
+
+  public lineChartType: ChartType = 'line';
+
+  @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
 
   constructor(private analyticsService: AnalyticsService, private authorizationService: AuthorizationService) {
     Chart.register(Annotation);
@@ -46,131 +59,14 @@ export class AnnualAnalyticsComponent implements OnInit {
         label: analytic.name,
         fill: 'origin'
       })
+      this.accommodations.push(analytic.name);
     }
 
     this.lineChartData = {
       datasets: datasets,
-      labels: ['January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December']
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     }
-
   }
 
-  public lineChartOptions: ChartConfiguration['options'] = {
-    elements: {
-      line: {
-        tension: 0.5,
-      },
-    },
-    scales: {
-      // We use this empty structure as a placeholder for dynamic theming.
-      y: {
-        position: 'left',
-      },
-      y1: {
-        position: 'right',
-        grid: {
-          color: 'rgba(255,0,0,0.3)',
-        },
-        ticks: {
-          color: 'red',
-        },
-      },
-    },
-
-    plugins: {
-      legend: { display: true },
-      annotation: {
-        annotations: [
-          {
-            type: 'line',
-            scaleID: 'x',
-            value: 'March',
-            borderColor: 'orange',
-            borderWidth: 2,
-            label: {
-              display: true,
-              position: 'center',
-              color: 'orange',
-              content: 'LineAnno',
-              font: {
-                weight: 'bold',
-              },
-            },
-          },
-        ],
-      },
-    },
-  };
-
-  public lineChartType: ChartType = 'line';
-
-  @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
-
-  private static generateNumber(i: number): number {
-    return Math.floor(Math.random() * (i < 2 ? 100 : 1000) + 1);
-  }
-
-  public randomize(): void {
-    for (let i = 0; i < this.lineChartData.datasets.length; i++) {
-      for (let j = 0; j < this.lineChartData.datasets[i].data.length; j++) {
-        this.lineChartData.datasets[i].data[j] =
-          AnnualAnalyticsComponent.generateNumber(i);
-      }
-    }
-    this.chart?.update();
-  }
-
-  // events
-  public chartClicked({
-    event,
-    active,
-  }: {
-    event?: ChartEvent;
-    active?: object[];
-  }): void {
-    console.log(event, active);
-  }
-
-  public chartHovered({
-    event,
-    active,
-  }: {
-    event?: ChartEvent;
-    active?: object[];
-  }): void {
-    console.log(event, active);
-  }
-
-  public hideOne(): void {
-    const isHidden = this.chart?.isDatasetHidden(1);
-    this.chart?.hideDataset(1, !isHidden);
-  }
-
-  public pushOne(): void {
-    this.lineChartData.datasets.forEach((x, i) => {
-      const num = AnnualAnalyticsComponent.generateNumber(i);
-      x.data.push(num);
-    });
-    this.lineChartData?.labels?.push(
-      `Label ${this.lineChartData.labels.length}`
-    );
-
-    this.chart?.update();
-  }
-
-  public changeColor(): void {
-    this.lineChartData.datasets[2].borderColor = 'green';
-    this.lineChartData.datasets[2].backgroundColor = `rgba(0, 255, 0, 0.3)`;
-
-    this.chart?.update();
-  }
-
-  public changeLabel(): void {
-    const tmp = this.newLabel;
-    this.newLabel = this.lineChartData.datasets[2].label;
-    this.lineChartData.datasets[2].label = tmp;
-
-    this.chart?.update();
-  }
 }

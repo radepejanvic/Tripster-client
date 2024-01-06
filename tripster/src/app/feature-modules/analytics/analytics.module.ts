@@ -4,6 +4,7 @@ import { AnnualAnalyticsComponent } from './annual-analytics/annual-analytics.co
 import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
 import { AnalyticsComponent } from './analytics/analytics.component';
 import { TotalAnalyticsComponent } from './total-analytics/total-analytics.component';
+import { ToggleButtonModule } from 'primeng/togglebutton';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { TotalAnalyticsComponent } from './total-analytics/total-analytics.compo
   ],
   imports: [
     CommonModule,
-    NgChartsModule
+    NgChartsModule,
+    ToggleButtonModule
   ],
   providers: [
     { provide: NgChartsConfiguration, useValue: { generateColors: true } }
