@@ -5,6 +5,7 @@ import { BaseChartDirective } from 'ng2-charts';
 import { Analytics } from '../model/analytics.model';
 import { AnalyticsService } from '../analytics.service';
 import { AuthorizationService } from '../../authorization/authorization.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-total-analytics',
@@ -14,8 +15,14 @@ import { AuthorizationService } from '../../authorization/authorization.service'
 export class TotalAnalyticsComponent implements OnInit {
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
   analytics!: Analytics[];
+  startDate: Date;
+  endDate: Date;
 
-  // Pie
+  form = new FormGroup({
+    start: new FormControl(new Date(), Validators.required),
+    end: new FormControl(new Date(), Validators.required)
+  });
+
   public pieChartOptions: ChartConfiguration['options'] = {
     plugins: {
       legend: {
@@ -40,7 +47,11 @@ export class TotalAnalyticsComponent implements OnInit {
   constructor(private analyticsService: AnalyticsService, private authorizationService: AuthorizationService) { }
 
   ngOnInit(): void {
-    this.analyticsService.getTotal(this.authorizationService.getPersonId(), 1644447600000, 1707519600000).subscribe({
+    this.getTotalAnalytics(new Date().getMilliseconds(), new Date().getMilliseconds());
+  }
+
+  getTotalAnalytics(start: number, end: number): void {
+    this.analyticsService.getTotal(this.authorizationService.getPersonId(), start, end).subscribe({
       next: (response: Analytics[]) => {
         this.analytics = response;
         this.loadPieChartData();
@@ -70,132 +81,38 @@ export class TotalAnalyticsComponent implements OnInit {
         },
       ],
     };
-
-    // this.lineChartData = {
-    //   datasets: datasets,
-    //   labels: ['January', 'February', 'March', 'April', 'May', 'June',
-    //     'July', 'August', 'September', 'October', 'November', 'December']
-    // }
-
   }
 
-  // events
-  public chartClicked({
-    event,
-    active,
-  }: {
-    event: ChartEvent;
-    active: object[];
-  }): void {
-    console.log(event, active);
-  }
-
-  public chartHovered({
-    event,
-    active,
-  }: {
-    event: ChartEvent;
-    active: object[];
-  }): void {
-    console.log(event, active);
-  }
-
-  changeLabels(): void {
-    const words = [
-      'hen',
-      'variable',
-      'embryo',
-      'instal',
-      'pleasant',
-      'physical',
-      'bomber',
-      'army',
-      'add',
-      'film',
-      'conductor',
-      'comfortable',
-      'flourish',
-      'establish',
-      'circumstance',
-      'chimney',
-      'crack',
-      'hall',
-      'energy',
-      'treat',
-      'window',
-      'shareholder',
-      'division',
-      'disk',
-      'temptation',
-      'chord',
-      'left',
-      'hospital',
-      'beef',
-      'patrol',
-      'satisfied',
-      'academy',
-      'acceptance',
-      'ivory',
-      'aquarium',
-      'building',
-      'store',
-      'replace',
-      'language',
-      'redeem',
-      'honest',
-      'intention',
-      'silk',
-      'opera',
-      'sleep',
-      'innocent',
-      'ignore',
-      'suite',
-      'applaud',
-      'funny',
-    ];
-    const randomWord = () => words[Math.trunc(Math.random() * words.length)];
-    this.pieChartData.labels = new Array(3).map((_) => randomWord());
-
-    this.chart?.update();
-  }
-
-  addSlice(): void {
-    if (this.pieChartData.labels) {
-      this.pieChartData.labels.push(['Line 1', 'Line 2', 'Line 3']);
+  onSubmit(): void {
+    if (!this.form.valid) {
+      console.log('Invalid form.');
+      return;
     }
 
-    this.pieChartData.datasets[0].data.push(400);
+    const startValue = this.form.value.start;
+    const endValue = this.form.value.end;
 
-    this.chart?.update();
-  }
+    if (startValue && endValue) {
+      this.startDate = new Date(startValue);
+      this.endDate = new Date(endValue);
 
-  removeSlice(): void {
-    if (this.pieChartData.labels) {
-      this.pieChartData.labels.pop();
+      if (!isNaN(this.startDate.getTime()) && !isNaN(this.endDate.getTime())) {
+
+        const startTimestamp = this.startDate.getTime();
+        const endTimestamp = this.endDate.getTime();
+
+        console.log(startTimestamp);
+        console.log(endTimestamp);
+
+        if (endTimestamp > startTimestamp) {
+          this.getTotalAnalytics(startTimestamp, endTimestamp);
+        }
+        return;
+      }
     }
 
-    this.pieChartData.datasets[0].data.pop();
-
-    this.chart?.update();
+    console.log('Invalid date values.');
   }
 
-  changeLegendPosition(): void {
-    if (this.pieChartOptions?.plugins?.legend) {
-      this.pieChartOptions.plugins.legend.position =
-        this.pieChartOptions.plugins.legend.position === 'left'
-          ? 'top'
-          : 'left';
-    }
 
-    this.chart?.render();
-  }
-
-  toggleLegend(): void {
-    if (this.pieChartOptions?.plugins?.legend) {
-      this.pieChartOptions.plugins.legend.display =
-        !this.pieChartOptions.plugins.legend.display;
-    }
-
-    this.chart?.render();
-  }
 }
