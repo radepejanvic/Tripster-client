@@ -1,8 +1,4 @@
-<div
-  class="card mb-3"
-  [routerLink]="['/accommodationInfo', reservation.id]"
-  [ngClass]="{ opacity: checkStatus() }"
->
+<div class="card mb-3" [ngClass]="{ opacity: checkStatus() }">
   <div class="row g-0" style="height: 100%">
     <img
       src="{{ reservation.url }}"

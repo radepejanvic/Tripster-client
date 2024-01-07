@@ -1,6 +1,6 @@
 <div>
   <form [formGroup]="basicFilter">
-    <div class="mb-3">
+    <div class="mb-3" *ngIf="!getCurrentURL().includes('reservation')">
       <label class="form-label" for="destination">Destination</label>
       <input
         formControlName="destination"
@@ -8,6 +8,16 @@
         class="form-control"
         id="destination"
         placeholder="Copenhagen, Denmark"
+        (input)="onFilterChange()"
+      />
+    </div>
+    <div class="mb-3" *ngIf="getCurrentURL().includes('reservation')">
+      <label class="form-label" for="destination">Name</label>
+      <input
+        formControlName="destination"
+        type="email"
+        class="form-control"
+        id="destination"
         (input)="onFilterChange()"
       />
     </div>
@@ -31,7 +41,7 @@
         (input)="onFilterChange()"
       />
     </div>
-    <div class="mb-3" *ngIf="!getCurrentURL().includes('guest/reservation')">
+    <div class="mb-3" *ngIf="!getCurrentURL().includes('reservation')">
       <label for="nubmerOfGuest" class="form-label">Numer of guests</label>
       <input
         formControlName="numberOfGuest"

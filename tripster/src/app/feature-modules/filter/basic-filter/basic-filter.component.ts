@@ -31,7 +31,7 @@ export class BasicFilterComponent {
   }
 
   setCustomValidators() {
-    if (!this.getCurrentURL().includes('guest/reservation')) {
+    if (!this.getCurrentURL().includes('reservation')) {
       this.basicFilter.setValidators(this.dateValidator.bind(this));
       this.basicFilter.updateValueAndValidity();
     }
