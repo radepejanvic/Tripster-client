@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { AccommodationRequestCardComponent } from './accommodation-request-card/accommodation-request-card.component';
 import { HostAccommodationCardComponent } from './host-accommodation-card/host-accommodation-card.component';
 import { GuestReservationCardComponent } from './guest-reservation-card/guest-reservation-card.component';
+import { HostReservationCardComponent } from './host-reservation-card/host-reservation-card.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { GuestReservationCardComponent } from './guest-reservation-card/guest-re
     AccommodationRequestCardComponent,
     HostAccommodationCardComponent,
     GuestReservationCardComponent,
+    HostReservationCardComponent,
   ],
   imports: [CommonModule, AccommodationInfoModule, RouterModule],
   exports: [
@@ -20,6 +22,7 @@ import { GuestReservationCardComponent } from './guest-reservation-card/guest-re
     AccommodationRequestCardComponent,
     HostAccommodationCardComponent,
     GuestReservationCardComponent,
+    HostReservationCardComponent,
   ],
 })
 export class CardsModule {}

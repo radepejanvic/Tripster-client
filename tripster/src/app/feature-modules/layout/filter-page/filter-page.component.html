@@ -10,15 +10,14 @@
         ></app-basic-filter>
         <app-additional-filter
           *ngIf="
-            role != 'ROLE_ADMIN' &&
-            !getCurrentURL().includes('guest/reservation')
+            role != 'ROLE_ADMIN' && !getCurrentURL().includes('reservation')
           "
           (filterChange)="onAdditionalFilter($event)"
         ></app-additional-filter>
         <app-guest-rating-filter *ngIf="false"></app-guest-rating-filter>
         <app-reservation-status-filter
           (filterChange)="onReservationStatusFilter($event)"
-          *ngIf="getCurrentURL().includes('guest/reservation')"
+          *ngIf="getCurrentURL().includes('reservation')"
         ></app-reservation-status-filter>
         <app-time-filter *ngIf="false"></app-time-filter>
         <app-user-type-status-filter
@@ -62,6 +61,10 @@
         <app-guest-reservation-card
           [reservation]="reservation"
         ></app-guest-reservation-card>
+      </div>
+      <div *ngFor="let reservation of hostReservation">
+        <app-host-reservation-card [reservation]="reservation">
+        </app-host-reservation-card>
       </div>
     </div>
   </div>

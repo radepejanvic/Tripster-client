@@ -30,6 +30,7 @@ export class FilterPageComponent implements OnInit {
   accommodationRequests: AccommodationRequest[];
   hostAccommodation: AccommodationInfoCard[];
   guestReservation: Reservation[];
+  hostReservation: Reservation[];
   role: string = '';
 
   constructor(
@@ -80,7 +81,17 @@ export class FilterPageComponent implements OnInit {
           });
         });
     }
-    if (this.role == 'ROLE_HOST') {
+
+    if (this.getCurrentURL().includes('host/reservation')) {
+      this.service
+        .getHostReservation(this.authService.getPersonId())
+        .subscribe((value: Reservation[]) => {
+          this.hostReservation = value;
+          value.map((item) => {
+            item.url = this.util.base64ToDataURL(item.photo);
+          });
+        });
+    } else if (this.role == 'ROLE_HOST') {
       this.service
         .getAccommodationForHost(this.authService.getPersonId())
         .subscribe((value: AccommodationInfoCard[]) => {
@@ -145,6 +156,18 @@ export class FilterPageComponent implements OnInit {
             )
             .subscribe((value: Reservation[]) => {
               this.guestReservation = value;
+              value.map((item) => {
+                item.url = this.util.base64ToDataURL(item.photo);
+              });
+            });
+        } else if (this.getCurrentURL().includes('host/reservation')) {
+          this.service
+            .getHostReservationByParams(
+              this.getGuestReseravtionParams(),
+              this.authService.getPersonId()
+            )
+            .subscribe((value: Reservation[]) => {
+              this.hostReservation = value;
               value.map((item) => {
                 item.url = this.util.base64ToDataURL(item.photo);
               });
