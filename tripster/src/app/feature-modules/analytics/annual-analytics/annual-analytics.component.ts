@@ -9,6 +9,10 @@ import { AuthorizationModule } from '../../authorization/authorization.module';
 import { AuthorizationService } from '../../authorization/authorization.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+import html2canvas from 'html2canvas';
+import * as jspdf from 'jspdf';
+import 'jspdf-autotable';
+
 @Component({
   selector: 'app-annual-analytics',
   templateUrl: './annual-analytics.component.html',
@@ -88,6 +92,59 @@ export class AnnualAnalyticsComponent implements OnInit {
     let year = this.form.value.year || new Date().getFullYear();
     this.getAnnualAnalytics(year);
 
+  }
+
+  private getBase64Image(): string {
+    const canvas = document.querySelector('#chart') as HTMLCanvasElement;
+    const imageData = canvas.toDataURL('image/png');
+    return imageData.replace(/^data:image\/(png|jpg);base64,/, '');
+  }
+
+  private calculateHeight(table: HTMLElement, width: number): number {
+    const tableWidth = table.clientWidth;
+    const tableHeight = table.clientHeight;
+    const aspectRatio = tableWidth / tableHeight;
+
+    return width / aspectRatio;
+  }
+
+  exportToPDF(): void {
+    const container = document.querySelector('#annual-chart') as HTMLElement;
+    const table = document.querySelector('#table') as HTMLElement;
+
+    if (container instanceof HTMLElement && table instanceof HTMLElement) {
+      html2canvas(container).then((canvas) => {
+        const pdf = new jspdf.jsPDF();
+
+        pdf.text(this.generateTitle(), 10, 10);
+        pdf.addImage(this.getBase64Image(), 'PNG', 10, 20, 180, 100);
+
+        html2canvas(table, { scale: 1 }).then((tableCanvas) => {
+          pdf.addImage(tableCanvas.toDataURL('image/png'), 'PNG', 10, 130, 180, this.calculateHeight(table, 180));
+
+          this.checked = !this.checked;
+          this.loadLineChartData();
+
+          setTimeout(() => {
+
+            pdf.addPage();
+            pdf.text(this.generateTitle(), 10, 10);
+            pdf.addImage(this.getBase64Image(), 'PNG', 10, 20, 180, 100);
+
+            html2canvas(table, { scale: 1 }).then((secondTableCanvas) => {
+              pdf.addImage(secondTableCanvas.toDataURL('image/png'), 'PNG', 10, 130, 180, this.calculateHeight(table, 180));
+
+              pdf.save(`annual-analytics-${this.form.value.year}.pdf`);
+            });
+          }, 1000);
+        });
+
+      });
+    }
+  }
+
+  private generateTitle(): string {
+    return this.checked ? `Montlhy reservations for the calendar year ${this.form.value.year}` : `Montlhy revenue for the calendar year ${this.form.value.year}`;
   }
 
 
