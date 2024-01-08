@@ -5,7 +5,7 @@
     <p-toggleButton class="toggle" [(ngModel)]="checked" onLabel="Reservations" offLabel="Revenue" (click)="loadLineChartData()"></p-toggleButton>
   </h1>
 
-  <canvas id="chart"
+  <canvas id="a-chart"
     baseChart
     class="chart"
     [data]="lineChartData"
@@ -13,7 +13,7 @@
     [type]="lineChartType"
   ></canvas>
 
-  <table id="table">
+  <table id="annual-table">
     <tr>
       <th> Accommodation </th>
       <th *ngFor="let label of lineChartData.labels">{{ label }}</th>

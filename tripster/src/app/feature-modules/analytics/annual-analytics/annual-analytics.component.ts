@@ -11,7 +11,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import html2canvas from 'html2canvas';
 import * as jspdf from 'jspdf';
-import 'jspdf-autotable';
 
 @Component({
   selector: 'app-annual-analytics',
@@ -95,7 +94,7 @@ export class AnnualAnalyticsComponent implements OnInit {
   }
 
   private getBase64Image(): string {
-    const canvas = document.querySelector('#chart') as HTMLCanvasElement;
+    const canvas = document.querySelector('#a-chart') as HTMLCanvasElement;
     const imageData = canvas.toDataURL('image/png');
     return imageData.replace(/^data:image\/(png|jpg);base64,/, '');
   }
@@ -110,7 +109,7 @@ export class AnnualAnalyticsComponent implements OnInit {
 
   exportToPDF(): void {
     const container = document.querySelector('#annual-chart') as HTMLElement;
-    const table = document.querySelector('#table') as HTMLElement;
+    const table = document.querySelector('#annual-table') as HTMLElement;
 
     if (container instanceof HTMLElement && table instanceof HTMLElement) {
       html2canvas(container).then((canvas) => {

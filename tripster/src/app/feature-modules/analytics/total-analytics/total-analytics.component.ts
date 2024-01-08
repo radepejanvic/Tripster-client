@@ -7,6 +7,10 @@ import { AnalyticsService } from '../analytics.service';
 import { AuthorizationService } from '../../authorization/authorization.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+import html2canvas from 'html2canvas';
+import * as jspdf from 'jspdf';
+import { DatePipe } from '@angular/common';
+
 @Component({
   selector: 'app-total-analytics',
   templateUrl: './total-analytics.component.html',
@@ -112,6 +116,47 @@ export class TotalAnalyticsComponent implements OnInit {
     }
 
     console.log('Invalid date values.');
+  }
+
+  private getBase64Image(): string {
+    const canvas = document.querySelector('#t-chart') as HTMLCanvasElement;
+    const imageData = canvas.toDataURL('image/png');
+    return imageData.replace(/^data:image\/(png|jpg);base64,/, '');
+  }
+
+  private calculateHeight(table: HTMLElement, width: number): number {
+    const tableWidth = table.clientWidth;
+    const tableHeight = table.clientHeight;
+    const aspectRatio = tableWidth / tableHeight;
+
+    return width / aspectRatio;
+  }
+
+  exportToPDF(): void {
+    const container = document.querySelector('#total-chart') as HTMLElement;
+    const table = document.querySelector('#total-table') as HTMLElement;
+
+    if (container instanceof HTMLElement && table instanceof HTMLElement) {
+      html2canvas(container).then((canvas) => {
+        const pdf = new jspdf.jsPDF();
+
+        pdf.text(`Total reservations for period: ${this.formatDate(this.startDate)} - ${this.formatDate(this.endDate)}`, 10, 10);
+        pdf.addImage(this.getBase64Image(), 'PNG', 10, 10, 180, 180);
+
+        html2canvas(table, { scale: 1 }).then((tableCanvas) => {
+          pdf.addImage(tableCanvas.toDataURL('image/png'), 'PNG', 10, 180, 180, this.calculateHeight(table, 180));
+
+          pdf.save(`total-analytics-${this.formatDate(this.startDate)}-${this.formatDate(this.endDate)}.pdf`);
+        });
+
+      });
+    }
+  }
+
+  formatDate(date: Date): string {
+    const formatted = new DatePipe('en-US').transform(date, 'mediumDate');
+
+    return formatted ? formatted.replace(/[,\s]/g, '.') : 'unknown-date';
   }
 
 
