@@ -57,6 +57,11 @@
           [accommodation]="accommodation"
         ></app-host-accommodation-card>
       </div>
+      <div *ngFor="let accommodation of guestFavoriteAccommodation">
+        <app-accommodation-info-card
+          [accommodation]="accommodation"
+        ></app-accommodation-info-card>
+      </div>
       <div *ngFor="let reservation of guestReservation">
         <app-guest-reservation-card
           [reservation]="reservation"

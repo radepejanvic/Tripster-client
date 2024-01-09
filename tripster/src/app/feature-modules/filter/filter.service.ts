@@ -70,4 +70,12 @@ export class FilterService {
       { params }
     );
   }
+
+  getGuestFavotiteAccommodation(
+    id: number
+  ): Observable<AccommodationInfoCard[]> {
+    return this.http.get<AccommodationInfoCard[]>(
+      environment.apiHost + 'accommodations/favorites/' + id
+    );
+  }
 }

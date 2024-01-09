@@ -31,6 +31,7 @@ export class FilterPageComponent implements OnInit {
   hostAccommodation: AccommodationInfoCard[];
   guestReservation: Reservation[];
   hostReservation: Reservation[];
+  guestFavoriteAccommodation: AccommodationInfoCard[];
   role: string = '';
 
   constructor(
@@ -55,6 +56,15 @@ export class FilterPageComponent implements OnInit {
         .getGuestReservation(this.authService.getPersonId())
         .subscribe((value: Reservation[]) => {
           this.guestReservation = value;
+          value.map((item) => {
+            item.url = this.util.base64ToDataURL(item.photo);
+          });
+        });
+    } else if (this.getCurrentURL().includes('guest/favoriteAccommodation')) {
+      this.service
+        .getGuestFavotiteAccommodation(this.authService.getPersonId())
+        .subscribe((value: AccommodationInfoCard[]) => {
+          this.guestFavoriteAccommodation = value;
           value.map((item) => {
             item.url = this.util.base64ToDataURL(item.photo);
           });
