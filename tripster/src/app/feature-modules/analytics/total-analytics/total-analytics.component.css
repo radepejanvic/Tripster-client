@@ -1,0 +1,80 @@
+h1 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.chart {
+    width: 80%;
+}
+
+table {
+    width: 100%;
+    height: fit-content;
+    border: 3px solid #f0f0f0;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+th,
+td {
+    height: 50px;
+    padding: 8px;
+    text-align: center
+}
+
+tr:nth-child(even) {
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+form {
+    display: flex;
+    height: 50px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+
+input,
+button {
+    height: 50px;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid black;
+    width: 30%;
+}
+
+button {
+    margin: 0;
+    background-color: white;
+}
+
+label {
+    flex: 1;
+    font-size: 20px;
+}
+
+label,
+input {
+    margin-right: 5%;
+}
+
+.pdf {
+    width: 100%;
+}
+
+
+:host ::ng-deep .p-highlight.p-togglebutton,
+:host ::ng-deep .p-highlight.p-togglebutton:hover {
+    background: black;
+    border: none;
+    color: white;
+}
+
+:host ::ng-deep .p-togglebutton:focus {
+    box-shadow: 0 0 0 0.0rem white;
+}

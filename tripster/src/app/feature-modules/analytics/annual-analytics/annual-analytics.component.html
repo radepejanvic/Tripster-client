@@ -1,0 +1,48 @@
+<div id="annual-chart">
+  <h1> 
+  Montlhy stats for the calendar year {{this.form.value.year}}
+  
+    <p-toggleButton class="toggle" [(ngModel)]="checked" onLabel="Reservations" offLabel="Revenue" (click)="loadLineChartData()"></p-toggleButton>
+  </h1>
+
+  <canvas id="a-chart"
+    baseChart
+    class="chart"
+    [data]="lineChartData"
+    [options]="lineChartOptions"
+    [type]="lineChartType"
+  ></canvas>
+
+  <table id="annual-table">
+    <tr>
+      <th> Accommodation </th>
+      <th *ngFor="let label of lineChartData.labels">{{ label }}</th>
+    </tr>
+    <tr
+      *ngFor="let d of lineChartData.datasets; let i = index"
+      [class]="'line-' + i"
+    >
+      <td> {{accommodations[i]}} </td>
+      <td *ngFor="let label of lineChartData.labels; let j = index">
+        {{ d && d.data[j] }} <span *ngIf="!checked">€</span>
+      </td>
+    </tr>
+  </table>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <label> Pick the year to display: </label>
+    <input
+            id="year"
+            type="number"
+            min="2022"
+            max="2024"
+            formControlName="year"
+            placeholder="Pick the year"
+          />
+
+    <button class="btn btn-outline-dark" type="submit"> Load chart </button>
+  </form>
+
+  <button class="btn btn-outline-dark pdf" (click)="exportToPDF()"> Export to PDF </button>
+</div>
+
