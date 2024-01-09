@@ -1,0 +1,32 @@
+<div class="card mb-3">
+  <div class="row g-0" style="height: 100%">
+    <img
+      src="{{ review.reviewUrl }}"
+      class="img-fluid rounded-start col-md-4"
+      alt="..."
+    />
+
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ review.reviewedName }}</h5>
+        <app-review [review]="review"></app-review>
+      </div>
+      <div class="col coll mb-3">
+        <button
+          type="button"
+          class="btn btn-outline-danger ms-3"
+          (click)="delete()"
+        >
+          Decline
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-dark ms-2 me-3"
+          (click)="approvee()"
+        >
+          Approve
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
