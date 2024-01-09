@@ -1,0 +1,52 @@
+<div class="card mb-3" [ngClass]="{ opacity: checkStatus() }">
+  <div class="row g-0" style="height: 100%">
+    <img
+      src="{{ reservation.url }}"
+      class="img-fluid rounded-start col-md-4"
+      alt="..."
+    />
+
+    <div class="col-md-5">
+      <div class="card-body">
+        <h5 class="card-title">{{ reservation.name }}</h5>
+        <p class="card-text">
+          <small class="text-body-secondary">{{ reservation.address }}</small>
+        </p>
+        <p class="card-text short-description mt-8">
+          {{ reservation.duration }} nights, {{ reservation.numOfGuest }} guests
+        </p>
+        <p class="card-text">
+          {{ reservation.timeStamp }}
+        </p>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card-body">
+        <div class="price-info">
+          <p class="card-text text-end">{{ reservation.status }}</p>
+
+          <p class="card-text text-end price">{{ reservation.price }}€</p>
+
+          <div
+            class="d-flex flex-row-reverse mt-4"
+            *ngIf="reservation.status == 'REJECTED'"
+          >
+            <button type="button" class="btn btn-outline-danger mt-5">
+              Delete
+            </button>
+          </div>
+
+          <div
+            class="d-flex flex-row-reverse mt-4"
+            *ngIf="reservation.status == 'ACCEPTED'"
+          >
+            <button type="button" class="btn btn-outline-dark mt-5">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
