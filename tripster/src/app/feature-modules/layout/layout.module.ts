@@ -17,31 +17,31 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { HostNavbarComponent } from './navbar/host-navbar/host-navbar.component';
 
 @NgModule({
-	declarations: [
-		NavbarComponent,
-		HomeComponent,
-		FooterComponent,
-		UserNavbarComponent,
-		AdminNavbarComponent,
-		FilterPageComponent,
-  HostNavbarComponent,
-	],
-	imports: [
-		CommonModule,
-		RouterModule,
-		AccommodationInfoModule,
-		AuthorizationModule,
-		UserRegistrationModule,
-		UserAccountUpdateModule,
-		FilterModule,
-		CardsModule,
-		GoogleMapsModule,
-	],
-	exports: [
-		NavbarComponent,
-		HomeComponent,
-		FooterComponent,
-		FilterPageComponent,
-	],
+  declarations: [
+    NavbarComponent,
+    HomeComponent,
+    FooterComponent,
+    UserNavbarComponent,
+    AdminNavbarComponent,
+    FilterPageComponent,
+    HostNavbarComponent,
+  ],
+  imports: [
+    CommonModule,
+    RouterModule,
+    AccommodationInfoModule,
+    AuthorizationModule,
+    UserRegistrationModule,
+    UserAccountUpdateModule,
+    FilterModule,
+    CardsModule,
+    GoogleMapsModule,
+  ],
+  exports: [
+    NavbarComponent,
+    HomeComponent,
+    FooterComponent,
+    FilterPageComponent,
+  ],
 })
 export class LayoutModule {}
