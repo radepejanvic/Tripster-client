@@ -28,6 +28,30 @@ const routes: Routes = [
     data: { role: ['ROLE_GUEST'] },
   },
   {
+    path: 'accommodationReviews',
+    component: FilterPageComponent,
+    canActivate: [AuthGuard],
+    data: { role: ['ROLE_ADMIN'] },
+  },
+  {
+    path: 'accommodationReportReviews',
+    component: FilterPageComponent,
+    canActivate: [AuthGuard],
+    data: { role: ['ROLE_ADMIN'] },
+  },
+  {
+    path: 'userReviews',
+    component: FilterPageComponent,
+    canActivate: [AuthGuard],
+    data: { role: ['ROLE_ADMIN'] },
+  },
+  {
+    path: 'users',
+    component: FilterPageComponent,
+    canActivate: [AuthGuard],
+    data: { role: ['ROLE_ADMIN'] },
+  },
+  {
     path: 'guest/favoriteAccommodation',
     component: FilterPageComponent,
     canActivate: [AuthGuard],

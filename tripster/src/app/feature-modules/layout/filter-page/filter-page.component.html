@@ -71,6 +71,15 @@
         <app-host-reservation-card [reservation]="reservation">
         </app-host-reservation-card>
       </div>
+      <div *ngFor="let review of accommodationReviews">
+        <app-accommodation-review-card [review]="review">
+        </app-accommodation-review-card>
+      </div>
+
+      <div *ngFor="let review of accommodationReportReviews">
+        <app-accommodation-review-report-card [review]="review">
+        </app-accommodation-review-report-card>
+      </div>
     </div>
   </div>
 </div>

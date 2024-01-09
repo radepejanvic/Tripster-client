@@ -39,10 +39,15 @@
         <app-host-navbar *ngIf="role == 'ROLE_HOST'"></app-host-navbar>
         <div class="dropdown">
           <i class="bi bi-list dropbtn icon"></i>
-          <div class="dropdown-content">
-            <a href="#" [routerLink]="['guest/reservation']">Reservation</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
+          <div class="dropdown-content" *ngIf="role == 'ROLE_ADMIN'">
+            <a href="#" [routerLink]="['/users']">Users</a>
+            <a href="#" [routerLink]="['/accommodationRequests']"
+              >Accommodations</a
+            >
+            <a href="#" [routerLink]="['/userReviews']">User reviews</a>
+            <a href="#" [routerLink]="['/accommodationReviews']"
+              >Accommodation reviews</a
+            >
           </div>
         </div>
       </div>
