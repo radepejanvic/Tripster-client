@@ -20,6 +20,7 @@ import { AuthorizationService } from '../../authorization/authorization.service'
 import { UtilService } from 'src/app/shared/util.service';
 import { Reservation } from '../../cards/guest-reservation-card/model/reservation.model';
 import { ReviewReport } from '../../cards/accommodation-review-report-card/model/review-report.model';
+import { Report } from '../../report/model/report.model';
 
 @Component({
   selector: 'app-filter-page',
@@ -37,6 +38,8 @@ export class FilterPageComponent implements OnInit {
   hostReservation: Reservation[];
   accommodationReviews: Review[];
   accommodationReportReviews: ReviewReport[];
+  userReportReviews: ReviewReport[];
+  userReport: Report[];
   userReviews: Review[];
   guestFavoriteAccommodation: AccommodationInfoCard[];
   role: string = '';
@@ -97,7 +100,6 @@ export class FilterPageComponent implements OnInit {
         });
       });
     } else if (this.getCurrentURL().includes('accommodationReportReviews')) {
-      this.service;
       this.service
         .getAccommodationReportReview()
         .subscribe((value: ReviewReport[]) => {
@@ -106,6 +108,18 @@ export class FilterPageComponent implements OnInit {
             if (item.photo) item.url = this.util.base64ToDataURL(item.photo);
           });
         });
+    } else if (this.getCurrentURL().includes('userReviews')) {
+      this.service.getAccommodationReview().subscribe((value: Review[]) => {
+        this.userReviews = value;
+      });
+    } else if (this.getCurrentURL().includes('userReportReviews')) {
+      this.service.getUserReportReview().subscribe((value: ReviewReport[]) => {
+        this.userReportReviews = value;
+      });
+    } else if (this.getCurrentURL().includes('userReport')) {
+      this.service.getUserReport().subscribe((value: Report[]) => {
+        this.userReport = value;
+      });
     } else if (this.role == 'ROLE_ADMIN') {
       this.service
         .getAccommodationRequestByFiltersForAdmin(new HttpParams())

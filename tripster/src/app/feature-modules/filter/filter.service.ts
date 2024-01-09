@@ -8,6 +8,7 @@ import { Reservation } from '../cards/guest-reservation-card/model/reservation.m
 import { AuthorizationService } from '../authorization/authorization.service';
 import { Review } from '../accommodation-info/model/accommodation.model';
 import { ReviewReport } from '../cards/accommodation-review-report-card/model/review-report.model';
+import { Report } from '../report/model/report.model';
 
 @Injectable({
   providedIn: 'root',
@@ -89,6 +90,14 @@ export class FilterService {
   getAccommodationReportReview(): Observable<ReviewReport[]> {
     return this.http.get<ReviewReport[]>(
       environment.apiHost + 'accommodations/reviews/reports'
+    );
+  }
+  getUserReport(): Observable<Report[]> {
+    return this.http.get<Report[]>(environment.apiHost + 'users/reports');
+  }
+  getUserReportReview(): Observable<ReviewReport[]> {
+    return this.http.get<ReviewReport[]>(
+      environment.apiHost + 'users/reviews/reports'
     );
   }
 }

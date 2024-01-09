@@ -80,6 +80,19 @@
         <app-accommodation-review-report-card [review]="review">
         </app-accommodation-review-report-card>
       </div>
+
+      <div *ngFor="let review of userReviews">
+        <app-user-review-card [review]="review"> </app-user-review-card>
+      </div>
+
+      <div *ngFor="let review of userReportReviews">
+        <app-user-report-review-card [review]="review">
+        </app-user-report-review-card>
+      </div>
+
+      <div *ngFor="let review of userReport">
+        <app-user-report-card [report]="review"> </app-user-report-card>
+      </div>
     </div>
   </div>
 </div>
