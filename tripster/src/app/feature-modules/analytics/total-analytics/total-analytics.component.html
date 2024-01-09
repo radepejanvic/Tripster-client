@@ -1,0 +1,56 @@
+<div id="total-chart">
+  <h1 *ngIf="startDate == undefined || endDate == undefined"> 
+  Total reservations and revenue for period from _________ to _________
+</h1>
+
+<h1 *ngIf="startDate != undefined && endDate != undefined"> 
+  Total reservations and revenue for period from {{startDate | date: 'mediumDate'}} to {{endDate | date: 'mediumDate'}}
+</h1>
+
+<div class="chart">
+  <canvas id="t-chart"
+  baseChart
+  class="chart"
+  [data]="pieChartData"
+  [type]="pieChartType"
+  [options]="pieChartOptions"
+  [plugins]="pieChartPlugins"
+  >
+  </canvas>
+</div>
+
+
+<table id="total-table">
+  <tr>
+    <th> Accommodation </th>
+    <th> Revenue </th>
+    <th> Reservations </th>
+  </tr>
+  <tr *ngFor="let analytic of analytics">
+    <td> {{analytic.name}} </td>
+    <td> {{analytic.totalRevenue}} €</td>
+    <td> {{analytic.totalReservations}} </td>
+  </tr>
+</table>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <label> Start date: </label>
+  <input
+    id="start"
+    type="date"
+    formControlName="start"
+    placeholder="Pick the start date"
+  />
+  <label> End date: </label>
+  <input
+    id="end"
+    type="date"
+    formControlName="end"
+    placeholder="Pick the end date"
+  />
+
+  <button class="btn btn-outline-dark" type="submit"> Load chart </button>
+</form>
+  <button class="btn btn-outline-dark pdf" (click)="exportToPDF()"> Export to PDF </button>
+
+</div>
