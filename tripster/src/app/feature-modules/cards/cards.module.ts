@@ -9,6 +9,9 @@ import { GuestReservationCardComponent } from './guest-reservation-card/guest-re
 import { HostReservationCardComponent } from './host-reservation-card/host-reservation-card.component';
 import { AccommodationReviewCardComponent } from './accommodation-review-card/accommodation-review-card.component';
 import { AccommodationReviewReportCardComponent } from './accommodation-review-report-card/accommodation-review-report-card.component';
+import { UserReviewCardComponent } from './user-review-card/user-review-card.component';
+import { UserReportReviewCardComponent } from './user-report-review-card/user-report-review-card.component';
+import { UserReportCardComponent } from './user-report-card/user-report-card.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,9 @@ import { AccommodationReviewReportCardComponent } from './accommodation-review-r
     HostReservationCardComponent,
     AccommodationReviewCardComponent,
     AccommodationReviewReportCardComponent,
+    UserReviewCardComponent,
+    UserReportReviewCardComponent,
+    UserReportCardComponent,
   ],
   imports: [CommonModule, AccommodationInfoModule, RouterModule],
   exports: [
@@ -29,6 +35,9 @@ import { AccommodationReviewReportCardComponent } from './accommodation-review-r
     HostReservationCardComponent,
     AccommodationReviewCardComponent,
     AccommodationReviewReportCardComponent,
+    UserReviewCardComponent,
+    UserReportCardComponent,
+    UserReportReviewCardComponent,
   ],
 })
 export class CardsModule {}
