@@ -22,6 +22,12 @@ const routes: Routes = [
   },
   { path: 'filterPage', component: FilterPageComponent },
   {
+    path: 'myAccommodation',
+    component: FilterPageComponent,
+    canActivate: [AuthGuard],
+    data: { role: ['ROLE_HOST'] },
+  },
+  {
     path: 'guest/reservation',
     component: FilterPageComponent,
     canActivate: [AuthGuard],
@@ -95,8 +101,8 @@ const routes: Routes = [
   {
     path: 'analytics',
     component: AnalyticsComponent,
-    // canActivate: [AuthGuard],
-    // data: { role: ['ROLE_HOST'] }
+    canActivate: [AuthGuard],
+    data: { role: ['ROLE_HOST'] },
   },
 ];
 

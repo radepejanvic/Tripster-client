@@ -54,6 +54,18 @@
             >
             <a href="#" [routerLink]="['/userReport']">User reports</a>
           </div>
+
+          <div class="dropdown-content" *ngIf="role == 'ROLE_HOST'">
+            <a href="#" [routerLink]="['/myAccommodation']">Accommodations</a>
+            <a href="#" [routerLink]="['/host/reservation']">Reservations</a>
+            <a href="#" [routerLink]="['/analytics']">Analytics</a>
+          </div>
+          <div class="dropdown-content" *ngIf="role == 'ROLE_GUEST'">
+            <a href="#" [routerLink]="['/guest/reservation']">Reservations</a>
+            <a href="#" [routerLink]="['/guest/favoriteAccommodation']"
+              >Favorites</a
+            >
+          </div>
         </div>
       </div>
     </div>

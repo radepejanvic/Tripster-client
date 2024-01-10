@@ -78,7 +78,7 @@ export class FilterPageComponent implements OnInit {
             item.url = this.util.base64ToDataURL(item.photo);
           });
         });
-    } else if (this.role == 'ROLE_GUEST') {
+    } else if (this.getCurrentURL().includes('filterPage')) {
       this.service
         .getAllAccommodations()
         .subscribe((value: AccommodationInfoCard[]) => {
@@ -115,7 +115,7 @@ export class FilterPageComponent implements OnInit {
       this.service.getUserReport().subscribe((value: Report[]) => {
         this.userReport = value;
       });
-    } else if (this.role == 'ROLE_ADMIN') {
+    } else if (this.getCurrentURL().includes('accommodationRequests')) {
       this.service
         .getAccommodationRequestByFiltersForAdmin(new HttpParams())
         .subscribe((value: AccommodationRequest[]) => {
@@ -135,7 +135,7 @@ export class FilterPageComponent implements OnInit {
             item.url = this.util.base64ToDataURL(item.photo);
           });
         });
-    } else if (this.role == 'ROLE_HOST') {
+    } else if (this.getCurrentURL().includes('myAccommodation')) {
       this.service
         .getAccommodationForHost(this.authService.getPersonId())
         .subscribe((value: AccommodationInfoCard[]) => {
