@@ -1,7 +1,6 @@
 .card {
   background-color: #f0f0f0;
   width: 100%;
-  aspect-ratio: 4/1;
 }
 .card:hover {
   scale: 1.005;
@@ -28,4 +27,14 @@ p {
 
 .opacity {
   opacity: 0.5;
+}
+
+.report {
+  height: 18px;
+  transition: height 0.3s ease;
+  cursor: pointer;
+}
+
+.report:hover {
+  height: 24px;
 }
