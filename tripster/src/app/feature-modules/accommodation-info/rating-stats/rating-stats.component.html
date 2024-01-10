@@ -2,34 +2,34 @@
     
     <div id="stat-header">
         
-        <h1> 4.6 Excellent </h1>
-        <p> 253 reviews </p>
+        <h1> {{stats.rating}} {{getRateName()}} </h1>
+        <p> {{stats.reviews}} reviews </p>
         
     </div>
     
     <div class="header">
         <p> Excellent </p>
-        <p> 123 </p>
+        <p> {{stats.excellent}} </p>
     </div>
-    <mat-progress-bar mode="determinate" value="90"></mat-progress-bar>
+    <mat-progress-bar mode="determinate" [value]="calculateProgress(stats.excellent)"></mat-progress-bar>
     <div class="header">
         <p> Good </p>
-        <p> 42 </p>
+        <p> {{stats.good}} </p>
     </div>
-    <mat-progress-bar mode="determinate" value="60"></mat-progress-bar>
+    <mat-progress-bar mode="determinate" [value]="calculateProgress(stats.good)"></mat-progress-bar>
     <div class="header">
         <p> Average </p>
-        <p> 12 </p>
+        <p> {{stats.average}} </p>
     </div>
-    <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+    <mat-progress-bar mode="determinate" [value]="calculateProgress(stats.average)"></mat-progress-bar>
     <div class="header">
         <p> Poor </p>
-        <p> 5 </p>
+        <p> {{stats.poor}} </p>
     </div>
-    <mat-progress-bar mode="determinate" value="70"></mat-progress-bar>
+    <mat-progress-bar mode="determinate" [value]="calculateProgress(stats.poor)"></mat-progress-bar>
     <div class="header">
         <p> Bad </p>
-        <p> 1 </p>
+        <p> {{stats.bad}} </p>
     </div>
-    <mat-progress-bar mode="determinate" value="10"></mat-progress-bar>
+    <mat-progress-bar mode="determinate" [value]="calculateProgress(stats.bad)"></mat-progress-bar>
 </div>
