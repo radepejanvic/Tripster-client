@@ -74,4 +74,17 @@ export class CardService {
       environment.apiHost + 'users/reviews/reports/' + id
     );
   }
+
+  approveUserReport(id: number): Observable<number> {
+    return this.http.patch<number>(
+      environment.apiHost + 'users/reports/' + id,
+      null
+    );
+  }
+
+  deletedUserReport(id: number) {
+    return this.http.delete<Status>(
+      environment.apiHost + 'users/reports/' + id
+    );
+  }
 }

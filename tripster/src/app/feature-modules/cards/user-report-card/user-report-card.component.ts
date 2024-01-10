@@ -13,13 +13,26 @@ export class UserReportCardComponent {
   @Input()
   report: Report;
 
-  // constructor(private service: CardService) {}
+  constructor(private service: CardService) {}
+  delete() {
+    this.service.deletedUserReport(this.report.reporteeId || 0).subscribe({
+      next: (response: any) => {
+        window.location.reload();
+      },
+      error: (err: any) => {
+        console.log(err);
+      },
+    });
+  }
 
-  // delete() {
-  //   this.service.deletedAccommodationReportReview(this.review.id || 0);
-  // }
-
-  // approve() {
-  //   this.service.approveAccommodationReportReview(this.review.id || 0);
-  // }
+  approve() {
+    this.service.approveUserReport(this.report.reporteeId || 0).subscribe({
+      next: (response: any) => {
+        window.location.reload();
+      },
+      error: (err: any) => {
+        console.log(err);
+      },
+    });
+  }
 }

@@ -12,10 +12,18 @@
         </div>
       </div>
       <div class="col coll mb-3">
-        <button type="button" class="btn btn-outline-danger ms-3">
+        <button
+          type="button"
+          class="btn btn-outline-danger ms-3"
+          (click)="delete()"
+        >
           Delete
         </button>
-        <button type="button" class="btn btn-outline-dark ms-2 me-3">
+        <button
+          type="button"
+          class="btn btn-outline-dark ms-2 me-3"
+          (click)="approve()"
+        >
           Approve
         </button>
       </div>
