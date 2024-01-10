@@ -15,10 +15,28 @@ export class AccommodationReviewReportCardComponent {
   constructor(private service: CardService) {}
 
   delete() {
-    this.service.deletedAccommodationReportReview(this.review.id || 0);
+    this.service
+      .deletedAccommodationReportReview(this.review.id || 0)
+      .subscribe({
+        next: (response: any) => {
+          window.location.reload();
+        },
+        error: (err: any) => {
+          console.log(err);
+        },
+      });
   }
 
   approve() {
-    this.service.approveAccommodationReportReview(this.review.id || 0);
+    this.service
+      .approveAccommodationReportReview(this.review.id || 0)
+      .subscribe({
+        next: (response: any) => {
+          window.location.reload();
+        },
+        error: (err: any) => {
+          console.log(err);
+        },
+      });
   }
 }

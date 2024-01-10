@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Status } from './accommodation-request-card/model/status.model';
 import { environment } from 'src/env/env';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -48,7 +49,29 @@ export class CardService {
     );
   }
 
-  approveAccommodationReportReview(id: number) {}
+  approveAccommodationReportReview(id: number): Observable<number> {
+    return this.http.patch<number>(
+      environment.apiHost + 'accommodations/reviews/reports/' + id,
+      null
+    );
+  }
 
-  deletedAccommodationReportReview(id: number) {}
+  deletedAccommodationReportReview(id: number) {
+    return this.http.delete<Status>(
+      environment.apiHost + 'accommodations/reviews/reports/' + id
+    );
+  }
+
+  approveUserReportReview(id: number): Observable<number> {
+    return this.http.patch<number>(
+      environment.apiHost + 'users/reviews/reports/' + id,
+      null
+    );
+  }
+
+  deletedUserReportReview(id: number) {
+    return this.http.delete<Status>(
+      environment.apiHost + 'users/reviews/reports/' + id
+    );
+  }
 }
