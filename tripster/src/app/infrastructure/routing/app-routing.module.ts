@@ -40,12 +40,6 @@ const routes: Routes = [
     data: { role: ['ROLE_ADMIN'] },
   },
   {
-    path: 'userReviews',
-    component: FilterPageComponent,
-    canActivate: [AuthGuard],
-    data: { role: ['ROLE_ADMIN'] },
-  },
-  {
     path: 'userReportReviews',
     component: FilterPageComponent,
     canActivate: [AuthGuard],
@@ -53,12 +47,6 @@ const routes: Routes = [
   },
   {
     path: 'userReport',
-    component: FilterPageComponent,
-    canActivate: [AuthGuard],
-    data: { role: ['ROLE_ADMIN'] },
-  },
-  {
-    path: 'users',
     component: FilterPageComponent,
     canActivate: [AuthGuard],
     data: { role: ['ROLE_ADMIN'] },

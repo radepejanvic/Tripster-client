@@ -40,14 +40,19 @@
         <div class="dropdown">
           <i class="bi bi-list dropbtn icon"></i>
           <div class="dropdown-content" *ngIf="role == 'ROLE_ADMIN'">
-            <a href="#" [routerLink]="['/users']">Users</a>
             <a href="#" [routerLink]="['/accommodationRequests']"
               >Accommodations</a
             >
-            <a href="#" [routerLink]="['/userReviews']">User reviews</a>
+            <a href="#" [routerLink]="['/accommodationReportReviews']"
+              >Accommodation review reports</a
+            >
             <a href="#" [routerLink]="['/accommodationReviews']"
               >Accommodation reviews</a
             >
+            <a href="#" [routerLink]="['/userReportReviews']"
+              >User review reports</a
+            >
+            <a href="#" [routerLink]="['/userReport']">User reports</a>
           </div>
         </div>
       </div>
