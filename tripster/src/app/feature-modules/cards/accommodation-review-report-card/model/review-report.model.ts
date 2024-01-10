@@ -6,4 +6,5 @@ export interface ReviewReport {
   name: string;
   reason: string;
   reporterEmail: string;
+  rate: number;
 }

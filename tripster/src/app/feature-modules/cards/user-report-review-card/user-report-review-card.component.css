@@ -20,3 +20,7 @@
 .short-description {
   margin-top: 40px;
 }
+.rate {
+  display: flex;
+  justify-content: space-between;
+}

@@ -40,7 +40,6 @@ export class FilterPageComponent implements OnInit {
   accommodationReportReviews: ReviewReport[];
   userReportReviews: ReviewReport[];
   userReport: Report[];
-  userReviews: Review[];
   guestFavoriteAccommodation: AccommodationInfoCard[];
   role: string = '';
 
@@ -108,10 +107,6 @@ export class FilterPageComponent implements OnInit {
             if (item.photo) item.url = this.util.base64ToDataURL(item.photo);
           });
         });
-    } else if (this.getCurrentURL().includes('userReviews')) {
-      this.service.getAccommodationReview().subscribe((value: Review[]) => {
-        this.userReviews = value;
-      });
     } else if (this.getCurrentURL().includes('userReportReviews')) {
       this.service.getUserReportReview().subscribe((value: ReviewReport[]) => {
         this.userReportReviews = value;
