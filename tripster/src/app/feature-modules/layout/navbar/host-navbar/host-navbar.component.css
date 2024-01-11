@@ -1,5 +1,7 @@
-.user-circle {
-    font-size: 40px;
-    margin-left: 20px;
+.icon {
+    display: inline;
+    width: fit-content;
+    height: fit-content;
+    margin-left: 10px;
     cursor: pointer;
 }

@@ -16,7 +16,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatSliderModule } from '@angular/material/slider';
-
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   declarations: [],
@@ -30,7 +32,10 @@ import { MatSliderModule } from '@angular/material/slider';
     MatNativeDateModule,
     MatCardModule,
     MatSliderModule,
-    MatDialogModule
+    MatDialogModule,
+    MatIconModule,
+    MatButtonModule,
+    MatBadgeModule
 
     // MatCalendar
   ],
@@ -44,7 +49,10 @@ import { MatSliderModule } from '@angular/material/slider';
     MatCardModule,
     MatCalendar,
     MatSliderModule,
-    MatDialogModule
+    MatDialogModule,
+    MatIconModule,
+    MatButtonModule,
+    MatBadgeModule
   ],
   providers: [
     {

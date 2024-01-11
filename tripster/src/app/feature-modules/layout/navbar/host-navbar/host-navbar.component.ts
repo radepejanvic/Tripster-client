@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-host-navbar',
@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './host-navbar.component.css'
 })
 export class HostNavbarComponent {
-
+  @Input() notifications: number;
 }

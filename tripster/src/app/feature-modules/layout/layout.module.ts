@@ -15,6 +15,7 @@ import { FilterModule } from '../filter/filter.module';
 import { CardsModule } from '../cards/cards.module';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { HostNavbarComponent } from './navbar/host-navbar/host-navbar.component';
+import { MaterialModule } from 'src/app/infrastructure/material/material.module';
 
 @NgModule({
 	declarations: [
@@ -24,7 +25,7 @@ import { HostNavbarComponent } from './navbar/host-navbar/host-navbar.component'
 		UserNavbarComponent,
 		AdminNavbarComponent,
 		FilterPageComponent,
-  HostNavbarComponent,
+		HostNavbarComponent,
 	],
 	imports: [
 		CommonModule,
@@ -36,6 +37,7 @@ import { HostNavbarComponent } from './navbar/host-navbar/host-navbar.component'
 		FilterModule,
 		CardsModule,
 		GoogleMapsModule,
+		MaterialModule
 	],
 	exports: [
 		NavbarComponent,
@@ -44,4 +46,4 @@ import { HostNavbarComponent } from './navbar/host-navbar/host-navbar.component'
 		FilterPageComponent,
 	],
 })
-export class LayoutModule {}
+export class LayoutModule { }
