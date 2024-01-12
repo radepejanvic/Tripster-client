@@ -2,13 +2,13 @@
     <h1 (click)="toggleSettings()" [@changeHeaderBackground]="headerBackgroundState"> Notifications <img src="./assets/icons/settings.svg" [@rotateImage]="imageRotationState" (click)="rotateImage()" ></h1>
 
     <div class="settings" [@showHideSettings]="settingsState">
-        <h3> Notify me about reservations  <mat-slide-toggle color="warn"/> </h3>
-        <h3> Notify me about my reviews  <mat-slide-toggle color="warn"/> </h3>
-        <h3> Notify me about accommodation reviews  <mat-slide-toggle color="warn"/> </h3>
+        <h3> Notify me about reservations  <mat-slide-toggle [(ngModel)]="settings.reservationNotification" color="warn"/> </h3>
+        <h3 *ngIf="role == 'ROLE_HOST'"> Notify me about my reviews  <mat-slide-toggle [(ngModel)]="settings.reviewNotification" color="warn"/> </h3>
+        <h3 *ngIf="role == 'ROLE_HOST'"> Notify me about accommodation reviews  <mat-slide-toggle [(ngModel)]="settings.accommodationReviewNotification" color="warn"/> </h3>
+        <div class="wrapper">
+            <button class="btn btn-outline-dark" (click)="saveSettings()"> Apply </button>
+        </div>
     </div>
-
-    <p *ngFor="let message of messages"> {{message}} </p>
-
 
     <app-notification *ngFor="let notification of notifications" [notification]="notification" (read)="markAsRead($event)"></app-notification>
 

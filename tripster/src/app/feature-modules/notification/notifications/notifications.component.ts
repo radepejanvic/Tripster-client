@@ -8,6 +8,8 @@ import SockJS from 'sockjs-client';
 import { environment } from 'src/env/env';
 import { Message } from 'primeng/api';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Settings } from '../model/settings.model';
+import { SettingsService } from '../settings.service';
 
 @Component({
   selector: 'app-notifications',
@@ -45,6 +47,9 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 })
 export class NotificationsComponent implements OnInit {
   notifications: Notification[] = [];
+  settings: Settings;
+  role: string;
+
   settingsState: 'hidden' | 'visible' = 'hidden';
   headerBackgroundState: 'hidden' | 'visible' = 'hidden';
   imageRotationState: 'normal' | 'rotated' = 'normal';
@@ -52,26 +57,37 @@ export class NotificationsComponent implements OnInit {
   private serverUrl = environment.socket + 'socket'
   private stompClient: any;
 
-  isLoaded: boolean = false;
-  isCustomSocketOpened = false;
-  messages: Message[] = [];
-
   constructor(private notificationService: NotificationService,
-    private authService: AuthorizationService) { }
+    private settingsService: SettingsService,
+    private authService: AuthorizationService) {
+    this.role = authService.getRole();
+  }
 
   ngOnInit(): void {
+    this.settingsService.getSettings(this.authService.getUserId()).subscribe({
+      next: (response: Settings) => {
+        this.settings = response;
+        this.loadNotifications();
+        console.log(`Succssesfully fetched settings: ${response}!`);
+      },
+      error: (err: any) => {
+        console.error('Error fetching settings. ', err);
+      }
+    })
+
+    this.initializeWebSocketConnection();
+  }
+
+  loadNotifications(): void {
     this.notificationService.getUnreadNotifications(this.authService.getUserId()).subscribe({
       next: (response: Notification[]) => {
-        this.notifications = response;
+        this.notifications = this.filterNotifications(response);
         console.log(`Fetched ${response.length} unread notifications.`);
-        console.log(response);
       },
       error: (err: any) => {
         console.error('Error fetching notifications. ', err);
       }
     })
-
-    this.initializeWebSocketConnection();
   }
 
   initializeWebSocketConnection() {
@@ -81,19 +97,15 @@ export class NotificationsComponent implements OnInit {
     let that = this;
 
     this.stompClient.connect({}, function () {
-      that.isLoaded = true;
       that.openSocket();
     });
 
   }
 
   openSocket() {
-    if (this.isLoaded) {
-      this.isCustomSocketOpened = true;
-      this.stompClient.subscribe("/socket-publisher/" + this.authService.getUserId(), (message: { body: string; }) => {
-        this.handleResult(message);
-      });
-    }
+    this.stompClient.subscribe("/socket-publisher/" + this.authService.getUserId(), (message: { body: string; }) => {
+      this.handleResult(message);
+    });
   }
 
   handleResult(message: { body: string; }) {
@@ -117,6 +129,29 @@ export class NotificationsComponent implements OnInit {
 
   markAsRead(id: string): void {
     this.notifications = this.notifications.filter(not => not.id !== +id);
+  }
+
+
+  saveSettings(): void {
+    this.settingsService.saveSettings(this.settings).subscribe({
+      next: (response: Settings) => {
+        this.settings = response;
+        this.loadNotifications();
+        console.log(`Succssesfully saved settings: ${response}!`);
+      },
+      error: (err: any) => {
+        console.error('Error saving settings. ', err);
+      }
+    })
+  }
+
+  filterNotifications(notifications: Notification[]): Notification[] {
+    let filters: string[] = [];
+    if (this.settings.reservationNotification) filters.push('RESERVATION');
+    if (this.settings.reviewNotification) filters.push('REVIEW');
+    if (this.settings.accommodationReviewNotification) filters.push('ACCOMMODATION_REVIEW');
+
+    return notifications.filter(notification => filters.includes(notification.type));
   }
 
 }

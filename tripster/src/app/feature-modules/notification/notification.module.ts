@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { MaterialModule } from 'src/app/infrastructure/material/material.module';
 import { NotificationComponent } from './notification/notification.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -12,7 +13,9 @@ import { NotificationComponent } from './notification/notification.component';
   ],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     NotificationsComponent
