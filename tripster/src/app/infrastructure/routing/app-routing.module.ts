@@ -8,6 +8,7 @@ import { LoginComponent } from 'src/app/feature-modules/authorization/login/logi
 import { FilterPageComponent } from 'src/app/feature-modules/layout/filter-page/filter-page.component';
 import { AccommodationCrudComponent } from 'src/app/feature-modules/accommodation-info/accommodation-crud/accommodation-crud.component';
 import { AnalyticsComponent } from 'src/app/feature-modules/analytics/analytics/analytics.component';
+import { NotificationsComponent } from 'src/app/feature-modules/notification/notifications/notifications.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' }, //default route
@@ -68,10 +69,15 @@ const routes: Routes = [
     // canActivate: [AuthGuard],
     // data: { role: ['ROLE_HOST'] }
   },
+
+  {
+    path: 'notifications',
+    component: NotificationsComponent
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

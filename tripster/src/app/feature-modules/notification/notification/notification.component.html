@@ -1,0 +1,13 @@
+<div class="notification">
+    
+    <span>
+        <h2> {{notification.title}} </h2>
+        <p class="timeStamp"> {{notification.timeStamp}} </p>
+    </span>
+
+    <p *ngFor="let text of parseText()"> {{text}} </p>
+
+    <div class="wrapper">
+        <button class="btn btn-outline-dark" (click)="markAsRead()"> Mark as read </button>
+    </div>
+</div>

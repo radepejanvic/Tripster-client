@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: fit-content;
+}
+
+h3 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+}
+
+.settings {
+    border-radius: 0 0 10px 10px;
+    background-color: #f0f0f0;
+    padding: 0 20px;
+    margin-bottom: 20px;
+
+}
+
+h1 {
+    margin: 0;
+    border-radius: 10px 10px 0 0;
+    padding: 20px;
+}
+
+img {
+    cursor: pointer;
+}

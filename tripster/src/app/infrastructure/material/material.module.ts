@@ -19,6 +19,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [],
@@ -35,7 +36,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatDialogModule,
     MatIconModule,
     MatButtonModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatSlideToggleModule
 
     // MatCalendar
   ],
@@ -52,7 +54,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatDialogModule,
     MatIconModule,
     MatButtonModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatSlideToggleModule
   ],
   providers: [
     {
