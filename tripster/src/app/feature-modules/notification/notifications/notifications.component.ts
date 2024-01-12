@@ -47,8 +47,8 @@ import { SettingsService } from '../settings.service';
 })
 export class NotificationsComponent implements OnInit {
   notifications: Notification[] = [];
-  settings: Settings;
   role: string;
+  settings: Settings;
 
   settingsState: 'hidden' | 'visible' = 'hidden';
   headerBackgroundState: 'hidden' | 'visible' = 'hidden';
@@ -67,6 +67,7 @@ export class NotificationsComponent implements OnInit {
     this.settingsService.getSettings(this.authService.getUserId()).subscribe({
       next: (response: Settings) => {
         this.settings = response;
+        localStorage.setItem('settings', JSON.stringify(this.settings));
         this.loadNotifications();
         console.log(`Succssesfully fetched settings: ${response}!`);
       },
@@ -79,15 +80,17 @@ export class NotificationsComponent implements OnInit {
   }
 
   loadNotifications(): void {
+
     this.notificationService.getUnreadNotifications(this.authService.getUserId()).subscribe({
       next: (response: Notification[]) => {
-        this.notifications = this.filterNotifications(response);
+        this.notifications = this.notificationService.filterNotifications(response, this.settings);
         console.log(`Fetched ${response.length} unread notifications.`);
       },
       error: (err: any) => {
         console.error('Error fetching notifications. ', err);
       }
     })
+
   }
 
   initializeWebSocketConnection() {
@@ -145,13 +148,5 @@ export class NotificationsComponent implements OnInit {
     })
   }
 
-  filterNotifications(notifications: Notification[]): Notification[] {
-    let filters: string[] = [];
-    if (this.settings.reservationNotification) filters.push('RESERVATION');
-    if (this.settings.reviewNotification) filters.push('REVIEW');
-    if (this.settings.accommodationReviewNotification) filters.push('ACCOMMODATION_REVIEW');
-
-    return notifications.filter(notification => filters.includes(notification.type));
-  }
 
 }

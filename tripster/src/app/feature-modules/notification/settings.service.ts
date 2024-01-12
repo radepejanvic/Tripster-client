@@ -19,4 +19,19 @@ export class SettingsService {
     return this.http.put<Settings>(`${environment.apiHost}users/settings`, settings);
   }
 
+  accessSettings(): Settings | null {
+    const settingsString = localStorage.getItem('settings');
+
+    if (settingsString) {
+      try {
+        const settings = JSON.parse(settingsString);
+        return settings;
+      } catch (error) {
+        console.error('Error parsing settings:', error);
+      }
+    }
+
+    return null;
+  }
+
 }
