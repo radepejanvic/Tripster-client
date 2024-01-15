@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Accommodation } from '../../accommodation-info/model/accommodation.model';
+import {
+  Accommodation,
+  Review,
+} from '../../accommodation-info/model/accommodation.model';
 import { AccommodationInfoService } from '../../accommodation-info/accommodation-info.service';
 import { AccommodationInfoCard } from '../../cards/accommodation-info-card/model/accommodation-info-card.model';
 import { FilterService } from '../../filter/filter.service';
@@ -16,6 +19,8 @@ import { Amenity } from 'src/app/shared/enum/amenity.enum';
 import { AuthorizationService } from '../../authorization/authorization.service';
 import { UtilService } from 'src/app/shared/util.service';
 import { Reservation } from '../../cards/guest-reservation-card/model/reservation.model';
+import { ReviewReport } from '../../cards/accommodation-review-report-card/model/review-report.model';
+import { Report } from '../../report/model/report.model';
 
 @Component({
   selector: 'app-filter-page',
@@ -31,6 +36,11 @@ export class FilterPageComponent implements OnInit {
   hostAccommodation: AccommodationInfoCard[];
   guestReservation: Reservation[];
   hostReservation: Reservation[];
+  accommodationReviews: Review[];
+  accommodationReportReviews: ReviewReport[];
+  userReportReviews: ReviewReport[];
+  userReport: Report[];
+  guestFavoriteAccommodation: AccommodationInfoCard[];
   role: string = '';
 
   constructor(
@@ -59,7 +69,16 @@ export class FilterPageComponent implements OnInit {
             item.url = this.util.base64ToDataURL(item.photo);
           });
         });
-    } else if (this.role == 'ROLE_GUEST') {
+    } else if (this.getCurrentURL().includes('guest/favoriteAccommodation')) {
+      this.service
+        .getGuestFavotiteAccommodation(this.authService.getPersonId())
+        .subscribe((value: AccommodationInfoCard[]) => {
+          this.guestFavoriteAccommodation = value;
+          value.map((item) => {
+            item.url = this.util.base64ToDataURL(item.photo);
+          });
+        });
+    } else if (this.getCurrentURL().includes('filterPage')) {
       this.service
         .getAllAccommodations()
         .subscribe((value: AccommodationInfoCard[]) => {
@@ -71,7 +90,32 @@ export class FilterPageComponent implements OnInit {
         });
     }
 
-    if (this.role == 'ROLE_ADMIN') {
+    if (this.getCurrentURL().includes('accommodationReviews')) {
+      this.service.getAccommodationReview().subscribe((value: Review[]) => {
+        this.accommodationReviews = value;
+        value.map((item) => {
+          if (item.reviewedPhoto)
+            item.reviewUrl = this.util.base64ToDataURL(item.reviewedPhoto);
+        });
+      });
+    } else if (this.getCurrentURL().includes('accommodationReportReviews')) {
+      this.service
+        .getAccommodationReportReview()
+        .subscribe((value: ReviewReport[]) => {
+          this.accommodationReportReviews = value;
+          value.map((item) => {
+            if (item.photo) item.url = this.util.base64ToDataURL(item.photo);
+          });
+        });
+    } else if (this.getCurrentURL().includes('userReportReviews')) {
+      this.service.getUserReportReview().subscribe((value: ReviewReport[]) => {
+        this.userReportReviews = value;
+      });
+    } else if (this.getCurrentURL().includes('userReport')) {
+      this.service.getUserReport().subscribe((value: Report[]) => {
+        this.userReport = value;
+      });
+    } else if (this.getCurrentURL().includes('accommodationRequests')) {
       this.service
         .getAccommodationRequestByFiltersForAdmin(new HttpParams())
         .subscribe((value: AccommodationRequest[]) => {
@@ -91,7 +135,7 @@ export class FilterPageComponent implements OnInit {
             item.url = this.util.base64ToDataURL(item.photo);
           });
         });
-    } else if (this.role == 'ROLE_HOST') {
+    } else if (this.getCurrentURL().includes('myAccommodation')) {
       this.service
         .getAccommodationForHost(this.authService.getPersonId())
         .subscribe((value: AccommodationInfoCard[]) => {

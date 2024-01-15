@@ -25,40 +25,41 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ReportModule } from '../report/report.module';
 
 @NgModule({
-	declarations: [
-		PhotosComponent,
-		RatingComponent,
-		OverviewComponent,
-		AmenityComponent,
-		ReviewComponent,
-		RatingStatsComponent,
-		ReviewsComponent,
-		RentComponent,
-		AccommodationCrudComponent,
-		PhotoUploadComponent,
-		PriceListComponent,
-		MapComponent,
-		ReviewFormComponent,
-		DetailsComponent,
-	],
-	imports: [
-		CommonModule,
-		MaterialModule,
-		RouterModule,
-		NgxDropzoneModule,
-		BrowserModule,
-		FormsModule,
-		GoogleMapsModule,
-		ReactiveFormsModule,
-		CalendarModule,
-		ToggleButtonModule,
-		ReportModule
-	],
-	exports: [
-		PhotosComponent,
-		RatingComponent,
-		AccommodationCrudComponent,
-		OverviewComponent
-	]
+  declarations: [
+    PhotosComponent,
+    RatingComponent,
+    OverviewComponent,
+    AmenityComponent,
+    ReviewComponent,
+    RatingStatsComponent,
+    ReviewsComponent,
+    RentComponent,
+    AccommodationCrudComponent,
+    PhotoUploadComponent,
+    PriceListComponent,
+    MapComponent,
+    ReviewFormComponent,
+    DetailsComponent,
+  ],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    RouterModule,
+    NgxDropzoneModule,
+    BrowserModule,
+    FormsModule,
+    GoogleMapsModule,
+    ReactiveFormsModule,
+    CalendarModule,
+    ToggleButtonModule,
+    ReportModule,
+  ],
+  exports: [
+    PhotosComponent,
+    RatingComponent,
+    AccommodationCrudComponent,
+    OverviewComponent,
+    ReviewComponent,
+  ],
 })
-export class AccommodationInfoModule { }
+export class AccommodationInfoModule {}

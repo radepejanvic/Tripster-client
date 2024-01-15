@@ -23,7 +23,43 @@ const routes: Routes = [
   },
   { path: 'filterPage', component: FilterPageComponent },
   {
+    path: 'myAccommodation',
+    component: FilterPageComponent,
+    canActivate: [AuthGuard],
+    data: { role: ['ROLE_HOST'] },
+  },
+  {
     path: 'guest/reservation',
+    component: FilterPageComponent,
+    canActivate: [AuthGuard],
+    data: { role: ['ROLE_GUEST'] },
+  },
+  {
+    path: 'accommodationReviews',
+    component: FilterPageComponent,
+    canActivate: [AuthGuard],
+    data: { role: ['ROLE_ADMIN'] },
+  },
+  {
+    path: 'accommodationReportReviews',
+    component: FilterPageComponent,
+    canActivate: [AuthGuard],
+    data: { role: ['ROLE_ADMIN'] },
+  },
+  {
+    path: 'userReportReviews',
+    component: FilterPageComponent,
+    canActivate: [AuthGuard],
+    data: { role: ['ROLE_ADMIN'] },
+  },
+  {
+    path: 'userReport',
+    component: FilterPageComponent,
+    canActivate: [AuthGuard],
+    data: { role: ['ROLE_ADMIN'] },
+  },
+  {
+    path: 'guest/favoriteAccommodation',
     component: FilterPageComponent,
     canActivate: [AuthGuard],
     data: { role: ['ROLE_GUEST'] },
@@ -66,8 +102,8 @@ const routes: Routes = [
   {
     path: 'analytics',
     component: AnalyticsComponent,
-    // canActivate: [AuthGuard],
-    // data: { role: ['ROLE_HOST'] }
+    canActivate: [AuthGuard],
+    data: { role: ['ROLE_HOST'] },
   },
 
   {

@@ -9,4 +9,7 @@ export interface Reservation {
   duration: number;
   status: string;
   price: number;
+  numOfCancelled: number;
+  guest: string;
+  userID: number;
 }

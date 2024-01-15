@@ -1,0 +1,37 @@
+<div class="card mb-3">
+  <div class="row g-0" style="height: 100%">
+    <div class="col-md-12">
+      <div class="card-body">
+        <h5 class="card-title">{{ review.name }}</h5>
+        <p><b>Reporter: </b> {{ review.reporterEmail }}</p>
+        <div class="row border border-2 rounded">
+          <p style="margin: 0px"><b>Reason for report:</b></p>
+          <p style="margin-top: 0px">{{ review.reason }}</p>
+        </div>
+
+        <div class="row border border-2 rounded mt-2">
+          <p style="margin: 0px" class="rate">
+            <b>Comment:</b> <B>Rate: {{ review.rate }}</B>
+          </p>
+          <p style="margin: 0px">{{ review.comment }}</p>
+        </div>
+      </div>
+      <div class="col coll mb-3">
+        <button
+          type="button"
+          class="btn btn-outline-danger ms-3"
+          (click)="delete()"
+        >
+          Delete
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-dark ms-2 me-3"
+          (click)="approve()"
+        >
+          Approve
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

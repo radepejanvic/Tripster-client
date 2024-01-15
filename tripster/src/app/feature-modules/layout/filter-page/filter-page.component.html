@@ -57,6 +57,11 @@
           [accommodation]="accommodation"
         ></app-host-accommodation-card>
       </div>
+      <div *ngFor="let accommodation of guestFavoriteAccommodation">
+        <app-accommodation-info-card
+          [accommodation]="accommodation"
+        ></app-accommodation-info-card>
+      </div>
       <div *ngFor="let reservation of guestReservation">
         <app-guest-reservation-card
           [reservation]="reservation"
@@ -65,6 +70,24 @@
       <div *ngFor="let reservation of hostReservation">
         <app-host-reservation-card [reservation]="reservation">
         </app-host-reservation-card>
+      </div>
+      <div *ngFor="let review of accommodationReviews">
+        <app-accommodation-review-card [review]="review">
+        </app-accommodation-review-card>
+      </div>
+
+      <div *ngFor="let review of accommodationReportReviews">
+        <app-accommodation-review-report-card [review]="review">
+        </app-accommodation-review-report-card>
+      </div>
+
+      <div *ngFor="let review of userReportReviews">
+        <app-user-report-review-card [review]="review">
+        </app-user-report-review-card>
+      </div>
+
+      <div *ngFor="let review of userReport">
+        <app-user-report-card [report]="review"> </app-user-report-card>
       </div>
     </div>
   </div>
