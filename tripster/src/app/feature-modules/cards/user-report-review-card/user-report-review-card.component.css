@@ -12,29 +12,15 @@
   font-size: 24px;
   font-weight: 500;
 }
-p {
-  margin-bottom: 0;
+.coll {
+  display: flex;
+  justify-content: end;
 }
 
 .short-description {
-  margin-top: 70px;
+  margin-top: 40px;
 }
-
-.price {
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.opacity {
-  opacity: 0.5;
-}
-
-.report {
-  height: 18px;
-  transition: height 0.3s ease;
-  cursor: pointer;
-}
-
-.report:hover {
-  height: 24px;
+.rate {
+  display: flex;
+  justify-content: space-between;
 }

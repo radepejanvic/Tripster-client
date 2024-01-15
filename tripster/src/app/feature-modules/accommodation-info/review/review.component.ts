@@ -8,15 +8,17 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-review',
   templateUrl: './review.component.html',
-  styleUrl: './review.component.css'
+  styleUrl: './review.component.css',
 })
 export class ReviewComponent {
   @Input() review: Review;
   @Input() checked: boolean;
 
-  constructor(private reviewService: ReviewService,
+  constructor(
+    private reviewService: ReviewService,
     private authorizationService: AuthorizationService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog
+  ) {}
 
   isDeletable(): boolean {
     return this.review.reviewerId == this.authorizationService.getUserId();
@@ -27,7 +29,6 @@ export class ReviewComponent {
   }
 
   deleteReview(): void {
-
     if (!this.review.id) {
       console.log('Error finding review id.');
       return;
@@ -40,7 +41,7 @@ export class ReviewComponent {
         },
         error: (err: any) => {
           console.error('Failed to delete host review.', err);
-        }
+        },
       });
     } else {
       this.reviewService.deleteAccommodationReview(this.review.id).subscribe({
@@ -49,7 +50,7 @@ export class ReviewComponent {
         },
         error: (err: any) => {
           console.error('Failed to delete accommodation review.', err);
-        }
+        },
       });
     }
   }
@@ -59,9 +60,10 @@ export class ReviewComponent {
       width: '400px',
       data: {
         id: this.review.id,
-        type: this.checked ? 'host-review-report' : 'accommodation-review-report'
-      }
+        type: this.checked
+          ? 'host-review-report'
+          : 'accommodation-review-report',
+      },
     });
   }
-
 }

@@ -39,10 +39,32 @@
         <app-host-navbar *ngIf="role == 'ROLE_HOST'"></app-host-navbar>
         <div class="dropdown">
           <i class="bi bi-list dropbtn icon"></i>
-          <div class="dropdown-content">
-            <a href="#" [routerLink]="['guest/reservation']">Reservation</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
+          <div class="dropdown-content" *ngIf="role == 'ROLE_ADMIN'">
+            <a href="#" [routerLink]="['/accommodationRequests']"
+              >Accommodations</a
+            >
+            <a href="#" [routerLink]="['/accommodationReportReviews']"
+              >Accommodation review reports</a
+            >
+            <a href="#" [routerLink]="['/accommodationReviews']"
+              >Accommodation reviews</a
+            >
+            <a href="#" [routerLink]="['/userReportReviews']"
+              >User review reports</a
+            >
+            <a href="#" [routerLink]="['/userReport']">User reports</a>
+          </div>
+
+          <div class="dropdown-content" *ngIf="role == 'ROLE_HOST'">
+            <a href="#" [routerLink]="['/myAccommodation']">Accommodations</a>
+            <a href="#" [routerLink]="['/host/reservation']">Reservations</a>
+            <a href="#" [routerLink]="['/analytics']">Analytics</a>
+          </div>
+          <div class="dropdown-content" *ngIf="role == 'ROLE_GUEST'">
+            <a href="#" [routerLink]="['/guest/reservation']">Reservations</a>
+            <a href="#" [routerLink]="['/guest/favoriteAccommodation']"
+              >Favorites</a
+            >
           </div>
         </div>
       </div>
