@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Review } from './model/accommodation.model';
+import { Rating, Review } from './model/accommodation.model';
 import { environment } from 'src/env/env';
 
 @Injectable({
@@ -37,6 +37,10 @@ export class ReviewService {
 
   deleteHostReview(id: number): Observable<boolean> {
     return this.http.delete<boolean>(`${environment.apiHost}users/reviews/${id}`);
+  }
+
+  getRatingStats(id: number): Observable<Rating> {
+    return this.http.get<Rating>(`${environment.apiHost}accommodations/reviews/stats/${id}`);
   }
 
 }

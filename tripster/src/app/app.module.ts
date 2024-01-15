@@ -20,6 +20,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts'
 import { AnalyticsModule } from './feature-modules/analytics/analytics.module';
+import { NotificationModule } from './feature-modules/notification/notification.module';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { AnalyticsModule } from './feature-modules/analytics/analytics.module';
     CalendarModule,
     ToggleButtonModule,
     NgChartsModule,
-    AnalyticsModule
+    AnalyticsModule,
+    NotificationModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

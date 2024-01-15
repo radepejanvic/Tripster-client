@@ -67,3 +67,13 @@ export interface Interval {
   start: Date;
   end: Date;
 }
+
+export interface Rating {
+  rating: number;
+  reviews: number;
+  excellent: number;
+  good: number;
+  average: number;
+  poor: number;
+  bad: number;
+}
