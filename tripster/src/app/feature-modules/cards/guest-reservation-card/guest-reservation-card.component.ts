@@ -27,4 +27,14 @@ export class GuestReservationCardComponent {
       },
     });
   }
+  cancelReservation() {
+    this.service.cancelReservation(this.reservation.id || 0).subscribe({
+      next: (response: any) => {
+        window.location.reload();
+      },
+      error: (err: any) => {
+        console.log(err);
+      },
+    });
+  }
 }

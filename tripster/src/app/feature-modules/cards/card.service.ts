@@ -103,4 +103,10 @@ export class CardService {
   deleteReservation(id: number) {
     return this.http.delete<Status>(environment.apiHost + 'reservations/' + id);
   }
+  cancelReservation(id: number) {
+    return this.http.put<Status>(
+      environment.apiHost + 'reservations/cancel/' + id,
+      null
+    );
+  }
 }
