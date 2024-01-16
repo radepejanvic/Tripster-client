@@ -32,7 +32,11 @@
             class="d-flex flex-row-reverse mt-4"
             *ngIf="reservation.status == 'REJECTED'"
           >
-            <button type="button" class="btn btn-outline-danger mt-5">
+            <button
+              type="button"
+              class="btn btn-outline-danger mt-5"
+              (click)="deleteReservation()"
+            >
               Delete
             </button>
           </div>
@@ -41,7 +45,11 @@
             class="d-flex flex-row-reverse mt-4"
             *ngIf="reservation.status == 'ACCEPTED'"
           >
-            <button type="button" class="btn btn-outline-dark mt-5">
+            <button
+              type="button"
+              class="btn btn-outline-dark mt-5"
+              (click)="cancelReservation()"
+            >
               Cancel
             </button>
           </div>
