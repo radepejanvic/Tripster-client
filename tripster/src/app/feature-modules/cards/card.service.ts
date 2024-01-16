@@ -87,4 +87,20 @@ export class CardService {
       environment.apiHost + 'users/reports/' + id
     );
   }
+  acceptReservation(id: number) {
+    return this.http.put<Status>(
+      environment.apiHost + 'reservations/accept/' + id,
+      null
+    );
+  }
+  rejectReservation(id: number) {
+    return this.http.put<Status>(
+      environment.apiHost + 'reservations/reject/' + id,
+      null
+    );
+  }
+
+  deleteReservation(id: number) {
+    return this.http.delete<Status>(environment.apiHost + 'reservations/' + id);
+  }
 }
