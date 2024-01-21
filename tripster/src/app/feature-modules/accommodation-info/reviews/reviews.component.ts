@@ -19,6 +19,7 @@ export class ReviewsComponent implements OnInit {
   reviews!: Review[];
   reviewable: boolean = true;
   checked: boolean = false;
+  role: string;
 
   constructor(private accommodationService: AccommodationInfoService,
     private authorizationService: AuthorizationService,
@@ -28,6 +29,7 @@ export class ReviewsComponent implements OnInit {
   ngOnInit(): void {
 
     this.getAllAccommodationReviews();
+    this.role = this.authorizationService.getRole();
     // this.canReviewAccommodation();
 
   }
