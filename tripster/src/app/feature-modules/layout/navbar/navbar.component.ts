@@ -70,6 +70,7 @@ export class NavbarComponent implements OnInit {
 				localStorage.removeItem('user');
 				localStorage.removeItem('userID');
 				localStorage.removeItem('personID');
+				localStorage.removeItem('settings');
 				this.authService.setRole();
 			},
 		});
