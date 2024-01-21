@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 	constructor(
 		private authService: AuthorizationService,
 		private router: Router
-	) {}
+	) { }
 	ngOnInit(): void {
 		this.router.navigate(['home']);
 		document.getElementById('login')?.click();
@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
 					this.authService.setRole();
 					this.router.navigate(['home']);
 					document.getElementById('close')?.click();
+					window.location.reload();
 				},
 				(error: string) => {
 					let text: string = error.toString();

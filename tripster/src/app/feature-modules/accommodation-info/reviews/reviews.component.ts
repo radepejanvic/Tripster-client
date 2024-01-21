@@ -19,6 +19,7 @@ export class ReviewsComponent implements OnInit {
   reviews!: Review[];
   reviewable: boolean = true;
   checked: boolean = false;
+  role: string;
 
   constructor(private accommodationService: AccommodationInfoService,
     private authorizationService: AuthorizationService,
@@ -28,7 +29,8 @@ export class ReviewsComponent implements OnInit {
   ngOnInit(): void {
 
     this.getAllAccommodationReviews();
-    // this.canReviewAccommodation();
+    this.role = this.authorizationService.getRole();
+    this.canReviewAccommodation();
 
   }
 
@@ -96,12 +98,12 @@ export class ReviewsComponent implements OnInit {
   }
 
   canReviewHost(): void {
-    if (this.host.userId == undefined) {
+    if (this.host.id == undefined) {
       console.error('Error fetching host data.');
       return;
     }
 
-    this.reviewService.canReviewHost(this.host.userId, this.authorizationService.getUserId()).subscribe({
+    this.reviewService.canReviewHost(this.host.id, this.authorizationService.getUserId()).subscribe({
       next: (response: boolean) => {
         this.reviewable = response;
       },
@@ -117,12 +119,12 @@ export class ReviewsComponent implements OnInit {
     if (this.checked) {
 
       this.getAllHostReviews();
-      // this.canReviewHost();
+      this.canReviewHost();
 
     } else {
 
       this.getAllAccommodationReviews();
-      // this.canReviewAccommodation();
+      this.canReviewAccommodation();
 
     }
 

@@ -8,14 +8,14 @@
 
     <div class="col-md-5">
       <div class="card-body">
-        <h5 class="card-title">{{ reservation.name }}</h5>
+        <h5 class="card-title" name="card-title">{{ reservation.name }}</h5>
         <p class="card-text">
-          <small class="text-body-secondary">{{ reservation.address }}</small>
+          <small class="text-body-secondary" name="address">{{ reservation.address }}</small>
         </p>
-        <p class="card-text short-description mt-8">
+        <p class="card-text short-description mt-8" name="duration">
           {{ reservation.duration }} nights, {{ reservation.numOfGuest }} guests
         </p>
-        <p class="card-text">
+        <p class="card-text" name="timeStamp">
           {{ reservation.timeStamp }}
         </p>
       </div>
@@ -24,9 +24,9 @@
     <div class="col-md-3">
       <div class="card-body">
         <div class="price-info">
-          <p class="card-text text-end">{{ reservation.status }}</p>
+          <p class="card-text text-end" name="status">{{ reservation.status }}</p>
 
-          <p class="card-text text-end price">{{ reservation.price }}€</p>
+          <p class="card-text text-end price" name="price">{{ reservation.price }}€</p>
 
           <div
             class="d-flex flex-row-reverse mt-4"
@@ -46,6 +46,7 @@
             *ngIf="reservation.status == 'ACCEPTED'"
           >
             <button
+              name="cancel-button"
               type="button"
               class="btn btn-outline-dark mt-5"
               (click)="cancelReservation()"
