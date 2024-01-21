@@ -46,8 +46,18 @@
 
           <div class="mt-5" *ngIf="reservation.status == 'PENDING'">
             <div class="row">
-              <button type="button" class="btn btn-outline-dark">Accept</button>
-              <button type="button" class="btn btn-outline-danger mt-2">
+              <button
+                type="button"
+                class="btn btn-outline-dark"
+                (click)="acceptReservation()"
+              >
+                Accept
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-danger mt-2"
+                (click)="rejectReservation()"
+              >
                 Reject
               </button>
             </div>

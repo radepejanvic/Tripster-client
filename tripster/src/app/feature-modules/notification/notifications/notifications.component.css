@@ -1,0 +1,50 @@
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: fit-content;
+}
+
+h3 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+}
+
+.settings {
+    width: 500px;
+    border-radius: 0 0 10px 10px;
+    background-color: #f0f0f0;
+    padding: 0 20px;
+    margin-bottom: 20px;
+
+}
+
+h1 {
+    width: 500px;
+    margin: 0;
+    border-radius: 10px 10px 0 0;
+    padding: 20px;
+}
+
+img {
+    cursor: pointer;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    width: 100%;
+}
+
+button {
+    height: 50px;
+    width: 30%;
+    margin-bottom: 20px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid black;
+}

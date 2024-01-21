@@ -44,6 +44,7 @@ export class AnnualAnalyticsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("USAO")
     this.getAnnualAnalytics(new Date().getFullYear());
   }
 

@@ -23,6 +23,7 @@
     "@angular/router": "^17.0.0",
     "@auth0/angular-jwt": "^5.2.0",
     "@ks89/angular-modal-gallery": "^11.1.1",
+    "@types/socket.io": "^3.0.2",
     "bootstrap": "^5.3.2",
     "bootstrap-icons": "^1.11.2",
     "chart.js": "^4.4.1",
@@ -35,6 +36,8 @@
     "ngx-dropzone": "^3.1.0",
     "primeng": "^17.1.0",
     "rxjs": "~7.8.0",
+    "sockjs-client": "^1.6.1",
+    "stompjs": "^2.3.3",
     "zone.js": "~0.14.2"
   },
   "devDependencies": {
@@ -43,6 +46,8 @@
     "@angular/compiler-cli": "^17.0.0",
     "@types/jasmine": "~5.1.0",
     "@types/jquery": "^3.5.29",
+    "@types/sockjs-client": "^1.5.4",
+    "@types/stompjs": "^2.3.9",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

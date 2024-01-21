@@ -35,8 +35,8 @@
           Log out
         </button>
         <app-admin-navbar *ngIf="role == 'ROLE_ADMIN'"></app-admin-navbar>
-        <app-user-navbar *ngIf="role == 'ROLE_GUEST'"></app-user-navbar>
-        <app-host-navbar *ngIf="role == 'ROLE_HOST'"></app-host-navbar>
+        <app-user-navbar [notifications]="notifications.length" *ngIf="role == 'ROLE_GUEST'"></app-user-navbar>
+        <app-host-navbar [notifications]="notifications.length" *ngIf="role == 'ROLE_HOST'"></app-host-navbar>
         <div class="dropdown">
           <i class="bi bi-list dropbtn icon"></i>
           <div class="dropdown-content" *ngIf="role == 'ROLE_ADMIN'">

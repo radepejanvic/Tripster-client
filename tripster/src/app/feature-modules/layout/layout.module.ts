@@ -15,33 +15,35 @@ import { FilterModule } from '../filter/filter.module';
 import { CardsModule } from '../cards/cards.module';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { HostNavbarComponent } from './navbar/host-navbar/host-navbar.component';
+import { MaterialModule } from 'src/app/infrastructure/material/material.module';
 
 @NgModule({
-  declarations: [
-    NavbarComponent,
-    HomeComponent,
-    FooterComponent,
-    UserNavbarComponent,
-    AdminNavbarComponent,
-    FilterPageComponent,
-    HostNavbarComponent,
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    AccommodationInfoModule,
-    AuthorizationModule,
-    UserRegistrationModule,
-    UserAccountUpdateModule,
-    FilterModule,
-    CardsModule,
-    GoogleMapsModule,
-  ],
-  exports: [
-    NavbarComponent,
-    HomeComponent,
-    FooterComponent,
-    FilterPageComponent,
-  ],
+	declarations: [
+		NavbarComponent,
+		HomeComponent,
+		FooterComponent,
+		UserNavbarComponent,
+		AdminNavbarComponent,
+		FilterPageComponent,
+		HostNavbarComponent,
+	],
+	imports: [
+		CommonModule,
+		RouterModule,
+		AccommodationInfoModule,
+		AuthorizationModule,
+		UserRegistrationModule,
+		UserAccountUpdateModule,
+		FilterModule,
+		CardsModule,
+		GoogleMapsModule,
+		MaterialModule
+	],
+	exports: [
+		NavbarComponent,
+		HomeComponent,
+		FooterComponent,
+		FilterPageComponent,
+	],
 })
-export class LayoutModule {}
+export class LayoutModule { }

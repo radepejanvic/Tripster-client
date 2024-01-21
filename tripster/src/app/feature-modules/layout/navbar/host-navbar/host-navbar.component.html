@@ -1,8 +1,11 @@
-<i
-	class="bi bi-person-circle user-circle"
-	[routerLink]="['/updateAccount']"
-></i>
-<i
-	class="bi bi-plus-circle-fill user-circle"
-	[routerLink]="['/addAccommodation']"
-></i>
+<div class="icon" [matBadge]="notifications" matBadgeColor="warn" [routerLink]="['/notifications']">
+	<img src="./assets/icons/notification.svg"  >
+</div>
+
+<div class="icon" [routerLink]="['/updateAccount']">
+	<img src="./assets/icons/account.svg"  >
+</div>
+
+<div class="icon" [routerLink]="['/addAccommodation']">
+	<img src="./assets/icons/add.svg"  >
+</div>
