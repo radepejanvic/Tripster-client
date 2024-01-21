@@ -81,7 +81,7 @@ export class UserAccountUpdateComponent implements OnInit {
 			const update: PersonUpdate = {
 				id: this.authService.getPersonId(),
 
-				email: 'vetkonetko@gmail.com',
+				email: this.user.email,
 				password: this.accountUpdateForm.value.password1 || '',
 				userType: UserType['GUEST' as keyof typeof UserType],
 				status: UserStatus['ACTIVE' as keyof typeof UserStatus],
