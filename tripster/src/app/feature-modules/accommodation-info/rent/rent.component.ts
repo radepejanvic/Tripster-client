@@ -174,7 +174,9 @@ export class RentComponent implements OnInit {
 
 	isDateRangeContinual(): boolean {
 		let checkDay = this.reservationForm.value.start;
-		this.start = new Date(this.reservationForm.value.start);	
+		this.start = new Date(this.reservationForm.value.start);
+		this.today = new Date();
+		if(this.reservationForm.value.start < this.today) return false;
 		while (checkDay < this.reservationForm.value.end) {
 			checkDay.setDate(checkDay.getDate() + 1);
 			if (!this.dateFilter(checkDay)) {
