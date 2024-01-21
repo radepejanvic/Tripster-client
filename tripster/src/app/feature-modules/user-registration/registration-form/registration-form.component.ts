@@ -18,7 +18,8 @@ export class RegistrationFormComponent {
     private service: RegistrationFormService,
     private router: Router,
     private authService: AuthorizationService
-  ) {}
+  ) {
+  }
 
   registrationForm = new FormGroup({
     email: new FormControl('', [Validators.email]),
@@ -61,7 +62,12 @@ export class RegistrationFormComponent {
         number: this.registrationForm.value.number || '',
       };
 
-      this.service.register(registration).subscribe(
+      this.onSubmit(registration);
+    }
+  }
+
+  onSubmit(registration:PersonCRUD): void {
+    this.service.register(registration).subscribe(
         (response: PersonCRUD) => {
           this.registrationSubmit.emit();
           document.getElementById('close-btn')?.click();
@@ -73,10 +79,8 @@ export class RegistrationFormComponent {
           console.log('User name exists.');
           this.errorText = 'User name exists.';
         }
-      );
-    }
+    );
   }
-
   private validateForm(): boolean {
     if (
       this.registrationForm.value.password1 !=
