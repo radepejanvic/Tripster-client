@@ -13,9 +13,9 @@ export class UserReportCardComponent {
   @Input()
   report: Report;
 
-  constructor(private service: CardService) {}
+  constructor(private service: CardService) { }
   delete() {
-    this.service.deletedUserReport(this.report.reporteeId || 0).subscribe({
+    this.service.deletedUserReport(this.report.id || 0).subscribe({
       next: (response: any) => {
         window.location.reload();
       },
@@ -26,7 +26,7 @@ export class UserReportCardComponent {
   }
 
   approve() {
-    this.service.approveUserReport(this.report.reporteeId || 0).subscribe({
+    this.service.approveUserReport(this.report.id || 0).subscribe({
       next: (response: any) => {
         window.location.reload();
       },

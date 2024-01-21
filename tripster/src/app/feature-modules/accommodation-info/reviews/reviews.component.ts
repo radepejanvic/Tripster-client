@@ -30,7 +30,7 @@ export class ReviewsComponent implements OnInit {
 
     this.getAllAccommodationReviews();
     this.role = this.authorizationService.getRole();
-    // this.canReviewAccommodation();
+    this.canReviewAccommodation();
 
   }
 
@@ -98,12 +98,12 @@ export class ReviewsComponent implements OnInit {
   }
 
   canReviewHost(): void {
-    if (this.host.userId == undefined) {
+    if (this.host.id == undefined) {
       console.error('Error fetching host data.');
       return;
     }
 
-    this.reviewService.canReviewHost(this.host.userId, this.authorizationService.getUserId()).subscribe({
+    this.reviewService.canReviewHost(this.host.id, this.authorizationService.getUserId()).subscribe({
       next: (response: boolean) => {
         this.reviewable = response;
       },
@@ -119,12 +119,12 @@ export class ReviewsComponent implements OnInit {
     if (this.checked) {
 
       this.getAllHostReviews();
-      // this.canReviewHost();
+      this.canReviewHost();
 
     } else {
 
       this.getAllAccommodationReviews();
-      // this.canReviewAccommodation();
+      this.canReviewAccommodation();
 
     }
 
