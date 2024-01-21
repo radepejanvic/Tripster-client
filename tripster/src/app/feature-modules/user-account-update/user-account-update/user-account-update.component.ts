@@ -27,7 +27,7 @@ export class UserAccountUpdateComponent implements OnInit {
 		private service: UserAccountUpdateService,
 		private authService: AuthorizationService,
 		private router: Router
-	) {}
+	) { }
 
 	private user: PersonUpdate;
 
@@ -46,7 +46,7 @@ export class UserAccountUpdateComponent implements OnInit {
 	public email: string = '';
 
 	ngOnInit(): void {
-		this.service.getUser(this.authService.getPersonId()).subscribe(
+		this.service.getUser(this.authService.getUserId()).subscribe(
 			(data: PersonUpdate) => {
 				this.user = data;
 				this.email = data.email;
