@@ -173,8 +173,8 @@ export class RentComponent implements OnInit {
 	}
 
 	isDateRangeContinual(): boolean {
-		let checkDay = new Date();
-		checkDay.setDate(this.reservationForm.value.start.getDate());
+		let checkDay = this.reservationForm.value.start;
+		this.start = new Date(this.reservationForm.value.start);	
 		while (checkDay < this.reservationForm.value.end) {
 			checkDay.setDate(checkDay.getDate() + 1);
 			if (!this.dateFilter(checkDay)) {
@@ -186,8 +186,7 @@ export class RentComponent implements OnInit {
 
 	calculatePrice(): number {
 		let price = 0;
-		let checkDay = new Date();
-		checkDay.setDate(this.reservationForm.value.start.getDate());
+		let checkDay = this.start;
 		while (checkDay < this.reservationForm.value.end) {
 			let diff = this.calendar.find((date) =>
 				this.isSameDay(date.date, checkDay)
