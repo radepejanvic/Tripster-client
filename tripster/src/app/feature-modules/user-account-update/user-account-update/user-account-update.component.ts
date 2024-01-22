@@ -94,15 +94,20 @@ export class UserAccountUpdateComponent implements OnInit {
 				street: this.accountUpdateForm.value.street || '',
 				number: this.accountUpdateForm.value.number || '',
 			};
-			//console.log(update);
-			this.service
-				.updateUser(update)
-				.subscribe((response: PersonUpdate) => {
-					console.log(response);
-					alert('Account updated.');
-					//document.getElementById("account-update-show");
-				});
+
+			this.onSubmit(update);
+
 		}
+	}
+
+	onSubmit(person: PersonUpdate): void {
+		this.service
+			.updateUser(person)
+			.subscribe((response: PersonUpdate) => {
+				console.log(response);
+				alert('Account updated.');
+				//document.getElementById("account-update-show");
+			});
 	}
 
 	deleteProfile(): void {

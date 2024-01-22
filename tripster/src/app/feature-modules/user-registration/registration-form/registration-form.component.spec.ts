@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegistrationFormComponent } from './registration-form.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {BrowserModule, By} from "@angular/platform-browser";
-import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { BrowserModule, By } from "@angular/platform-browser";
+import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
 
 describe('RegistrationFormComponent', () => {
   let component: RegistrationFormComponent;
@@ -21,7 +21,7 @@ describe('RegistrationFormComponent', () => {
         HttpClientTestingModule
       ]
     })
-    .compileComponents();
+      .compileComponents();
 
   });
   beforeEach(() => {
@@ -67,7 +67,7 @@ describe('RegistrationFormComponent', () => {
     expect(component.registrationForm.valid).toBeTruthy();
   });
 
-  it(`shouldn't call the onSubmit method`,() => {
+  it(`shouldn't call the onSubmit method`, () => {
     spyOn(component, 'onSubmit');
     el = fixture.debugElement.query(By.css('button.mybtn')).nativeElement;
     el.click();
