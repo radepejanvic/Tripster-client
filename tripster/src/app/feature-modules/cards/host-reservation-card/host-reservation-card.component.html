@@ -8,7 +8,7 @@
 
     <div class="col-md-5">
       <div class="card-body">
-        <h5 class="card-title">{{ reservation.name }}</h5>
+        <h5 class="card-title" name="accommodation-name">{{ reservation.name }}</h5>
         <p class="card-text">
           <small class="text-body-secondary">{{ reservation.address }}</small>
         </p>
@@ -31,7 +31,7 @@
         <p class="card-text short-description mt-8">
           {{ reservation.duration }} nights, {{ reservation.numOfGuest }} guests
         </p>
-        <p class="card-text">
+        <p class="card-text" name="timestamp">
           {{ reservation.timeStamp }}
         </p>
       </div>
@@ -40,13 +40,14 @@
     <div class="col-md-3">
       <div class="card-body">
         <div class="price-info">
-          <p class="card-text text-end">{{ reservation.status }}</p>
+          <p class="card-text text-end" name="status">{{ reservation.status }}</p>
 
           <p class="card-text text-end price">{{ reservation.price }}€</p>
 
           <div class="mt-5" *ngIf="reservation.status == 'PENDING'">
             <div class="row">
               <button
+                name="accept-button"
                 type="button"
                 class="btn btn-outline-dark"
                 (click)="acceptReservation()"
@@ -54,6 +55,7 @@
                 Accept
               </button>
               <button
+                name="reject-button"
                 type="button"
                 class="btn btn-outline-danger mt-2"
                 (click)="rejectReservation()"
